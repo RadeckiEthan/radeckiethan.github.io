@@ -23,10 +23,12 @@
 .weight-table tr:last-child td { border-bottom:none; }
 .weight-bar { height:8px;border-radius:4px;background:rgba(var(--accent-rgb),0.15);position:relative;width:120px; }
 .weight-fill { height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2)); }
-@media(max-width:768px){
-  .arch-diagram { grid-template-columns:1fr; }
-  .metric-grid { grid-template-columns:1fr; }
-}
+.findings-bubbles { display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.5rem 0; }
+.finding-bubble { padding:1.5rem 1.75rem;transition:transform 0.2s; }
+.finding-bubble:hover { transform:translateY(-3px); }
+.finding-num { font-size:0.68rem;font-weight:800;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem;opacity:0.7; }
+.finding-bubble p { font-size:0.93rem;color:var(--text);line-height:1.65;font-weight:500; }
+@media(max-width:600px){ .findings-bubbles { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -259,12 +261,24 @@
   <!-- KEY FINDINGS -->
   <div class="section-label">Key Findings</div>
   <div class="section-title">What the data revealed.</div>
-  <ul class="findings-list">
-    <li><div class="finding-dot"></div><strong style="color:var(--text);">Head-to-head dominance is highly concentrated.</strong> The all-time H2H matrix reveals a small group of managers with consistently winning records against the field, while others show persistent losing records regardless of opponent.</li>
-    <li><div class="finding-dot"></div><strong style="color:var(--text);">Draft slot has limited predictive power when adjusted for manager quality.</strong> Raw playoff rates vary widely by slot, but once manager quality is controlled for, the effect nearly disappears — suggesting roster management matters far more than draft position.</li>
-    <li><div class="finding-dot"></div><strong style="color:var(--text);">Mid-season and late-season scoring are the strongest predictors of making the playoffs.</strong> Q2 (Wks 4-6) and Q4 (Wks 10-13) produced statistically significant regression coefficients (p&lt;0.05), while Q3 was the weakest predictor with a model AUC of 0.83.</li>
-    <li><div class="finding-dot"></div><strong style="color:var(--text);">Schedule luck has swung careers by as many as 10 wins.</strong> The all-time luck rankings show meaningful variance across managers — some have been gifted wins by favorable scheduling while others have been systematically disadvantaged despite strong scoring output.</li>
-  </ul>
+  <div class="findings-bubbles">
+    <div class="finding-bubble glass">
+      <div class="finding-num">01</div>
+      <p>H2H dominance is concentrated — a small group of managers win consistently across all opponents.</p>
+    </div>
+    <div class="finding-bubble glass">
+      <div class="finding-num">02</div>
+      <p>Draft slot barely matters once manager quality is controlled for — roster management wins leagues, not position.</p>
+    </div>
+    <div class="finding-bubble glass">
+      <div class="finding-num">03</div>
+      <p>Q2 and Q4 scoring are the only statistically significant predictors of making the playoffs (p&lt;0.05, AUC 0.83).</p>
+    </div>
+    <div class="finding-bubble glass">
+      <div class="finding-num">04</div>
+      <p>Schedule luck has swung careers by up to 10 wins — some managers are far better than their record shows.</p>
+    </div>
+  </div>
 
   <hr class="section-divider">
 
