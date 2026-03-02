@@ -249,7 +249,7 @@ footer { text-align:center;padding:2rem;color:var(--muted);font-size:0.76rem;bor
   transition:all 0.2s;
 }
 .lightbox-close:hover { background:rgba(255,255,255,0.2); }
-.visual-img { cursor:zoom-in; transition:transform 0.2s, box-shadow 0.2s; }
+.visual-img { cursor:zoom-in; transition:transform 0.2s, box-shadow 0.2s; max-height:400px; width:100%; object-fit:contain; }
 .visual-img:hover { transform:scale(1.01); box-shadow:0 12px 40px rgba(0,0,0,0.15); }
 .stack-tags { display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem; }
 .stack-tag { background:rgba(var(--accent-rgb),0.08);border:1px solid rgba(var(--accent-rgb),0.2);color:var(--accent);border-radius:20px;padding:0.25rem 0.75rem;font-size:0.78rem;font-weight:600; }
