@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fantasy Football Platform | Ethan Radecki</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+/* ── REPORT-ONLY STYLES ── */
+.arch-diagram { display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0; }
+.arch-box { padding:1.25rem;text-align:center; }
+.arch-box .arch-icon { font-size:1.5rem;margin-bottom:0.5rem; }
+.arch-box h4 { font-size:0.78rem;font-weight:700;color:var(--text);margin-bottom:0.35rem;text-transform:uppercase;letter-spacing:0.08em; }
+.arch-box p { font-size:0.76rem;color:var(--muted);line-height:1.5; }
+.metric-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.5rem 0; }
+.metric-card { padding:1.5rem; }
+.metric-card h4 { font-size:0.85rem;font-weight:700;color:var(--accent);margin-bottom:0.5rem; }
+.metric-card p { font-size:0.86rem;color:var(--muted);line-height:1.65; }
+.metric-formula { font-family:monospace;font-size:0.82rem;background:rgba(var(--accent-rgb),0.06);border:1px solid rgba(var(--accent-rgb),0.15);padding:0.4rem 0.75rem;border-radius:8px;margin-top:0.5rem;color:var(--text);display:inline-block; }
+.weight-table { width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:0.88rem; }
+.weight-table th { text-align:left;padding:0.6rem 1rem;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);border-bottom:2px solid var(--border-dim); }
+.weight-table td { padding:0.6rem 1rem;color:var(--muted);border-bottom:1px solid var(--border-dim); }
+.weight-table tr:last-child td { border-bottom:none; }
+.weight-bar { height:8px;border-radius:4px;background:rgba(var(--accent-rgb),0.15);position:relative;width:120px; }
+.weight-fill { height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+@media(max-width:768px){
+  .arch-diagram { grid-template-columns:1fr; }
+  .metric-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-wrap">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="content">
+<nav class="glass" style="border-radius:0;">
+  <a href="../index.html" class="nav-logo">ER.</a>
+  <a href="../index.html#projects" class="nav-back">← Back to Projects</a>
+</nav>
+
+<div class="report-wrap">
+
+  <!-- HEADER -->
+  <div class="report-header">
+    <div class="report-tag">Project Report</div>
+    <h1>Fantasy Football <span>Analytics Platform</span></h1>
+    <div class="report-meta">
+      <span class="meta-item"><span class="meta-dot"></span>Personal Project</span>
+      <span class="meta-item"><span class="meta-dot"></span>Self-Taught</span>
+      <span class="meta-item"><span class="meta-dot"></span>2024 – 2025</span>
+      <span class="meta-item"><span class="meta-dot"></span>Live on Render</span>
+    </div>
+    <p class="report-summary">
+      A full-stack fantasy football web application built from scratch with no prior web development experience. The platform transforms six seasons of league data into interactive analytics including custom-built metrics, a machine learning similarity engine, and per-manager performance dashboards, deployed live and accessible to all league members.
+    </p>
+    <div class="report-actions">
+      <a href="https://github.com/RadeckiEthan/fantasy-league-hub" target="_blank" class="r-btn primary">View on GitHub</a>
+      <a href="https://fantasy-league-hub.onrender.com" target="_blank" class="r-btn secondary">View Live Site</a>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- STATS -->
+  <div class="section-label">At a Glance</div>
+  <div class="stat-row">
+    <div class="stat-box glass"><div class="num">6</div><div class="label">Seasons of Data</div></div>
+    <div class="stat-box glass"><div class="num">15+</div><div class="label">Flask Routes</div></div>
+    <div class="stat-box glass"><div class="num">7</div><div class="label">Similarity Features</div></div>
+    <div class="stat-box glass"><div class="num">3</div><div class="label">Charts Per Manager</div></div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- PROBLEM -->
+  <div class="section-label">Problem</div>
+  <div class="section-title">More than a scoreboard.</div>
+  <p class="prose">Most fantasy football platforms give you wins, losses, and points — and nothing else. They don't tell you whether a team got lucky with their schedule, whether a manager is genuinely dominant or just fortunate, or how a current team compares to the best and worst teams in league history. Standard tools also have no memory: each season starts fresh with no cumulative context.</p>
+  <p class="prose">The goal was to build a platform that treats the league like a real sports organization, with career statistics, historical context, and analytics that actually tell you something meaningful about performance.</p>
+
+  <div class="callout glass">
+    <div class="callout-label">Core Question</div>
+    <p>"How do you separate genuine performance from luck in a format where schedule randomness plays a massive role in outcomes?"</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ARCHITECTURE -->
+  <div class="section-label">Architecture</div>
+  <div class="section-title">How the system is built.</div>
+  <p class="prose">The application follows a clean separation between data processing, application logic, and presentation. Python scripts handle all analytics and visualization generation; Flask routes serve dynamic pages from pre-processed data; and HTML templates handle display with Bootstrap for layout.</p>
+  <div class="arch-diagram">
+    <div class="arch-box glass">
+      <div class="arch-icon">⚙️</div>
+      <h4>Data Layer</h4>
+      <p>CSV files for matchup history and manager stats. Python scripts for metric calculation, visualization generation, and similarity analysis.</p>
+    </div>
+    <div class="arch-box glass">
+      <div class="arch-icon">🔀</div>
+      <h4>Application Layer</h4>
+      <p>Flask backend with 15+ routes. Pandas for data manipulation. Plotly for interactive chart generation. Auto-runs visualization pipeline on startup.</p>
+    </div>
+    <div class="arch-box glass">
+      <div class="arch-icon">🖥️</div>
+      <h4>Presentation Layer</h4>
+      <p>Bootstrap HTML templates. Plotly charts embedded as HTML. Deployed on Render via GitHub with render.yaml configuration.</p>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- METRICS -->
+  <div class="section-label">Custom Analytics</div>
+  <div class="section-title">Metrics built from scratch.</div>
+  <p class="prose">Rather than surface-level stats, the platform introduces three original metrics designed to isolate real performance signals from the inherent randomness of fantasy scheduling.</p>
+  <div class="metric-grid">
+    <div class="metric-card glass">
+      <h4>Dominance Score</h4>
+      <p>Measures how offensively dominant a team was relative to the rest of the league in a given season. A z-score calculated from points-for per game, where 0 is league average. Positive values indicate above-average scoring, negative values below average.</p>
+      <span class="metric-formula">z = (PF/G - league_mean) / league_std</span>
+    </div>
+    <div class="metric-card glass">
+      <h4>Luck Score (LR Z-Score)</h4>
+      <p>Measures how favorable a team's schedule was. Based on points-against per game. A team that faced weak opponents all season has a negative luck score. A high positive score means the schedule actively worked against them despite strong performance.</p>
+      <span class="metric-formula">z = (PA/G - league_mean) / league_std</span>
+    </div>
+    <div class="metric-card glass">
+      <h4>Schedule Luck Matrix</h4>
+      <p>Compares a manager's actual win-loss record each season against their predicted record, where predicted wins are calculated by determining whether their weekly score exceeded the league median that week. The gap between actual and predicted reveals true schedule luck.</p>
+      <span class="metric-formula">luck = actual_wins - predicted_wins</span>
+    </div>
+    <div class="metric-card glass">
+      <h4>Draft Slot Analysis</h4>
+      <p>Manager-quality-adjusted analysis of historical draft slot performance. Accounts for the fact that stronger managers tend to cluster in certain slots over time, using each manager's career average Dominance Score as a quality baseline before measuring slot-level over or underperformance.</p>
+      <span class="metric-formula">adj = actual_dom - expected_dom</span>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SIMILARITY ENGINE -->
+  <div class="section-label">Similarity Engine</div>
+  <div class="section-title">Finding your historical twin.</div>
+  <p class="prose">The most technically complex feature is the historical team similarity engine, which matches each 2025 playoff team against every team in league history using a weighted Euclidean distance algorithm. The system normalizes all features using StandardScaler, applies custom weights to reflect the relative importance of each metric, and returns the top 3 most similar historical teams with a similarity score out of 100.</p>
+
+  <div class="visual-block">
+    <img src="assets/preach_similarity_grid.png" class="visual-img" alt="Historical team similarity analysis grid">
+    <p class="caption">2025 playoff team similarity cards — each card shows the 3 most statistically similar teams from league history, ranked by weighted Euclidean distance across 7 performance features.</p>
+  </div>
+
+  <table class="weight-table glass" style="padding:1.5rem;display:block;">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Weight</th>
+        <th>Reasoning</th>
+        <th style="width:140px;">Relative Importance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Late Season PF/G (Wks 10-13)</td><td style="color:var(--accent);font-weight:700;">2.0</td><td>Best predictor of playoff form</td><td><div class="weight-bar"><div class="weight-fill" style="width:100%"></div></div></td></tr>
+      <tr><td>Season PF/G</td><td style="color:var(--accent);font-weight:700;">1.7</td><td>Overall scoring ability</td><td><div class="weight-bar"><div class="weight-fill" style="width:85%"></div></div></td></tr>
+      <tr><td>Win Percentage</td><td style="color:var(--accent);font-weight:700;">1.4</td><td>Season-level consistency</td><td><div class="weight-bar"><div class="weight-fill" style="width:70%"></div></div></td></tr>
+      <tr><td>Luck Score (LR Z-Score)</td><td style="color:var(--accent);font-weight:700;">1.1</td><td>Schedule context</td><td><div class="weight-bar"><div class="weight-fill" style="width:55%"></div></div></td></tr>
+      <tr><td>Dominance Score</td><td style="color:var(--accent);font-weight:700;">0.9</td><td>Relative scoring dominance</td><td><div class="weight-bar"><div class="weight-fill" style="width:45%"></div></div></td></tr>
+      <tr><td>Draft Slot</td><td style="color:var(--accent);font-weight:700;">0.6</td><td>Roster construction context</td><td><div class="weight-bar"><div class="weight-fill" style="width:30%"></div></div></td></tr>
+      <tr><td>Point Differential</td><td style="color:var(--accent);font-weight:700;">0.4</td><td>Secondary performance signal</td><td><div class="weight-bar"><div class="weight-fill" style="width:20%"></div></div></td></tr>
+    </tbody>
+  </table>
+
+  <p class="prose" style="margin-top:1.25rem;">The algorithm also handles non-standard playoff structures. The 2020 season had 14 teams with 4 playoff rounds, and 2021 included a wildcard game for two managers, requiring custom normalization logic to make historical comparisons meaningful across seasons with different formats.</p>
+
+  <hr class="section-divider">
+
+  <!-- DASHBOARDS -->
+  <div class="section-label">Manager Dashboards</div>
+  <div class="section-title">Per-manager interactive analytics.</div>
+  <p class="prose">Every manager in the league has a dedicated profile page generated dynamically from the data. Each profile includes a career summary with rank-among-peers coloring, a full season-by-season table, and three Plotly visualizations generated at startup by <strong>generate_manager_visualizations.py</strong>.</p>
+
+  <div class="visual-block">
+    <img src="assets/preach_h2h_matrix.png" class="visual-img" alt="All-time head-to-head matrix">
+    <p class="caption">All-time head-to-head matrix across all managers (2020-2025). Green cells indicate winning records, red cells losing records — color intensity reflects dominance.</p>
+  </div>
+
+  <div class="visual-grid">
+    <div class="visual-block">
+      <img src="assets/preach_draft_playoff_rate.png" class="visual-img" alt="Playoff rate by draft slot">
+      <p class="caption">Playoff rate by draft slot — slots 1, 7, 8, 11, and 13 show the highest historical playoff conversion rates at 83.3%.</p>
+    </div>
+    <div class="visual-block">
+      <img src="assets/preach_draft_adjusted_performance.png" class="visual-img" alt="Manager adjusted dominance score by draft slot">
+      <p class="caption">Manager-quality-adjusted dominance score by draft slot — controls for the fact that stronger managers cluster in certain positions over time.</p>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- FINDINGS -->
+  <div class="section-label">Key Findings</div>
+  <div class="section-title">What the data revealed.</div>
+  <ul class="findings-list">
+    <li><div class="finding-dot"></div><strong style="color:var(--text);">Late-season form is the strongest predictor of playoff success.</strong> Teams that peaked in weeks 10-13 dramatically outperformed their seeding in the playoffs — this is why it was weighted most heavily in the similarity algorithm.</li>
+    <li><div class="finding-dot"></div><strong style="color:var(--text);">Schedule luck materially distorts final standings.</strong> Several managers finished outside the playoffs in seasons where their predicted record based on weekly median performance would have comfortably qualified them.</li>
+    <li><div class="finding-dot"></div><strong style="color:var(--text);">Draft slot has limited predictive power when adjusted for manager quality.</strong> Middle-round picks (slots 5-9) showed slight overperformance, but the effect nearly disappears once manager-quality variance is controlled for.</li>
+    <li><div class="finding-dot"></div><strong style="color:var(--text);">Historical similarity scores meaningfully predicted playoff outcomes.</strong> Teams matched to historical champions showed higher advancement rates in round 1, validating the feature weighting approach.</li>
+  </ul>
+
+  <hr class="section-divider">
+
+  <!-- REFLECTION -->
+  <div class="section-label">Reflection</div>
+  <div class="section-title">What this project taught me.</div>
+  <p class="prose">This was my first experience building a full-stack web application, built entirely without prior web development knowledge. The project forced me to connect skills I already had in Python, data analysis, and statistical thinking to an entirely new domain of Flask routing, HTML templating, and production deployment. The biggest technical challenge was building the playoff normalization logic for non-standard seasons — getting the similarity algorithm to treat 2020's 14-team format and 2021's wildcard round as comparable to standard seasons required careful thought about what the data actually meant versus what it said.</p>
+
+  <div class="callout glass">
+    <div class="callout-label">Takeaway</div>
+    <p>The most valuable thing a data scientist can build isn't always the most complex model — it's the tool that makes good analysis accessible and interpretable to the people who need it.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- TECH STACK -->
+  <div class="section-label">Tech Stack</div>
+  <div class="section-title">Tools used.</div>
+  <div class="stack-tags">
+    <span class="stack-tag">Python</span>
+    <span class="stack-tag">Flask</span>
+    <span class="stack-tag">Pandas</span>
+    <span class="stack-tag">Plotly</span>
+    <span class="stack-tag">Chart.js</span>
+    <span class="stack-tag">Scikit-learn</span>
+    <span class="stack-tag">SciPy</span>
+    <span class="stack-tag">Bootstrap</span>
+    <span class="stack-tag">NumPy</span>
+    <span class="stack-tag">Render</span>
+    <span class="stack-tag">GitHub</span>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="report-footer">
+    <p>Ethan Radecki · ecradeck@syr.edu</p>
+    <div class="report-actions">
+      <a href="https://github.com/RadeckiEthan/fantasy-league-hub" target="_blank" class="r-btn primary">View on GitHub</a>
+      <a href="../index.html#projects" class="r-btn secondary">Back to Projects</a>
+    </div>
+  </div>
+
+</div>
+</div>
+</body>
+</html>
