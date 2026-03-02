@@ -186,12 +186,74 @@ footer { text-align:center;padding:2rem;color:var(--muted);font-size:0.76rem;bor
 .r-sk-grid { display:flex;flex-wrap:wrap;gap:0.38rem; }
 .r-sk { background:rgba(var(--accent-rgb),0.08);border:1px solid rgba(var(--accent-rgb),0.18);color:var(--muted);border-radius:20px;padding:0.18rem 0.6rem;font-size:0.76rem; }
 
+/* ── TABLET (max 1024px) ── */
+@media(max-width:1024px){
+  #hero { padding: 6rem 6% 4rem; }
+  .about-grid { gap: 2.5rem; }
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── MOBILE (max 768px) ── */
 @media(max-width:768px){
-  #hero{padding:5rem 5% 3rem;}
-  .about-grid,.resume-body{grid-template-columns:1fr;gap:2rem;}
-  nav{padding:0.9rem 1.2rem;}
-  .nav-links{gap:1.1rem;}
-  .resume-top{flex-direction:column;gap:0.9rem;align-items:flex-start;}
+  /* Nav */
+  nav { padding: 0.85rem 1.25rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 0.78rem; }
+
+  /* Hero */
+  #hero { padding: 5.5rem 5% 3rem; }
+  #hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
+  #hero > p { font-size: 0.97rem; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns .btn { text-align: center; justify-content: center; }
+  .hero-socials { gap: 0.5rem; }
+  .hero-socials a { font-size: 0.78rem; padding: 0.38rem 0.75rem; }
+
+  /* Sections */
+  section { padding: 4rem 1.25rem; }
+  .section-title { font-size: 1.5rem; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+
+  /* Projects */
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card { padding: 1.4rem; }
+
+  /* Skills */
+  .skills-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .skill-group { padding: 1.1rem; }
+
+  /* Resume */
+  .resume-top { flex-direction: column; gap: 0.9rem; align-items: flex-start; }
+  .resume-body { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.25rem; }
+  .r-actions { flex-wrap: wrap; }
+
+  /* Contact */
+  .contact-row { flex-direction: column; align-items: center; }
+  .c-link { width: 100%; justify-content: center; }
+
+  /* Modals — full screen on mobile */
+  .overlay { padding: 0; align-items: flex-end; }
+  .modal-box { border-radius: 22px 22px 0 0; max-height: 92vh; width: 100%; }
+  .proj-modal { padding: 2rem 1.5rem; }
+  .res-modal { padding: 2rem 1.5rem; }
+  .m-links { flex-direction: column; }
+  .r-full-head h2 { font-size: 1.4rem; }
+  .r-contact-row { flex-direction: column; align-items: center; gap: 0.5rem; }
+  .r-eh { flex-direction: column; gap: 0.1rem; }
+}
+
+/* ── SMALL MOBILE (max 480px) ── */
+@media(max-width:480px){
+  .nav-links { gap: 0.65rem; }
+  .nav-links a { font-size: 0.72rem; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .stat-num { font-size: 1.8rem; }
+  .hero-tag { font-size: 0.68rem; }
 }
 </style>
 </head>
@@ -425,6 +487,7 @@ footer { text-align:center;padding:2rem;color:var(--muted);font-size:0.76rem;bor
     <div class="m-sect"><h4>Tech Stack</h4><p id="mStack"></p></div>
     <div class="m-links">
       <a id="mGH" href="#" target="_blank" class="m-link p">View on GitHub</a>
+      <a id="mReport" href="#" class="m-link s">View Report</a>
       <a id="mDemo" href="#" target="_blank" class="m-link s">Live Demo</a>
     </div>
   </div>
@@ -528,13 +591,13 @@ const data = {
     icon:"",
     title:"Fantasy Sports Analytics Platform",
     sub:"Full-Stack Web App · Flask · Python · Plotly · Chart.js",
-    overview:"Built entirely from scratch as a self-taught engineering project, this full-stack fantasy football platform replaced a limited Google Sites setup with a data-rich, interactive web application for the Preach Fantasy league. The project demonstrates end-to-end ownership from backend data pipelines to frontend deployment, with no prior web development experience at the start.",
+    overview:"Built entirely from scratch as a self-taught engineering project, this full-stack fantasy football web application transforms raw league data into a rich analytics platform for the Preach Fantasy league. Starting with no prior web development experience, the project covers everything from custom algorithm design to production deployment on Render.",
     pts:[
-      "Engineered custom analytics including luck scores, z-score dominance metrics, draft slot performance analysis, and historical team similarity using a weighted similarity algorithm",
-      "Built with Flask (Python) backend, Bootstrap frontend, and Plotly/Chart.js for interactive mobile-optimized visualizations",
-      "Sophisticated data integrity practices: consolation games excluded, playoff matchups correctly handled, confounding variables controlled",
-      "Deployed on Render via GitHub with standalone HTML templates and distinct visual identity per league",
-      "Self-taught Flask and front-end development while leveraging existing Python and analytical skills to bootstrap the data pipeline"
+      "Built a weighted Euclidean distance similarity engine using StandardScaler and scipy to match each 2025 playoff team against every historical team in league history across 7 custom-weighted features",
+      "Engineered three original analytics metrics: Dominance Score and Luck Score (PA/G z-scores), and a Schedule Luck matrix comparing actual vs. predicted records against the weekly league median",
+      "Generated per-manager interactive dashboards with Plotly including dual-axis win%/PF/G charts, head-to-head heatmaps, scoring distribution histograms, and quarterly performance trend lines",
+      "Built a Flask backend with 15+ routes serving dynamic manager pages, a career leaderboard, draft slot analysis with manager-quality adjustment, and playoff bracket tracking",
+      "Deployed on Render via GitHub with auto-generated visualizations on startup, parallel data processing, and clean data integrity practices throughout"
     ],
     stack:"Python, Flask, Bootstrap, Plotly, Chart.js, CSV, GitHub, Render",
     gh:"#", demo:""
@@ -557,16 +620,16 @@ const data = {
 
 function openProj(id) {
   const p = data[id];
-  document.getElementById('mIcon').textContent = p.icon;
   document.getElementById('mTitle').textContent = p.title;
   document.getElementById('mSub').textContent = p.sub;
   document.getElementById('mOverview').textContent = p.overview;
   document.getElementById('mPoints').innerHTML = p.pts.map(x=>`<li>${x}</li>`).join('');
   document.getElementById('mStack').textContent = p.stack;
   document.getElementById('mGH').href = p.gh;
+  const report = document.getElementById('mReport');
+  if(p.report){ report.style.display=''; report.href=p.report; } else { report.style.display='none'; }
   const d = document.getElementById('mDemo');
-  d.style.display = p.demo ? '' : 'none';
-  if(p.demo) d.href = p.demo;
+  if(p.demo){ d.style.display=''; d.href=p.demo; } else { d.style.display='none'; }
   document.getElementById('projOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
