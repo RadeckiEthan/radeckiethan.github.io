@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fantasy Football Platform | Ethan Radecki</title>
+<style>
+:root {
+  --bg: #f5f0e8; --bg2: #ede7dc;
+  --surface: rgba(255,255,255,0.38); --surface-hover: rgba(255,255,255,0.52);
+  --border: rgba(255,255,255,0.55); --border-dim: rgba(200,185,165,0.35);
+  --accent: #4a7fa8; --accent2: #2d5f80; --accent-rgb: 74,127,168;
+  --glow: rgba(74,127,168,0.2);
+  --text: #1e1a14; --muted: #6b5f50;
+  --rim-top: rgba(255,255,255,0.82); --rim-bot: rgba(180,160,135,0.18);
+  --radius: 18px;
+  --blob1: #c5d8eb; --blob2: #d0e4f5; --blob3: #dde8f0;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7; min-height:100vh; }
+
+.bg-wrap { position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; background:linear-gradient(145deg,#f7f2ea 0%,#ede5d8 50%,#e8dfd0 100%); }
+.blob { position:absolute; border-radius:50%; filter:blur(60px); will-change:transform; }
+.blob-1 { width:520px;height:520px;top:-120px;right:-80px;background:var(--blob1);animation:drift1 18s ease-in-out infinite alternate; }
+.blob-2 { width:380px;height:380px;bottom:-60px;left:-60px;background:var(--blob2);animation:drift2 14s ease-in-out infinite alternate; }
+.blob-3 { width:280px;height:280px;top:45%;left:35%;background:var(--blob3);animation:drift3 20s ease-in-out infinite alternate; }
+@keyframes drift1 { from{transform:translate(0,0) scale(1)} to{transform:translate(-50px,60px) scale(1.12)} }
+@keyframes drift2 { from{transform:translate(0,0) scale(1)} to{transform:translate(60px,-40px) scale(1.08)} }
+@keyframes drift3 { from{transform:translate(0,0) scale(1)} to{transform:translate(-30px,50px) scale(1.15)} }
+
+.glass {
+  background:var(--surface);
+  backdrop-filter:blur(28px) saturate(2.2) brightness(1.06);
+  -webkit-backdrop-filter:blur(28px) saturate(2.2) brightness(1.06);
+  border:1px solid var(--border); border-radius:var(--radius); position:relative; overflow:hidden;
+  box-shadow:inset 0 1.5px 0 var(--rim-top),inset 0 -1px 0 var(--rim-bot),inset 1px 0 0 rgba(255,255,255,0.4),0 4px 24px rgba(0,0,0,0.07);
+}
+.glass::before { content:'';position:absolute;top:0;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.9),transparent);z-index:2;pointer-events:none; }
+.glass::after { content:'';position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,0.18) 48%,rgba(255,255,255,0.10) 52%,transparent 70%);z-index:2;pointer-events:none;transition:left 0.75s ease; }
+.glass:hover::after { left:130%; }
+
+nav { position:fixed;top:0;width:100%;z-index:100;background:rgba(245,240,232,0.55);backdrop-filter:blur(32px) saturate(2.4) brightness(1.04);-webkit-backdrop-filter:blur(32px) saturate(2.4) brightness(1.04);border-bottom:1px solid rgba(255,255,255,0.6);box-shadow:inset 0 1px 0 rgba(255,255,255,0.85),0 4px 20px rgba(0,0,0,0.06);padding:0.9rem 2.5rem;display:flex;justify-content:space-between;align-items:center; }
+.nav-logo { font-weight:800;font-size:1.1rem;color:var(--accent);letter-spacing:0.04em;text-decoration:none; }
+.nav-back { display:flex;align-items:center;gap:0.5rem;color:var(--muted);text-decoration:none;font-size:0.86rem;font-weight:500;padding:0.4rem 0.9rem;border-radius:9px;transition:all 0.2s;background:var(--surface);border:1px solid var(--border);box-shadow:inset 0 1px 0 var(--rim-top); }
+.nav-back:hover { color:var(--accent);border-color:rgba(var(--accent-rgb),0.4);transform:translateX(-2px); }
+
+.content { position:relative;z-index:1; }
+.report-wrap { max-width:860px;margin:0 auto;padding:7rem 2rem 5rem; }
+
+/* HEADER */
+.report-tag { display:inline-flex;align-items:center;gap:0.5rem;padding:0.3rem 0.9rem;border-radius:20px;margin-bottom:1.2rem;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-weight:600;background:rgba(var(--accent-rgb),0.08);border:1px solid rgba(var(--accent-rgb),0.2); }
+.report-header h1 { font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;line-height:1.15;letter-spacing:-0.02em;margin-bottom:1rem; }
+.report-header h1 span { color:var(--accent); }
+.report-meta { display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem; }
+.meta-item { font-size:0.82rem;color:var(--muted);display:flex;align-items:center;gap:0.35rem; }
+.meta-dot { width:4px;height:4px;border-radius:50%;background:var(--accent); }
+.report-summary { font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:680px; }
+.report-actions { display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.75rem; }
+.r-btn { padding:0.6rem 1.3rem;border-radius:10px;font-size:0.85rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all 0.22s;display:inline-flex;align-items:center;gap:0.45rem; }
+.r-btn.primary { background:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(var(--accent-rgb),0.3),inset 0 1px 0 rgba(255,255,255,0.2); }
+.r-btn.primary:hover { filter:brightness(1.08);transform:translateY(-2px); }
+.r-btn.secondary { background:var(--surface);color:var(--text);border:1px solid var(--border);box-shadow:inset 0 1px 0 var(--rim-top);backdrop-filter:blur(12px); }
+.r-btn.secondary:hover { color:var(--accent);border-color:rgba(var(--accent-rgb),0.4);transform:translateY(-2px); }
+
+.section-divider { width:100%;height:1px;background:var(--border-dim);margin:2.5rem 0;border:none; }
+.section-label { font-size:0.72rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--accent);font-weight:700;margin-bottom:0.5rem; }
+.section-title { font-size:1.3rem;font-weight:800;margin-bottom:0.75rem;letter-spacing:-0.01em; }
+.prose { font-size:0.97rem;color:var(--muted);line-height:1.85;margin-bottom:1.25rem; }
+.prose strong { color:var(--text);font-weight:600; }
+
+/* STAT ROW */
+.stat-row { display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:1.5rem 0; }
+.stat-box { padding:1.2rem 1rem;text-align:center; }
+.stat-box .num { font-size:1.8rem;font-weight:800;color:var(--accent);line-height:1; }
+.stat-box .label { font-size:0.74rem;color:var(--muted);margin-top:0.3rem;font-weight:500; }
+
+/* ARCHITECTURE DIAGRAM */
+.arch-diagram { display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0; }
+.arch-box { padding:1.25rem;text-align:center; }
+.arch-box .arch-icon { font-size:1.5rem;margin-bottom:0.5rem; }
+.arch-box h4 { font-size:0.78rem;font-weight:700;color:var(--text);margin-bottom:0.35rem;text-transform:uppercase;letter-spacing:0.08em; }
+.arch-box p { font-size:0.76rem;color:var(--muted);line-height:1.5; }
+
+/* METRIC CARDS */
+.metric-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.5rem 0; }
+.metric-card { padding:1.5rem; }
+.metric-card h4 { font-size:0.85rem;font-weight:700;color:var(--accent);margin-bottom:0.5rem; }
+.metric-card p { font-size:0.86rem;color:var(--muted);line-height:1.65; }
+.metric-formula { font-family:monospace;font-size:0.82rem;background:rgba(var(--accent-rgb),0.06);border:1px solid rgba(var(--accent-rgb),0.15);padding:0.4rem 0.75rem;border-radius:8px;margin-top:0.5rem;color:var(--text);display:inline-block; }
+
+/* FEATURE WEIGHT TABLE */
+.weight-table { width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:0.88rem; }
+.weight-table th { text-align:left;padding:0.6rem 1rem;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);border-bottom:2px solid var(--border-dim); }
+.weight-table td { padding:0.6rem 1rem;color:var(--muted);border-bottom:1px solid var(--border-dim); }
+.weight-table tr:last-child td { border-bottom:none; }
+.weight-bar { height:8px;border-radius:4px;background:rgba(var(--accent-rgb),0.15);position:relative;width:120px; }
+.weight-fill { height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+
+/* FINDINGS */
+.findings-list { list-style:none;display:flex;flex-direction:column;gap:0.75rem;margin:1rem 0; }
+.findings-list li { display:flex;gap:0.75rem;align-items:flex-start;font-size:0.93rem;color:var(--muted);line-height:1.65; }
+.finding-dot { width:20px;height:20px;border-radius:50%;background:rgba(var(--accent-rgb),0.12);border:1px solid rgba(var(--accent-rgb),0.25);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px; }
+.finding-dot::after { content:'';width:6px;height:6px;border-radius:50%;background:var(--accent); }
+
+/* CALLOUT */
+.callout { padding:1.5rem 1.75rem;margin:2rem 0;border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0; }
+.callout .callout-label { font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);font-weight:700;margin-bottom:0.4rem; }
+.callout p { font-size:0.93rem;color:var(--muted);line-height:1.75; }
+
+/* VISUAL PLACEHOLDER */
+.visual-block { margin:2rem 0; }
+.visual-block .caption { font-size:0.8rem;color:var(--muted);margin-top:0.65rem;text-align:center;font-style:italic; }
+.visual-placeholder { width:100%;min-height:260px;border-radius:var(--radius);background:rgba(255,255,255,0.25);border:2px dashed rgba(var(--accent-rgb),0.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;color:rgba(var(--accent-rgb),0.5);font-size:0.85rem;font-weight:500;padding:2rem;backdrop-filter:blur(8px); }
+.visual-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:2rem 0; }
+.visual-img { width:100%;border-radius:var(--radius);box-shadow:0 8px 32px rgba(0,0,0,0.1); }
+
+/* STACK */
+.stack-tags { display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem; }
+.stack-tag { background:rgba(var(--accent-rgb),0.08);border:1px solid rgba(var(--accent-rgb),0.2);color:var(--accent);border-radius:20px;padding:0.25rem 0.75rem;font-size:0.78rem;font-weight:600; }
+
+/* FOOTER */
+.report-footer { margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border-dim);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem; }
+.report-footer p { font-size:0.78rem;color:var(--muted); }
+
+@media(max-width:768px){
+  nav{padding:0.9rem 1.2rem;}
+  .report-wrap{padding:6rem 1.25rem 4rem;}
+  .arch-diagram{grid-template-columns:1fr;}
+  .metric-grid{grid-template-columns:1fr;}
+  .visual-grid{grid-template-columns:1fr;}
+  .report-footer{flex-direction:column;align-items:flex-start;}
+  .report-actions{flex-direction:column;}
+  .r-btn{justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-wrap">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="content">
+<nav class="glass" style="border-radius:0;">
+  <a href="../index.html" class="nav-logo">ER.</a>
+  <a href="../index.html#projects" class="nav-back">← Back to Projects</a>
+</nav>
+
+<div class="report-wrap">
+
+  <!-- HEADER -->
+  <div class="report-header">
+    <div class="report-tag">Project Report</div>
+    <h1>Fantasy Football <span>Analytics Platform</span></h1>
+    <div class="report-meta">
+      <span class="meta-item"><span class="meta-dot"></span>Personal Project</span>
+      <span class="meta-item"><span class="meta-dot"></span>Self-Taught</span>
+      <span class="meta-item"><span class="meta-dot"></span>2024 – 2025</span>
+      <span class="meta-item"><span class="meta-dot"></span>Live on Render</span>
+    </div>
+    <p class="report-summary">
+      A full-stack fantasy football web application built from scratch with no prior web development experience. The platform transforms six seasons of league data into interactive analytics — including custom-built metrics, a machine learning similarity engine, and per-manager performance dashboards — deployed live and accessible to all league members.
+    </p>
+    <div class="report-actions">
+      <a href="https://github.com/RadeckiEthan/fantasy-league-hub" target="_blank" class="r-btn primary">View on GitHub</a>
+      <a href="https://fantasy-league-hub.onrender.com" target="_blank" class="r-btn secondary">View Live Site</a>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- STATS -->
+  <div class="section-label">At a Glance</div>
+  <div class="stat-row">
+    <div class="stat-box glass"><div class="num">6</div><div class="label">Seasons of Data</div></div>
+    <div class="stat-box glass"><div class="num">15+</div><div class="label">Flask Routes</div></div>
+    <div class="stat-box glass"><div class="num">7</div><div class="label">Similarity Features</div></div>
+    <div class="stat-box glass"><div class="num">3</div><div class="label">Charts Per Manager</div></div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- PROBLEM -->
+  <div class="section-label">Problem</div>
+  <div class="section-title">More than a scoreboard.</div>
+  <p class="prose">
+    Most fantasy football platforms give you wins, losses, and points — and nothing else. They don't tell you whether a team got lucky with their schedule, whether a manager is genuinely dominant or just fortunate, or how a current team compares to the best and worst teams in league history. Standard tools also have no memory: each season starts fresh with no cumulative context.
+  </p>
+  <p class="prose">
+    The goal was to build a platform that treats the league like a real sports organization — with career statistics, historical context, and analytics that actually tell you something meaningful about performance.
+  </p>
+
+  <div class="callout glass">
+    <div class="callout-label">Core Question</div>
+    <p>"How do you separate genuine performance from luck in a format where schedule randomness plays a massive role in outcomes?"</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ARCHITECTURE -->
+  <div class="section-label">Architecture</div>
+  <div class="section-title">How the system is built.</div>
+  <p class="prose">
+    The application follows a clean separation between data processing, application logic, and presentation. Python scripts handle all analytics and visualization generation; Flask routes serve dynamic pages from pre-processed data; and HTML templates handle display with Bootstrap for layout.
+  </p>
+  <div class="arch-diagram">
+    <div class="arch-box glass">
+      <div class="arch-icon">⚙️</div>
+      <h4>Data Layer</h4>
+      <p>CSV files for matchup history and manager stats. Python scripts for metric calculation, visualization generation, and similarity analysis.</p>
+    </div>
+    <div class="arch-box glass">
+      <div class="arch-icon">🔀</div>
+      <h4>Application Layer</h4>
+      <p>Flask backend with 15+ routes. Pandas for data manipulation. Plotly for interactive chart generation. Auto-runs visualization pipeline on startup.</p>
+    </div>
+    <div class="arch-box glass">
+      <div class="arch-icon">🖥️</div>
+      <h4>Presentation Layer</h4>
+      <p>Bootstrap HTML templates. Plotly charts embedded as HTML. Deployed on Render via GitHub with render.yaml configuration.</p>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- METRICS -->
+  <div class="section-label">Custom Analytics</div>
+  <div class="section-title">Metrics built from scratch.</div>
+  <p class="prose">
+    Rather than surface-level stats, the platform introduces three original metrics designed to isolate real performance signals from the inherent randomness of fantasy scheduling.
+  </p>
+
+  <div class="metric-grid">
+    <div class="metric-card glass">
+      <h4>Dominance Score</h4>
+      <p>Measures how offensively dominant a team was relative to the rest of the league in a given season. A z-score calculated from points-for per game, where 0 is league average. Positive values indicate above-average scoring, negative values below average.</p>
+      <span class="metric-formula">z = (PF/G - league_mean) / league_std</span>
+    </div>
+    <div class="metric-card glass">
+      <h4>Luck Score (LR Z-Score)</h4>
+      <p>Measures how favorable a team's schedule was. Based on points-against per game — a team that faced weak opponents all season has a negative luck score (they got lucky). A high positive score means the schedule actively worked against them despite strong performance.</p>
+      <span class="metric-formula">z = (PA/G - league_mean) / league_std</span>
+    </div>
+    <div class="metric-card glass">
+      <h4>Schedule Luck Matrix</h4>
+      <p>Compares a manager's actual win-loss record each season against their predicted record — where predicted wins are calculated by determining whether their weekly score exceeded the league median that week. The gap between actual and predicted reveals true schedule luck.</p>
+      <span class="metric-formula">luck = actual_wins - predicted_wins</span>
+    </div>
+    <div class="metric-card glass">
+      <h4>Draft Slot Analysis</h4>
+      <p>Manager-quality-adjusted analysis of historical draft slot performance. Accounts for the fact that stronger managers tend to cluster in certain slots over time, using each manager's career average Dominance Score as a quality baseline before measuring slot-level over or underperformance.</p>
+      <span class="metric-formula">adj = actual_dom - expected_dom</span>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SIMILARITY ENGINE -->
+  <div class="section-label">Similarity Engine</div>
+  <div class="section-title">Finding your historical twin.</div>
+  <p class="prose">
+    The most technically complex feature is the historical team similarity engine, which matches each 2025 playoff team against every team in league history using a weighted Euclidean distance algorithm. The system normalizes all features using StandardScaler, applies custom weights to reflect the relative importance of each metric, and returns the top 3 most similar historical teams with a similarity score out of 100.
+  </p>
+
+  <div class="visual-grid">
+    <div class="visual-block">
+      <img src="assets/preach_draft_playoff_rate.png" class="visual-img" alt="Playoff rate by draft slot">
+      <p class="caption">Playoff rate by draft slot — slots 1, 7, 8, 11, and 13 show the highest historical playoff conversion rates at 83.3%.</p>
+    </div>
+    <div class="visual-block">
+      <img src="assets/preach_draft_adjusted_performance.png" class="visual-img" alt="Manager adjusted dominance score by draft slot">
+      <p class="caption">Manager-quality-adjusted dominance score by draft slot — controls for the fact that stronger managers cluster in certain positions over time.</p>
+    </div>
+  </div>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Weight</th>
+        <th>Reasoning</th>
+        <th style="width:140px;">Relative Importance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Late Season PF/G (Wks 10-13)</td>
+        <td style="color:var(--accent);font-weight:700;">2.0</td>
+        <td>Best predictor of playoff form</td>
+        <td><div class="weight-bar"><div class="weight-fill" style="width:100%"></div></div></td>
+      </tr>
+      <tr>
+        <td>Season PF/G</td>
+        <td style="color:var(--accent);font-weight:700;">1.7</td>
+        <td>Overall scoring ability</td>
+        <td><div class="weight-bar"><div class="weight-fill" style="width:85%"></div></div></td>
+      </tr>
+      <tr>
+        <td>Win Percentage</td>
+        <td style="color:var(--accent);font-weight:700;">1.4</td>
+        <td>Season-level consistency</td>
+        <td><div class="weight-bar"><div class="weight-fill" style="width:70%"></div></div></td>
+      </tr>
+      <tr>
+        <td>Luck Score (LR Z-Score)</td>
+        <td style="color:var(--accent);font-weight:700;">1.1</td>
+        <td>Schedule context</td>
+        <td><div class="weight-bar"><div class="weight-fill" style="width:55%"></div></div></td>
+      </tr>
+      <tr>
+        <td>Dominance Score</td>
+        <td style="color:var(--accent);font-weight:700;">0.9</td>
+        <td>Relative scoring dominance</td>
+        <td><div class="weight-bar"><div class="weight-fill" style="width:45%"></div></div></td>
+      </tr>
+      <tr>
+        <td>Draft Slot</td>
+        <td style="color:var(--accent);font-weight:700;">0.6</td>
+        <td>Roster construction context</td>
+        <td><div class="weight-bar"><div class="weight-fill" style="width:30%"></div></div></td>
+      </tr>
+      <tr>
+        <td>Point Differential</td>
+        <td style="color:var(--accent);font-weight:700;">0.4</td>
+        <td>Secondary performance signal</td>
+        <td><div class="weight-bar"><div class="weight-fill" style="width:20%"></div></div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="visual-block">
+    <img src="assets/preach_similarity_grid.png" class="visual-img" alt="Historical team similarity analysis grid">
+    <p class="caption">2025 playoff team similarity cards — each card shows the 3 most statistically similar teams from league history, ranked by weighted Euclidean distance across 7 performance features.</p>
+  </div> — the 2020 season had 14 teams with 4 playoff rounds, and 2021 included a wildcard game for two managers, requiring custom normalization logic to make historical comparisons meaningful across seasons with different formats.
+  </p>
+
+  <hr class="section-divider">
+
+  <!-- DASHBOARDS -->
+  <div class="section-label">Manager Dashboards</div>
+  <div class="section-title">Per-manager interactive analytics.</div>
+  <p class="prose">
+    Every manager in the league has a dedicated profile page generated dynamically from the data. Each profile includes a career summary with rank-among-peers coloring, a full season-by-season table, and three Plotly visualizations generated at startup by <strong>generate_manager_visualizations.py</strong>.
+  </p>
+
+  <div class="visual-block">
+    <img src="assets/preach_h2h_matrix.png" class="visual-img" alt="All-time head-to-head matrix">
+    <p class="caption">All-time head-to-head matrix across all managers (2020-2025). Green cells indicate winning records, red cells losing records — color intensity reflects dominance.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- KEY FINDINGS -->
+  <div class="section-label">Key Findings</div>
+  <div class="section-title">What the data revealed.</div>
+  <ul class="findings-list">
+    <li><div class="finding-dot"></div><strong style="color:var(--text);">Late-season form is the strongest predictor of playoff success.</strong> Teams that peaked in weeks 10-13 dramatically outperformed their seeding in the playoffs — this is why it was weighted most heavily in the similarity algorithm.</li>
+    <li><div class="finding-dot"></div><strong style="color:var(--text);">Schedule luck materially distorts final standings.</strong> Several managers finished outside the playoffs in seasons where their predicted record (based on weekly median performance) would have comfortably qualified them.</li>
+    <li><div class="finding-dot"></div><strong style="color:var(--text);">Draft slot has limited predictive power when adjusted for manager quality.</strong> Middle-round picks (slots 5-9) showed slight overperformance, but the effect nearly disappears once manager-quality variance is controlled for.</li>
+    <li><div class="finding-dot"></div><strong style="color:var(--text);">Historical similarity scores meaningfully predicted playoff outcomes.</strong> Teams matched to historical champions showed higher advancement rates in round 1, validating the feature weighting approach.</li>
+  </ul>
+
+  <hr class="section-divider">
+
+  <!-- REFLECTION -->
+  <div class="section-label">Reflection</div>
+  <div class="section-title">What this project taught me.</div>
+  <p class="prose">
+    This was my first experience building a full-stack web application, and I built it entirely without prior web development knowledge. The project forced me to connect skills I already had (Python, data analysis, statistical thinking) to an entirely new domain (Flask routing, HTML templating, production deployment). The biggest technical challenge was building the playoff normalization logic for non-standard seasons — getting the similarity algorithm to treat 2020's 14-team format and 2021's wildcard round as comparable to standard seasons required careful thought about what the data actually meant versus what it said.
+  </p>
+
+  <div class="callout glass">
+    <div class="callout-label">Takeaway</div>
+    <p>The most valuable thing a data scientist can build isn't always the most complex model — it's the tool that makes good analysis accessible and interpretable to the people who need it.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- TECH STACK -->
+  <div class="section-label">Tech Stack</div>
+  <div class="section-title">Tools used.</div>
+  <div class="stack-tags">
+    <span class="stack-tag">Python</span>
+    <span class="stack-tag">Flask</span>
+    <span class="stack-tag">Pandas</span>
+    <span class="stack-tag">Plotly</span>
+    <span class="stack-tag">Chart.js</span>
+    <span class="stack-tag">Scikit-learn</span>
+    <span class="stack-tag">SciPy</span>
+    <span class="stack-tag">Bootstrap</span>
+    <span class="stack-tag">NumPy</span>
+    <span class="stack-tag">Render</span>
+    <span class="stack-tag">GitHub</span>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="report-footer">
+    <p>Ethan Radecki · ecradeck@syr.edu</p>
+    <div class="report-actions">
+      <a href="https://github.com/RadeckiEthan/fantasy-league-hub" target="_blank" class="r-btn primary">View on GitHub</a>
+      <a href="../index.html#projects" class="r-btn secondary">Back to Projects</a>
+    </div>
+  </div>
+
+</div>
+</div>
+</body>
+</html>
