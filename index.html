@@ -32,8 +32,8 @@
     <span class="hero-tag-dot"></span>
     Data Scientist & Analyst
   </div>
-  <h1>Hi, I'm <span>Ethan Radecki</span>.<br>I turn data into<br>decisions.</h1>
-  <p>Graduate researcher and analyst with a passion for using data to solve real problems — from the court and pitch to the boardroom.</p>
+  <h1>Hi, I'm <span>Ethan Radecki</span>.<br>Welcome to my portfolio.</h1>
+  <p>Thank you for taking the time to stop by. I'm a data scientist who loves digging into messy problems, finding what the numbers actually say, and sharing those findings in a way that helps people make better decisions.</p>
   <div class="hero-btns">
     <a href="#projects" class="btn btn-primary">View My Work</a>
     <a href="#contact" class="btn btn-outline glass">Get In Touch</a>
@@ -375,8 +375,13 @@ const data = {
   p3:{
     title:"Fantasy Sports Analytics Platform",
     sub:"Full-Stack Web App · Flask · Python · Plotly · Chart.js",
-    overview:"Built entirely from scratch as a self-taught engineering project, this full-stack fantasy football web application transforms raw league data into a rich analytics platform for the Preach Fantasy league. Starting with no prior web development experience, the project covers everything from custom algorithm design to production deployment on Render.",
-    pts:["Built a weighted Euclidean distance similarity engine using StandardScaler and scipy to match each 2025 playoff team against every historical team in league history across 7 custom-weighted features","Engineered three original analytics metrics: Dominance Score and Luck Score (PA/G z-scores), and a Schedule Luck matrix comparing actual vs. predicted records against the weekly league median","Generated per-manager interactive dashboards with Plotly including dual-axis win%/PF/G charts, head-to-head heatmaps, scoring distribution histograms, and quarterly performance trend lines","Built a Flask backend with 15+ routes serving dynamic manager pages, a career leaderboard, draft slot analysis with manager-quality adjustment, and playoff bracket tracking","Deployed on Render via GitHub with auto-generated visualizations on startup, parallel data processing, and clean data integrity practices throughout"],
+    overview:"A full-stack fantasy football platform built from scratch — no prior web development experience — that turns six seasons of league data into a live analytics site for the Preach Fantasy league. The project spans custom metric design, machine learning, statistical modeling, and production deployment.",
+    pts:[
+      "Designed three original performance metrics: Dominance Score, Luck Score, and Schedule Luck Rating, which quantifies career wins gained or lost due to schedule randomness",
+      "Built a weighted Euclidean distance similarity engine to match each 2025 playoff team against every historical team across 7 features, revealing that later draft slots outperform expectations when controlling for manager talent",
+      "Q2 and Q4 scoring were the only statistically significant predictors of playoff qualification in a logistic regression model (AUC 0.83)",
+      "Generated 14 per-manager interactive dashboards with Plotly and deployed the full app on Render via GitHub"
+    ],
     stack:"Python, Flask, Pandas, Plotly, Chart.js, Scikit-learn, SciPy, Bootstrap, NumPy, Render, GitHub",
     gh:"https://github.com/RadeckiEthan/fantasy-league-hub", report:"reports/fantasy-football.html", demo:""
   },
