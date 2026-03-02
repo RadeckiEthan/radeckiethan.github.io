@@ -52,7 +52,7 @@
     <div class="report-meta">
       <span class="meta-item"><span class="meta-dot"></span>Personal Project</span>
       <span class="meta-item"><span class="meta-dot"></span>Self-Taught</span>
-      <span class="meta-item"><span class="meta-dot"></span>2024 – 2025</span>
+      <span class="meta-item"><span class="meta-dot"></span>2024 - 2025</span>
       <span class="meta-item"><span class="meta-dot"></span>Live on Render</span>
     </div>
     <p class="report-summary">
@@ -72,7 +72,7 @@
     <div class="stat-box glass"><div class="num">6</div><div class="label">Seasons of Data</div></div>
     <div class="stat-box glass"><div class="num">15+</div><div class="label">Flask Routes</div></div>
     <div class="stat-box glass"><div class="num">7</div><div class="label">Similarity Features</div></div>
-    <div class="stat-box glass"><div class="num">3</div><div class="label">Charts Per Manager</div></div>
+    <div class="stat-box glass"><div class="num">1000+</div><div class="label">Total Matchups</div></div>
   </div>
 
   <hr class="section-divider">
@@ -80,7 +80,7 @@
   <!-- PROBLEM -->
   <div class="section-label">Problem</div>
   <div class="section-title">More than a scoreboard.</div>
-  <p class="prose">Most fantasy football platforms give you wins, losses, and points — and nothing else. They don't tell you whether a team got lucky with their schedule, whether a manager is genuinely dominant or just fortunate, or how a current team compares to the best and worst teams in league history. Standard tools also have no memory: each season starts fresh with no cumulative context.</p>
+  <p class="prose">Most fantasy football platforms give you wins, losses, and points - and nothing else. They don't tell you whether a team got lucky with their schedule, whether a manager is genuinely dominant or just fortunate, or how a current team compares to the best and worst teams in league history. Standard tools also have no memory: each season starts fresh with no cumulative context.</p>
   <p class="prose">The goal was to build a platform that treats the league like a real sports organization, with career statistics, historical context, and analytics that actually tell you something meaningful about performance.</p>
 
   <div class="callout glass">
@@ -125,8 +125,8 @@
       <span class="metric-formula">z = (PF/G - league_mean) / league_std</span>
     </div>
     <div class="metric-card glass">
-      <h4>Luck Score (LR Z-Score)</h4>
-      <p>Measures how favorable a team's schedule was. Based on points-against per game. A team that faced weak opponents all season has a negative luck score. A high positive score means the schedule actively worked against them despite strong performance.</p>
+      <h4>Luck Score</h4>
+      <p>Measures how favorable a team's schedule was. Based on points-against per game. A team that faced weak opponents all season has a negative luck score. A high positive score means the schedule actively worked against them.</p>
       <span class="metric-formula">z = (PA/G - league_mean) / league_std</span>
     </div>
     <div class="metric-card glass">
@@ -150,7 +150,7 @@
 
   <div class="visual-block">
     <img src="assets/preach_similarity_grid.png" class="visual-img" alt="Historical team similarity analysis grid">
-    <p class="caption">2025 playoff team similarity cards — each card shows the 3 most statistically similar teams from league history, ranked by weighted Euclidean distance across 7 performance features.</p>
+    <p class="caption">2025 playoff team similarity cards - each card shows the 3 most statistically similar teams from league history, ranked by weighted Euclidean distance across 7 performance features.</p>
   </div>
 
   <table class="weight-table glass" style="padding:1.5rem;display:block;">
@@ -184,18 +184,30 @@
 
   <div class="visual-block">
     <img src="assets/preach_h2h_matrix.png" class="visual-img" alt="All-time head-to-head matrix">
-    <p class="caption">All-time head-to-head matrix across all managers (2020-2025). Green cells indicate winning records, red cells losing records — color intensity reflects dominance.</p>
+    <p class="caption">All-time head-to-head matrix across all managers (2020-2025). Green cells indicate winning records, red cells losing records - color intensity reflects dominance.</p>
   </div>
 
   <div class="visual-grid">
     <div class="visual-block">
       <img src="assets/preach_draft_playoff_rate.png" class="visual-img" alt="Playoff rate by draft slot">
-      <p class="caption">Playoff rate by draft slot — slots 1, 7, 8, 11, and 13 show the highest historical playoff conversion rates at 83.3%.</p>
+      <p class="caption">Playoff rate by draft slot - slots 1, 7, 8, 11, and 13 show the highest historical playoff conversion rates at 83.3%.</p>
     </div>
     <div class="visual-block">
       <img src="assets/preach_draft_adjusted_performance.png" class="visual-img" alt="Manager adjusted dominance score by draft slot">
-      <p class="caption">Manager-quality-adjusted dominance score by draft slot — controls for the fact that stronger managers cluster in certain positions over time.</p>
+      <p class="caption">Manager-quality-adjusted dominance score by draft slot - controls for the fact that stronger managers cluster in certain positions over time.</p>
     </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- QUARTERLY REGRESSION -->
+  <div class="section-label">Seasonal Analysis</div>
+  <div class="section-title">Which quarter matters most?</div>
+  <p class="prose">To formally test which part of the season best predicts playoff qualification, a logistic regression was run using average points scored across each quarter of the season as independent variables. The model achieved an AUC of 0.83, indicating strong predictive accuracy.</p>
+
+  <div class="visual-block">
+    <img src="assets/preach_quarterly_regression.png" class="visual-img" alt="Quarterly regression predicting playoff appearance">
+    <p class="caption">Logistic regression coefficients and Pearson correlations for each quarter of the season as predictors of playoff appearance. Q2 (Wks 4-6) and Q4 (Wks 10-13) are statistically significant at p&lt;0.05, with Q3 (Wks 7-9) being the weakest predictor.</p>
   </div>
 
   <hr class="section-divider">
@@ -273,8 +285,6 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
-
-// Auto-attach lightbox to all .visual-img elements
 document.querySelectorAll('.visual-img').forEach(img => {
   img.addEventListener('click', () => openLightbox(img.src, img.alt));
 });
