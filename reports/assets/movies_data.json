@@ -1,0 +1,440 @@
+{
+  "generated_at": "2026-03-29T17:27:59.798923",
+  "headline_stats": {
+    "total_films_rated": 674,
+    "total_films_reviewed": 238,
+    "mean_rating": 3.616,
+    "five_star_count": 14,
+    "five_star_pct": 5.9,
+    "avg_review_length_words": 132.8,
+    "films_watched_since_cutoff": 228
+  },
+  "rating_stats": {
+    "all_films": {
+      "total": 674,
+      "mean": 3.333,
+      "median": 3.5,
+      "distribution": {
+        "0.5": 3,
+        "1.0": 7,
+        "1.5": 31,
+        "2.0": 51,
+        "2.5": 77,
+        "3.0": 121,
+        "3.5": 150,
+        "4.0": 130,
+        "4.5": 62,
+        "5.0": 42
+      }
+    },
+    "reviewed_films": {
+      "total": 238,
+      "mean": 3.616,
+      "median": 3.5,
+      "std": 0.745,
+      "distribution": {
+        "0.5": 1,
+        "1.0": 1,
+        "1.5": 0,
+        "2.0": 7,
+        "2.5": 16,
+        "3.0": 48,
+        "3.5": 52,
+        "4.0": 73,
+        "4.5": 26,
+        "5.0": 14
+      }
+    }
+  },
+  "ratings_over_time": [
+    {
+      "month": "2025-01",
+      "mean": 3.864,
+      "count": 11
+    },
+    {
+      "month": "2025-02",
+      "mean": 3.717,
+      "count": 23
+    },
+    {
+      "month": "2025-03",
+      "mean": 3.5,
+      "count": 7
+    },
+    {
+      "month": "2025-04",
+      "mean": 3.857,
+      "count": 7
+    },
+    {
+      "month": "2025-05",
+      "mean": 3.812,
+      "count": 8
+    },
+    {
+      "month": "2025-06",
+      "mean": 3.738,
+      "count": 21
+    },
+    {
+      "month": "2025-07",
+      "mean": 3.4,
+      "count": 40
+    },
+    {
+      "month": "2025-08",
+      "mean": 3.038,
+      "count": 13
+    },
+    {
+      "month": "2025-09",
+      "mean": 3.816,
+      "count": 19
+    },
+    {
+      "month": "2025-10",
+      "mean": 4.3,
+      "count": 5
+    },
+    {
+      "month": "2025-12",
+      "mean": 4.188,
+      "count": 8
+    },
+    {
+      "month": "2026-01",
+      "mean": 3.554,
+      "count": 28
+    },
+    {
+      "month": "2026-02",
+      "mean": 3.333,
+      "count": 24
+    },
+    {
+      "month": "2026-03",
+      "mean": 3.729,
+      "count": 24
+    }
+  ],
+  "time_habits": {
+    "films_per_month": [
+      {
+        "month": "2025-02",
+        "count": 22
+      },
+      {
+        "month": "2025-03",
+        "count": 7
+      },
+      {
+        "month": "2025-04",
+        "count": 7
+      },
+      {
+        "month": "2025-05",
+        "count": 11
+      },
+      {
+        "month": "2025-06",
+        "count": 21
+      },
+      {
+        "month": "2025-07",
+        "count": 41
+      },
+      {
+        "month": "2025-08",
+        "count": 13
+      },
+      {
+        "month": "2025-09",
+        "count": 21
+      },
+      {
+        "month": "2025-10",
+        "count": 2
+      },
+      {
+        "month": "2025-11",
+        "count": 2
+      },
+      {
+        "month": "2025-12",
+        "count": 8
+      },
+      {
+        "month": "2026-01",
+        "count": 26
+      },
+      {
+        "month": "2026-02",
+        "count": 25
+      },
+      {
+        "month": "2026-03",
+        "count": 22
+      }
+    ],
+    "films_by_day_of_week": [
+      {
+        "day": "Monday",
+        "count": 36
+      },
+      {
+        "day": "Tuesday",
+        "count": 31
+      },
+      {
+        "day": "Wednesday",
+        "count": 30
+      },
+      {
+        "day": "Thursday",
+        "count": 37
+      },
+      {
+        "day": "Friday",
+        "count": 31
+      },
+      {
+        "day": "Saturday",
+        "count": 33
+      },
+      {
+        "day": "Sunday",
+        "count": 30
+      }
+    ],
+    "watch_venues": {
+      "tv": 190,
+      "theater": 34,
+      "traveling": 4
+    },
+    "rewatch_stats": {
+      "rewatches": 31,
+      "first_watches": 197,
+      "rewatch_rate": 13.6
+    },
+    "avg_rating_by_month": [
+      {
+        "month": "2025-02",
+        "mean": 3.705,
+        "count": 22
+      },
+      {
+        "month": "2025-03",
+        "mean": 3.5,
+        "count": 7
+      },
+      {
+        "month": "2025-04",
+        "mean": 3.857,
+        "count": 7
+      },
+      {
+        "month": "2025-05",
+        "mean": 3.667,
+        "count": 9
+      },
+      {
+        "month": "2025-06",
+        "mean": 3.786,
+        "count": 21
+      },
+      {
+        "month": "2025-07",
+        "mean": 3.427,
+        "count": 41
+      },
+      {
+        "month": "2025-08",
+        "mean": 3.038,
+        "count": 13
+      },
+      {
+        "month": "2025-09",
+        "mean": 3.952,
+        "count": 21
+      },
+      {
+        "month": "2025-10",
+        "mean": 3.75,
+        "count": 2
+      },
+      {
+        "month": "2025-11",
+        "mean": 3.75,
+        "count": 2
+      },
+      {
+        "month": "2025-12",
+        "mean": 4.188,
+        "count": 8
+      },
+      {
+        "month": "2026-01",
+        "mean": 3.462,
+        "count": 26
+      },
+      {
+        "month": "2026-02",
+        "mean": 3.4,
+        "count": 25
+      },
+      {
+        "month": "2026-03",
+        "mean": 3.727,
+        "count": 22
+      }
+    ],
+    "total_gated_entries": 228
+  },
+  "decade_breakdown": [
+    {
+      "decade": "1930s",
+      "mean": 3.0,
+      "count": 1
+    },
+    {
+      "decade": "1940s",
+      "mean": 4.5,
+      "count": 2
+    },
+    {
+      "decade": "1950s",
+      "mean": 4.0,
+      "count": 4
+    },
+    {
+      "decade": "1960s",
+      "mean": 4.0,
+      "count": 5
+    },
+    {
+      "decade": "1970s",
+      "mean": 3.912,
+      "count": 17
+    },
+    {
+      "decade": "1980s",
+      "mean": 3.655,
+      "count": 58
+    },
+    {
+      "decade": "1990s",
+      "mean": 3.694,
+      "count": 62
+    },
+    {
+      "decade": "2000s",
+      "mean": 3.344,
+      "count": 154
+    },
+    {
+      "decade": "2010s",
+      "mean": 3.092,
+      "count": 213
+    },
+    {
+      "decade": "2020s",
+      "mean": 3.275,
+      "count": 158
+    }
+  ],
+  "top_films": [
+    {
+      "Name": "Sicario",
+      "Year": 2015,
+      "Rating": 5.0,
+      "Review": "I was debating whether to give this a 4.5 or a 5 but with some more thought I think it earned the 5 stars from me. The movie straight up felt like a live-action Modern Warfare campaign, especially the first 20 and last 30 minutes of the movie. Del-Toro was fantastic while Brolin and Blunt gave strong performances, but I think the real standout here was Villeneuve (as always). I've now watched a handful of his stuff, and he's easily become a top 3 director for me, the way he can build suspense throughout a movie is something else. 5/5"
+    },
+    {
+      "Name": "Oppenheimer",
+      "Year": 2023,
+      "Rating": 5.0,
+      "Review": "So good man. Haven’t seen it in about a year, maybe longer, but everything about the movie is elite. 5/5"
+    },
+    {
+      "Name": "La La Land",
+      "Year": 2016,
+      "Rating": 5.0,
+      "Review": "So ya this movie is still incredible. Banger after banger after banger on the soundtrack. Ending used to make me tear up, now it’s got me smiling because of how perfect it is. 5/5"
+    },
+    {
+      "Name": "Training Day",
+      "Year": 2001,
+      "Rating": 5.0,
+      "Review": "Worst day ever lmao. I’d only seen bits and pieces of Training Day over the years, so I finally sat down and watched it in full, and holy hell. Denzel gives one of the greatest acting performances ever, no exaggeration. And on top of that, Ethan Hawke goes toe-to-toe with him in a way that’s honestly just as impressive at times. The film is packed with iconic scenes, monologues, and quotes that feel etched into cinema history. You could bring up half this script in any film conversation, and someone would finish the line for you. I was thinking 4.5 but f' it, man. That final Denzel meltdown? Legendary.\r\n\r\n\"Awwww, you motherfuckers. Okay. All right. I'm putting cases on all of you bitches! Huh. You think you can do this shit? Jake! You think you can do this to me?! You motherfuckers will be playin' basketball in Pelican Bay when I get finished with you! SHU program, nigga! 23 hour lockdown! I'm the man up in this piece! You'll never see the light of - who the fuck do you think you're fuckin' with? I'm the police! I run shit here! You just live here! Yeah, that's right, you better walk away! Go on and walk away, 'cause I'm gonna burn this motherfucker down. King Kong ain't got shit on me! That's right, that's right. Shit, I don't fuck. I'm winnin' anyway, I'm winnin'. I'm winnin' any motherfuckin' way, I can't lose. Shit, you can shoot me, but you can't kill me.\""
+    },
+    {
+      "Name": "Princess Mononoke",
+      "Year": 1997,
+      "Rating": 5.0,
+      "Review": "Wow, easily my second favorite Studio Ghibli film after Spirited Away. Princess Mononoke was such a different type of Ghibli film, leaning more into drama and thriller elements like parts of Howl’s Moving Castle, and less like the lighter tones of Totoro or Ponyo. Just five minutes in, you see one guy lose his arms and another get decapitated, which is wild for a Ghibli movie and honestly grabbed my attention right away. From that point on, it just kept building.\r\n\r\nBoth main characters are great, and there’s one scene with Ashitaka that just had so much aura. Once again, I feel like I keep saying this for every Ghibli film, but they really know how to make non-human side characters come alive. In this one, there are so many cool examples, but the tiny tree spirits who don’t speak and just shake their heads stood out the most to me.\r\n\r\nI’m not trying to sound like a broken record, but you seriously need to watch these movies for the visuals and music alone. The piano piece in the final scene was incredible and gave me the same emotional vibe as some of the music in Spirited Away and Howl’s Moving Castle, especially the flower garden scene from Howl’s.\r\n\r\nI still have a lot more Studio Ghibli and Miyazaki films to watch, but man, they have been so freaking good so far."
+    },
+    {
+      "Name": "Arrival",
+      "Year": 2016,
+      "Rating": 5.0,
+      "Review": "B-B-B-B-Banger. The score, the acting, the twist, everything. I just love these sci-fi type films so much."
+    },
+    {
+      "Name": "Project Hail Mary",
+      "Year": 2026,
+      "Rating": 5.0,
+      "Review": "Do I think this movie will be for everybody? No. But I do think it deserves all the praise it’s getting. If you know me, you know this is basically a perfect mix of things I love. Science fiction, Ryan Gosling, space cinematography, good comedic timing, and some strong emotional moments. On top of that, the pacing is great in my opinion, loved the entire 150 minutes.\r\n\r\nIt also does not hurt that I saw this in IMAX. The large-scale shots are absolutely beautiful and really elevate the experience. I am definitely going to need a rewatch at some point, but one viewing was more than enough to leave an impression.\r\n\r\nMy roommate read the book last year and gave me some insight on the adaptation. He thought they did a really good job overall but mentioned that the movie tones down the science quite a bit. In the book, some of the scientific/mathematic problems take chapters to solve, while the movie wraps them up in a single scene. I would not have minded a bit more science, but too much of it can lose an audience, kind of like some of Christopher Nolan’s work, so I think they found a solid balance.\r\n\r\n2026 is shaping up to be a great year for movies, and it is safe to say the first blockbuster of the year met expectations and then some."
+    },
+    {
+      "Name": "Se7en",
+      "Year": 1995,
+      "Rating": 5.0,
+      "Review": "Holy MASTERPIECE. I have always pushed this movie to the side whenever I saw it on streaming because I have known the ending for years, but I was a fool for that. Pitt and Freeman are exceptional, both getting their moments to shine, but more so Freeman in my opinion. Sometimes you watch a film and no matter what the character is doing or saying, you are completely captivated. That was me with Freeman’s character.\r\n\r\nPaltrow does a good job with the limited screen time she gets, but Spacey in that final thirty minutes is genuinely unsettling. While updating my year rankings for 1995, I saw that The Usual Suspects was also released that year, what a run Spacey was on.\r\n\r\nThe plot was incredible, and I loved how the story flowed through the seven days. This genre of film is also sneaky one of my favorites. Like Zodiac, Fincher is at his best when making a crime mystery thriller. The dark and gritty city combined with the detective work even gave me The Batman (2022) vibes. This has to be one of my top thirty favorites ever, and I cannot imagine how much higher it would be if I went in blind. Bravo Se7en."
+    },
+    {
+      "Name": "One Battle After Another",
+      "Year": 2025,
+      "Rating": 5.0,
+      "Review": "On my second watch the movie jumped from a 4.5 to a 5. It is simply the best film of the year and compared to the rest of the 2020s it is one of the best there is. The casting is fantastic, from Leo to Benicio to Infiniti to Penn to Hall to Taylor and the rest of the cast, even Jungle Pussy.\r\n\r\nThe soundtrack is incredible, with amazing needle drops from The Jackson 5 to Steely Dan. My favorite part of the soundtrack might be the original piano pieces that play in the background of many scenes, sometimes feeling like the piano is there for at least ten minutes at a time. Combine that with Leo's character, Ghetto Pat/Rocket Man/Bob Ferguson, and you get a strange but satisfying dynamic that keeps you on the edge of your seat, sometimes laughing and sometimes tense.\r\n\r\nNo spoilers, but man does PTA know how to direct a road in the middle of the desert, so good. The first time around I thought Penn did a fine job, but I did not fully appreciate his performance. On the second viewing I could confidently say he took the movie to another level. Steven Lockjaw will be remembered.\r\n\r\nThis movie is great, and I hope everyone gets a chance to see it in theaters because I do not think a TV screen will do it justice."
+    },
+    {
+      "Name": "Saving Private Ryan",
+      "Year": 1998,
+      "Rating": 5.0,
+      "Review": "I miss my grandpa. For those who don’t know, he served in the Coast Guard in the Pacific during WW2. Even though this movie follows U.S. Army soldiers in France, I couldn’t help but think about him, especially during the opening and closing scenes. For that reason alone, this movie will always hold a special place in my heart.\r\n\r\nIt is strong all the way through with great pacing and very few drawbacks. The only part I hate watching is one of the death scenes near the end because every time I feel like yelling at my TV. Tom Hanks might just be one of my favorite actors ever too, with so many incredible performances under his belt.\r\n\r\nThis movie also hits home because Private Ryan is the last of four brothers, and whenever I think about that, I can’t help but imagine my own brothers and I in a situation like this. It makes me appreciate them even more. All that being said, this is easily on Spielberg’s Mount Rushmore and one of the best war movies of all time."
+    }
+  ],
+  "bottom_films": [
+    {
+      "Name": "War of the Worlds",
+      "Year": 2025,
+      "Rating": 0.5,
+      "Review": "Yeah it was that bad man. I've never seen a collection of acting this bad, and I mean what do you expect when the entire movie is watched from the same computer screen. The CGI was also really bad, kinda felt like I was playing one of those Godzilla video games back in the day on the PS2. I also just realized that a focal point of the film was Amazon and the movie was published by Amazon Video. You can't get any more cash grabby than that. There was a point during the movie when Ice Cube was checking another character’s vitals and their heart rate reached like 102 or something and he started to freak out because it was too high. That's such a simple thing you could fix I think. Speaking of Ice Cube, his acting was so bad. I think he showed up to set for one day, read all of his lines, and called it a movie. Whateva. Don't give it a watch unless you don’t care to toss away 90 minutes."
+    },
+    {
+      "Name": "Earwig and the Witch",
+      "Year": 2020,
+      "Rating": 1.0,
+      "Review": "Kind of a disgrace to the studio. Visually unpleasant, barely a plot to hang onto, underwhelming and mostly unlikable characters, and the rock music just does not fit the Ghibli vibe at all. I decided to finish the entire Studio Ghibli catalog since I only have a few left, but this is one I probably could have skipped.\r\n\r\nI always say Ghibli usually nails the trinity of characters, visuals, and music. Sometimes you get two out of three. Very rarely just one. But to not really deliver any of them at a high level is honestly disheartening. There were multiple moments where I caught myself thinking the exact same scene would look so much better in the classic Ghibli animation style.\r\n\r\nAnd that cliffhanger. Why end it like that? Did they really think people would be satisfied? I did not even care enough to be upset because I would not watch a sequel anyway but come on lmao."
+    },
+    {
+      "Name": "The Loveless",
+      "Year": 1981,
+      "Rating": 2.0,
+      "Review": "I don’t even know how much I really want to write about this film. At just around 80 minutes, I figured it’d be some quick fun and maybe offer something semi-memorable—but it didn’t. I think this was Dafoe’s first major role, and he was fine, but the rest of the characters and acting were just so bland. I didn’t care about any of it. I genuinely wouldn’t recommend this to anyone, even with the short runtime—because honestly, it felt like a waste of time. It wasn’t bad per se, just incredibly forgettable and uneventful. The one positive? I did end up adding an old song from the soundtrack to my playlist."
+    },
+    {
+      "Name": "Death of a Unicorn",
+      "Year": 2025,
+      "Rating": 2.0,
+      "Review": "So ahh. I mean, I think I was straight-faced the entire film. It invoked literally zero emotion out of me. I went into it thinking I would laugh because it was a comedy… nope. I went into it thinking I would be scared or that my heart rate would rise because it was a horror… also nope. I didn’t care for or like any of the characters, and the only actor I liked watching was Will Poulter.\r\n\r\nThe kills were underwhelming, especially for what I expect from this type of horror movie. Just bad overall. Probably my least favorite movie of the year, right there with Electric State and G20. Come on A24, do better."
+    },
+    {
+      "Name": "The Fast and the Furious: Tokyo Drift",
+      "Year": 2006,
+      "Rating": 2.0,
+      "Review": "Yeah, not a fan of this one. The only character I really liked or cared about was Han, and the only redeeming qualities were the ambiance and the soundtrack. Both of those were already standout elements in the first two films, so that should just be the standard by now. The cameo at the end felt like a Marvel post-credit scene, some Thanos or Dr. Doom type shit. So that’s three movies down in the franchise, and I think around eight more to go, but if they end up being as uninteresting as this one, it’s gonna be tough to get through. Also, no Brian or Rome in this one just knocks it down at least a star."
+    }
+  ]
+}
