@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="../style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
-  /* ── Report-specific overrides ── */
   .chart-wrap {
     position:relative; width:100%;
     background:var(--surface); border:1px solid var(--border);
@@ -23,10 +22,7 @@
   .chart-wrap.tall canvas { max-height:380px; }
   .chart-wrap.full canvas { max-height:320px; }
 
-  /* Callout pills */
-  .pill-row {
-    display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem;
-  }
+  .pill-row { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem; }
   .pill {
     flex:1 1 160px;
     background:var(--surface); border:1px solid var(--border);
@@ -37,26 +33,22 @@
     font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em;
     color:var(--muted); font-weight:600; margin-bottom:0.3rem;
   }
-  .pill .pill-value {
-    font-size:1.35rem; font-weight:800; color:var(--text); line-height:1.15;
-  }
-  .pill .pill-sub {
-    font-size:0.75rem; color:var(--muted); margin-top:0.2rem;
-  }
+  .pill .pill-value { font-size:1.35rem; font-weight:800; color:var(--text); line-height:1.15; }
+  .pill .pill-sub   { font-size:0.75rem; color:var(--muted); margin-top:0.2rem; }
 
-  /* Model card */
   .model-card {
     padding:1.4rem 1.75rem; margin-bottom:1rem;
     border-left:3px solid var(--accent);
     border-radius:0 var(--radius) var(--radius) 0;
   }
+  .model-card.structured { border-left-color: var(--accent2, #7a6fb0); }
   .model-card h4 { font-size:0.88rem; font-weight:700; margin-bottom:0.6rem; }
   .metric-row { display:flex; gap:2rem; flex-wrap:wrap; }
   .metric { text-align:center; }
   .metric .val { font-size:1.6rem; font-weight:800; color:var(--accent); line-height:1; }
   .metric .lbl { font-size:0.7rem; color:var(--muted); margin-top:0.2rem; font-weight:500; }
+  .model-card.structured .metric .val { color:#7a6fb0; }
 
-  /* Word importance bars */
   .word-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; }
   .word-col h5 {
     font-size:0.7rem; text-transform:uppercase; letter-spacing:0.12em;
@@ -74,22 +66,37 @@
   .word-col.solid .word-bar { background:#7a6fb0; }
   .word-col.great .word-bar { background:#4a7fa8; }
 
-  .scatter-note { font-size:0.78rem; color:var(--muted); text-align:center; margin-top:0.5rem; font-style:italic; }
+  /* Confusion matrix tooltip */
+  .cm-cell { position:relative; cursor:default; }
+  .cm-cell .cm-tooltip {
+    display:none; position:absolute; z-index:99;
+    background:rgba(250,246,240,0.98); border:1px solid var(--border);
+    border-radius:8px; padding:0.6rem 0.85rem;
+    font-size:0.75rem; color:#1e1a14; line-height:1.6;
+    white-space:nowrap; top:100%; left:50%; transform:translateX(-50%);
+    box-shadow:0 4px 16px rgba(0,0,0,0.12); margin-top:4px;
+    max-width:220px; white-space:normal;
+  }
+  .cm-cell:hover .cm-tooltip { display:block; }
 
+  .scatter-note { font-size:0.78rem; color:var(--muted); text-align:center; margin-top:0.5rem; font-style:italic; }
   .report-section { margin-bottom:3.5rem; }
   .section-h {
     font-size:clamp(1.3rem,2.5vw,1.8rem); font-weight:800; margin-bottom:0.75rem;
     letter-spacing:-0.01em;
   }
-  .section-rule { width:44px; height:3px; background:linear-gradient(90deg,var(--accent),rgba(74,127,168,0.2)); border-radius:2px; margin:0.5rem 0 1.5rem; }
-
+  .section-rule {
+    width:44px; height:3px;
+    background:linear-gradient(90deg,var(--accent),rgba(74,127,168,0.2));
+    border-radius:2px; margin:0.5rem 0 1.5rem;
+  }
   #loading { text-align:center; padding:6rem 2rem; color:var(--muted); font-size:0.95rem; }
   #main-content { display:none; }
 
   @media(max-width:768px){
-    .word-grid { grid-template-columns:1fr; }
+    .word-grid  { grid-template-columns:1fr; }
     .metric-row { gap:1.2rem; }
-    .pill-row { flex-direction:column; }
+    .pill-row   { flex-direction:column; }
   }
 </style>
 </head>
@@ -103,16 +110,13 @@
 
 <div class="content">
 
-<!-- NAV -->
 <nav class="glass" style="border-radius:0;">
   <a href="../index.html" class="nav-logo">ER.</a>
   <a href="../index.html#projects" class="nav-back">← Back to Projects</a>
 </nav>
 
-<!-- LOADING -->
 <div id="loading">Loading data...</div>
 
-<!-- MAIN CONTENT -->
 <div id="main-content">
 <div class="report-wrap">
 
@@ -145,31 +149,32 @@
       I've been logging every film I watch on Letterboxd and writing a short review for each one.
       After a few years of that, I had enough data to do something interesting with it — so I built
       a Python pipeline that pulls my exports, runs analysis across rating patterns, genres, directors,
-      and release years, and trains a machine learning model on my own reviews to see whether my
+      and release years, and trains machine learning models on my own reviews to see whether my
       writing can actually predict how much I liked a film.
     </p>
     <p class="prose" style="margin-top:0.75rem;">
       The data covers <strong id="intro-rated"></strong> rated films and <strong id="intro-reviewed"></strong> written
-      reviews. Genre, director, and actor metadata is pulled from the TMDB API. The ML section uses
-      TF-IDF text features combined with VADER sentiment scores to train a Ridge Regression and a
-      3-class classifier. All analysis is done locally — only the output JSON files are pushed to this page.
+      reviews. Genre, director, actor, and financial metadata is pulled from the TMDB API. Two separate
+      ML approaches are compared: one trained purely on the text of my reviews using TF-IDF and VADER
+      sentiment, and one trained on structured film properties like genre, director, runtime, budget,
+      and TMDB crowd ratings. All analysis runs locally and only the output JSON files are pushed here.
     </p>
   </div>
 
   <hr class="section-divider">
 
-  <!-- SECTION 1: A HISTORY OF FILM TASTE -->
+  <!-- SECTION 1: HISTORY OF FILM TASTE -->
   <div class="report-section">
     <div class="section-h">A History of Film Taste</div>
     <div class="section-rule"></div>
     <p class="prose">
       Every film I've rated, plotted by the year it was released. Bars show how many films I've
-      watched from each year; the line tracks my average rating. Older films tend to be rated higher —
-      a mix of genuine quality and survivorship bias, since the bad ones from 1975 have been largely
+      watched from each year and the line tracks my average rating. Older films tend to rate higher,
+      a mix of genuine quality and survivorship bias since the bad ones from 1975 have largely been
       forgotten.
     </p>
     <div class="chart-wrap tall" style="margin-top:1.25rem;">
-      <div class="chart-title">Films Rated & Avg Rating by Release Year</div>
+      <div class="chart-title">Films Rated and Avg Rating by Release Year</div>
       <canvas id="chartYearBreakdown"></canvas>
     </div>
   </div>
@@ -181,9 +186,10 @@
     <div class="section-h">How I Rate</div>
     <div class="section-rule"></div>
     <p class="prose">
-      My rating distribution skews positive — most films land in the 3.0–4.0 range. The runtime
-      chart tells a cleaner story: the longer the film, the higher I tend to rate it. Whether that
-      reflects genuine quality or just the kind of films that earn a long runtime is hard to say.
+      My rating distribution skews positive with most films landing in the 3.0 to 4.0 range.
+      The runtime chart tells a cleaner story: the longer the film, the higher I tend to rate it.
+      Whether that reflects genuine quality or just the kind of ambition that earns a long runtime
+      is hard to say.
     </p>
     <div class="pill-row" id="rating-pills"></div>
     <div class="visual-grid">
@@ -206,9 +212,9 @@
     <div class="section-rule"></div>
     <p class="prose">
       Genre metadata from TMDB. The scatter plot shows each genre as a single point — how much
-      I watch it versus how highly I tend to rate it. Genres in the top-right are both frequently
-      watched and well-rated. Genres bottom-left are neither. The decade bars show the same
-      volume vs. quality split across eras of film.
+      I watch it versus how highly I tend to rate it. The shaded regions divide the chart into
+      thirds by avg rating across all genres. The decade charts show the same volume vs quality
+      split across eras of film.
     </p>
     <div class="pill-row" id="genre-pills"></div>
     <div class="chart-wrap full" style="margin-bottom:1.25rem;">
@@ -234,9 +240,9 @@
     <div class="section-h">Directors &amp; Actors</div>
     <div class="section-rule"></div>
     <p class="prose">
-      Directors ranked by average rating across at least 2 films. Actors by watch count across
-      at least 3 films. The director list surfaces genuine taste; the actor list is more a
-      reflection of the kind of films I gravitate toward.
+      Directors require at least 2 films and actors at least 3 to appear. Both charts are ordered
+      by average rating so the ranking reflects taste rather than volume. Hover over any bar to see
+      film count alongside the rating.
     </p>
     <div class="pill-row" id="director-pills"></div>
     <div class="visual-grid">
@@ -245,7 +251,7 @@
         <canvas id="chartDirectors"></canvas>
       </div>
       <div class="chart-wrap tall">
-        <div class="chart-title">Most Watched Actors</div>
+        <div class="chart-title">Top Actors by Avg Rating</div>
         <canvas id="chartActors"></canvas>
       </div>
     </div>
@@ -253,17 +259,17 @@
 
   <hr class="section-divider">
 
-  <!-- SECTION 5: ML ANALYSIS -->
+  <!-- SECTION 5: NLP MODEL -->
   <div class="report-section">
     <div class="section-h">Can My Words Predict My Rating?</div>
     <div class="section-rule"></div>
     <p class="prose">
-      I trained two models on my <strong id="ml-review-count"></strong> reviews: a <strong>Ridge Regression</strong>
-      to predict the exact star rating, and a <strong>3-class Logistic Regression</strong> to classify
-      each review as <em>Meh</em> (≤2.5★), <em>Solid</em> (3.0–3.5★), or <em>Great</em> (≥4.0★).
-      Features include TF-IDF text vectors combined with VADER sentiment scores. Ridge Regression
-      was chosen over standard linear regression to avoid overfitting in the high-dimensional TF-IDF
-      feature space.
+      I trained two models on my <strong id="ml-review-count"></strong> written reviews using an 80/20
+      train/test split: a <strong>Ridge Regression</strong> to predict the exact star rating, and a
+      <strong>3-class Logistic Regression</strong> to classify each review as <em>Meh</em> (≤2.5★),
+      <em>Solid</em> (3.0–3.5★), or <em>Great</em> (≥4.0★). Features are TF-IDF text vectors combined
+      with VADER sentiment scores. Ridge was chosen over standard linear regression to avoid overfitting
+      in the high-dimensional feature space. All metrics below are from the held-out test set.
     </p>
 
     <div class="visual-grid" style="margin-bottom:1.5rem;">
@@ -279,41 +285,89 @@
 
     <div class="model-card glass">
       <h4>Ridge Regression — Predict Exact Star Rating</h4>
-      <div class="metric-row" id="regression-metrics"></div>
+      <div class="metric-row" id="nlp-regression-metrics"></div>
     </div>
     <div class="model-card glass">
       <h4>Logistic Regression — 3-Class Classifier (Meh / Solid / Great)</h4>
-      <div class="metric-row" id="classification-metrics"></div>
+      <div class="metric-row" id="nlp-classification-metrics"></div>
     </div>
 
     <div class="callout glass" style="margin-top:1.5rem;">
       <div class="callout-label">Honest Model Assessment</div>
-      <p id="model-callout"></p>
+      <p id="nlp-model-callout"></p>
     </div>
 
     <div class="chart-wrap tall" style="margin-top:1.5rem;">
-      <div class="chart-title">Predicted vs Actual Rating (Ridge Regression)</div>
+      <div class="chart-title">Predicted vs Actual Rating — NLP Model (Test Set)</div>
       <canvas id="chartScatter"></canvas>
     </div>
-    <p class="scatter-note">Each point is one reviewed film. Perfect predictions would fall on the diagonal line.</p>
+    <p class="scatter-note">Each point is one film from the held-out test set. Perfect predictions fall on the diagonal.</p>
 
     <div style="margin-top:2rem;">
-      <div class="section-h" style="font-size:0.95rem;">Confusion Matrix</div>
+      <div class="section-h" style="font-size:0.95rem;">Confusion Matrix — NLP Classifier</div>
       <div class="section-rule"></div>
-      <p class="prose">How often the classifier got each class right vs. what it confused them with.</p>
-      <div id="confusion-matrix" style="overflow-x:auto;"></div>
+      <p class="prose">How often the classifier got each class right vs what it confused them with. Hover over any off-diagonal cell to see which films were misclassified.</p>
+      <div id="nlp-confusion-matrix" style="overflow-x:auto;"></div>
     </div>
   </div>
 
   <hr class="section-divider">
 
-  <!-- SECTION 6: LANGUAGE ANALYSIS -->
+  <!-- SECTION 6: STRUCTURED MODEL -->
+  <div class="report-section">
+    <div class="section-h">Can Film Properties Predict My Rating?</div>
+    <div class="section-rule"></div>
+    <p class="prose">
+      A second model trained on the same 255 films but using structured TMDB features instead of
+      review text: genre, director, cast, runtime, budget, revenue, release year, and TMDB crowd
+      rating. The goal is to see whether objective film properties predict my taste as well as
+      my own words do — and to understand what role crowd consensus plays.
+    </p>
+
+    <div class="model-card glass structured">
+      <h4>Ridge Regression — Predict Exact Star Rating (Structured Features)</h4>
+      <div class="metric-row" id="struct-regression-metrics"></div>
+    </div>
+    <div class="model-card glass structured">
+      <h4>Logistic Regression — 3-Class Classifier (Structured Features)</h4>
+      <div class="metric-row" id="struct-classification-metrics"></div>
+    </div>
+
+    <div class="callout glass" style="margin-top:1.5rem;">
+      <div class="callout-label">The Vote Average Effect</div>
+      <p id="struct-model-callout"></p>
+    </div>
+
+    <div class="chart-wrap tall" style="margin-top:1.5rem;">
+      <div class="chart-title">Predicted vs Actual Rating — Structured Model (Test Set)</div>
+      <canvas id="chartStructScatter"></canvas>
+    </div>
+    <p class="scatter-note">Each point is one film from the held-out test set. Perfect predictions fall on the diagonal.</p>
+
+    <div style="margin-top:2rem;">
+      <div class="section-h" style="font-size:0.95rem;">Confusion Matrix — Structured Classifier</div>
+      <div class="section-rule"></div>
+      <p class="prose">How often the structured classifier got each class right. Hover over off-diagonal cells to see misclassified films.</p>
+      <div id="struct-confusion-matrix" style="overflow-x:auto;"></div>
+    </div>
+
+    <div style="margin-top:2rem;">
+      <div class="section-h" style="font-size:0.95rem;">Top Predictive Features</div>
+      <div class="section-rule"></div>
+      <p class="prose">The features the structured model weighted most heavily per class. Feature names prefixed with "genre", "dir", or "actor" are one-hot encoded properties; the rest are numeric.</p>
+      <div class="word-grid" id="struct-feature-importance"></div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 7: LANGUAGE ANALYSIS -->
   <div class="report-section">
     <div class="section-h">How My Language Changes by Rating</div>
     <div class="section-rule"></div>
     <p class="prose">
-      The words below are the most <em>distinctive</em> to each rating class — not just the most frequent,
-      but the ones the model learned are most predictive of that class over the others.
+      The words below are the most distinctive to each rating class — not just the most frequent,
+      but the ones the NLP model learned are most predictive of that class over the others.
       Bar length represents coefficient strength.
     </p>
 
@@ -330,7 +384,6 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <div class="report-footer">
     <p>Ethan Radecki · ecradeck@syr.edu</p>
     <div class="report-actions">
@@ -338,13 +391,11 @@
     </div>
   </div>
 
-</div><!-- /report-wrap -->
-</div><!-- /main-content -->
-
-</div><!-- /content -->
+</div>
+</div>
+</div>
 
 <script>
-// ── Palette & defaults ────────────────────────────────────────────────────────
 const ACCENT  = '#4a7fa8';
 const ACCENT2 = '#7a6fb0';
 const CORAL   = '#c0616e';
@@ -361,10 +412,8 @@ const baseOpts = {
   plugins:{ legend:{display:false}, tooltip:{
     backgroundColor:'rgba(250,246,240,0.95)',
     titleColor:'#1e1a14', bodyColor:MUTED,
-    borderColor:BORDER, borderWidth:1,
-    padding:10, cornerRadius:10,
-    titleFont:{weight:'700', family:FONT},
-    bodyFont:{family:FONT}
+    borderColor:BORDER, borderWidth:1, padding:10, cornerRadius:10,
+    titleFont:{weight:'700', family:FONT}, bodyFont:{family:FONT}
   }},
   scales:{
     x:{ grid:{color:'rgba(200,185,165,0.2)'}, ticks:{font:{family:FONT, size:10}} },
@@ -375,10 +424,8 @@ const baseOpts = {
 function barOpts(extra={}) {
   return { ...JSON.parse(JSON.stringify(baseOpts)), ...extra };
 }
-
 function alphaAccent(a) { return `rgba(74,127,168,${a})`; }
 
-// ── Pill helper ───────────────────────────────────────────────────────────────
 function pill(label, value, sub) {
   return `<div class="pill glass">
     <div class="pill-label">${label}</div>
@@ -387,27 +434,79 @@ function pill(label, value, sub) {
   </div>`;
 }
 
-// ── Confusion matrix ──────────────────────────────────────────────────────────
-function buildConfusionMatrix(cm, labels) {
-  let html = `<table style="border-collapse:collapse;font-size:0.82rem;width:100%;max-width:420px;margin:0 auto;">`;
+function metricHTML(pairs) {
+  return pairs.map(([v,l]) =>
+    `<div class="metric"><div class="val">${v}</div><div class="lbl">${l}</div></div>`
+  ).join('');
+}
+
+// ── Confusion matrix with hover on off-diagonal cells ────────────────────────
+function buildConfusionMatrix(cm, labels, misclassifiedFilms) {
+  let html = `<table style="border-collapse:collapse;font-size:0.82rem;width:100%;max-width:460px;margin:0 auto;">`;
   html += `<thead><tr><th style="padding:0.5rem;color:var(--muted);font-weight:500;"></th>`;
   labels.forEach(l => {
     html += `<th style="padding:0.5rem;color:var(--accent);font-weight:700;text-align:center;">Pred: ${l}</th>`;
   });
   html += `</tr></thead><tbody>`;
+
   cm.matrix.forEach((row, i) => {
     html += `<tr><td style="padding:0.5rem;color:var(--accent);font-weight:700;">Act: ${labels[i]}</td>`;
     row.forEach((val, j) => {
       const isDiag = i === j;
-      const bg  = isDiag ? 'rgba(74,127,168,0.12)' : 'rgba(0,0,0,0.02)';
+      const bg  = isDiag ? 'rgba(74,127,168,0.12)' : 'rgba(192,97,110,0.07)';
       const fw  = isDiag ? '700' : '400';
       const col = isDiag ? 'var(--text)' : 'var(--muted)';
-      html += `<td style="padding:0.65rem;text-align:center;background:${bg};border-radius:6px;font-weight:${fw};color:${col};border:1px solid var(--border-dim);">${val}</td>`;
+      const cellStyle = `padding:0.65rem;text-align:center;background:${bg};border-radius:6px;font-weight:${fw};color:${col};border:1px solid var(--border-dim);`;
+
+      if (!isDiag && val > 0 && misclassifiedFilms) {
+        const key   = `${labels[i]}_as_${labels[j]}`;
+        const films = misclassifiedFilms[key] || [];
+        const filmList = films.length
+          ? films.map(f => `<div>${f}</div>`).join('')
+          : 'No films';
+        html += `<td style="${cellStyle}">
+          <div class="cm-cell">${val}
+            <div class="cm-tooltip">
+              <strong style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);">Rated ${labels[i]}, predicted ${labels[j]}</strong>
+              ${filmList}
+            </div>
+          </div>
+        </td>`;
+      } else {
+        html += `<td style="${cellStyle}">${val}</td>`;
+      }
     });
     html += `</tr>`;
   });
   html += `</tbody></table>`;
   return html;
+}
+
+// ── Feature importance bars (reuses word-bar style) ──────────────────────────
+function buildFeatureImportance(importanceData) {
+  return [{key:'Meh',cls:'meh'},{key:'Solid',cls:'solid'},{key:'Great',cls:'great'}]
+    .map(({key, cls}) => {
+      const feats    = importanceData[key] || [];
+      const maxScore = Math.max(...feats.map(f => Math.abs(f.score)));
+      const label    = key === 'Meh' ? '≤2.5★' : key === 'Solid' ? '3.0–3.5★' : '≥4.0★';
+
+      // Clean up feature names for display
+      const cleanName = name => name
+        .replace(/^genre_/, '')
+        .replace(/^dir_/, '')
+        .replace(/^actor_/, '');
+
+      return `<div class="word-col ${cls}">
+        <h5>${key} (${label})</h5>
+        ${feats.map(f => {
+          const pct = Math.round((Math.abs(f.score) / maxScore) * 100);
+          return `<div class="word-bar-row">
+            <span class="word-label" title="${f.feature}">${cleanName(f.feature)}</span>
+            <div class="word-bar-bg"><div class="word-bar" style="width:${pct}%"></div></div>
+          </div>`;
+        }).join('')}
+      </div>`;
+    }).join('');
 }
 
 // ── Main render ───────────────────────────────────────────────────────────────
@@ -424,19 +523,15 @@ async function render() {
   const h  = data.headline_stats;
   const rs = data.rating_stats;
 
-  // Generated date
   const genEl = document.getElementById('generated-date');
-  if (genEl) {
-    genEl.textContent = new Date(data.generated_at)
-      .toLocaleDateString('en-US', {month:'long', year:'numeric'});
-  }
+  if (genEl) genEl.textContent = new Date(data.generated_at)
+    .toLocaleDateString('en-US', {month:'long', year:'numeric'});
 
-  // Intro counts
-  document.getElementById('intro-rated').textContent    = h.total_films_rated.toLocaleString();
-  document.getElementById('intro-reviewed').textContent = h.total_films_reviewed.toLocaleString();
+  document.getElementById('intro-rated').textContent     = h.total_films_rated.toLocaleString();
+  document.getElementById('intro-reviewed').textContent  = h.total_films_reviewed.toLocaleString();
   document.getElementById('ml-review-count').textContent = h.total_films_reviewed.toLocaleString();
 
-  // ── SECTION 1: Year breakdown ───────────────────────────────────────────────
+  // ── SECTION 1: Year breakdown ─────────────────────────────────────────────
   const yb = data.year_breakdown;
   new Chart(document.getElementById('chartYearBreakdown'), {
     type: 'bar',
@@ -444,25 +539,15 @@ async function render() {
       labels: yb.map(y => y.Year),
       datasets: [
         {
-          type: 'bar',
-          data: yb.map(y => y.count),
-          backgroundColor: alphaAccent(0.55),
-          borderRadius: 3,
-          borderSkipped: false,
-          yAxisID: 'yCount',
-          order: 2,
+          type: 'bar', data: yb.map(y => y.count),
+          backgroundColor: alphaAccent(0.55), borderRadius: 3,
+          borderSkipped: false, yAxisID: 'yCount', order: 2,
         },
         {
-          type: 'line',
-          data: yb.map(y => y.mean),
-          borderColor: CORAL,
-          backgroundColor: 'transparent',
-          tension: 0.35,
-          pointRadius: 0,
-          pointHoverRadius: 4,
-          borderWidth: 2,
-          yAxisID: 'yRating',
-          order: 1,
+          type: 'line', data: yb.map(y => y.mean),
+          borderColor: CORAL, backgroundColor: 'transparent',
+          tension: 0.35, pointRadius: 0, pointHoverRadius: 4,
+          borderWidth: 2, yAxisID: 'yRating', order: 1,
         }
       ]
     },
@@ -474,10 +559,9 @@ async function render() {
           ...baseOpts.plugins.tooltip,
           callbacks: {
             title: ctx => `${ctx[0].label}`,
-            label: ctx => {
-              if (ctx.datasetIndex === 0) return `Films: ${ctx.parsed.y}`;
-              return `Avg rating: ${ctx.parsed.y.toFixed(2)}★`;
-            }
+            label: ctx => ctx.datasetIndex === 0
+              ? `Films: ${ctx.parsed.y}`
+              : `Avg rating: ${ctx.parsed.y.toFixed(2)}★`
           }
         }
       },
@@ -490,8 +574,7 @@ async function render() {
           title: { display:true, text:'# Films', font:{size:10}, color:MUTED },
         },
         yRating: {
-          position: 'right',
-          min: 1, max: 5,
+          position: 'right', min: 1, max: 5,
           grid: { drawOnChartArea: false },
           ticks: { font: {family:FONT, size:10} },
           title: { display:true, text:'Avg Rating ★', font:{size:10}, color:CORAL },
@@ -500,77 +583,95 @@ async function render() {
     }
   });
 
-  // ── SECTION 2: How I Rate ───────────────────────────────────────────────────
+  // ── SECTION 2: How I Rate ─────────────────────────────────────────────────
   const ratingLabels = ['0.5','1.0','1.5','2.0','2.5','3.0','3.5','4.0','4.5','5.0'];
   const allCounts    = ratingLabels.map(r => rs.all_films.distribution[r] || 0);
   const distColors   = ratingLabels.map(r =>
     parseFloat(r) >= 4 ? ACCENT : parseFloat(r) >= 3 ? ACCENT2 : CORAL
   );
 
-  // Pills
   const rt = tmdb.runtime_buckets;
   const bestRuntime = rt.reduce((a,b) => b.mean_rating > a.mean_rating ? b : a);
   document.getElementById('rating-pills').innerHTML =
-    pill('Mean Rating', h.mean_rating.toFixed(2) + '★', `across ${h.total_films_rated} films`) +
-    pill('5★ Films', h.five_star_count, `${h.five_star_pct}% of reviewed films`) +
+    pill('Mean Rating',    h.mean_rating.toFixed(2) + '★', `across ${h.total_films_rated} films`) +
     pill('Longer = Better', bestRuntime.bucket, `avg ${bestRuntime.mean_rating.toFixed(2)}★`);
 
   new Chart(document.getElementById('chartAllDist'), {
     type: 'bar',
-    data: {
-      labels: ratingLabels,
-      datasets: [{ data:allCounts, backgroundColor:distColors, borderRadius:5, borderSkipped:false }]
-    },
+    data: { labels: ratingLabels, datasets: [{ data:allCounts, backgroundColor:distColors, borderRadius:5, borderSkipped:false }] },
     options: barOpts({ scales:{
       x:{ ...baseOpts.scales.x, title:{display:true, text:'Rating ★', font:{size:10}} },
       y:{ ...baseOpts.scales.y, title:{display:true, text:'# Films',  font:{size:10}} }
     }})
   });
 
-  // Runtime chart
-  const rtLabels = rt.map(b => b.bucket);
-  const rtRatings = rt.map(b => b.mean_rating);
   new Chart(document.getElementById('chartRuntime'), {
     type: 'bar',
     data: {
-      labels: rtLabels,
-      datasets: [{
-        data: rtRatings,
-        backgroundColor: rt.map(b =>
-          b.mean_rating >= 4 ? ACCENT : b.mean_rating >= 3.5 ? ACCENT2 : CORAL
-        ),
-        borderRadius: 5, borderSkipped: false
-      }]
+      labels: rt.map(b => b.bucket),
+      datasets: [{ data: rt.map(b => b.mean_rating),
+        backgroundColor: rt.map(b => b.mean_rating >= 4 ? ACCENT : b.mean_rating >= 3.5 ? ACCENT2 : CORAL),
+        borderRadius:5, borderSkipped:false }]
     },
     options: barOpts({ scales:{
       x:{ ...baseOpts.scales.x },
-      y:{ ...baseOpts.scales.y, min:2.5, max:4.5,
-          title:{display:true, text:'Avg Rating ★', font:{size:10}} }
+      y:{ ...baseOpts.scales.y, min:2.5, max:4.5, title:{display:true, text:'Avg Rating ★', font:{size:10}} }
     }})
   });
 
-  // ── SECTION 3: What I Watch ─────────────────────────────────────────────────
+  // ── SECTION 3: What I Watch ───────────────────────────────────────────────
   const genres = tmdb.genre_analysis;
   const mostWatched  = [...genres].sort((a,b) => b.count - a.count)[0];
-  const highestRated = [...genres].filter(g => g.count >= 5)
-                                  .sort((a,b) => b.mean_rating - a.mean_rating)[0];
-  const lowestRated  = [...genres].filter(g => g.count >= 5)
-                                  .sort((a,b) => a.mean_rating - b.mean_rating)[0];
+  const highestRated = [...genres].filter(g => g.count >= 5).sort((a,b) => b.mean_rating - a.mean_rating)[0];
+  const lowestRated  = [...genres].filter(g => g.count >= 5).sort((a,b) => a.mean_rating - b.mean_rating)[0];
 
   document.getElementById('genre-pills').innerHTML =
-    pill('Most Watched', mostWatched.name, `${mostWatched.count} films`) +
-    pill('Highest Rated', highestRated.name, `${highestRated.mean_rating.toFixed(2)}★ avg`) +
-    pill('Lowest Rated', lowestRated.name, `${lowestRated.mean_rating.toFixed(2)}★ avg`);
+    pill('Most Watched',   mostWatched.name,  `${mostWatched.count} films`) +
+    pill('Highest Rated',  highestRated.name, `${highestRated.mean_rating.toFixed(2)}★ avg`) +
+    pill('Lowest Rated',   lowestRated.name,  `${lowestRated.mean_rating.toFixed(2)}★ avg`);
 
-  // Genre scatter
+  // Genre scatter with shaded rating bands
+  const ratings      = genres.map(g => g.mean_rating);
+  const minR         = Math.min(...ratings);
+  const maxR         = Math.max(...ratings);
+  const third        = (maxR - minR) / 3;
+  const lowThresh    = minR + third;
+  const highThresh   = minR + 2 * third;
+
+  const scatterPlugin = {
+    id: 'ratingBands',
+    beforeDraw(chart) {
+      const { ctx, chartArea, scales } = chart;
+      if (!chartArea) return;
+      const { left, right, top, bottom } = chartArea;
+      const yScale = scales.y;
+
+      const toY = v => yScale.getPixelForValue(v);
+      const yMin = yScale.min;
+      const yMax = yScale.max;
+
+      const bands = [
+        { from: yMin,       to: lowThresh,  color: 'rgba(192,97,110,0.07)'  },
+        { from: lowThresh,  to: highThresh, color: 'rgba(122,111,176,0.07)' },
+        { from: highThresh, to: yMax,       color: 'rgba(74,127,168,0.09)'  },
+      ];
+      bands.forEach(b => {
+        const y1 = Math.min(toY(b.from), bottom);
+        const y2 = Math.max(toY(b.to),   top);
+        ctx.fillStyle = b.color;
+        ctx.fillRect(left, y2, right - left, y1 - y2);
+      });
+    }
+  };
+
   new Chart(document.getElementById('chartGenreScatter'), {
     type: 'scatter',
+    plugins: [scatterPlugin],
     data: {
       datasets: [{
         data: genres.map(g => ({ x: g.count, y: g.mean_rating, name: g.name })),
-        backgroundColor: alphaAccent(0.7),
-        pointRadius: 7,
-        pointHoverRadius: 9,
+        backgroundColor: alphaAccent(0.75),
+        pointRadius: 7, pointHoverRadius: 9,
       }]
     },
     options: {
@@ -580,41 +681,31 @@ async function render() {
         tooltip: {
           ...baseOpts.plugins.tooltip,
           callbacks: {
-            label: ctx => {
-              const g = ctx.raw;
-              return [`${g.name}`, `${g.x} films · ${g.y.toFixed(2)}★ avg`];
-            }
+            label: ctx => [`${ctx.raw.name}`, `${ctx.raw.x} films · ${ctx.raw.y.toFixed(2)}★ avg`]
           }
         }
       },
       scales: {
         x: { ...baseOpts.scales.x, title:{display:true, text:'Films Watched', font:{size:10}} },
-        y: { ...baseOpts.scales.y, min:2, max:4.5,
+        y: { ...baseOpts.scales.y, min: Math.floor(minR * 10) / 10 - 0.1, max: Math.ceil(maxR * 10) / 10 + 0.1,
              title:{display:true, text:'Avg Rating ★', font:{size:10}} }
       }
     }
   });
 
-  // Decade charts
   const dec = data.decade_breakdown.filter(d => d.decade !== 'Unknown');
   new Chart(document.getElementById('chartDecadeCount'), {
     type: 'bar',
-    data: {
-      labels: dec.map(d => d.decade),
-      datasets: [{ data:dec.map(d => d.count), backgroundColor:alphaAccent(0.65), borderRadius:5, borderSkipped:false }]
-    },
+    data: { labels: dec.map(d => d.decade), datasets: [{ data:dec.map(d => d.count), backgroundColor:alphaAccent(0.65), borderRadius:5, borderSkipped:false }] },
     options: barOpts()
   });
-
   new Chart(document.getElementById('chartDecadeRating'), {
     type: 'bar',
     data: {
       labels: dec.map(d => d.decade),
-      datasets: [{
-        data: dec.map(d => d.mean),
+      datasets: [{ data: dec.map(d => d.mean),
         backgroundColor: dec.map(d => d.mean >= 3.8 ? ACCENT : d.mean >= 3.4 ? ACCENT2 : CORAL),
-        borderRadius:5, borderSkipped:false
-      }]
+        borderRadius:5, borderSkipped:false }]
     },
     options: barOpts({ scales:{
       x:{ ...baseOpts.scales.x },
@@ -622,151 +713,137 @@ async function render() {
     }})
   });
 
-  // ── SECTION 4: Directors & Actors ───────────────────────────────────────────
-  const dirs   = tmdb.director_analysis;
-  const actors = tmdb.top_actors_by_count;
-  const topDir = dirs[0];
-  const sandler = actors.find(a => a.name === 'Adam Sandler');
+  // ── SECTION 4: Directors & Actors ─────────────────────────────────────────
+  // Both ordered by avg rating, top entry highlighted
+  const dirs        = [...tmdb.director_analysis].sort((a,b) => b.mean_rating - a.mean_rating);
+  const actorsSrc   = tmdb.top_actors_by_rating || tmdb.top_actors_by_count;
+  const actors      = [...actorsSrc].sort((a,b) => b.mean_rating - a.mean_rating);
+  const topDir      = dirs[0];
+  const topActor    = actors[0];
+  const sandler     = tmdb.top_actors_by_count.find(a => a.name === 'Adam Sandler');
 
   document.getElementById('director-pills').innerHTML =
     pill('Favourite Director', topDir.name,
-      `${topDir.mean_rating.toFixed(2)}★ avg · ${topDir.count} films`) +
+      `${topDir.mean_rating.toFixed(2)}★ avg across ${topDir.count} films`) +
     (sandler
       ? pill('Most Watched Actor', sandler.name,
           `${sandler.count} films · ${sandler.mean_rating.toFixed(2)}★ avg`)
-      : pill('Most Watched Actor', actors[0].name,
-          `${actors[0].count} films · ${actors[0].mean_rating.toFixed(2)}★ avg`)
+      : pill('Top Rated Actor', topActor.name,
+          `${topActor.mean_rating.toFixed(2)}★ avg · ${topActor.count} films`)
     );
 
-  // Directors horizontal bar
   new Chart(document.getElementById('chartDirectors'), {
     type: 'bar',
     data: {
       labels: dirs.map(d => d.name),
       datasets: [{
         data: dirs.map(d => d.mean_rating),
-        backgroundColor: ACCENT2,
-        borderRadius: 4, borderSkipped: false
+        backgroundColor: dirs.map((d,i) => i === 0 ? CORAL : ACCENT2),
+        borderRadius:4, borderSkipped:false
       }]
     },
     options: barOpts({
       indexAxis: 'y',
+      plugins: { ...baseOpts.plugins, tooltip: { ...baseOpts.plugins.tooltip,
+        callbacks: { label: ctx => {
+          const d = dirs[ctx.dataIndex];
+          return [`${d.mean_rating.toFixed(2)}★ avg · ${d.count} films`];
+        }}
+      }},
       scales: {
-        x: { ...baseOpts.scales.x, min:3.5, max:5.2,
-             title:{display:true, text:'Avg Rating ★', font:{size:10}} },
-        y: { ...baseOpts.scales.y, grid:{display:false},
-             ticks:{font:{family:FONT, size:10}} }
+        x: { ...baseOpts.scales.x, min:3.5, max:5.2, title:{display:true, text:'Avg Rating ★', font:{size:10}} },
+        y: { ...baseOpts.scales.y, grid:{display:false}, ticks:{font:{family:FONT, size:10}} }
       }
     })
   });
 
-  // Actors horizontal bar
   new Chart(document.getElementById('chartActors'), {
     type: 'bar',
     data: {
       labels: actors.map(a => a.name),
       datasets: [{
-        data: actors.map(a => a.count),
-        backgroundColor: actors.map(a =>
-          a.name === 'Adam Sandler' ? CORAL : alphaAccent(0.7)
-        ),
-        borderRadius: 4, borderSkipped: false
+        data: actors.map(a => a.mean_rating),
+        backgroundColor: actors.map((a,i) => i === 0 ? CORAL : alphaAccent(0.7)),
+        borderRadius:4, borderSkipped:false
       }]
     },
     options: barOpts({
       indexAxis: 'y',
-      plugins: {
-        ...baseOpts.plugins,
-        tooltip: {
-          ...baseOpts.plugins.tooltip,
-          callbacks: {
-            label: ctx => {
-              const a = actors[ctx.dataIndex];
-              return [`${a.count} films · ${a.mean_rating.toFixed(2)}★ avg`];
-            }
-          }
-        }
-      },
+      plugins: { ...baseOpts.plugins, tooltip: { ...baseOpts.plugins.tooltip,
+        callbacks: { label: ctx => {
+          const a = actors[ctx.dataIndex];
+          return [`${a.mean_rating.toFixed(2)}★ avg · ${a.count} films`];
+        }}
+      }},
       scales: {
-        x: { ...baseOpts.scales.x, title:{display:true, text:'Films Watched', font:{size:10}} },
-        y: { ...baseOpts.scales.y, grid:{display:false},
-             ticks:{font:{family:FONT, size:10}} }
+        x: { ...baseOpts.scales.x, min:3.5, max:5.2, title:{display:true, text:'Avg Rating ★', font:{size:10}} },
+        y: { ...baseOpts.scales.y, grid:{display:false}, ticks:{font:{family:FONT, size:10}} }
       }
     })
   });
 
-  // ── SECTION 5: ML ───────────────────────────────────────────────────────────
+  // ── SECTION 5: NLP Model ──────────────────────────────────────────────────
   const cd = ml.class_distribution;
   new Chart(document.getElementById('chartClassDist'), {
     type: 'bar',
-    data: {
-      labels: ['Meh (≤2.5★)', 'Solid (3.0–3.5★)', 'Great (≥4.0★)'],
-      datasets: [{ data:[cd.Meh, cd.Solid, cd.Great],
-                   backgroundColor:[CORAL, ACCENT2, ACCENT], borderRadius:5, borderSkipped:false }]
-    },
+    data: { labels:['Meh (≤2.5★)','Solid (3.0–3.5★)','Great (≥4.0★)'],
+            datasets:[{ data:[cd.Meh,cd.Solid,cd.Great], backgroundColor:[CORAL,ACCENT2,ACCENT], borderRadius:5, borderSkipped:false }] },
     options: barOpts()
   });
 
   const vc = ml.vader_by_class;
   new Chart(document.getElementById('chartVaderClass'), {
     type: 'bar',
-    data: {
-      labels: ['Meh', 'Solid', 'Great'],
-      datasets: [{ data:[vc.Meh.mean_compound, vc.Solid.mean_compound, vc.Great.mean_compound],
-                   backgroundColor:[CORAL, ACCENT2, ACCENT], borderRadius:5, borderSkipped:false }]
-    },
+    data: { labels:['Meh','Solid','Great'],
+            datasets:[{ data:[vc.Meh.mean_compound,vc.Solid.mean_compound,vc.Great.mean_compound],
+                        backgroundColor:[CORAL,ACCENT2,ACCENT], borderRadius:5, borderSkipped:false }] },
     options: barOpts({ scales:{
       x:{ ...baseOpts.scales.x },
       y:{ ...baseOpts.scales.y, title:{display:true, text:'VADER Compound Score', font:{size:10}} }
     }})
   });
 
-  const reg = ml.regression_metrics;
-  document.getElementById('regression-metrics').innerHTML = [
-    [reg.cv_r2_mean.toFixed(2),        'R² (5-fold CV)'],
-    ['±' + reg.cv_r2_std.toFixed(2),   'Std Dev'],
-    [reg.cv_mae_mean.toFixed(2) + '★', 'MAE (avg error)'],
-    ['±' + reg.cv_mae_std.toFixed(2),  'Std Dev'],
-  ].map(([v,l]) => `<div class="metric"><div class="val">${v}</div><div class="lbl">${l}</div></div>`).join('');
+  const nlpReg = ml.nlp_regression_metrics;
+  const nlpClf = ml.nlp_classification_metrics;
 
-  const clf = ml.classification_metrics;
-  document.getElementById('classification-metrics').innerHTML = [
-    [(clf.cv_accuracy_mean * 100).toFixed(0) + '%', 'Accuracy (5-fold CV)'],
-    ['±' + (clf.cv_accuracy_std * 100).toFixed(0) + '%', 'Std Dev'],
-    [clf.cv_f1_mean.toFixed(2), 'F1 Macro'],
-    ['~' + Math.round(100/3) + '%', 'Baseline (chance)'],
-  ].map(([v,l]) => `<div class="metric"><div class="val">${v}</div><div class="lbl">${l}</div></div>`).join('');
+  document.getElementById('nlp-regression-metrics').innerHTML = metricHTML([
+    [nlpReg.cv_r2_mean.toFixed(2),        'R² (5-fold CV)'],
+    ['±' + nlpReg.cv_r2_std.toFixed(2),   'Std Dev'],
+    [nlpReg.test_r2.toFixed(2),           'R² (test set)'],
+    [nlpReg.test_mae.toFixed(2) + '★',    'MAE (test set)'],
+  ]);
 
-  document.getElementById('model-callout').textContent =
-    `The regression model explains about ${(reg.cv_r2_mean * 100).toFixed(0)}% of variance in my ratings ` +
-    `(R²=${reg.cv_r2_mean.toFixed(2)}), missing by ${reg.cv_mae_mean.toFixed(2)} stars on average. ` +
-    `The classifier hits ${(clf.cv_accuracy_mean * 100).toFixed(0)}% accuracy versus a ~33% random baseline — ` +
-    `so it's learning something real, but the word importance analysis below is more interesting than the raw numbers. ` +
+  document.getElementById('nlp-classification-metrics').innerHTML = metricHTML([
+    [(nlpClf.cv_accuracy_mean * 100).toFixed(0) + '%', 'Accuracy (CV)'],
+    ['±' + (nlpClf.cv_accuracy_std * 100).toFixed(0) + '%', 'Std Dev'],
+    [(nlpClf.test_accuracy * 100).toFixed(0) + '%', 'Accuracy (test set)'],
+    ['~33%', 'Baseline (chance)'],
+  ]);
+
+  document.getElementById('nlp-model-callout').textContent =
+    `On the held-out test set, the NLP regression explains ${(nlpReg.test_r2 * 100).toFixed(0)}% of variance in my ratings ` +
+    `and misses by ${nlpReg.test_mae.toFixed(2)} stars on average. The classifier correctly identifies ` +
+    `${(nlpClf.test_accuracy * 100).toFixed(0)}% of films versus a 33% random baseline. ` +
     `VADER sentiment alone correlates only ${ml.vader_correlation_with_rating} with my ratings, ` +
     `suggesting I write analytically regardless of how much I liked a film.`;
 
-  // Scatter
-  const scatterData  = ml.per_review.map(r => ({ x:r.actual, y:r.predicted, name:r.name, cls:r.cls }));
-  const scatterColors = scatterData.map(p =>
-    p.cls === 'Meh' ? CORAL : p.cls === 'Solid' ? ACCENT2 : ACCENT
-  );
+  // NLP scatter (test set, predicted_nlp)
+  const nlpScatter = ml.per_review.map(r => ({ x:r.actual, y:r.predicted_nlp, name:r.name, cls:r.cls }));
+  const nlpColors  = nlpScatter.map(p => p.cls === 'Meh' ? CORAL : p.cls === 'Solid' ? ACCENT2 : ACCENT);
 
   new Chart(document.getElementById('chartScatter'), {
     type: 'scatter',
     data: { datasets:[
-      { data: scatterData.map(p => ({x:p.x, y:p.y})),
-        backgroundColor: scatterColors.map(c => c + 'bb'),
-        pointRadius:5, pointHoverRadius:7 },
+      { data: nlpScatter.map(p => ({x:p.x, y:p.y})),
+        backgroundColor: nlpColors.map(c => c + 'bb'), pointRadius:5, pointHoverRadius:7 },
       { type:'line', data:[{x:0.5,y:0.5},{x:5,y:5}],
-        borderColor:'rgba(200,185,165,0.5)', borderDash:[4,4],
-        pointRadius:0, borderWidth:1.5 }
+        borderColor:'rgba(200,185,165,0.5)', borderDash:[4,4], pointRadius:0, borderWidth:1.5 }
     ]},
     options: { ...barOpts(),
-      plugins: { ...baseOpts.plugins, tooltip:{
-        ...baseOpts.plugins.tooltip,
-        callbacks:{ label: ctx => {
+      plugins: { ...baseOpts.plugins, tooltip: { ...baseOpts.plugins.tooltip,
+        callbacks: { label: ctx => {
           if (ctx.datasetIndex === 1) return null;
-          const p = scatterData[ctx.dataIndex];
+          const p = nlpScatter[ctx.dataIndex];
           return [`${p.name}`, `Actual: ${p.x}★  Predicted: ${p.y.toFixed(2)}★`];
         }}
       }},
@@ -777,18 +854,77 @@ async function render() {
     }
   });
 
-  document.getElementById('confusion-matrix').innerHTML =
-    buildConfusionMatrix(ml.confusion_matrix, ml.confusion_matrix.labels);
+  document.getElementById('nlp-confusion-matrix').innerHTML =
+    buildConfusionMatrix(ml.nlp_confusion_matrix, ml.nlp_confusion_matrix.labels, ml.nlp_confusion_matrix.misclassified_films);
 
-  // ── SECTION 6: Word importance ──────────────────────────────────────────────
+  // ── SECTION 6: Structured Model ───────────────────────────────────────────
+  const sReg = ml.structured_regression_metrics;
+  const sClf = ml.structured_classification_metrics;
+  const sNov = sReg.without_vote_avg;
+
+  document.getElementById('struct-regression-metrics').innerHTML = metricHTML([
+    [sReg.cv_r2_mean.toFixed(2),       'R² (5-fold CV)'],
+    ['±' + sReg.cv_r2_std.toFixed(2),  'Std Dev'],
+    [sReg.test_r2.toFixed(2),          'R² (test set)'],
+    [sReg.test_mae.toFixed(2) + '★',   'MAE (test set)'],
+  ]);
+
+  document.getElementById('struct-classification-metrics').innerHTML = metricHTML([
+    [(sClf.cv_accuracy_mean * 100).toFixed(0) + '%', 'Accuracy (CV)'],
+    ['±' + (sClf.cv_accuracy_std * 100).toFixed(0) + '%', 'Std Dev'],
+    [(sClf.test_accuracy * 100).toFixed(0) + '%', 'Accuracy (test set)'],
+    ['~33%', 'Baseline (chance)'],
+  ]);
+
+  document.getElementById('struct-model-callout').textContent =
+    `With TMDB crowd rating included, the structured model achieves R²=${sReg.test_r2.toFixed(2)} on the test set. ` +
+    `Remove vote_average and that collapses to R²=${sNov.test_r2.toFixed(2)} — essentially zero. ` +
+    `Genre, director, runtime, budget, and cast alone explain almost nothing about my personal ratings. ` +
+    `The crowd average does nearly all the work, which means my taste aligns with consensus more than ` +
+    `any specific film property predicts it.`;
+
+  // Structured scatter (predicted_structured)
+  const structScatter = ml.per_review
+    .filter(r => r.predicted_structured != null)
+    .map(r => ({ x:r.actual, y:r.predicted_structured, name:r.name, cls:r.cls }));
+  const structColors  = structScatter.map(p => p.cls === 'Meh' ? CORAL : p.cls === 'Solid' ? ACCENT2 : ACCENT);
+
+  new Chart(document.getElementById('chartStructScatter'), {
+    type: 'scatter',
+    data: { datasets:[
+      { data: structScatter.map(p => ({x:p.x, y:p.y})),
+        backgroundColor: structColors.map(c => c + 'bb'), pointRadius:5, pointHoverRadius:7 },
+      { type:'line', data:[{x:0.5,y:0.5},{x:5,y:5}],
+        borderColor:'rgba(200,185,165,0.5)', borderDash:[4,4], pointRadius:0, borderWidth:1.5 }
+    ]},
+    options: { ...barOpts(),
+      plugins: { ...baseOpts.plugins, tooltip: { ...baseOpts.plugins.tooltip,
+        callbacks: { label: ctx => {
+          if (ctx.datasetIndex === 1) return null;
+          const p = structScatter[ctx.dataIndex];
+          return [`${p.name}`, `Actual: ${p.x}★  Predicted: ${p.y.toFixed(2)}★`];
+        }}
+      }},
+      scales:{
+        x:{ ...baseOpts.scales.x, min:0.5, max:5.2, title:{display:true, text:'Actual Rating ★',    font:{size:10}} },
+        y:{ ...baseOpts.scales.y, min:0.5, max:5.2, title:{display:true, text:'Predicted Rating ★', font:{size:10}} }
+      }
+    }
+  });
+
+  document.getElementById('struct-confusion-matrix').innerHTML =
+    buildConfusionMatrix(ml.structured_confusion_matrix, ml.structured_confusion_matrix.labels, ml.structured_confusion_matrix.misclassified_films);
+
+  document.getElementById('struct-feature-importance').innerHTML =
+    buildFeatureImportance(ml.structured_feature_importance);
+
+  // ── SECTION 7: Word importance ────────────────────────────────────────────
   const lb = ml.length_by_class;
   new Chart(document.getElementById('chartReviewLength'), {
     type: 'bar',
-    data: {
-      labels: ['Meh (≤2.5★)', 'Solid (3.0–3.5★)', 'Great (≥4.0★)'],
-      datasets: [{ data:[lb.Meh.mean, lb.Solid.mean, lb.Great.mean],
-                   backgroundColor:[CORAL, ACCENT2, ACCENT], borderRadius:5, borderSkipped:false }]
-    },
+    data: { labels:['Meh (≤2.5★)','Solid (3.0–3.5★)','Great (≥4.0★)'],
+            datasets:[{ data:[lb.Meh.mean,lb.Solid.mean,lb.Great.mean],
+                        backgroundColor:[CORAL,ACCENT2,ACCENT], borderRadius:5, borderSkipped:false }] },
     options: barOpts({ scales:{
       x:{ ...baseOpts.scales.x },
       y:{ ...baseOpts.scales.y, title:{display:true, text:'Avg Word Count', font:{size:10}} }
@@ -799,12 +935,12 @@ async function render() {
   document.getElementById('word-importance').innerHTML =
     [{key:'Meh',cls:'meh'},{key:'Solid',cls:'solid'},{key:'Great',cls:'great'}]
     .map(({key,cls}) => {
-      const words    = wi[key].top.slice(0, 12);
+      const words    = wi[key].top.slice(0,12);
       const maxScore = Math.max(...words.map(w => Math.abs(w.score)));
       return `<div class="word-col ${cls}">
         <h5>${key} (${key==='Meh'?'≤2.5★':key==='Solid'?'3.0–3.5★':'≥4.0★'})</h5>
         ${words.map(w => {
-          const pct = Math.round((Math.abs(w.score) / maxScore) * 100);
+          const pct = Math.round((Math.abs(w.score)/maxScore)*100);
           return `<div class="word-bar-row">
             <span class="word-label">${w.word}</span>
             <div class="word-bar-bg"><div class="word-bar" style="width:${pct}%"></div></div>
@@ -817,7 +953,7 @@ async function render() {
     `VADER sentiment correlates only ${ml.vader_correlation_with_rating} with my star ratings. ` +
     `My "Meh" reviews average a compound sentiment of ${vc.Meh.mean_compound.toFixed(2)}, ` +
     `"Solid" ${vc.Solid.mean_compound.toFixed(2)}, and "Great" ${vc.Great.mean_compound.toFixed(2)}. ` +
-    `The gap is real but small — I tend to write analytically and with humor regardless of rating, ` +
+    `The gap is real but small. I tend to write analytically and with humor regardless of rating, ` +
     `which means pure sentiment is a weak predictor of how much I liked a film.`;
 }
 
@@ -827,6 +963,5 @@ render().catch(err => {
   console.error(err);
 });
 </script>
-
 </body>
 </html>
