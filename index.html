@@ -151,6 +151,30 @@
       <button class="view-btn">View Project →</button>
     </div>
 
+    <div class="project-card glass" onclick="openProj('p5')">
+      <div class="p-top-bar"></div>
+      <div class="p-visual p-visual-housing">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- House outline -->
+          <path d="M18 5 L32 16 L32 31 L4 31 L4 16 Z" stroke="rgba(74,127,168,0.55)" stroke-width="1.5" stroke-linejoin="round" fill="rgba(74,127,168,0.06)"/>
+          <path d="M18 5 L32 16 L4 16 Z" stroke="rgba(74,127,168,0.7)" stroke-width="1.5" stroke-linejoin="round" fill="rgba(74,127,168,0.1)"/>
+          <!-- Declining sensitivity line -->
+          <path d="M7 27 L14 22 L21 23.5 L29 26.5" stroke="rgba(74,140,100,0.9)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="2 1.5"/>
+          <!-- Flat Covid line -->
+          <path d="M23 26.5 L29 26.4" stroke="rgba(190,80,60,0.85)" stroke-width="2" stroke-linecap="round"/>
+          <!-- Period dots -->
+          <circle cx="7" cy="27" r="1.8" fill="rgba(74,127,168,0.9)"/>
+          <circle cx="14" cy="22" r="1.8" fill="rgba(74,127,168,0.75)"/>
+          <circle cx="21" cy="23.5" r="1.8" fill="rgba(74,127,168,0.6)"/>
+          <circle cx="29" cy="26.5" r="1.8" fill="rgba(190,80,60,0.85)"/>
+        </svg>
+      </div>
+      <h3>Decoupling of U.S. Housing Markets from Economic Fundamentals</h3>
+      <p>Documenting a 97% collapse in unemployment sensitivity across three macroeconomic periods using panel regression and Bayesian MCMC on 5,820 state-month observations from FRED.</p>
+      <div class="tags"><span class="tag">R</span><span class="tag">Panel Regression</span><span class="tag">Bayesian Analysis</span><span class="tag">FRED Data</span><span class="tag">Housing Economics</span></div>
+      <button class="view-btn">View Project →</button>
+    </div>
+
   </div>
 </section>
 
@@ -400,6 +424,21 @@ const data = {
     pts:["Collected and integrated 3,100+ player-seasons from basketball-reference and salary databases","Applied OLS regression in R and Python to model salary as a function of performance metrics","Identified statistically significant predictors of salary and market inefficiencies","Delivered actionable roster construction benchmarks for cap-constrained team building"],
     stack:"R, Python, OLS Regression, Pandas, ggplot2, Tableau",
     gh:"#", report:"reports/nba.html", demo:""
+  },
+  p5:{
+    title:"Decoupling of U.S. Housing Markets from Economic Fundamentals",
+    sub:"Academic Research Paper · R · Panel Regression · Bayesian Analysis · Syracuse University · 2025",
+    overview:"An empirical investigation of whether U.S. housing price sensitivity to unemployment and building permit activity has changed structurally across three macroeconomic periods: Pre-Crisis (2000–2008), Recovery (2009–2019), and Covid (2020–2024). Using 5,820 state-month observations from FRED and a single interaction-term OLS model with cluster-robust standard errors, the paper documents a 97% collapse in the unemployment coefficient — from −2.187% to −0.061% — confirmed by Bayesian MCMC analysis with a Bayes Factor of 6.8 × 10¹⁹⁵.",
+    pts:[
+      "Recovered period-specific unemployment coefficients of −2.187% (Pre-Crisis), −1.232% (Recovery), and −0.061% (Covid) from a single interaction-term model with cluster-robust standard errors — a 97% decline over the full sample",
+      "The interaction terms for both Recovery (+0.955***) and Covid (+2.126***) are highly significant (F = 116.008, p < 0.001), confirming the slope itself changed across periods — not just the price level",
+      "Bayesian MCMC analysis (10,000 iterations) produced posterior means consistent with OLS to within 0.01 percentage points across all three periods",
+      "The Covid-period 95% credible interval [−0.29%, +0.17%] is the only one to contain zero, providing direct probabilistic evidence that unemployment ceased to predict housing prices in the post-2020 period",
+      "Bayes Factor of 6.8 × 10¹⁹⁵ in favor of the period-differentiated model over a pooled specification — decisive evidence of structural change on the Jeffreys scale",
+      "Discussed policy implications: if housing prices no longer respond to labor market deterioration, the efficacy of monetary tightening as a housing-cooling tool is fundamentally reduced"
+    ],
+    stack:"R, OLS Panel Regression, Bayesian MCMC, FRED Data API, ggplot2, cluster-robust SE",
+    gh:"#", report:"reports/housing.html", demo:""
   }
 };
 
