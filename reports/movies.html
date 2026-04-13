@@ -126,7 +126,7 @@
     <div class="report-meta">
       <span class="meta-item"><span class="meta-dot"></span>Ethan Radecki</span>
       <span class="meta-item"><span class="meta-dot"></span>Python · scikit-learn · Chart.js</span>
-      <span class="meta-item"><span class="meta-dot"></span id="generated-date">2025</span>
+      <span class="meta-item"><span class="meta-dot"></span id="generated-date">2026</span>
     </div>
     <div class="stack-tags" style="margin-top:1rem;">
       <span class="stack-tag">Python</span>
@@ -146,7 +146,7 @@
     <div class="section-rule"></div>
     <p class="prose">
       I've been logging every film I watch on Letterboxd and writing a short review for each one.
-      After a few years of that, I had enough data to do something interesting with it. I built
+      After a couple years of that, I had enough data to do something interesting with it. I built
       a Python pipeline that pulls my exports, runs analysis across rating patterns, genres, directors,
       and release years, and trains machine learning models on my own reviews to see whether my
       writing can actually predict how much I liked a film.
@@ -169,7 +169,7 @@
     <p class="prose">
       Every film I've rated, plotted by the year it was released. Bars show how many films I've
       watched from each year and the line tracks my average rating. Older films tend to rate higher,
-      a mix of genuine quality and survivorship bias since the forgettable ones from 1975 have largely
+      a mix of genuine quality and survivorship bias since the forgettable ones from earlier decades have largely
       disappeared from view. The decade charts below show the same story at a coarser resolution.
     </p>
     <div class="chart-wrap tall" style="margin-top:1.25rem;">
@@ -198,7 +198,7 @@
       My rating distribution skews positive with most films landing in the 3.0 to 4.0 range.
       The runtime chart tells a cleaner story: the longer the film, the higher I tend to rate it.
       Whether that reflects genuine quality or just the kind of ambition that earns a long runtime
-      is hard to say.
+      is hard to say. My guess would be that I enjoy the experience of watching a long film more than a short one, since it allows for more immersion and nuance, even if the actual quality is variable.
     </p>
     <div class="pill-row" id="rating-pills"></div>
     <div class="visual-grid">
@@ -313,7 +313,7 @@
       <div class="section-h" style="font-size:0.95rem;">How My Language Changes by Rating</div>
       <div class="section-rule"></div>
       <p class="prose">
-        The words below are the most distinctive to each rating class — not just the most frequent,
+        The words below are the most distinctive to each rating class, not just the most frequent,
         but the ones the model learned are most predictive of that class over the others.
         Bar length represents coefficient strength.
       </p>
@@ -791,13 +791,13 @@ async function render() {
     [(nlpClf.cv_accuracy_mean * 100).toFixed(0) + '%',  'Accuracy (CV)'],
     ['±' + (nlpClf.cv_accuracy_std * 100).toFixed(0) + '%', 'Std Dev'],
     [(nlpClf.test_accuracy * 100).toFixed(0) + '%',     'Accuracy (test set)'],
-    ['~33%', 'Baseline (chance)'],
+    ['~48%', 'Baseline (majority class)'],
   ]);
 
   document.getElementById('nlp-model-callout').textContent =
     `On the held-out test set, the NLP regression explains ${(nlpReg.test_r2 * 100).toFixed(0)}% of variance in my ratings ` +
     `and misses by ${nlpReg.test_mae.toFixed(2)} stars on average. The classifier correctly identifies ` +
-    `${(nlpClf.test_accuracy * 100).toFixed(0)}% of films versus a 33% random baseline. ` +
+    `${(nlpClf.test_accuracy * 100).toFixed(0)}% of films versus a 48% majority class baseline. ` +
     `VADER sentiment alone correlates only ${ml.vader_correlation_with_rating} with my ratings, ` +
     `suggesting I write analytically regardless of how much I liked a film.`;
 
