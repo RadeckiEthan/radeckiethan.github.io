@@ -5,53 +5,54 @@
     "Great": "≥4.0"
   },
   "class_distribution": {
-    "Meh": 25,
-    "Solid": 100,
-    "Great": 113
+    "Meh": 28,
+    "Solid": 104,
+    "Great": 123
   },
   "rating_distribution_full": {
     "0.5": 1,
     "1.0": 1,
+    "1.5": 1,
     "2.0": 7,
-    "2.5": 16,
-    "3.0": 48,
-    "3.5": 52,
-    "4.0": 73,
-    "4.5": 26,
-    "5.0": 14
+    "2.5": 18,
+    "3.0": 50,
+    "3.5": 54,
+    "4.0": 77,
+    "4.5": 31,
+    "5.0": 15
   },
-  "vader_correlation_with_rating": 0.135,
+  "vader_correlation_with_rating": 0.176,
   "vader_by_class": {
     "Meh": {
-      "mean_compound": 0.391,
-      "mean_pos": 0.137,
-      "mean_neg": 0.075,
-      "mean_neu": 0.788
+      "mean_compound": 0.382,
+      "mean_pos": 0.14,
+      "mean_neg": 0.078,
+      "mean_neu": 0.783
     },
     "Solid": {
-      "mean_compound": 0.839,
+      "mean_compound": 0.845,
       "mean_pos": 0.183,
-      "mean_neg": 0.048,
-      "mean_neu": 0.769
+      "mean_neg": 0.047,
+      "mean_neu": 0.77
     },
     "Great": {
-      "mean_compound": 0.771,
-      "mean_pos": 0.196,
-      "mean_neg": 0.047,
+      "mean_compound": 0.788,
+      "mean_pos": 0.197,
+      "mean_neg": 0.046,
       "mean_neu": 0.757
     }
   },
   "regression_metrics": {
-    "cv_r2_mean": 0.2,
-    "cv_r2_std": 0.069,
-    "cv_mae_mean": 0.499,
-    "cv_mae_std": 0.038
+    "cv_r2_mean": 0.239,
+    "cv_r2_std": 0.07,
+    "cv_mae_mean": 0.503,
+    "cv_mae_std": 0.025
   },
   "classification_metrics": {
-    "cv_accuracy_mean": 0.622,
-    "cv_accuracy_std": 0.079,
-    "cv_f1_mean": 0.562,
-    "cv_f1_std": 0.09,
+    "cv_accuracy_mean": 0.624,
+    "cv_accuracy_std": 0.057,
+    "cv_f1_mean": 0.568,
+    "cv_f1_std": 0.066,
     "classes": [
       "Meh",
       "Solid",
@@ -66,19 +67,19 @@
     ],
     "matrix": [
       [
-        25,
+        27,
         0,
-        0
+        1
       ],
       [
-        5,
-        93,
+        7,
+        95,
         2
       ],
       [
+        6,
         4,
-        3,
-        106
+        113
       ]
     ]
   },
@@ -86,206 +87,206 @@
     "Meh": {
       "top": [
         {
-          "word": "old",
-          "score": 1.2421
-        },
-        {
           "word": "just",
-          "score": 1.0997
-        },
-        {
-          "word": "predictable",
-          "score": 0.8345
-        },
-        {
-          "word": "type",
-          "score": 0.7751
-        },
-        {
-          "word": "plot",
-          "score": 0.7496
-        },
-        {
-          "word": "didn",
-          "score": 0.6833
-        },
-        {
-          "word": "sequel",
-          "score": 0.6516
-        },
-        {
-          "word": "decisions",
-          "score": 0.627
-        },
-        {
-          "word": "did",
-          "score": 0.6262
-        },
-        {
-          "word": "place",
-          "score": 0.6259
-        },
-        {
-          "word": "film just",
-          "score": 0.6235
-        },
-        {
-          "word": "worse",
-          "score": 0.6228
-        },
-        {
-          "word": "really like",
-          "score": 0.5949
-        },
-        {
-          "word": "care",
-          "score": 0.5742
-        },
-        {
-          "word": "don",
-          "score": 0.5554
+          "score": 1.0683
         },
         {
           "word": "comedy",
-          "score": 0.5511
+          "score": 0.9573
         },
         {
-          "word": "ve seen",
-          "score": 0.5497
+          "word": "predictable",
+          "score": 0.8451
         },
         {
-          "word": "seeing",
-          "score": 0.5364
+          "word": "plot",
+          "score": 0.7596
         },
         {
-          "word": "honestly",
-          "score": 0.5313
+          "word": "fine",
+          "score": 0.7436
         },
         {
-          "word": "sadly",
-          "score": 0.5264
-        },
-        {
-          "word": "kinda",
-          "score": 0.5245
-        },
-        {
-          "word": "credit",
-          "score": 0.5173
+          "word": "type",
+          "score": 0.692
         },
         {
           "word": "expect",
-          "score": 0.5127
+          "score": 0.6359
         },
         {
-          "word": "deliver",
-          "score": 0.5102
+          "word": "decisions",
+          "score": 0.6254
+        },
+        {
+          "word": "didn",
+          "score": 0.6
+        },
+        {
+          "word": "welp",
+          "score": 0.5942
+        },
+        {
+          "word": "care",
+          "score": 0.5898
+        },
+        {
+          "word": "worse",
+          "score": 0.5842
+        },
+        {
+          "word": "film just",
+          "score": 0.5743
+        },
+        {
+          "word": "sequel",
+          "score": 0.5714
+        },
+        {
+          "word": "recommend",
+          "score": 0.566
+        },
+        {
+          "word": "did",
+          "score": 0.5612
+        },
+        {
+          "word": "place",
+          "score": 0.5564
+        },
+        {
+          "word": "really like",
+          "score": 0.5447
         },
         {
           "word": "lmao",
-          "score": 0.4982
+          "score": 0.5248
+        },
+        {
+          "word": "worst",
+          "score": 0.506
+        },
+        {
+          "word": "like",
+          "score": 0.4977
+        },
+        {
+          "word": "good movie",
+          "score": 0.4962
+        },
+        {
+          "word": "trailer",
+          "score": 0.4862
+        },
+        {
+          "word": "credit",
+          "score": 0.4849
+        },
+        {
+          "word": "kinda",
+          "score": 0.4814
         }
       ],
       "bottom": [
         {
           "word": "great",
-          "score": -0.5722
+          "score": -0.5512
         },
         {
           "word": "way",
-          "score": -0.4789
+          "score": -0.5176
         },
         {
           "word": "solid",
-          "score": -0.4602
+          "score": -0.4768
         },
         {
           "word": "final",
-          "score": -0.4199
+          "score": -0.4371
         },
         {
           "word": "best",
-          "score": -0.3971
+          "score": -0.4342
         },
         {
           "word": "performance",
-          "score": -0.3913
+          "score": -0.4102
         },
         {
           "word": "life",
-          "score": -0.3832
+          "score": -0.4027
         },
         {
           "word": "hitchcock",
-          "score": -0.3601
+          "score": -0.3864
         },
         {
           "word": "half",
-          "score": -0.3586
-        },
-        {
-          "word": "hit",
-          "score": -0.3522
-        },
-        {
-          "word": "little",
-          "score": -0.344
-        },
-        {
-          "word": "watch",
-          "score": -0.3423
+          "score": -0.3798
         },
         {
           "word": "peak",
-          "score": -0.3367
+          "score": -0.3711
         },
         {
           "word": "incredible",
-          "score": -0.3336
+          "score": -0.3562
         },
         {
-          "word": "got",
-          "score": -0.3131
+          "word": "little",
+          "score": -0.3548
+        },
+        {
+          "word": "fun",
+          "score": -0.336
         },
         {
           "word": "deeper",
-          "score": -0.3074
-        },
-        {
-          "word": "liked",
-          "score": -0.2842
-        },
-        {
-          "word": "line",
-          "score": -0.2818
-        },
-        {
-          "word": "perfect",
-          "score": -0.2812
-        },
-        {
-          "word": "feel",
-          "score": -0.2787
+          "score": -0.3344
         },
         {
           "word": "justice",
-          "score": -0.2782
+          "score": -0.3249
         },
         {
-          "word": "home",
-          "score": -0.2748
+          "word": "liked",
+          "score": -0.3113
+        },
+        {
+          "word": "perfect",
+          "score": -0.3048
+        },
+        {
+          "word": "classic",
+          "score": -0.3029
+        },
+        {
+          "word": "movie",
+          "score": -0.2977
+        },
+        {
+          "word": "film",
+          "score": -0.2964
+        },
+        {
+          "word": "line",
+          "score": -0.2915
         },
         {
           "word": "job",
-          "score": -0.2638
+          "score": -0.2895
         },
         {
-          "word": "years",
-          "score": -0.2577
+          "word": "home",
+          "score": -0.2895
         },
         {
-          "word": "thought",
-          "score": -0.2572
+          "word": "love",
+          "score": -0.2851
+        },
+        {
+          "word": "lot",
+          "score": -0.2752
         }
       ]
     },
@@ -293,205 +294,205 @@
       "top": [
         {
           "word": "solid",
-          "score": 0.7858
+          "score": 0.8208
         },
         {
           "word": "fun",
-          "score": 0.5884
+          "score": 0.7267
         },
         {
           "word": "pretty",
-          "score": 0.5501
-        },
-        {
-          "word": "say",
-          "score": 0.5343
-        },
-        {
-          "word": "just didn",
-          "score": 0.5221
-        },
-        {
-          "word": "nice",
-          "score": 0.4997
-        },
-        {
-          "word": "justice",
-          "score": 0.4922
-        },
-        {
-          "word": "aside",
-          "score": 0.4901
-        },
-        {
-          "word": "definitely",
-          "score": 0.4799
-        },
-        {
-          "word": "wanted",
-          "score": 0.4696
-        },
-        {
-          "word": "felt",
-          "score": 0.4623
+          "score": 0.6083
         },
         {
           "word": "movie",
-          "score": 0.4245
+          "score": 0.5594
         },
         {
-          "word": "job",
-          "score": 0.3868
+          "word": "definitely",
+          "score": 0.5549
         },
         {
-          "word": "present",
-          "score": 0.3594
+          "word": "justice",
+          "score": 0.5489
+        },
+        {
+          "word": "say",
+          "score": 0.5362
+        },
+        {
+          "word": "felt",
+          "score": 0.5253
+        },
+        {
+          "word": "aside",
+          "score": 0.52
+        },
+        {
+          "word": "nice",
+          "score": 0.5199
+        },
+        {
+          "word": "wanted",
+          "score": 0.5149
+        },
+        {
+          "word": "just didn",
+          "score": 0.4561
         },
         {
           "word": "lowkey",
-          "score": 0.3554
-        },
-        {
-          "word": "little",
-          "score": 0.3546
-        },
-        {
-          "word": "bit",
-          "score": 0.3502
+          "score": 0.439
         },
         {
           "word": "pull",
-          "score": 0.3497
+          "score": 0.406
         },
         {
-          "word": "watch",
-          "score": 0.3447
+          "word": "little",
+          "score": 0.399
         },
         {
-          "word": "try",
-          "score": 0.3442
+          "word": "job",
+          "score": 0.3895
         },
         {
-          "word": "hilarious",
-          "score": 0.3416
+          "word": "present",
+          "score": 0.384
+        },
+        {
+          "word": "did",
+          "score": 0.3742
+        },
+        {
+          "word": "laughs",
+          "score": 0.3732
         },
         {
           "word": "fun movie",
-          "score": 0.3397
+          "score": 0.3653
+        },
+        {
+          "word": "hilarious",
+          "score": 0.3645
+        },
+        {
+          "word": "try",
+          "score": 0.3628
+        },
+        {
+          "word": "worked",
+          "score": 0.3599
         },
         {
           "word": "meh",
-          "score": 0.3335
+          "score": 0.3509
         },
         {
-          "word": "just alright",
-          "score": 0.3328
-        },
-        {
-          "word": "final",
-          "score": 0.3159
+          "word": "given",
+          "score": 0.3363
         }
       ],
       "bottom": [
         {
           "word": "place",
-          "score": -0.5714
-        },
-        {
-          "word": "predictable",
-          "score": -0.5694
-        },
-        {
-          "word": "time",
-          "score": -0.5572
-        },
-        {
-          "word": "old",
-          "score": -0.5429
+          "score": -0.5932
         },
         {
           "word": "soundtrack",
-          "score": -0.5274
+          "score": -0.5499
+        },
+        {
+          "word": "predictable",
+          "score": -0.5473
+        },
+        {
+          "word": "time",
+          "score": -0.5264
+        },
+        {
+          "word": "recommend",
+          "score": -0.4742
         },
         {
           "word": "expect",
-          "score": -0.4171
-        },
-        {
-          "word": "type",
-          "score": -0.412
-        },
-        {
-          "word": "films",
-          "score": -0.4059
-        },
-        {
-          "word": "drama",
-          "score": -0.3943
-        },
-        {
-          "word": "acting",
-          "score": -0.39
-        },
-        {
-          "word": "banger",
-          "score": -0.3857
-        },
-        {
-          "word": "good",
-          "score": -0.3785
-        },
-        {
-          "word": "just",
-          "score": -0.3757
-        },
-        {
-          "word": "perfectly",
-          "score": -0.3688
+          "score": -0.4531
         },
         {
           "word": "know",
-          "score": -0.3686
+          "score": -0.4369
         },
         {
-          "word": "favorite",
-          "score": -0.3682
-        },
-        {
-          "word": "reviews",
-          "score": -0.3606
-        },
-        {
-          "word": "moving",
-          "score": -0.3573
-        },
-        {
-          "word": "plot",
-          "score": -0.3554
+          "word": "films",
+          "score": -0.4088
         },
         {
           "word": "absolutely",
-          "score": -0.3491
+          "score": -0.4062
         },
         {
-          "word": "nd",
-          "score": -0.3474
+          "word": "drama",
+          "score": -0.3922
+        },
+        {
+          "word": "acting",
+          "score": -0.3859
+        },
+        {
+          "word": "banger",
+          "score": -0.3838
+        },
+        {
+          "word": "welp",
+          "score": -0.3787
+        },
+        {
+          "word": "best",
+          "score": -0.3675
+        },
+        {
+          "word": "reviews",
+          "score": -0.3637
+        },
+        {
+          "word": "worst",
+          "score": -0.3637
+        },
+        {
+          "word": "favorite",
+          "score": -0.3519
+        },
+        {
+          "word": "exactly",
+          "score": -0.3514
+        },
+        {
+          "word": "perfectly",
+          "score": -0.3513
         },
         {
           "word": "feel good",
-          "score": -0.3428
+          "score": -0.3439
         },
         {
-          "word": "seeing",
-          "score": -0.3239
+          "word": "going",
+          "score": -0.3434
         },
         {
-          "word": "book",
-          "score": -0.3237
+          "word": "plot",
+          "score": -0.3429
         },
         {
-          "word": "incredible",
-          "score": -0.3233
+          "word": "good",
+          "score": -0.3424
+        },
+        {
+          "word": "moving",
+          "score": -0.3355
+        },
+        {
+          "word": "nd",
+          "score": -0.3346
         }
       ]
     },
@@ -499,213 +500,213 @@
       "top": [
         {
           "word": "best",
-          "score": 0.7145
+          "score": 0.8018
         },
         {
           "word": "incredible",
-          "score": 0.6569
+          "score": 0.6823
         },
         {
           "word": "life",
-          "score": 0.6381
-        },
-        {
-          "word": "great",
-          "score": 0.6068
+          "score": 0.6495
         },
         {
           "word": "banger",
-          "score": 0.5887
+          "score": 0.6127
         },
         {
-          "word": "hitchcock",
-          "score": 0.5256
+          "word": "great",
+          "score": 0.5657
         },
         {
           "word": "soundtrack",
-          "score": 0.4989
+          "score": 0.5506
+        },
+        {
+          "word": "hitchcock",
+          "score": 0.5458
         },
         {
           "word": "year",
-          "score": 0.4749
-        },
-        {
-          "word": "strong",
-          "score": 0.4465
-        },
-        {
-          "word": "man",
-          "score": 0.444
-        },
-        {
-          "word": "thought",
-          "score": 0.424
-        },
-        {
-          "word": "nd time",
-          "score": 0.4095
-        },
-        {
-          "word": "christmas",
-          "score": 0.4035
+          "score": 0.5427
         },
         {
           "word": "good",
-          "score": 0.401
+          "score": 0.4827
+        },
+        {
+          "word": "man",
+          "score": 0.4524
         },
         {
           "word": "perfect",
-          "score": 0.3996
+          "score": 0.4519
+        },
+        {
+          "word": "nd time",
+          "score": 0.4444
         },
         {
           "word": "makes",
-          "score": 0.3939
+          "score": 0.4438
         },
         {
           "word": "performance",
-          "score": 0.3656
+          "score": 0.4105
         },
         {
-          "word": "performances",
-          "score": 0.3376
+          "word": "strong",
+          "score": 0.407
         },
         {
-          "word": "nd",
-          "score": 0.3298
-        },
-        {
-          "word": "finally",
-          "score": 0.327
+          "word": "thought",
+          "score": 0.3784
         },
         {
           "word": "scene",
-          "score": 0.3256
+          "score": 0.378
         },
         {
-          "word": "music",
-          "score": 0.3253
+          "word": "performances",
+          "score": 0.3612
         },
         {
-          "word": "appreciated",
-          "score": 0.3242
+          "word": "nd",
+          "score": 0.3489
         },
         {
-          "word": "elite",
-          "score": 0.3187
+          "word": "does",
+          "score": 0.3474
         },
         {
           "word": "camera",
-          "score": 0.3091
+          "score": 0.3387
+        },
+        {
+          "word": "appreciated",
+          "score": 0.3351
+        },
+        {
+          "word": "finally",
+          "score": 0.3321
+        },
+        {
+          "word": "stars",
+          "score": 0.3297
+        },
+        {
+          "word": "tense",
+          "score": 0.3271
         }
       ],
       "bottom": [
         {
           "word": "did",
-          "score": -0.9087
-        },
-        {
-          "word": "didn",
-          "score": -0.7574
-        },
-        {
-          "word": "just",
-          "score": -0.724
-        },
-        {
-          "word": "old",
-          "score": -0.6991
-        },
-        {
-          "word": "sequel",
-          "score": -0.6196
-        },
-        {
-          "word": "kinda",
-          "score": -0.6107
-        },
-        {
-          "word": "fine",
-          "score": -0.5941
-        },
-        {
-          "word": "laughs",
-          "score": -0.5917
-        },
-        {
-          "word": "felt",
-          "score": -0.5854
+          "score": -0.9354
         },
         {
           "word": "comedy",
-          "score": -0.5497
+          "score": -0.7617
+        },
+        {
+          "word": "fine",
+          "score": -0.7397
+        },
+        {
+          "word": "just",
+          "score": -0.7359
+        },
+        {
+          "word": "didn",
+          "score": -0.7126
         },
         {
           "word": "pretty",
-          "score": -0.5327
+          "score": -0.6655
+        },
+        {
+          "word": "felt",
+          "score": -0.6009
+        },
+        {
+          "word": "sequel",
+          "score": -0.5996
+        },
+        {
+          "word": "kinda",
+          "score": -0.5969
+        },
+        {
+          "word": "laughs",
+          "score": -0.5963
         },
         {
           "word": "definitely",
-          "score": -0.5229
-        },
-        {
-          "word": "interesting",
-          "score": -0.495
-        },
-        {
-          "word": "let",
-          "score": -0.487
-        },
-        {
-          "word": "quick",
-          "score": -0.4642
+          "score": -0.5075
         },
         {
           "word": "gets",
-          "score": -0.4518
-        },
-        {
-          "word": "like",
-          "score": -0.4394
-        },
-        {
-          "word": "movie just",
-          "score": -0.4281
-        },
-        {
-          "word": "don",
-          "score": -0.4171
-        },
-        {
-          "word": "ve seen",
-          "score": -0.4092
-        },
-        {
-          "word": "film just",
-          "score": -0.3959
-        },
-        {
-          "word": "plot",
-          "score": -0.3941
+          "score": -0.4705
         },
         {
           "word": "kind",
-          "score": -0.3679
+          "score": -0.4484
+        },
+        {
+          "word": "let",
+          "score": -0.4475
+        },
+        {
+          "word": "movie just",
+          "score": -0.4412
+        },
+        {
+          "word": "like",
+          "score": -0.4269
+        },
+        {
+          "word": "plot",
+          "score": -0.4168
         },
         {
           "word": "fun",
-          "score": -0.3638
+          "score": -0.3906
+        },
+        {
+          "word": "interesting",
+          "score": -0.3856
+        },
+        {
+          "word": "maybe",
+          "score": -0.3778
+        },
+        {
+          "word": "wasn",
+          "score": -0.3769
+        },
+        {
+          "word": "film just",
+          "score": -0.3734
+        },
+        {
+          "word": "decisions",
+          "score": -0.3636
+        },
+        {
+          "word": "just didn",
+          "score": -0.362
         },
         {
           "word": "type",
-          "score": -0.3631
+          "score": -0.361
         }
       ]
     }
   },
   "length_by_class": {
     "Meh": {
-      "mean": 111.0,
-      "median": 118.0,
+      "mean": 115.0,
+      "median": 123.5,
       "min": 8,
       "max": 227,
       "values": [
@@ -733,12 +734,15 @@
         134,
         129,
         98,
-        158
+        158,
+        143,
+        78,
+        224
       ]
     },
     "Solid": {
-      "mean": 130.1,
-      "median": 115.0,
+      "mean": 133.0,
+      "median": 120.0,
       "min": 4,
       "max": 418,
       "values": [
@@ -841,12 +845,16 @@
         219,
         81,
         126,
-        292
+        292,
+        200,
+        185,
+        212,
+        223
       ]
     },
     "Great": {
-      "mean": 140.1,
-      "median": 120.0,
+      "mean": 150.7,
+      "median": 135.0,
       "min": 10,
       "max": 454,
       "values": [
@@ -962,7 +970,17 @@
         170,
         201,
         329,
-        203
+        203,
+        315,
+        299,
+        269,
+        357,
+        232,
+        158,
+        136,
+        306,
+        299,
+        336
       ]
     }
   },
@@ -973,7 +991,7 @@
       "vader": 0.9549,
       "length": 100,
       "cls": "Great",
-      "predicted": 4.15
+      "predicted": 4.14
     },
     {
       "name": "The Fall Guy",
@@ -989,7 +1007,7 @@
       "vader": 0.9561,
       "length": 61,
       "cls": "Great",
-      "predicted": 4.23
+      "predicted": 4.21
     },
     {
       "name": "Mississippi Burning",
@@ -997,7 +1015,7 @@
       "vader": -0.5301,
       "length": 47,
       "cls": "Great",
-      "predicted": 3.73
+      "predicted": 3.67
     },
     {
       "name": "Rain Man",
@@ -1005,7 +1023,7 @@
       "vader": 0.9246,
       "length": 80,
       "cls": "Great",
-      "predicted": 3.83
+      "predicted": 3.81
     },
     {
       "name": "Beautiful Boy",
@@ -1013,7 +1031,7 @@
       "vader": 0.4019,
       "length": 50,
       "cls": "Great",
-      "predicted": 3.78
+      "predicted": 3.71
     },
     {
       "name": "Breakfast at Tiffany's",
@@ -1021,7 +1039,7 @@
       "vader": -0.2799,
       "length": 23,
       "cls": "Solid",
-      "predicted": 3.5
+      "predicted": 3.41
     },
     {
       "name": "The Boondock Saints",
@@ -1029,7 +1047,7 @@
       "vader": 0.4588,
       "length": 38,
       "cls": "Solid",
-      "predicted": 3.06
+      "predicted": 3.02
     },
     {
       "name": "Young Guns",
@@ -1037,7 +1055,7 @@
       "vader": 0.9109,
       "length": 74,
       "cls": "Solid",
-      "predicted": 3.31
+      "predicted": 3.29
     },
     {
       "name": "Oppenheimer",
@@ -1045,7 +1063,7 @@
       "vader": 0.2724,
       "length": 20,
       "cls": "Great",
-      "predicted": 4.35
+      "predicted": 4.33
     },
     {
       "name": "The Report",
@@ -1053,7 +1071,7 @@
       "vader": 0.8658,
       "length": 74,
       "cls": "Solid",
-      "predicted": 3.2
+      "predicted": 3.19
     },
     {
       "name": "The Brutalist",
@@ -1061,7 +1079,7 @@
       "vader": 0.996,
       "length": 124,
       "cls": "Great",
-      "predicted": 3.95
+      "predicted": 3.98
     },
     {
       "name": "Blink Twice",
@@ -1069,7 +1087,7 @@
       "vader": 0.9208,
       "length": 41,
       "cls": "Solid",
-      "predicted": 3.61
+      "predicted": 3.62
     },
     {
       "name": "Heathers",
@@ -1077,7 +1095,7 @@
       "vader": 0.6652,
       "length": 70,
       "cls": "Solid",
-      "predicted": 3.49
+      "predicted": 3.46
     },
     {
       "name": "Mission: Impossible – Rogue Nation",
@@ -1085,7 +1103,7 @@
       "vader": 0.9201,
       "length": 58,
       "cls": "Great",
-      "predicted": 4.09
+      "predicted": 4.07
     },
     {
       "name": "Mission: Impossible",
@@ -1093,7 +1111,7 @@
       "vader": 0.9766,
       "length": 79,
       "cls": "Solid",
-      "predicted": 3.7
+      "predicted": 3.72
     },
     {
       "name": "Mission: Impossible II",
@@ -1101,7 +1119,7 @@
       "vader": 0.5028,
       "length": 77,
       "cls": "Solid",
-      "predicted": 3.35
+      "predicted": 3.34
     },
     {
       "name": "Hitch",
@@ -1109,7 +1127,7 @@
       "vader": 0.6797,
       "length": 49,
       "cls": "Solid",
-      "predicted": 3.16
+      "predicted": 3.17
     },
     {
       "name": "Mission: Impossible III",
@@ -1117,7 +1135,7 @@
       "vader": 0.8225,
       "length": 56,
       "cls": "Solid",
-      "predicted": 3.74
+      "predicted": 3.72
     },
     {
       "name": "Mission: Impossible – Ghost Protocol",
@@ -1125,7 +1143,7 @@
       "vader": 0.8605,
       "length": 77,
       "cls": "Great",
-      "predicted": 4.0
+      "predicted": 4.05
     },
     {
       "name": "Mission: Impossible – Fallout",
@@ -1133,7 +1151,7 @@
       "vader": 0.6863,
       "length": 106,
       "cls": "Great",
-      "predicted": 4.18
+      "predicted": 4.19
     },
     {
       "name": "Mission: Impossible – Dead Reckoning",
@@ -1141,7 +1159,7 @@
       "vader": 0.8307,
       "length": 158,
       "cls": "Great",
-      "predicted": 4.01
+      "predicted": 3.99
     },
     {
       "name": "Minority Report",
@@ -1149,7 +1167,7 @@
       "vader": 0.8429,
       "length": 104,
       "cls": "Solid",
-      "predicted": 3.5
+      "predicted": 3.57
     },
     {
       "name": "The Hangover Part II",
@@ -1165,7 +1183,7 @@
       "vader": -0.5909,
       "length": 62,
       "cls": "Meh",
-      "predicted": 2.98
+      "predicted": 2.92
     },
     {
       "name": "About Time",
@@ -1173,7 +1191,7 @@
       "vader": 0.969,
       "length": 69,
       "cls": "Great",
-      "predicted": 4.19
+      "predicted": 4.24
     },
     {
       "name": "A Real Pain",
@@ -1189,7 +1207,7 @@
       "vader": 0.9916,
       "length": 136,
       "cls": "Solid",
-      "predicted": 3.54
+      "predicted": 3.59
     },
     {
       "name": "Conclave",
@@ -1197,7 +1215,7 @@
       "vader": 0.9633,
       "length": 67,
       "cls": "Great",
-      "predicted": 4.03
+      "predicted": 4.0
     },
     {
       "name": "Wallace & Gromit: Vengeance Most Fowl",
@@ -1205,7 +1223,7 @@
       "vader": 0.8832,
       "length": 23,
       "cls": "Solid",
-      "predicted": 3.66
+      "predicted": 3.67
     },
     {
       "name": "Maria",
@@ -1213,7 +1231,7 @@
       "vader": 0.6757,
       "length": 41,
       "cls": "Great",
-      "predicted": 4.12
+      "predicted": 4.11
     },
     {
       "name": "La La Land",
@@ -1221,7 +1239,7 @@
       "vader": 0.7717,
       "length": 34,
       "cls": "Great",
-      "predicted": 4.65
+      "predicted": 4.64
     },
     {
       "name": "The Peanut Butter Falcon",
@@ -1229,7 +1247,7 @@
       "vader": 0.9493,
       "length": 73,
       "cls": "Great",
-      "predicted": 3.83
+      "predicted": 3.85
     },
     {
       "name": "Dallas Buyers Club",
@@ -1237,7 +1255,7 @@
       "vader": 0.792,
       "length": 49,
       "cls": "Great",
-      "predicted": 3.72
+      "predicted": 3.69
     },
     {
       "name": "The Nice Guys",
@@ -1245,7 +1263,7 @@
       "vader": 0.6753,
       "length": 42,
       "cls": "Great",
-      "predicted": 3.8
+      "predicted": 3.79
     },
     {
       "name": "The Menu",
@@ -1253,7 +1271,7 @@
       "vader": 0.0799,
       "length": 45,
       "cls": "Solid",
-      "predicted": 2.81
+      "predicted": 2.79
     },
     {
       "name": "Chinatown",
@@ -1261,7 +1279,7 @@
       "vader": 0.9498,
       "length": 82,
       "cls": "Solid",
-      "predicted": 3.3
+      "predicted": 3.34
     },
     {
       "name": "The French Connection",
@@ -1269,7 +1287,7 @@
       "vader": 0.9707,
       "length": 59,
       "cls": "Great",
-      "predicted": 3.99
+      "predicted": 3.98
     },
     {
       "name": "The Electric State",
@@ -1277,7 +1295,7 @@
       "vader": 0.4304,
       "length": 33,
       "cls": "Meh",
-      "predicted": 3.08
+      "predicted": 2.99
     },
     {
       "name": "Dìdi (弟弟)",
@@ -1285,7 +1303,7 @@
       "vader": 0.8702,
       "length": 39,
       "cls": "Great",
-      "predicted": 4.2
+      "predicted": 4.23
     },
     {
       "name": "Sicario: Day of the Soldado",
@@ -1293,7 +1311,7 @@
       "vader": 0.6486,
       "length": 52,
       "cls": "Solid",
-      "predicted": 3.6
+      "predicted": 3.56
     },
     {
       "name": "Wicked",
@@ -1301,7 +1319,7 @@
       "vader": 0.9062,
       "length": 39,
       "cls": "Great",
-      "predicted": 3.98
+      "predicted": 3.94
     },
     {
       "name": "The Truman Show",
@@ -1309,7 +1327,7 @@
       "vader": 0.8908,
       "length": 12,
       "cls": "Great",
-      "predicted": 4.08
+      "predicted": 4.1
     },
     {
       "name": "Donnie Darko",
@@ -1317,7 +1335,7 @@
       "vader": -0.4764,
       "length": 58,
       "cls": "Great",
-      "predicted": 3.67
+      "predicted": 3.65
     },
     {
       "name": "Say Anything...",
@@ -1325,7 +1343,7 @@
       "vader": -0.7581,
       "length": 271,
       "cls": "Great",
-      "predicted": 3.81
+      "predicted": 3.79
     },
     {
       "name": "Reservoir Dogs",
@@ -1333,7 +1351,7 @@
       "vader": 0.9764,
       "length": 37,
       "cls": "Great",
-      "predicted": 4.07
+      "predicted": 4.05
     },
     {
       "name": "G20",
@@ -1341,7 +1359,7 @@
       "vader": 0.5719,
       "length": 8,
       "cls": "Meh",
-      "predicted": 3.03
+      "predicted": 3.66
     },
     {
       "name": "Sinners",
@@ -1349,7 +1367,7 @@
       "vader": 0.3612,
       "length": 12,
       "cls": "Great",
-      "predicted": 3.8
+      "predicted": 3.78
     },
     {
       "name": "The Lord of the Rings: The Fellowship of the Ring",
@@ -1357,7 +1375,7 @@
       "vader": 0.6714,
       "length": 27,
       "cls": "Great",
-      "predicted": 3.78
+      "predicted": 3.72
     },
     {
       "name": "The Lord of the Rings: The Two Towers",
@@ -1365,7 +1383,7 @@
       "vader": 0.7964,
       "length": 31,
       "cls": "Great",
-      "predicted": 3.92
+      "predicted": 3.86
     },
     {
       "name": "The Lord of the Rings: The Return of the King",
@@ -1373,7 +1391,7 @@
       "vader": 0.9682,
       "length": 47,
       "cls": "Great",
-      "predicted": 4.28
+      "predicted": 4.27
     },
     {
       "name": "Thunderbolts*",
@@ -1389,7 +1407,7 @@
       "vader": 0.825,
       "length": 109,
       "cls": "Solid",
-      "predicted": 3.2
+      "predicted": 3.19
     },
     {
       "name": "Mission: Impossible – The Final Reckoning",
@@ -1397,7 +1415,7 @@
       "vader": 0.9666,
       "length": 77,
       "cls": "Great",
-      "predicted": 3.89
+      "predicted": 3.91
     },
     {
       "name": "Sinners",
@@ -1405,7 +1423,7 @@
       "vader": 0.9246,
       "length": 67,
       "cls": "Great",
-      "predicted": 3.98
+      "predicted": 4.04
     },
     {
       "name": "Beetlejuice Beetlejuice",
@@ -1421,7 +1439,7 @@
       "vader": 0.401,
       "length": 39,
       "cls": "Meh",
-      "predicted": 2.78
+      "predicted": 2.75
     },
     {
       "name": "Friendship",
@@ -1437,7 +1455,7 @@
       "vader": -0.0387,
       "length": 80,
       "cls": "Solid",
-      "predicted": 3.16
+      "predicted": 3.09
     },
     {
       "name": "Ballerina",
@@ -1445,7 +1463,7 @@
       "vader": 0.9042,
       "length": 69,
       "cls": "Solid",
-      "predicted": 3.65
+      "predicted": 3.61
     },
     {
       "name": "Arrival",
@@ -1453,7 +1471,7 @@
       "vader": 0.6369,
       "length": 17,
       "cls": "Great",
-      "predicted": 4.18
+      "predicted": 4.21
     },
     {
       "name": "Bring Her Back",
@@ -1461,7 +1479,7 @@
       "vader": 0.6448,
       "length": 60,
       "cls": "Meh",
-      "predicted": 3.09
+      "predicted": 3.06
     },
     {
       "name": "The Fall Guy",
@@ -1469,7 +1487,7 @@
       "vader": 0.4215,
       "length": 21,
       "cls": "Solid",
-      "predicted": 3.56
+      "predicted": 3.53
     },
     {
       "name": "Materialists",
@@ -1477,7 +1495,7 @@
       "vader": 0.9878,
       "length": 94,
       "cls": "Great",
-      "predicted": 3.55
+      "predicted": 3.65
     },
     {
       "name": "Vertigo",
@@ -1485,7 +1503,7 @@
       "vader": -0.8488,
       "length": 87,
       "cls": "Great",
-      "predicted": 3.41
+      "predicted": 3.4
     },
     {
       "name": "The Life of Chuck",
@@ -1493,7 +1511,7 @@
       "vader": 0.8988,
       "length": 104,
       "cls": "Great",
-      "predicted": 3.96
+      "predicted": 3.99
     },
     {
       "name": "Rear Window",
@@ -1509,7 +1527,7 @@
       "vader": 0.8595,
       "length": 108,
       "cls": "Great",
-      "predicted": 3.6
+      "predicted": 3.61
     },
     {
       "name": "How to Train Your Dragon",
@@ -1517,7 +1535,7 @@
       "vader": 0.9902,
       "length": 130,
       "cls": "Great",
-      "predicted": 3.8
+      "predicted": 3.86
     },
     {
       "name": "Requiem for a Dream",
@@ -1525,7 +1543,7 @@
       "vader": 0.5187,
       "length": 107,
       "cls": "Great",
-      "predicted": 3.93
+      "predicted": 3.88
     },
     {
       "name": "28 Days Later",
@@ -1533,7 +1551,7 @@
       "vader": 0.7777,
       "length": 77,
       "cls": "Solid",
-      "predicted": 3.44
+      "predicted": 3.43
     },
     {
       "name": "28 Years Later",
@@ -1541,7 +1559,7 @@
       "vader": 0.9721,
       "length": 134,
       "cls": "Solid",
-      "predicted": 3.31
+      "predicted": 3.36
     },
     {
       "name": "Jurassic World Rebirth",
@@ -1549,7 +1567,7 @@
       "vader": 0.886,
       "length": 141,
       "cls": "Great",
-      "predicted": 3.71
+      "predicted": 3.67
     },
     {
       "name": "Sound of Metal",
@@ -1557,7 +1575,7 @@
       "vader": 0.1531,
       "length": 120,
       "cls": "Great",
-      "predicted": 3.98
+      "predicted": 3.94
     },
     {
       "name": "The Graduate",
@@ -1565,7 +1583,7 @@
       "vader": 0.9747,
       "length": 111,
       "cls": "Solid",
-      "predicted": 3.44
+      "predicted": 3.42
     },
     {
       "name": "F1",
@@ -1573,7 +1591,7 @@
       "vader": 0.6684,
       "length": 135,
       "cls": "Great",
-      "predicted": 4.18
+      "predicted": 4.22
     },
     {
       "name": "F1",
@@ -1581,7 +1599,7 @@
       "vader": 0.4404,
       "length": 10,
       "cls": "Great",
-      "predicted": 3.95
+      "predicted": 3.97
     },
     {
       "name": "Dunkirk",
@@ -1589,7 +1607,7 @@
       "vader": 0.9492,
       "length": 109,
       "cls": "Solid",
-      "predicted": 3.57
+      "predicted": 3.58
     },
     {
       "name": "The Last of the Mohicans",
@@ -1597,7 +1615,7 @@
       "vader": 0.9776,
       "length": 129,
       "cls": "Solid",
-      "predicted": 3.53
+      "predicted": 3.57
     },
     {
       "name": "Bloodsport",
@@ -1605,7 +1623,7 @@
       "vader": 0.9821,
       "length": 128,
       "cls": "Solid",
-      "predicted": 3.34
+      "predicted": 3.31
     },
     {
       "name": "The Loveless",
@@ -1613,7 +1631,7 @@
       "vader": 0.9337,
       "length": 111,
       "cls": "Meh",
-      "predicted": 2.44
+      "predicted": 2.52
     },
     {
       "name": "Heads of State",
@@ -1621,7 +1639,7 @@
       "vader": 0.9567,
       "length": 71,
       "cls": "Meh",
-      "predicted": 2.8
+      "predicted": 2.75
     },
     {
       "name": "Kickboxer",
@@ -1629,7 +1647,7 @@
       "vader": 0.9515,
       "length": 77,
       "cls": "Solid",
-      "predicted": 3.29
+      "predicted": 3.26
     },
     {
       "name": "A Fistful of Dollars",
@@ -1637,7 +1655,7 @@
       "vader": 0.3355,
       "length": 121,
       "cls": "Great",
-      "predicted": 3.59
+      "predicted": 3.58
     },
     {
       "name": "Sinners",
@@ -1645,7 +1663,7 @@
       "vader": 0.796,
       "length": 58,
       "cls": "Great",
-      "predicted": 4.26
+      "predicted": 4.35
     },
     {
       "name": "Howl's Moving Castle",
@@ -1653,7 +1671,7 @@
       "vader": 0.7391,
       "length": 72,
       "cls": "Great",
-      "predicted": 4.14
+      "predicted": 4.09
     },
     {
       "name": "My Neighbor Totoro",
@@ -1661,7 +1679,7 @@
       "vader": 0.9858,
       "length": 125,
       "cls": "Great",
-      "predicted": 3.88
+      "predicted": 3.91
     },
     {
       "name": "Porco Rosso",
@@ -1669,7 +1687,7 @@
       "vader": 0.908,
       "length": 86,
       "cls": "Great",
-      "predicted": 3.66
+      "predicted": 3.61
     },
     {
       "name": "Ponyo",
@@ -1677,7 +1695,7 @@
       "vader": 0.9934,
       "length": 157,
       "cls": "Great",
-      "predicted": 3.75
+      "predicted": 3.79
     },
     {
       "name": "Eternal Sunshine of the Spotless Mind",
@@ -1685,7 +1703,7 @@
       "vader": 0.9773,
       "length": 107,
       "cls": "Great",
-      "predicted": 4.23
+      "predicted": 4.19
     },
     {
       "name": "A Minecraft Movie",
@@ -1693,7 +1711,7 @@
       "vader": 0.4974,
       "length": 69,
       "cls": "Solid",
-      "predicted": 3.35
+      "predicted": 3.31
     },
     {
       "name": "Dream Scenario",
@@ -1701,7 +1719,7 @@
       "vader": 0.3702,
       "length": 68,
       "cls": "Solid",
-      "predicted": 3.16
+      "predicted": 3.2
     },
     {
       "name": "The Internship",
@@ -1709,7 +1727,7 @@
       "vader": -0.7742,
       "length": 46,
       "cls": "Meh",
-      "predicted": 2.97
+      "predicted": 2.91
     },
     {
       "name": "Love & Other Drugs",
@@ -1717,7 +1735,7 @@
       "vader": 0.3333,
       "length": 67,
       "cls": "Solid",
-      "predicted": 2.97
+      "predicted": 2.93
     },
     {
       "name": "Airplane!",
@@ -1725,7 +1743,7 @@
       "vader": 0.9803,
       "length": 104,
       "cls": "Great",
-      "predicted": 3.87
+      "predicted": 3.85
     },
     {
       "name": "Training Day",
@@ -1733,7 +1751,7 @@
       "vader": -0.9269,
       "length": 252,
       "cls": "Great",
-      "predicted": 4.09
+      "predicted": 4.06
     },
     {
       "name": "Airplane II: The Sequel",
@@ -1757,7 +1775,7 @@
       "vader": 0.9992,
       "length": 454,
       "cls": "Great",
-      "predicted": 3.98
+      "predicted": 4.13
     },
     {
       "name": "Death Warrant",
@@ -1765,7 +1783,7 @@
       "vader": 0.7817,
       "length": 114,
       "cls": "Solid",
-      "predicted": 3.12
+      "predicted": 3.21
     },
     {
       "name": "Kiki's Delivery Service",
@@ -1773,7 +1791,7 @@
       "vader": 0.9948,
       "length": 170,
       "cls": "Great",
-      "predicted": 3.84
+      "predicted": 3.91
     },
     {
       "name": "The Super Mario Bros. Movie",
@@ -1781,7 +1799,7 @@
       "vader": 0.9337,
       "length": 127,
       "cls": "Solid",
-      "predicted": 3.3
+      "predicted": 3.36
     },
     {
       "name": "I Know What You Did Last Summer",
@@ -1789,7 +1807,7 @@
       "vader": -0.7037,
       "length": 137,
       "cls": "Meh",
-      "predicted": 2.64
+      "predicted": 2.58
     },
     {
       "name": "Princess Mononoke",
@@ -1797,7 +1815,7 @@
       "vader": 0.935,
       "length": 232,
       "cls": "Great",
-      "predicted": 4.36
+      "predicted": 4.38
     },
     {
       "name": "Eddington",
@@ -1805,7 +1823,7 @@
       "vader": 0.9925,
       "length": 188,
       "cls": "Great",
-      "predicted": 3.95
+      "predicted": 4.01
     },
     {
       "name": "The Fast and the Furious",
@@ -1813,7 +1831,7 @@
       "vader": -0.0286,
       "length": 123,
       "cls": "Solid",
-      "predicted": 3.17
+      "predicted": 3.13
     },
     {
       "name": "The Naked Gun: From the Files of Police Squad!",
@@ -1821,7 +1839,7 @@
       "vader": 0.959,
       "length": 117,
       "cls": "Solid",
-      "predicted": 3.14
+      "predicted": 3.1
     },
     {
       "name": "Close Encounters of the Third Kind",
@@ -1829,7 +1847,7 @@
       "vader": 0.9897,
       "length": 418,
       "cls": "Solid",
-      "predicted": 3.32
+      "predicted": 3.37
     },
     {
       "name": "2 Fast 2 Furious",
@@ -1837,7 +1855,7 @@
       "vader": 0.9639,
       "length": 164,
       "cls": "Solid",
-      "predicted": 3.76
+      "predicted": 3.79
     },
     {
       "name": "Flow",
@@ -1845,7 +1863,7 @@
       "vader": 0.9914,
       "length": 209,
       "cls": "Solid",
-      "predicted": 3.61
+      "predicted": 3.63
     },
     {
       "name": "The Fantastic 4: First Steps",
@@ -1853,7 +1871,7 @@
       "vader": 0.9943,
       "length": 301,
       "cls": "Great",
-      "predicted": 4.0
+      "predicted": 4.08
     },
     {
       "name": "Happy Gilmore 2",
@@ -1869,7 +1887,7 @@
       "vader": -0.4035,
       "length": 115,
       "cls": "Meh",
-      "predicted": 2.51
+      "predicted": 2.44
     },
     {
       "name": "The Naked Gun 2½: The Smell of Fear",
@@ -1877,7 +1895,7 @@
       "vader": 0.8605,
       "length": 102,
       "cls": "Solid",
-      "predicted": 3.17
+      "predicted": 3.12
     },
     {
       "name": "Naked Gun 33⅓: The Final Insult",
@@ -1885,7 +1903,7 @@
       "vader": 0.9231,
       "length": 81,
       "cls": "Solid",
-      "predicted": 3.2
+      "predicted": 3.24
     },
     {
       "name": "Happy Gilmore 2",
@@ -1893,7 +1911,7 @@
       "vader": 0.5106,
       "length": 55,
       "cls": "Meh",
-      "predicted": 2.85
+      "predicted": 2.91
     },
     {
       "name": "Wicked",
@@ -1901,7 +1919,7 @@
       "vader": 0.8858,
       "length": 47,
       "cls": "Great",
-      "predicted": 3.93
+      "predicted": 3.91
     },
     {
       "name": "The Fantastic 4: First Steps",
@@ -1909,7 +1927,7 @@
       "vader": 0.9769,
       "length": 96,
       "cls": "Great",
-      "predicted": 3.73
+      "predicted": 3.74
     },
     {
       "name": "Dog Day Afternoon",
@@ -1917,7 +1935,7 @@
       "vader": 0.979,
       "length": 150,
       "cls": "Great",
-      "predicted": 3.66
+      "predicted": 3.69
     },
     {
       "name": "The Fast and the Furious: Tokyo Drift",
@@ -1933,7 +1951,7 @@
       "vader": 0.9708,
       "length": 138,
       "cls": "Solid",
-      "predicted": 3.55
+      "predicted": 3.61
     },
     {
       "name": "War of the Worlds",
@@ -1941,7 +1959,7 @@
       "vader": -0.1993,
       "length": 177,
       "cls": "Meh",
-      "predicted": 2.09
+      "predicted": 2.05
     },
     {
       "name": "Blue Beetle",
@@ -1957,7 +1975,7 @@
       "vader": 0.6865,
       "length": 167,
       "cls": "Meh",
-      "predicted": 3.1
+      "predicted": 3.08
     },
     {
       "name": "Weapons",
@@ -1965,7 +1983,7 @@
       "vader": 0.9631,
       "length": 270,
       "cls": "Solid",
-      "predicted": 3.49
+      "predicted": 3.55
     },
     {
       "name": "Nobody",
@@ -1973,7 +1991,7 @@
       "vader": 0.7349,
       "length": 84,
       "cls": "Solid",
-      "predicted": 3.18
+      "predicted": 3.16
     },
     {
       "name": "Ricky Stanicky",
@@ -1981,7 +1999,7 @@
       "vader": 0.941,
       "length": 106,
       "cls": "Solid",
-      "predicted": 3.16
+      "predicted": 3.17
     },
     {
       "name": "Raging Bull",
@@ -1989,7 +2007,7 @@
       "vader": 0.9973,
       "length": 179,
       "cls": "Great",
-      "predicted": 3.88
+      "predicted": 3.85
     },
     {
       "name": "The Naked Gun",
@@ -1997,7 +2015,7 @@
       "vader": 0.7964,
       "length": 20,
       "cls": "Solid",
-      "predicted": 3.54
+      "predicted": 3.4
     },
     {
       "name": "Nobody 2",
@@ -2005,7 +2023,7 @@
       "vader": 0.9188,
       "length": 72,
       "cls": "Solid",
-      "predicted": 3.27
+      "predicted": 3.23
     },
     {
       "name": "The United States of Leland",
@@ -2013,7 +2031,7 @@
       "vader": 0.8585,
       "length": 88,
       "cls": "Solid",
-      "predicted": 3.48
+      "predicted": 3.42
     },
     {
       "name": "There Will Be Blood",
@@ -2021,7 +2039,7 @@
       "vader": 0.7894,
       "length": 140,
       "cls": "Great",
-      "predicted": 4.19
+      "predicted": 4.2
     },
     {
       "name": "Full Metal Jacket",
@@ -2029,7 +2047,7 @@
       "vader": 0.9932,
       "length": 197,
       "cls": "Great",
-      "predicted": 3.91
+      "predicted": 3.95
     },
     {
       "name": "Collateral",
@@ -2037,7 +2055,7 @@
       "vader": 0.9948,
       "length": 116,
       "cls": "Great",
-      "predicted": 3.64
+      "predicted": 3.65
     },
     {
       "name": "Sixteen Candles",
@@ -2045,7 +2063,7 @@
       "vader": 0.9545,
       "length": 107,
       "cls": "Solid",
-      "predicted": 3.42
+      "predicted": 3.37
     },
     {
       "name": "Thief",
@@ -2053,7 +2071,7 @@
       "vader": 0.9711,
       "length": 168,
       "cls": "Great",
-      "predicted": 3.78
+      "predicted": 3.8
     },
     {
       "name": "Caught Stealing",
@@ -2061,7 +2079,7 @@
       "vader": 0.8303,
       "length": 162,
       "cls": "Solid",
-      "predicted": 3.36
+      "predicted": 3.38
     },
     {
       "name": "Road to Perdition",
@@ -2069,7 +2087,7 @@
       "vader": 0.9685,
       "length": 138,
       "cls": "Great",
-      "predicted": 3.77
+      "predicted": 3.8
     },
     {
       "name": "Scary Movie",
@@ -2077,7 +2095,7 @@
       "vader": 0.7574,
       "length": 43,
       "cls": "Solid",
-      "predicted": 3.53
+      "predicted": 3.48
     },
     {
       "name": "Misery",
@@ -2085,7 +2103,7 @@
       "vader": -0.5469,
       "length": 90,
       "cls": "Great",
-      "predicted": 3.75
+      "predicted": 3.72
     },
     {
       "name": "Warfare",
@@ -2093,7 +2111,7 @@
       "vader": 0.4678,
       "length": 199,
       "cls": "Solid",
-      "predicted": 3.62
+      "predicted": 3.67
     },
     {
       "name": "The Conjuring: Last Rites",
@@ -2101,7 +2119,7 @@
       "vader": 0.9333,
       "length": 167,
       "cls": "Solid",
-      "predicted": 3.23
+      "predicted": 3.22
     },
     {
       "name": "Meet the Parents",
@@ -2109,7 +2127,7 @@
       "vader": 0.8807,
       "length": 131,
       "cls": "Solid",
-      "predicted": 3.44
+      "predicted": 3.43
     },
     {
       "name": "Se7en",
@@ -2117,7 +2135,7 @@
       "vader": 0.9806,
       "length": 205,
       "cls": "Great",
-      "predicted": 4.57
+      "predicted": 4.6
     },
     {
       "name": "HIM",
@@ -2125,7 +2143,7 @@
       "vader": 0.9663,
       "length": 109,
       "cls": "Solid",
-      "predicted": 3.0
+      "predicted": 2.99
     },
     {
       "name": "The Secret World of Arrietty",
@@ -2141,7 +2159,7 @@
       "vader": 0.9661,
       "length": 117,
       "cls": "Great",
-      "predicted": 4.23
+      "predicted": 4.24
     },
     {
       "name": "Meet the Fockers",
@@ -2157,7 +2175,7 @@
       "vader": 0.9838,
       "length": 181,
       "cls": "Great",
-      "predicted": 4.37
+      "predicted": 4.47
     },
     {
       "name": "Boogie Nights",
@@ -2165,7 +2183,7 @@
       "vader": 0.9797,
       "length": 151,
       "cls": "Great",
-      "predicted": 3.92
+      "predicted": 3.89
     },
     {
       "name": "The Iron Claw",
@@ -2173,7 +2191,7 @@
       "vader": 0.6003,
       "length": 108,
       "cls": "Great",
-      "predicted": 4.38
+      "predicted": 4.37
     },
     {
       "name": "One Battle After Another",
@@ -2181,7 +2199,7 @@
       "vader": 0.8621,
       "length": 65,
       "cls": "Great",
-      "predicted": 4.12
+      "predicted": 4.09
     },
     {
       "name": "One Battle After Another",
@@ -2189,7 +2207,7 @@
       "vader": 0.9913,
       "length": 231,
       "cls": "Great",
-      "predicted": 4.43
+      "predicted": 4.47
     },
     {
       "name": "Inherent Vice",
@@ -2213,7 +2231,7 @@
       "vader": 0.9847,
       "length": 88,
       "cls": "Solid",
-      "predicted": 3.54
+      "predicted": 3.51
     },
     {
       "name": "Gone Girl",
@@ -2221,7 +2239,7 @@
       "vader": 0.9749,
       "length": 110,
       "cls": "Great",
-      "predicted": 3.89
+      "predicted": 3.87
     },
     {
       "name": "The Polar Express",
@@ -2229,7 +2247,7 @@
       "vader": 0.9231,
       "length": 31,
       "cls": "Great",
-      "predicted": 3.98
+      "predicted": 3.87
     },
     {
       "name": "One Battle After Another",
@@ -2237,7 +2255,7 @@
       "vader": 0.7246,
       "length": 48,
       "cls": "Great",
-      "predicted": 4.34
+      "predicted": 4.38
     },
     {
       "name": "Pineapple Express",
@@ -2245,7 +2263,7 @@
       "vader": 0.9009,
       "length": 42,
       "cls": "Solid",
-      "predicted": 3.65
+      "predicted": 3.62
     },
     {
       "name": "The Polar Express",
@@ -2253,7 +2271,7 @@
       "vader": 0.7076,
       "length": 26,
       "cls": "Great",
-      "predicted": 4.14
+      "predicted": 4.05
     },
     {
       "name": "It's a Wonderful Life",
@@ -2261,7 +2279,7 @@
       "vader": 0.7906,
       "length": 39,
       "cls": "Great",
-      "predicted": 4.45
+      "predicted": 4.48
     },
     {
       "name": "Wake Up Dead Man",
@@ -2277,7 +2295,7 @@
       "vader": -0.3515,
       "length": 70,
       "cls": "Great",
-      "predicted": 4.25
+      "predicted": 4.24
     },
     {
       "name": "Marty Supreme",
@@ -2285,7 +2303,7 @@
       "vader": 0.9954,
       "length": 298,
       "cls": "Great",
-      "predicted": 4.09
+      "predicted": 4.14
     },
     {
       "name": "Love Lies Bleeding",
@@ -2293,7 +2311,7 @@
       "vader": 0.9419,
       "length": 152,
       "cls": "Meh",
-      "predicted": 2.64
+      "predicted": 2.69
     },
     {
       "name": "Ne Zha",
@@ -2301,7 +2319,7 @@
       "vader": -0.393,
       "length": 181,
       "cls": "Meh",
-      "predicted": 2.94
+      "predicted": 2.88
     },
     {
       "name": "Zootopia 2",
@@ -2309,7 +2327,7 @@
       "vader": 0.9944,
       "length": 178,
       "cls": "Solid",
-      "predicted": 3.56
+      "predicted": 3.54
     },
     {
       "name": "Glengarry Glen Ross",
@@ -2317,7 +2335,7 @@
       "vader": 0.9779,
       "length": 186,
       "cls": "Great",
-      "predicted": 3.64
+      "predicted": 3.67
     },
     {
       "name": "Ronin",
@@ -2325,7 +2343,7 @@
       "vader": 0.9628,
       "length": 179,
       "cls": "Solid",
-      "predicted": 3.15
+      "predicted": 3.1
     },
     {
       "name": "Gamer",
@@ -2333,7 +2351,7 @@
       "vader": 0.9747,
       "length": 227,
       "cls": "Meh",
-      "predicted": 2.91
+      "predicted": 3.02
     },
     {
       "name": "The Phoenician Scheme",
@@ -2341,7 +2359,7 @@
       "vader": 0.9406,
       "length": 252,
       "cls": "Solid",
-      "predicted": 3.54
+      "predicted": 3.58
     },
     {
       "name": "Castle in the Sky",
@@ -2349,7 +2367,7 @@
       "vader": 0.9566,
       "length": 187,
       "cls": "Great",
-      "predicted": 3.77
+      "predicted": 3.81
     },
     {
       "name": "Casablanca",
@@ -2357,7 +2375,7 @@
       "vader": 0.9961,
       "length": 197,
       "cls": "Great",
-      "predicted": 3.97
+      "predicted": 3.98
     },
     {
       "name": "Call Me by Your Name",
@@ -2365,7 +2383,7 @@
       "vader": 0.9953,
       "length": 223,
       "cls": "Great",
-      "predicted": 3.87
+      "predicted": 3.91
     },
     {
       "name": "Battle Royale",
@@ -2373,7 +2391,7 @@
       "vader": 0.996,
       "length": 150,
       "cls": "Great",
-      "predicted": 3.99
+      "predicted": 3.97
     },
     {
       "name": "Ford v Ferrari",
@@ -2381,7 +2399,7 @@
       "vader": 0.9871,
       "length": 227,
       "cls": "Great",
-      "predicted": 3.71
+      "predicted": 3.73
     },
     {
       "name": "Paths of Glory",
@@ -2397,7 +2415,7 @@
       "vader": 0.9866,
       "length": 172,
       "cls": "Solid",
-      "predicted": 3.4
+      "predicted": 3.44
     },
     {
       "name": "Sorry, Baby",
@@ -2405,7 +2423,7 @@
       "vader": 0.9974,
       "length": 432,
       "cls": "Great",
-      "predicted": 3.87
+      "predicted": 4.02
     },
     {
       "name": "Notting Hill",
@@ -2413,7 +2431,7 @@
       "vader": 0.9862,
       "length": 179,
       "cls": "Solid",
-      "predicted": 3.61
+      "predicted": 3.67
     },
     {
       "name": "People We Meet on Vacation",
@@ -2421,7 +2439,7 @@
       "vader": 0.9874,
       "length": 170,
       "cls": "Solid",
-      "predicted": 3.29
+      "predicted": 3.31
     },
     {
       "name": "The Player",
@@ -2429,7 +2447,7 @@
       "vader": 0.9951,
       "length": 250,
       "cls": "Solid",
-      "predicted": 3.59
+      "predicted": 3.63
     },
     {
       "name": "The Smashing Machine",
@@ -2437,7 +2455,7 @@
       "vader": 0.992,
       "length": 350,
       "cls": "Solid",
-      "predicted": 3.55
+      "predicted": 3.58
     },
     {
       "name": "The Man in the Iron Mask",
@@ -2445,7 +2463,7 @@
       "vader": 0.9934,
       "length": 179,
       "cls": "Solid",
-      "predicted": 3.5
+      "predicted": 3.49
     },
     {
       "name": "Tales from Earthsea",
@@ -2453,7 +2471,7 @@
       "vader": 0.9754,
       "length": 269,
       "cls": "Solid",
-      "predicted": 3.4
+      "predicted": 3.44
     },
     {
       "name": "The Girl Next Door",
@@ -2461,7 +2479,7 @@
       "vader": 0.9784,
       "length": 178,
       "cls": "Solid",
-      "predicted": 3.26
+      "predicted": 3.24
     },
     {
       "name": "From Up on Poppy Hill",
@@ -2477,7 +2495,7 @@
       "vader": 0.9953,
       "length": 373,
       "cls": "Great",
-      "predicted": 3.98
+      "predicted": 4.11
     },
     {
       "name": "Whisper of the Heart",
@@ -2485,7 +2503,7 @@
       "vader": 0.9986,
       "length": 390,
       "cls": "Great",
-      "predicted": 3.88
+      "predicted": 3.9
     },
     {
       "name": "If I Had Legs I'd Kick You",
@@ -2493,7 +2511,7 @@
       "vader": 0.9907,
       "length": 160,
       "cls": "Meh",
-      "predicted": 2.9
+      "predicted": 2.89
     },
     {
       "name": "Good Time",
@@ -2501,7 +2519,7 @@
       "vader": 0.9458,
       "length": 134,
       "cls": "Meh",
-      "predicted": 3.05
+      "predicted": 3.06
     },
     {
       "name": "When Marnie Was There",
@@ -2517,7 +2535,7 @@
       "vader": 0.9739,
       "length": 170,
       "cls": "Solid",
-      "predicted": 3.09
+      "predicted": 3.08
     },
     {
       "name": "Flight Risk",
@@ -2525,7 +2543,7 @@
       "vader": 0.9839,
       "length": 129,
       "cls": "Meh",
-      "predicted": 2.92
+      "predicted": 2.88
     },
     {
       "name": "The Shape of Water",
@@ -2533,7 +2551,7 @@
       "vader": 0.9903,
       "length": 196,
       "cls": "Solid",
-      "predicted": 3.47
+      "predicted": 3.49
     },
     {
       "name": "Sing Sing",
@@ -2541,7 +2559,7 @@
       "vader": 0.9974,
       "length": 222,
       "cls": "Great",
-      "predicted": 4.31
+      "predicted": 4.35
     },
     {
       "name": "Only Yesterday",
@@ -2557,7 +2575,7 @@
       "vader": -0.3208,
       "length": 98,
       "cls": "Meh",
-      "predicted": 2.69
+      "predicted": 2.64
     },
     {
       "name": "Bugonia",
@@ -2565,7 +2583,7 @@
       "vader": 0.9938,
       "length": 189,
       "cls": "Solid",
-      "predicted": 3.59
+      "predicted": 3.67
     },
     {
       "name": "How to Lose a Guy in 10 Days",
@@ -2573,7 +2591,7 @@
       "vader": 0.9892,
       "length": 114,
       "cls": "Solid",
-      "predicted": 3.67
+      "predicted": 3.68
     },
     {
       "name": "The Notebook",
@@ -2581,7 +2599,7 @@
       "vader": 0.9959,
       "length": 252,
       "cls": "Great",
-      "predicted": 3.78
+      "predicted": 3.86
     },
     {
       "name": "Harry Potter and the Philosopher's Stone",
@@ -2589,7 +2607,7 @@
       "vader": 0.9806,
       "length": 247,
       "cls": "Great",
-      "predicted": 4.1
+      "predicted": 4.14
     },
     {
       "name": "Harry Potter and the Chamber of Secrets",
@@ -2597,7 +2615,7 @@
       "vader": 0.9915,
       "length": 226,
       "cls": "Solid",
-      "predicted": 3.57
+      "predicted": 3.59
     },
     {
       "name": "Harry Potter and the Prisoner of Azkaban",
@@ -2605,7 +2623,7 @@
       "vader": 0.989,
       "length": 232,
       "cls": "Great",
-      "predicted": 4.37
+      "predicted": 4.41
     },
     {
       "name": "Harry Potter and the Goblet of Fire",
@@ -2613,7 +2631,7 @@
       "vader": -0.9556,
       "length": 256,
       "cls": "Great",
-      "predicted": 4.05
+      "predicted": 3.98
     },
     {
       "name": "Harry Potter and the Order of the Phoenix",
@@ -2621,7 +2639,7 @@
       "vader": 0.7649,
       "length": 237,
       "cls": "Solid",
-      "predicted": 3.5
+      "predicted": 3.56
     },
     {
       "name": "Harry Potter and the Half-Blood Prince",
@@ -2629,7 +2647,7 @@
       "vader": 0.9136,
       "length": 232,
       "cls": "Great",
-      "predicted": 4.05
+      "predicted": 4.08
     },
     {
       "name": "Pom Poko",
@@ -2645,7 +2663,7 @@
       "vader": 0.9732,
       "length": 125,
       "cls": "Solid",
-      "predicted": 3.03
+      "predicted": 2.96
     },
     {
       "name": "Earwig and the Witch",
@@ -2653,7 +2671,7 @@
       "vader": 0.8262,
       "length": 158,
       "cls": "Meh",
-      "predicted": 2.36
+      "predicted": 2.38
     },
     {
       "name": "Courage Under Fire",
@@ -2661,7 +2679,7 @@
       "vader": 0.7003,
       "length": 92,
       "cls": "Solid",
-      "predicted": 3.09
+      "predicted": 3.07
     },
     {
       "name": "Harry Potter and the Deathly Hallows: Part 1",
@@ -2669,7 +2687,7 @@
       "vader": 0.9737,
       "length": 215,
       "cls": "Great",
-      "predicted": 4.07
+      "predicted": 4.05
     },
     {
       "name": "Harry Potter and the Deathly Hallows: Part 2",
@@ -2677,7 +2695,7 @@
       "vader": 0.9702,
       "length": 256,
       "cls": "Great",
-      "predicted": 4.11
+      "predicted": 4.14
     },
     {
       "name": "In the Mood for Love",
@@ -2685,7 +2703,7 @@
       "vader": 0.992,
       "length": 293,
       "cls": "Great",
-      "predicted": 4.19
+      "predicted": 4.24
     },
     {
       "name": "Star Wars: Episode I – The Phantom Menace",
@@ -2693,7 +2711,7 @@
       "vader": 0.9789,
       "length": 116,
       "cls": "Solid",
-      "predicted": 3.28
+      "predicted": 3.25
     },
     {
       "name": "Fantastic Beasts and Where to Find Them",
@@ -2701,7 +2719,7 @@
       "vader": 0.9621,
       "length": 173,
       "cls": "Solid",
-      "predicted": 3.31
+      "predicted": 3.29
     },
     {
       "name": "Monty Python and the Holy Grail",
@@ -2709,7 +2727,7 @@
       "vader": 0.9856,
       "length": 127,
       "cls": "Solid",
-      "predicted": 3.16
+      "predicted": 3.19
     },
     {
       "name": "Sleepless in Seattle",
@@ -2717,7 +2735,7 @@
       "vader": 0.9899,
       "length": 191,
       "cls": "Solid",
-      "predicted": 3.19
+      "predicted": 3.21
     },
     {
       "name": "Lost in Translation",
@@ -2725,7 +2743,7 @@
       "vader": 0.9923,
       "length": 187,
       "cls": "Solid",
-      "predicted": 3.54
+      "predicted": 3.56
     },
     {
       "name": "Hamnet",
@@ -2733,7 +2751,7 @@
       "vader": 0.9573,
       "length": 216,
       "cls": "Great",
-      "predicted": 4.1
+      "predicted": 4.13
     },
     {
       "name": "Blue Moon",
@@ -2741,7 +2759,7 @@
       "vader": 0.7875,
       "length": 192,
       "cls": "Great",
-      "predicted": 3.98
+      "predicted": 4.0
     },
     {
       "name": "Train Dreams",
@@ -2749,7 +2767,7 @@
       "vader": 0.9746,
       "length": 181,
       "cls": "Great",
-      "predicted": 4.14
+      "predicted": 4.17
     },
     {
       "name": "War Machine",
@@ -2757,7 +2775,7 @@
       "vader": 0.0,
       "length": 4,
       "cls": "Solid",
-      "predicted": 3.5
+      "predicted": 3.39
     },
     {
       "name": "Frankenstein",
@@ -2765,7 +2783,7 @@
       "vader": 0.985,
       "length": 213,
       "cls": "Solid",
-      "predicted": 3.47
+      "predicted": 3.52
     },
     {
       "name": "Dead Poets Society",
@@ -2773,7 +2791,7 @@
       "vader": 0.9854,
       "length": 164,
       "cls": "Great",
-      "predicted": 4.3
+      "predicted": 4.28
     },
     {
       "name": "Perfect Blue",
@@ -2781,7 +2799,7 @@
       "vader": 0.8687,
       "length": 84,
       "cls": "Great",
-      "predicted": 3.7
+      "predicted": 3.71
     },
     {
       "name": "Project Hail Mary",
@@ -2789,7 +2807,7 @@
       "vader": 0.9978,
       "length": 231,
       "cls": "Great",
-      "predicted": 4.47
+      "predicted": 4.5
     },
     {
       "name": "Blue Valentine",
@@ -2797,7 +2815,7 @@
       "vader": 0.9712,
       "length": 231,
       "cls": "Solid",
-      "predicted": 3.69
+      "predicted": 3.74
     },
     {
       "name": "The Secret Agent",
@@ -2805,7 +2823,7 @@
       "vader": 0.9912,
       "length": 135,
       "cls": "Great",
-      "predicted": 3.95
+      "predicted": 4.04
     },
     {
       "name": "Argo",
@@ -2813,7 +2831,7 @@
       "vader": 0.9922,
       "length": 170,
       "cls": "Great",
-      "predicted": 3.7
+      "predicted": 3.71
     },
     {
       "name": "Moon",
@@ -2821,7 +2839,7 @@
       "vader": 0.9939,
       "length": 219,
       "cls": "Solid",
-      "predicted": 3.48
+      "predicted": 3.5
     },
     {
       "name": "Mean Girls",
@@ -2829,7 +2847,7 @@
       "vader": 0.9819,
       "length": 81,
       "cls": "Solid",
-      "predicted": 3.53
+      "predicted": 3.55
     },
     {
       "name": "Spotlight",
@@ -2837,7 +2855,7 @@
       "vader": 0.9945,
       "length": 201,
       "cls": "Great",
-      "predicted": 3.76
+      "predicted": 3.8
     },
     {
       "name": "The Lego Batman Movie",
@@ -2845,7 +2863,7 @@
       "vader": 0.8835,
       "length": 126,
       "cls": "Solid",
-      "predicted": 3.58
+      "predicted": 3.64
     },
     {
       "name": "Eternity",
@@ -2853,7 +2871,7 @@
       "vader": 0.9981,
       "length": 329,
       "cls": "Great",
-      "predicted": 3.73
+      "predicted": 3.78
     },
     {
       "name": "Birdman or (The Unexpected Virtue of Ignorance)",
@@ -2861,7 +2879,7 @@
       "vader": 0.9954,
       "length": 292,
       "cls": "Solid",
-      "predicted": 3.48
+      "predicted": 3.53
     },
     {
       "name": "Little Miss Sunshine",
@@ -2869,7 +2887,143 @@
       "vader": 0.9972,
       "length": 203,
       "cls": "Great",
-      "predicted": 3.99
+      "predicted": 4.06
+    },
+    {
+      "name": "Boiling Point",
+      "actual": 4.0,
+      "vader": 0.9888,
+      "length": 315,
+      "cls": "Great",
+      "predicted": 3.94
+    },
+    {
+      "name": "Eternal Sunshine of the Spotless Mind",
+      "actual": 4.5,
+      "vader": 0.9967,
+      "length": 299,
+      "cls": "Great",
+      "predicted": 4.13
+    },
+    {
+      "name": "Scent of a Woman",
+      "actual": 4.5,
+      "vader": 0.9443,
+      "length": 269,
+      "cls": "Great",
+      "predicted": 4.26
+    },
+    {
+      "name": "Ted",
+      "actual": 2.5,
+      "vader": 0.5272,
+      "length": 143,
+      "cls": "Meh",
+      "predicted": 2.91
+    },
+    {
+      "name": "Bumblebee",
+      "actual": 3.0,
+      "vader": 0.9554,
+      "length": 200,
+      "cls": "Solid",
+      "predicted": 3.18
+    },
+    {
+      "name": "Red Rocket",
+      "actual": 4.0,
+      "vader": 0.9972,
+      "length": 357,
+      "cls": "Great",
+      "predicted": 3.78
+    },
+    {
+      "name": "The Drama",
+      "actual": 4.0,
+      "vader": 0.9948,
+      "length": 232,
+      "cls": "Great",
+      "predicted": 3.84
+    },
+    {
+      "name": "Project Hail Mary",
+      "actual": 5.0,
+      "vader": 0.9736,
+      "length": 158,
+      "cls": "Great",
+      "predicted": 4.25
+    },
+    {
+      "name": "The Super Mario Galaxy Movie",
+      "actual": 3.5,
+      "vader": 0.9925,
+      "length": 185,
+      "cls": "Solid",
+      "predicted": 3.56
+    },
+    {
+      "name": "Anaconda",
+      "actual": 2.5,
+      "vader": 0.8921,
+      "length": 78,
+      "cls": "Meh",
+      "predicted": 2.88
+    },
+    {
+      "name": "Fast Times at Ridgemont High",
+      "actual": 4.0,
+      "vader": 0.9923,
+      "length": 136,
+      "cls": "Great",
+      "predicted": 3.84
+    },
+    {
+      "name": "Pizza Movie",
+      "actual": 3.0,
+      "vader": 0.9941,
+      "length": 212,
+      "cls": "Solid",
+      "predicted": 2.89
+    },
+    {
+      "name": "Mercy",
+      "actual": 1.5,
+      "vader": -0.5123,
+      "length": 224,
+      "cls": "Meh",
+      "predicted": 2.29
+    },
+    {
+      "name": "Kill Bill: Vol. 1",
+      "actual": 4.5,
+      "vader": 0.996,
+      "length": 306,
+      "cls": "Great",
+      "predicted": 4.07
+    },
+    {
+      "name": "Kill Bill: Vol. 2",
+      "actual": 4.5,
+      "vader": 0.9971,
+      "length": 299,
+      "cls": "Great",
+      "predicted": 4.02
+    },
+    {
+      "name": "Waves",
+      "actual": 4.5,
+      "vader": 0.9975,
+      "length": 336,
+      "cls": "Great",
+      "predicted": 4.04
+    },
+    {
+      "name": "Sea of Love",
+      "actual": 3.5,
+      "vader": 0.9877,
+      "length": 223,
+      "cls": "Solid",
+      "predicted": 3.52
     }
   ]
 }

@@ -1,0 +1,395 @@
+{
+  "generated_at": "2026-04-13T06:46:39.456980+00:00",
+  "coverage": {
+    "total_films": 689,
+    "matched_to_tmdb": 689,
+    "unmatched": 0
+  },
+  "genre_analysis": [
+    {
+      "name": "Comedy",
+      "count": 239,
+      "mean_rating": 3.134
+    },
+    {
+      "name": "Drama",
+      "count": 230,
+      "mean_rating": 3.724
+    },
+    {
+      "name": "Adventure",
+      "count": 214,
+      "mean_rating": 3.315
+    },
+    {
+      "name": "Action",
+      "count": 207,
+      "mean_rating": 3.309
+    },
+    {
+      "name": "Thriller",
+      "count": 147,
+      "mean_rating": 3.327
+    },
+    {
+      "name": "Science Fiction",
+      "count": 145,
+      "mean_rating": 3.245
+    },
+    {
+      "name": "Family",
+      "count": 120,
+      "mean_rating": 3.171
+    },
+    {
+      "name": "Fantasy",
+      "count": 100,
+      "mean_rating": 3.25
+    },
+    {
+      "name": "Animation",
+      "count": 98,
+      "mean_rating": 3.398
+    },
+    {
+      "name": "Crime",
+      "count": 95,
+      "mean_rating": 3.595
+    },
+    {
+      "name": "Horror",
+      "count": 79,
+      "mean_rating": 2.722
+    },
+    {
+      "name": "Romance",
+      "count": 71,
+      "mean_rating": 3.401
+    },
+    {
+      "name": "Mystery",
+      "count": 60,
+      "mean_rating": 3.258
+    },
+    {
+      "name": "History",
+      "count": 26,
+      "mean_rating": 3.788
+    },
+    {
+      "name": "War",
+      "count": 19,
+      "mean_rating": 3.974
+    },
+    {
+      "name": "Western",
+      "count": 10,
+      "mean_rating": 3.7
+    },
+    {
+      "name": "Music",
+      "count": 10,
+      "mean_rating": 3.7
+    }
+  ],
+  "top_actors_by_count": [
+    {
+      "name": "Adam Sandler",
+      "count": 16,
+      "mean_rating": 2.312
+    },
+    {
+      "name": "Tom Cruise",
+      "count": 14,
+      "mean_rating": 3.786
+    },
+    {
+      "name": "Robert Downey Jr.",
+      "count": 13,
+      "mean_rating": 3.577
+    },
+    {
+      "name": "Leonardo DiCaprio",
+      "count": 13,
+      "mean_rating": 4.192
+    },
+    {
+      "name": "Mark Ruffalo",
+      "count": 13,
+      "mean_rating": 3.846
+    },
+    {
+      "name": "Ryan Gosling",
+      "count": 13,
+      "mean_rating": 4.0
+    },
+    {
+      "name": "Hugh Jackman",
+      "count": 12,
+      "mean_rating": 3.333
+    },
+    {
+      "name": "Chris Evans",
+      "count": 12,
+      "mean_rating": 3.583
+    },
+    {
+      "name": "Tom Hanks",
+      "count": 12,
+      "mean_rating": 4.167
+    },
+    {
+      "name": "Ben Stiller",
+      "count": 12,
+      "mean_rating": 3.125
+    },
+    {
+      "name": "Josh Brolin",
+      "count": 11,
+      "mean_rating": 3.955
+    },
+    {
+      "name": "Scarlett Johansson",
+      "count": 11,
+      "mean_rating": 3.318
+    },
+    {
+      "name": "Willem Dafoe",
+      "count": 11,
+      "mean_rating": 3.545
+    },
+    {
+      "name": "Steve Carell",
+      "count": 11,
+      "mean_rating": 3.364
+    },
+    {
+      "name": "Harrison Ford",
+      "count": 10,
+      "mean_rating": 4.4
+    }
+  ],
+  "top_actors_by_rating": [
+    {
+      "name": "Don Rickles",
+      "count": 3,
+      "mean_rating": 4.667
+    },
+    {
+      "name": "Christoph Waltz",
+      "count": 3,
+      "mean_rating": 4.5
+    },
+    {
+      "name": "Harrison Ford",
+      "count": 10,
+      "mean_rating": 4.4
+    },
+    {
+      "name": "Martin Sheen",
+      "count": 4,
+      "mean_rating": 4.375
+    },
+    {
+      "name": "Miles Teller",
+      "count": 3,
+      "mean_rating": 4.333
+    },
+    {
+      "name": "Brian Tyree Henry",
+      "count": 3,
+      "mean_rating": 4.333
+    },
+    {
+      "name": "James Stewart",
+      "count": 3,
+      "mean_rating": 4.333
+    },
+    {
+      "name": "Michael J. Fox",
+      "count": 3,
+      "mean_rating": 4.333
+    },
+    {
+      "name": "Lea Thompson",
+      "count": 3,
+      "mean_rating": 4.333
+    },
+    {
+      "name": "Sean Penn",
+      "count": 3,
+      "mean_rating": 4.333
+    },
+    {
+      "name": "Jeremy Renner",
+      "count": 3,
+      "mean_rating": 4.333
+    },
+    {
+      "name": "Viggo Mortensen",
+      "count": 3,
+      "mean_rating": 4.333
+    },
+    {
+      "name": "Yuriko Ishida",
+      "count": 3,
+      "mean_rating": 4.333
+    },
+    {
+      "name": "Michael Gambon",
+      "count": 3,
+      "mean_rating": 4.333
+    },
+    {
+      "name": "Hailee Steinfeld",
+      "count": 4,
+      "mean_rating": 4.25
+    }
+  ],
+  "director_analysis": [
+    {
+      "name": "Denis Villeneuve",
+      "count": 6,
+      "mean_rating": 4.917
+    },
+    {
+      "name": "Lee Unkrich",
+      "count": 2,
+      "mean_rating": 4.75
+    },
+    {
+      "name": "Peter Weir",
+      "count": 2,
+      "mean_rating": 4.5
+    },
+    {
+      "name": "John Carpenter",
+      "count": 2,
+      "mean_rating": 4.5
+    },
+    {
+      "name": "Andrew Adamson",
+      "count": 2,
+      "mean_rating": 4.5
+    },
+    {
+      "name": "Quentin Tarantino",
+      "count": 7,
+      "mean_rating": 4.429
+    },
+    {
+      "name": "Christopher Nolan",
+      "count": 11,
+      "mean_rating": 4.409
+    },
+    {
+      "name": "Hayao Miyazaki",
+      "count": 9,
+      "mean_rating": 4.389
+    },
+    {
+      "name": "Ridley Scott",
+      "count": 4,
+      "mean_rating": 4.375
+    },
+    {
+      "name": "Damien Chazelle",
+      "count": 4,
+      "mean_rating": 4.375
+    },
+    {
+      "name": "Peter Jackson",
+      "count": 3,
+      "mean_rating": 4.333
+    },
+    {
+      "name": "Martin Scorsese",
+      "count": 7,
+      "mean_rating": 4.286
+    },
+    {
+      "name": "Stanley Kubrick",
+      "count": 4,
+      "mean_rating": 4.25
+    },
+    {
+      "name": "Christopher McQuarrie",
+      "count": 4,
+      "mean_rating": 4.25
+    },
+    {
+      "name": "Joseph Kosinski",
+      "count": 2,
+      "mean_rating": 4.25
+    }
+  ],
+  "runtime_buckets": [
+    {
+      "bucket": "<90 min",
+      "count": 48,
+      "mean_rating": 3.0
+    },
+    {
+      "bucket": "90–120 min",
+      "count": 374,
+      "mean_rating": 3.1
+    },
+    {
+      "bucket": "120–150 min",
+      "count": 206,
+      "mean_rating": 3.631
+    },
+    {
+      "bucket": "150+ min",
+      "count": 61,
+      "mean_rating": 4.082
+    }
+  ],
+  "language_breakdown": [
+    {
+      "language": "English",
+      "count": 657,
+      "mean_rating": 3.319
+    },
+    {
+      "language": "Japanese",
+      "count": 23,
+      "mean_rating": 3.804
+    },
+    {
+      "language": "Italian",
+      "count": 3,
+      "mean_rating": 4.167
+    },
+    {
+      "language": "German",
+      "count": 1,
+      "mean_rating": 3.5
+    },
+    {
+      "language": "Spanish",
+      "count": 1,
+      "mean_rating": 1.5
+    },
+    {
+      "language": "French",
+      "count": 1,
+      "mean_rating": 4.0
+    },
+    {
+      "language": "Mandarin",
+      "count": 1,
+      "mean_rating": 2.5
+    },
+    {
+      "language": "CN",
+      "count": 1,
+      "mean_rating": 4.5
+    },
+    {
+      "language": "Portuguese",
+      "count": 1,
+      "mean_rating": 4.0
+    }
+  ]
+}
