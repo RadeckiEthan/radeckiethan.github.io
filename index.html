@@ -370,7 +370,7 @@ const data = {
     overview:"A fully custom data pipeline and analytics report built on my personal Letterboxd export data. The project covers 689 rated films and 255 written reviews, pulling genre, director, actor, budget, and runtime metadata from the TMDB API to power both descriptive analysis and two separate machine learning approaches. The report is deployed as a static page on GitHub Pages with all charts rendered via Chart.js.",
     pts:[
       "Built a three-stage local Python pipeline: Letterboxd CSV processing, NLP and ML analysis, and TMDB API enrichment via a cached 689-film metadata store",
-      "Trained an NLP model using TF-IDF text vectors and VADER sentiment scores with Ridge Regression and 3-class Logistic Regression on an 80/20 train/test split, achieving 64.7% test accuracy versus a 33% random baseline",
+      "Trained an NLP model using TF-IDF text vectors and VADER sentiment scores with Ridge Regression and 3-class Logistic Regression on an 80/20 train/test split, achieving 64.7% test accuracy versus a 48% majority class baseline",
       "Built a second structured feature model using genre, director, cast, runtime, budget, revenue, and TMDB crowd ratings to compare objective film properties against personal review text as rating predictors",
       "Discovered that removing TMDB vote average from the structured model collapses R² from 0.45 to near zero, showing that genre, director, and cast alone explain almost nothing about personal taste",
       "Designed a genre scatter plot with dynamically shaded rating bands, a dual-axis release year timeline spanning the full history of rated films, and interactive confusion matrices with per-film hover tooltips on misclassified cells",
