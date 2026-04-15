@@ -463,11 +463,18 @@ const data = {
   },
   p4:{
     title:"NBA Roster Construction & Salary Optimization",
-    sub:"Sports Economics · R · Python · OLS Regression",
-    overview:"A senior thesis-level data science project analyzing over 3,100 NBA player-seasons to answer a core front-office question: how do teams build competitive rosters while operating under salary cap constraints? The project identifies which performance metrics command the highest financial returns and benchmarks team strategies over time.",
-    pts:["Collected and integrated 3,100+ player-seasons from basketball-reference and salary databases","Applied OLS regression in R and Python to model salary as a function of performance metrics","Identified statistically significant predictors of salary and market inefficiencies","Delivered actionable roster construction benchmarks for cap-constrained team building"],
-    stack:"R, Python, OLS Regression, Pandas, ggplot2, Tableau",
-    gh:"#", report:"reports/nba.html", demo:""
+    sub:"Senior Thesis · Sport Analytics · Syracuse University · Dr. Rodney Paul · May 2025",
+    overview:"This paper explores the multifaceted relationship between NBA player statistics, contract valuation, and the league's evolving salary cap structure. Drawing from 3,176 player-seasons and 420 team rosters across 14 seasons (2011-2025), three OLS regression models evaluate how individual player traits influence salary share, which team playstyle indicators correlate with win percentage, and whether offensive or defensive performance matters more for team success.",
+    pts:[
+      "Age and offensive production are the strongest predictors of salary share, with each additional point per game associated with a 0.571% increase and each assist per game a 0.535% increase in team salary share",
+      "A point guard in the 2020-2025 era is expected to earn 3.159% more of a team's salary cap than a center in the 2011-2015 era, quantifying the league-wide shift toward offensive-minded guards",
+      "The team playstyle model explains 91.3% of win percentage variance, finding that limiting turnovers (4.3pp decrease per unit) is more impactful than forcing them (3.1pp increase), highlighting ball security over defensive aggression",
+      "Three-point shooting volume and accuracy are not statistically significant predictors of year-to-year team success, despite the league's widespread adoption of the strategy",
+      "The offense vs defense model explains 93.3% of win percentage variance and finds that net defensive rating (2.896% improvement per unit) slightly outperforms net offensive rating (2.872%) in predicting team success",
+      "Pre-model visualizations across all 30 franchises over 14 seasons surface distinct team-building philosophies, from the Clippers' veteran-heavy consistency to OKC's draft-and-develop cycle to the Spurs' post-Kawhi rebuild"
+    ],
+    stack:"R, Python, OLS Regression, Tableau, Basketball-Reference, RealGM, ggplot2",
+    gh:"#", report:"reports/nba-roster-construction.html", demo:""
   },
   p5:{
     title:"Decoupling of U.S. Housing Markets from Economic Fundamentals",
