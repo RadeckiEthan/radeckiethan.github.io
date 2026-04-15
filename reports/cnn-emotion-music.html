@@ -27,9 +27,9 @@
 .arch-step .step-title { font-size:0.9rem; font-weight:700; color:var(--text); margin-bottom:0.3rem; }
 .arch-step p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
 
-.pipeline-steps { counter-reset:pipeline; display:flex; flex-direction:column; gap:0.75rem; margin:1.5rem 0; }
-.pipeline-step { display:flex; gap:1rem; align-items:flex-start; padding:1rem 1.25rem; }
-.pipeline-step::before { counter-increment:pipeline; content:counter(pipeline); min-width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; font-size:0.78rem; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:0.1rem; }
+.pipeline-steps { display:flex; flex-direction:column; gap:0.75rem; margin:1.5rem 0; }
+.pipeline-step { display:flex; gap:1.1rem; align-items:flex-start; padding:1rem 1.25rem; }
+.pipeline-step .ps-num { min-width:36px; height:36px; border-radius:8px; background:linear-gradient(145deg,var(--accent),var(--accent2)); color:#fff; font-size:0.95rem; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 4px 12px rgba(var(--accent-rgb),0.35),inset 0 1px 0 rgba(255,255,255,0.25); letter-spacing:-0.02em; }
 .pipeline-step .ps-title { font-size:0.88rem; font-weight:700; color:var(--text); margin-bottom:0.2rem; }
 .pipeline-step p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
 
@@ -227,36 +227,42 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
     <p style="color:var(--muted); line-height:1.8; margin-top:1.25rem;">The full system pipeline from webcam capture to song recommendation follows six steps:</p>
     <div class="pipeline-steps">
       <div class="glass pipeline-step">
+        <div class="ps-num">1</div>
         <div>
           <div class="ps-title">Webcam Capture</div>
           <p>The program captures a frame from the user's webcam after a brief initialization period.</p>
         </div>
       </div>
       <div class="glass pipeline-step">
+        <div class="ps-num">2</div>
         <div>
           <div class="ps-title">Face Detection</div>
           <p>The face is detected using a Haar Cascade, cropped, converted to grayscale, resized to 48x48 pixels, and normalized for the model.</p>
         </div>
       </div>
       <div class="glass pipeline-step">
+        <div class="ps-num">3</div>
         <div>
           <div class="ps-title">Emotion Classification</div>
           <p>The preprocessed image is fed into the CNN trained on FER-2013, predicting one of seven emotions: Angry, Disgust, Fear, Happy, Sad, Surprise, or Neutral.</p>
         </div>
       </div>
       <div class="glass pipeline-step">
+        <div class="ps-num">4</div>
         <div>
           <div class="ps-title">Emotion-to-Valence Mapping</div>
           <p>Each emotion is mapped to a valence range (0-1) representing positive or negative musical mood.</p>
         </div>
       </div>
       <div class="glass pipeline-step">
+        <div class="ps-num">5</div>
         <div>
           <div class="ps-title">Song Filtering</div>
           <p>Songs from the Spotify dataset are filtered to match the valence range of the predicted emotion.</p>
         </div>
       </div>
       <div class="glass pipeline-step">
+        <div class="ps-num">6</div>
         <div>
           <div class="ps-title">Recommendation</div>
           <p>One song is randomly selected from the filtered list and presented to the user with title, artist, and valence score.</p>
