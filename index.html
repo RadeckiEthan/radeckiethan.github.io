@@ -10,6 +10,8 @@
 .p-visual-housing::before { content:'';position:absolute;inset:0;background:repeating-linear-gradient(120deg,transparent,transparent 10px,rgba(74,127,168,0.05) 10px,rgba(74,127,168,0.05) 11px); }
 .p-visual-cnn { background:linear-gradient(135deg,rgba(160,80,140,0.13),rgba(74,127,168,0.12)); }
 .p-visual-cnn::before { content:'';position:absolute;inset:0;background:radial-gradient(circle at 25% 50%,rgba(160,80,140,0.08) 0%,transparent 55%),radial-gradient(circle at 75% 50%,rgba(74,127,168,0.08) 0%,transparent 55%); }
+.p-visual-sentiment { background:linear-gradient(135deg,rgba(180,60,60,0.12),rgba(74,127,168,0.12)); }
+.p-visual-sentiment::before { content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 10px,rgba(180,60,60,0.04) 10px,rgba(180,60,60,0.04) 11px); }
 </style>
 </head>
 <body>
@@ -163,29 +165,31 @@
       <button class="view-btn">View Project →</button>
     </div>
 
-    <!-- 5: Movie Review Sentiment (placeholder p7 until paper is added) -->
+    <!-- 5: Movie Review Sentiment -->
     <div class="project-card glass" onclick="openProj('p7')">
       <div class="p-top-bar"></div>
-      <div class="p-visual p-visual-esg">
+      <div class="p-visual p-visual-sentiment">
         <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="8" width="28" height="20" rx="2" stroke="rgba(74,140,100,0.6)" stroke-width="1.5"/>
-          <rect x="4" y="8" width="5" height="20" fill="rgba(74,140,100,0.08)" stroke="rgba(74,140,100,0.25)" stroke-width="1"/>
-          <rect x="27" y="8" width="5" height="20" fill="rgba(74,140,100,0.08)" stroke="rgba(74,140,100,0.25)" stroke-width="1"/>
-          <line x1="4" y1="13" x2="9" y2="13" stroke="rgba(74,140,100,0.4)" stroke-width="1"/>
-          <line x1="4" y1="18" x2="9" y2="18" stroke="rgba(74,140,100,0.4)" stroke-width="1"/>
-          <line x1="4" y1="23" x2="9" y2="23" stroke="rgba(74,140,100,0.4)" stroke-width="1"/>
-          <line x1="27" y1="13" x2="32" y2="13" stroke="rgba(74,140,100,0.4)" stroke-width="1"/>
-          <line x1="27" y1="18" x2="32" y2="18" stroke="rgba(74,140,100,0.4)" stroke-width="1"/>
-          <line x1="27" y1="23" x2="32" y2="23" stroke="rgba(74,140,100,0.4)" stroke-width="1"/>
-          <path d="M12 15 Q18 13 24 15" stroke="rgba(74,140,100,0.8)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-          <path d="M12 19 Q18 21 24 19" stroke="rgba(74,127,168,0.8)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-          <circle cx="11" cy="15" r="1.2" fill="rgba(74,140,100,0.8)"/>
-          <circle cx="11" cy="19" r="1.2" fill="rgba(74,127,168,0.8)"/>
+          <!-- Film strip -->
+          <rect x="3" y="10" width="30" height="16" rx="2" stroke="rgba(180,60,60,0.55)" stroke-width="1.3" fill="rgba(180,60,60,0.05)"/>
+          <rect x="3" y="10" width="4.5" height="16" fill="rgba(180,60,60,0.1)" stroke="rgba(180,60,60,0.3)" stroke-width="0.8"/>
+          <rect x="28.5" y="10" width="4.5" height="16" fill="rgba(180,60,60,0.1)" stroke="rgba(180,60,60,0.3)" stroke-width="0.8"/>
+          <line x1="3" y1="14" x2="7.5" y2="14" stroke="rgba(180,60,60,0.4)" stroke-width="0.8"/>
+          <line x1="3" y1="18" x2="7.5" y2="18" stroke="rgba(180,60,60,0.4)" stroke-width="0.8"/>
+          <line x1="3" y1="22" x2="7.5" y2="22" stroke="rgba(180,60,60,0.4)" stroke-width="0.8"/>
+          <line x1="28.5" y1="14" x2="33" y2="14" stroke="rgba(180,60,60,0.4)" stroke-width="0.8"/>
+          <line x1="28.5" y1="18" x2="33" y2="18" stroke="rgba(180,60,60,0.4)" stroke-width="0.8"/>
+          <line x1="28.5" y1="22" x2="33" y2="22" stroke="rgba(180,60,60,0.4)" stroke-width="0.8"/>
+          <!-- Sentiment bar -->
+          <rect x="9" y="14" width="4" height="8" rx="1" fill="rgba(180,60,60,0.6)"/>
+          <rect x="14" y="15" width="4" height="6" rx="1" fill="rgba(200,120,60,0.6)"/>
+          <rect x="19" y="14.5" width="4" height="7" rx="1" fill="rgba(74,127,168,0.6)"/>
+          <rect x="24" y="13" width="4" height="9" rx="1" fill="rgba(74,160,100,0.7)"/>
         </svg>
       </div>
       <h3>Movie Review Sentiment Analysis</h3>
-      <p>Coming soon.</p>
-      <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Sentiment Analysis</span></div>
+      <p>Fine-grained five-class sentiment classification on Rotten Tomatoes reviews using bag-of-words, sentiment lexicons, and custom negation features, achieving 58.1% accuracy and a 7.7% improvement over the baseline.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">NLTK</span><span class="tag">scikit-learn</span><span class="tag">NLP</span><span class="tag">Logistic Regression</span></div>
       <button class="view-btn">View Project →</button>
     </div>
 
@@ -497,11 +501,18 @@ const data = {
   },
   p7:{
     title:"Movie Review Sentiment Analysis",
-    sub:"Coming soon",
-    overview:"Coming soon.",
-    pts:[],
-    stack:"",
-    gh:"#", report:"", demo:""
+    sub:"IST 664 Natural Language Processing · Syracuse University · December 2025",
+    overview:"This project analyzes sentiment analysis on thousands of movie reviews from Rotten Tomatoes, with the goal of automatically predicting sentiment across five categories from positive to negative. Rather than simple binary classification, this project tackles the more challenging task of fine-grained sentiment classification, distinguishing between five distinct levels of sentiment. Through progressive experimentation with preprocessing strategies, feature combinations, and classifiers, the best model achieved 58.1% accuracy and 55.3% F-1 score, representing a 7.7% improvement from the baseline.",
+    pts:[
+      "Implemented and compared three feature engineering approaches: bag-of-words using the 2,000 most frequent words with binary presence features, sentiment lexicons drawn from LIWC (405 positive, 499 negative words) and the Subjectivity Lexicon (2,718 positive, 4,912 negative words), and custom negation handling features tracking words within negation scope",
+      "The best feature combination was bag-of-words, sentiment lexicons, and negation features under minimal preprocessing, achieving 55.6% accuracy and 54.6% F-1 before classifier optimization",
+      "POS tag features decreased rather than improved performance, suggesting grammatical structure is less informative than lexical content for sentiment, and stacking POS with negation did not recover the lost performance",
+      "Minimal preprocessing outperformed full preprocessing for complex models, contradicting the common practice of aggressive text cleaning and suggesting stopwords and punctuation carry sentiment signal",
+      "Logistic Regression and SVM outperformed Naive Bayes by +2.3% accuracy and +2.5% F-1, validating findings from Pang et al. (2002) on classifier effectiveness for sentiment tasks",
+      "Final Logistic Regression model with minimal preprocessing achieved 58.1% accuracy and 55.3% F-1 across 10-fold cross-validation on 10,000 samples, versus 14.3% expected from random chance across 5 classes"
+    ],
+    stack:"Python, NLTK, scikit-learn, Logistic Regression, SVM, Naive Bayes, LIWC, Subjectivity Lexicon, Rotten Tomatoes Dataset",
+    gh:"#", report:"reports/movie-review-sentiment.html", demo:""
   }
 };
 
