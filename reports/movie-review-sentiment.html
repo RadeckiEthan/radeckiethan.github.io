@@ -238,7 +238,7 @@
       Since bag-of-words was the only feature within this model, the evaluation metrics were relatively low, but that is expected with a multi-class classification task. Full preprocessing works better in this experiment, as this is the most simple of all the experiments within this paper.
     </p>
     <div class="fig-wrap">
-      <img src="assets/bow_mr_sentiment.png" alt="Bag of Words experiment results" class="fig-img" onclick="openLightbox(this)">
+      <img src="assets/bow_mr_sentiment.jpg" alt="Bag of Words experiment results" class="fig-img" onclick="openLightbox(this)">
       <p class="fig-caption">Figure 1. Bag of Words baseline results. Full preprocessing outperforms minimal at this stage, with F-1 scores of 45.60% vs 42.50%.</p>
     </div>
 
@@ -248,7 +248,7 @@
       This model removed bag-of-words features and evaluated sentiment lexicon features alone. Accuracy and recall decreased from the first model, but precision and F-1 took a big step up, which makes sense since the sentiment lexicons are better suited for identifying nuances within the phrases and correctly classifying all classes rather than just the extreme or neutral phrases.
     </p>
     <div class="fig-wrap">
-      <img src="assets/sl_mr_sentiment.png" alt="Sentiment Lexicons experiment results" class="fig-img" onclick="openLightbox(this)">
+      <img src="assets/sl_mr_sentiment.jpg" alt="Sentiment Lexicons experiment results" class="fig-img" onclick="openLightbox(this)">
       <p class="fig-caption">Figure 2. Sentiment Lexicons only results. Precision and F-1 improve over BoW despite lower accuracy, showing the lexicons capture nuance that raw word counts miss.</p>
     </div>
 
@@ -258,7 +258,7 @@
       Combining the bag-of-words and sentiment lexicon features produced decent improvement from the individual models, emphasizing that these two feature types stack well within sentiment analysis. The F-1 score jumped to 54.2% for full preprocessing, with the previous high being 49.5%. It is also interesting to note that minimal and full preprocessing models are performing similarly at this point.
     </p>
     <div class="fig-wrap">
-      <img src="assets/bow_sl_mr_sentiment.png" alt="BoW + Sentiment Lexicons combined results" class="fig-img" onclick="openLightbox(this)">
+      <img src="assets/bow_sl_mr_sentiment.jpg" alt="BoW + Sentiment Lexicons combined results" class="fig-img" onclick="openLightbox(this)">
       <p class="fig-caption">Figure 3. BoW + Sentiment Lexicons combined. F-1 jumps to 54.2%, confirming these two feature types stack well for sentiment analysis.</p>
     </div>
 
@@ -268,7 +268,7 @@
       Adding custom negation features to the baseline performed better, showing that negation is an important feature for sentiment analysis. Minimal preprocessing performed better than full preprocessing across the board for the first time, hinting that more complex models benefit from less preprocessing.
     </p>
     <div class="fig-wrap">
-      <img src="assets/bow_sl_negation_mr_sentiment.png" alt="BoW + Sentiment Lexicons + Negation results" class="fig-img" onclick="openLightbox(this)">
+      <img src="assets/bow_sl_negation_mr_sentiment.jpg" alt="BoW + Sentiment Lexicons + Negation results" class="fig-img" onclick="openLightbox(this)">
       <p class="fig-caption">Figure 4. BoW + Sentiment Lexicons + Negation. Best feature model so far, with minimal preprocessing outperforming full for the first time (+0.9% accuracy, +1.0% F-1 over BoW + SL).</p>
     </div>
 
@@ -279,11 +279,11 @@
     </p>
     <div class="fig-grid">
       <div class="fig-wrap" style="margin:0;">
-        <img src="assets/bow_sl_pos_mr_sentiment.png" alt="BoW + SL + POS results" class="fig-img" onclick="openLightbox(this)">
+        <img src="assets/bow_sl_pos_mr_sentiment.jpg" alt="BoW + SL + POS results" class="fig-img" onclick="openLightbox(this)">
         <p class="fig-caption">Figure 5. BoW + SL + POS Tags. Performance drops compared to negation model, suggesting grammatical structure is less informative than lexical content for sentiment.</p>
       </div>
       <div class="fig-wrap" style="margin:0;">
-        <img src="assets/all_mr_sentiment.png" alt="All features combined results" class="fig-img" onclick="openLightbox(this)">
+        <img src="assets/all_mr_sentiment.jpg" alt="All features combined results" class="fig-img" onclick="openLightbox(this)">
         <p class="fig-caption">Figure 6. All features combined. Stacking POS with negation does not improve over negation alone, confirming POS tags add noise rather than signal.</p>
       </div>
     </div>
@@ -294,7 +294,7 @@
       All three classifiers were evaluated on the best feature combination (BoW, sentiment lexicons, and negation features) across minimal and full preprocessing on 10,000 samples. Minimal preprocessing clearly works better for these complex classifiers and Logistic Regression and SVM are better for multi-class classification than Naive Bayes. The best configuration identified was Logistic Regression with minimal preprocessing, achieving 58.1% accuracy and 55.3% F-1.
     </p>
     <div class="fig-wrap">
-      <img src="assets/log_scikit_mr_sentiment.png" alt="Classifier comparison results across Naive Bayes, Logistic Regression, and SVM" class="fig-img" onclick="openLightbox(this)">
+      <img src="assets/log_scikit_mr_sentiment.jpg" alt="Classifier comparison results across Naive Bayes, Logistic Regression, and SVM" class="fig-img" onclick="openLightbox(this)">
       <p class="fig-caption">Figure 7. Classifier comparison on the best feature set. Logistic Regression and SVM outperform Naive Bayes by +2.3% accuracy and +2.5% F-1 under minimal preprocessing.</p>
     </div>
 
@@ -304,7 +304,7 @@
       The full progression from baseline to final model under minimal preprocessing shows consistent improvement with each meaningful feature addition, with POS tags being the one feature that did not contribute positively.
     </p>
     <div class="fig-wrap">
-      <img src="assets/results_mr_sentiment.png" alt="Summary table showing full model progression from baseline to final" class="fig-img" onclick="openLightbox(this)">
+      <img src="assets/results_mr_sentiment.jpg" alt="Summary table showing full model progression from baseline to final" class="fig-img" onclick="openLightbox(this)">
       <p class="fig-caption">Figure 8. Full results summary. Total improvement of 7.7% accuracy and 12.8% F-1 from the BoW baseline to the final Logistic Regression model under minimal preprocessing.</p>
     </div>
 
