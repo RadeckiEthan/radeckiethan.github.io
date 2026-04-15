@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emotion to Music Recommender | Ethan Radecki</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+/* REPORT-ONLY STYLES */
+.stat-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin:1.75rem 0; }
+.stat-box { padding:1.25rem 1rem; text-align:center; }
+.stat-box .s-num { font-size:1.9rem; font-weight:900; color:var(--accent); line-height:1; letter-spacing:-0.03em; margin-bottom:0.3rem; }
+.stat-box .s-label { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); font-weight:600; }
+
+.emotion-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0.75rem; margin:1.5rem 0; }
+.emotion-card { padding:1rem; text-align:center; border-radius:var(--radius); }
+.emotion-card .e-name { font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:0.25rem; }
+.emotion-card .e-acc { font-size:1.3rem; font-weight:900; color:var(--accent); line-height:1; }
+.emotion-card .e-valence { font-size:0.72rem; color:var(--muted); margin-top:0.3rem; font-family:'Courier New', monospace; }
+.emotion-card.high .e-acc { color:#27ae60; }
+.emotion-card.mid .e-acc { color:#e67e22; }
+.emotion-card.low .e-acc { color:#c0392b; }
+
+.arch-steps { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin:1.5rem 0; }
+.arch-step { padding:1.1rem 1.25rem; }
+.arch-step .step-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent); font-weight:700; margin-bottom:0.35rem; }
+.arch-step .step-title { font-size:0.9rem; font-weight:700; color:var(--text); margin-bottom:0.3rem; }
+.arch-step p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+
+.pipeline-steps { counter-reset:pipeline; display:flex; flex-direction:column; gap:0.75rem; margin:1.5rem 0; }
+.pipeline-step { display:flex; gap:1rem; align-items:flex-start; padding:1rem 1.25rem; }
+.pipeline-step::before { counter-increment:pipeline; content:counter(pipeline); min-width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; font-size:0.78rem; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:0.1rem; }
+.pipeline-step .ps-title { font-size:0.88rem; font-weight:700; color:var(--text); margin-bottom:0.2rem; }
+.pipeline-step p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+
+.fig-wrap { margin:2rem 0; }
+.fig-img { width:100%; border-radius:var(--radius); box-shadow:0 8px 32px rgba(0,0,0,0.1); display:block; cursor:zoom-in; transition:transform 0.2s; }
+.fig-img:hover { transform:scale(1.01); }
+.fig-caption { font-size:0.8rem; color:var(--muted); margin-top:0.65rem; font-style:italic; text-align:center; }
+.fig-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin:2rem 0; }
+
+.lightbox-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:999; display:none; align-items:center; justify-content:center; cursor:zoom-out; padding:1.5rem; }
+.lightbox-overlay.open { display:flex; }
+.lightbox-overlay img { max-width:90vw; max-height:90vh; border-radius:12px; box-shadow:0 24px 80px rgba(0,0,0,0.5); object-fit:contain; }
+
+.callout-box { padding:1.25rem 1.5rem; margin:1.5rem 0; border-left:3px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0; }
+.callout-box .cb-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent); font-weight:700; margin-bottom:0.5rem; }
+.callout-box p { font-size:0.9rem; color:var(--muted); line-height:1.7; }
+
+code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 0.4em; border-radius:4px; font-family:'Courier New', monospace; }
+
+.stack-tags { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.75rem; }
+.stack-tag { background:rgba(var(--accent-rgb),0.08); border:1px solid rgba(var(--accent-rgb),0.2); color:var(--accent); border-radius:20px; padding:0.25rem 0.75rem; font-size:0.78rem; font-weight:600; }
+
+.report-footer { margin-top:4rem; padding-top:2rem; border-top:1px solid var(--border-dim); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+.report-footer p { font-size:0.78rem; color:var(--muted); }
+
+@media(max-width:768px){
+  nav { padding:0.9rem 1.2rem; }
+  .report-wrap { padding:6rem 1.25rem 4rem; }
+  .stat-row { grid-template-columns:repeat(2,1fr); }
+  .emotion-grid { grid-template-columns:repeat(2,1fr); }
+  .arch-steps { grid-template-columns:1fr; }
+  .fig-grid { grid-template-columns:1fr; }
+  .report-footer { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-wrap">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<div class="content">
+<nav class="glass" style="border-radius:0;">
+  <a href="../index.html" class="nav-logo">ER.</a>
+  <a href="../index.html#projects" class="nav-back">← Back to Projects</a>
+</nav>
+
+<div class="report-wrap">
+
+  <!-- HEADER -->
+  <div class="report-header">
+    <div class="report-tag">Course Project</div>
+    <h1>Emotion to Music Recommender<br><span>Using CNNs and OpenCV</span></h1>
+    <div class="report-meta">
+      <span class="meta-item"><span class="meta-dot"></span>Group Project</span>
+      <span class="meta-item"><span class="meta-dot"></span>Syracuse University</span>
+      <span class="meta-item"><span class="meta-dot"></span>Arya Patil, Caden Lippie, Ethan Radecki</span>
+      <span class="meta-item"><span class="meta-dot"></span>Complete</span>
+    </div>
+    <p class="report-summary">
+      This project integrates facial emotion recognition with Spotify audio features to generate dynamic, emotion-aware music recommendations by analyzing a user's facial expression through a webcam and mapping the detected emotion through a CNN to a valence score range. The system recommends songs that better match the user's mood in real time, delivering more personalized and context-aware music suggestions.
+    </p>
+    <div class="stack-tags">
+      <span class="stack-tag">Python</span>
+      <span class="stack-tag">TensorFlow / Keras</span>
+      <span class="stack-tag">CNN</span>
+      <span class="stack-tag">OpenCV</span>
+      <span class="stack-tag">FER-2013</span>
+      <span class="stack-tag">Spotify API</span>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- POSTER -->
+  <section>
+    <div class="section-label">Project Poster</div>
+    <div class="fig-wrap" style="margin-top:0.75rem;">
+      <img src="assets/emotion_poster.png"
+           alt="Emotion-Driven Music Recommendation project poster"
+           class="fig-img" onclick="openLightbox(this)">
+      <p class="fig-caption">Project poster summarizing the problem statement, system pipeline, model architecture, and results.</p>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- OVERVIEW -->
+  <section>
+    <div class="section-label">Project Overview</div>
+    <h2 class="section-title">Addressing the Gap in Real-Time Contextual Understanding</h2>
+
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
+      Current music recommendation systems rely heavily on users' historical listening patterns and collaborative filtering methods. While effective, these approaches lack real-time contextual understanding, particularly emotional feedback. To address this gap, this project integrates facial emotion recognition (FER) with Spotify audio features to generate dynamic, emotion-aware music recommendations.
+    </p>
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
+      The focus is on the use of convolutional neural networks to classify images of faces into seven different emotions. This classification task requires a convolutional neural network architecture to be designed and trained on the FER 2013 dataset. Overall, the model was estimated to be able to predict the correct emotion 60-70% of the time and thus be able to recommend a song in the accurate emotional valence.
+    </p>
+
+    <div class="stat-row">
+      <div class="glass stat-box">
+        <div class="s-num">35,887</div>
+        <div class="s-label">Training Images</div>
+      </div>
+      <div class="glass stat-box">
+        <div class="s-num">7</div>
+        <div class="s-label">Emotion Classes</div>
+      </div>
+      <div class="glass stat-box">
+        <div class="s-num">47%</div>
+        <div class="s-label">Validation Accuracy</div>
+      </div>
+      <div class="glass stat-box">
+        <div class="s-num">14.3%</div>
+        <div class="s-label">Random Chance Baseline</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- DATA -->
+  <section>
+    <div class="section-label">Data Exploration</div>
+    <h2 class="section-title">FER-2013 Dataset</h2>
+
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1.25rem;">
+      The data used for this project is the FER-2013 dataset from Kaggle. This data contains a total of 35,887 48x48 pixel grayscale images of faces, organized in seven folders labeled by emotion and split into training and testing folders, with 7,178 images in the test folder and 28,709 in the train folder.
+    </p>
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1.25rem;">
+      The data is a little unbalanced, with happy, neutral, and sad having more images than emotions like disgust. The disproportional amount of images labeled as disgust means the model might struggle to predict disgust relative to the other emotions. Additionally, it would be expected to see happiness predicted correctly more successfully since it encompasses 25% of the data. The images are centered on faces and are similarly zoomed in, which should allow the model to focus more on facial features and less on the environment.
+    </p>
+
+    <div class="fig-wrap">
+      <img src="assets/emotions_class_balance.png"
+           alt="Label distribution pie chart across 7 emotion classes"
+           class="fig-img" onclick="openLightbox(this)">
+      <p class="fig-caption">Figure 1. Label distribution across the seven emotion classes in the FER-2013 dataset. Happy dominates at 25.05%, while disgust represents only 1.52% of all images.</p>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- METHODS -->
+  <section>
+    <div class="section-label">Methods</div>
+    <h2 class="section-title">Model Architecture and System Pipeline</h2>
+
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1.25rem;">
+      The model architecture for this project is a 4-block convolutional neural network designed to classify images into 7 classes. The input layer is a 48x48x1 dimension image, meaning the image is square, 48 pixels wide and tall, and grayscale with one channel. The number of filters increases with each block (32, 64, 128, 256), with each filter learning to detect different features. The first Conv2D layers detect simpler features like edges, while the deeper layers detect more complex features.
+    </p>
+
+    <div class="arch-steps">
+      <div class="glass arch-step">
+        <div class="step-label">Blocks 1-3</div>
+        <div class="step-title">Two Conv2D + BatchNorm layers each</div>
+        <p>Each block ends with a max pooling layer and 25% dropout. Batch normalization smooths activations by centering them around zero. Max pooling downsamples feature maps by taking the maximum value in each 2x2 window to prevent overfitting and reduce computation.</p>
+      </div>
+      <div class="glass arch-step">
+        <div class="step-label">Block 4</div>
+        <div class="step-title">Single Conv2D + BatchNorm + MaxPooling</div>
+        <p>256 filters at 3x3 kernel size. ReLU activation functions introduce non-linearity across all Conv2D layers. Zero padding ensures spatial dimensions stay consistent and allows filters to learn features closer to the edges of images.</p>
+      </div>
+      <div class="glass arch-step">
+        <div class="step-label">Dense Layers</div>
+        <div class="step-title">Flatten then two fully connected layers</div>
+        <p>The flatten layer converts 3D feature maps into a 1D vector. The first dense layer has 256 units with ReLU activation and 50% dropout. The final dense layer outputs a probability distribution across the seven classes using softmax activation.</p>
+      </div>
+      <div class="glass arch-step">
+        <div class="step-label">OpenCV Pipeline</div>
+        <div class="step-title">Real-time webcam emotion detection</div>
+        <p>A single frame is captured following a five-second delay. A Haar Cascade classifier detects frontal faces, which are then resized, converted to grayscale, and preprocessed into 48x48 pixel format for input into the pre-trained model.</p>
+      </div>
+    </div>
+
+    <div class="fig-wrap">
+      <img src="assets/cnn_model_diagram.png"
+           alt="CNN model architecture diagram showing 4 blocks, flatten layer, and dense layers"
+           class="fig-img" onclick="openLightbox(this)">
+      <p class="fig-caption">Figure 2. CNN architecture diagram. Four convolutional blocks with increasing filter counts (32, 64, 128, 256) feed into a flatten layer and two dense layers for 7-class emotion prediction.</p>
+    </div>
+
+    <div class="callout-box glass">
+      <div class="cb-label">Valence Mapping</div>
+      <p>The music recommendation aspect uses a valence-based mapping system. Emotions are classified based on valence intervals: Happy (0.70-1.00), Surprise (0.60-0.90), Neutral (0.45-0.65), Fear (0.10-0.30), Sad (0.00-0.25), Angry (0.05-0.25), and Disgust (0.10-0.30). The Spotify dataset is then filtered to songs within the associated range and the song title, artist, and valence score are output to the user.</p>
+    </div>
+
+    <p style="color:var(--muted); line-height:1.8; margin-top:1.25rem;">The full system pipeline from webcam capture to song recommendation follows six steps:</p>
+    <div class="pipeline-steps">
+      <div class="glass pipeline-step">
+        <div>
+          <div class="ps-title">Webcam Capture</div>
+          <p>The program captures a frame from the user's webcam after a brief initialization period.</p>
+        </div>
+      </div>
+      <div class="glass pipeline-step">
+        <div>
+          <div class="ps-title">Face Detection</div>
+          <p>The face is detected using a Haar Cascade, cropped, converted to grayscale, resized to 48x48 pixels, and normalized for the model.</p>
+        </div>
+      </div>
+      <div class="glass pipeline-step">
+        <div>
+          <div class="ps-title">Emotion Classification</div>
+          <p>The preprocessed image is fed into the CNN trained on FER-2013, predicting one of seven emotions: Angry, Disgust, Fear, Happy, Sad, Surprise, or Neutral.</p>
+        </div>
+      </div>
+      <div class="glass pipeline-step">
+        <div>
+          <div class="ps-title">Emotion-to-Valence Mapping</div>
+          <p>Each emotion is mapped to a valence range (0-1) representing positive or negative musical mood.</p>
+        </div>
+      </div>
+      <div class="glass pipeline-step">
+        <div>
+          <div class="ps-title">Song Filtering</div>
+          <p>Songs from the Spotify dataset are filtered to match the valence range of the predicted emotion.</p>
+        </div>
+      </div>
+      <div class="glass pipeline-step">
+        <div>
+          <div class="ps-title">Recommendation</div>
+          <p>One song is randomly selected from the filtered list and presented to the user with title, artist, and valence score.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- RESULTS -->
+  <section>
+    <div class="section-label">Results</div>
+    <h2 class="section-title">Emotion-by-Emotion Accuracy and Model Performance</h2>
+
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1.25rem;">
+      The results show that certain emotions are better classified than others. The most accurately identified emotions were sad and happy, with approximately 80% of tested trials being accurate. Emotions such as anger, neutrality, and surprise showed relatively low to moderate accuracy. Disgust and fear were identified the least, both attaining an accuracy rate of 4%.
+    </p>
+
+    <div class="emotion-grid">
+      <div class="glass emotion-card high">
+        <div class="e-name">Happy</div>
+        <div class="e-acc">80%</div>
+        <div class="e-valence">valence 0.70-1.00</div>
+      </div>
+      <div class="glass emotion-card high">
+        <div class="e-name">Sad</div>
+        <div class="e-acc">80%</div>
+        <div class="e-valence">valence 0.00-0.25</div>
+      </div>
+      <div class="glass emotion-card mid">
+        <div class="e-name">Angry</div>
+        <div class="e-acc">32%</div>
+        <div class="e-valence">valence 0.05-0.25</div>
+      </div>
+      <div class="glass emotion-card mid">
+        <div class="e-name">Neutral</div>
+        <div class="e-acc">36%</div>
+        <div class="e-valence">valence 0.45-0.65</div>
+      </div>
+      <div class="glass emotion-card mid">
+        <div class="e-name">Surprise</div>
+        <div class="e-acc">24%</div>
+        <div class="e-valence">valence 0.60-0.90</div>
+      </div>
+      <div class="glass emotion-card low">
+        <div class="e-name">Fear</div>
+        <div class="e-acc">4%</div>
+        <div class="e-valence">valence 0.10-0.30</div>
+      </div>
+      <div class="glass emotion-card low">
+        <div class="e-name">Disgust</div>
+        <div class="e-acc">4%</div>
+        <div class="e-valence">valence 0.10-0.30</div>
+      </div>
+      <div class="glass emotion-card">
+        <div class="e-name">Overall (live)</div>
+        <div class="e-acc" style="color:var(--accent);">37.1%</div>
+        <div class="e-valence">vs 14.3% random</div>
+      </div>
+    </div>
+
+    <div class="fig-wrap">
+      <img src="assets/emotion_confusion_matrix.png"
+           alt="Validation confusion matrix for FER CNN model, n=25 examples per class"
+           class="fig-img" onclick="openLightbox(this)">
+      <p class="fig-caption">Figure 3. Validation confusion matrix (n=25 per class). Happy and Sad show strong diagonal concentration. Disgust, Fear, and Surprise were frequently misclassified as Sad, reflecting the model's difficulty with nuanced and underrepresented emotion classes.</p>
+    </div>
+
+    <div class="fig-grid">
+      <div class="fig-wrap" style="margin:0;">
+        <img src="assets/cnn_accuracy.png"
+             alt="Training vs validation accuracy over epochs"
+             class="fig-img" onclick="openLightbox(this)">
+        <p class="fig-caption">Figure 4. Training vs validation accuracy. After approximately epochs 14-16, validation accuracy stalls around 46-50% while training accuracy continues climbing toward 76%, indicating overfitting.</p>
+      </div>
+      <div class="fig-wrap" style="margin:0;">
+        <img src="assets/cnn_loss.png"
+             alt="Training vs validation loss over epochs"
+             class="fig-img" onclick="openLightbox(this)">
+        <p class="fig-caption">Figure 5. Training vs validation loss. Validation loss minimizes around epochs 4-10 before worsening, which is why the model exits training around epoch 15 and applies parameters from the best epoch.</p>
+      </div>
+    </div>
+
+    <div class="glass" style="padding:1.5rem 1.75rem; border-left:3px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0;">
+      <div class="section-label" style="margin-bottom:0.5rem;">Model Behavior</div>
+      <p style="font-size:0.92rem; color:var(--muted); line-height:1.75;">
+        The model was able to continue training to a limit of 40 epochs, however after approximately 14-16 the model stalls in terms of validation accuracy, thus not making any reasonable progress and increasing chances for potential overfitting. The final model validation accuracy indicates the model had an overall 46-50% accuracy when trained on the dataset, which is significantly better than leaving it to random chance at 14.3%.
+      </p>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- PROBLEMS -->
+  <section>
+    <div class="section-label">Problems Encountered</div>
+    <h2 class="section-title">Overfitting, Nuanced Emotion Detection, and Dataset Bias</h2>
+
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
+      Overall, the model encountered problems with overfitting, nuanced emotion detection, and emotion detection across different ethnicities. Overfitting was present throughout the development of the model and different numbers of convolutional blocks were tested for the optimum rates of validation accuracy, validation loss, and training accuracy. When initially running the model, the validation accuracy was approximately 0.23, with values of validation loss as high as 3.75. The initial 3-block model was then altered to 4 blocks to try and capture more nuanced emotions such as anger, neutral, and surprise.
+    </p>
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
+      Certain emotions were not as likely to be classified as others, specifically disgust, fear, and surprise. This makes sense as these emotions have similarities to emotions such as sad and anger, which explains the confusion matrix data where these three emotions were often classified as sad (disgust: 12, fear: 13, surprise: 10). While testing the model in real time, the model could not distinguish emotions unless they were very exaggerated, which is not ideal as in reality most people would be displaying emotions on a much less exaggerated scale.
+    </p>
+    <p style="color:var(--muted); line-height:1.8;">
+      This phenomenon is also analogous to the ethnicities presented in the dataset. The fact that the images are black and white makes it harder to distinguish certain features in ethnicities with darker skin complexion. In the future a larger and more inclusive dataset of ethnicities and subtle emotions should be utilized.
+    </p>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- CONCLUSION -->
+  <section>
+    <div class="section-label">Evaluation of Goals</div>
+    <h2 class="section-title">Goals Met, with Room for Improvement</h2>
+
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
+      Overall, the goals of this project were met. The project results did perform suboptimally when taking into context the initial predictions for the model, as a lot of the more nuanced expressions were often not classified correctly. However, the project allowed for a more successful recognition of emotion and music recommendation in a live feed than if it were left to random chance, with approximately 47-50% validation accuracy and 37% on live trials versus 14.3% for random chance.
+    </p>
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
+      The results could likely be optimized by utilizing a pre-existing model designed for facial recognition such as VGG-Face, ResNet50, or MobileNet-V3. Future work could include adding a reinforcement learning model in which genre could be selected more thoroughly through a feedback mechanism of the individual indicating whether they like the song genre or not.
+    </p>
+
+    <div class="glass" style="padding:1.5rem 1.75rem; border-left:3px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0;">
+      <div class="section-label" style="margin-bottom:0.5rem;">Core Finding</div>
+      <p style="font-size:0.95rem; color:var(--muted); line-height:1.8;">
+        The 4-block CNN trained on FER-2013 achieved 46-50% validation accuracy and 37.1% accuracy on live trials, significantly outperforming the 14.3% random chance baseline across 7 emotion classes. The system successfully integrated emotion recognition with Spotify valence mapping to deliver real-time, mood-aware music recommendations, with happy and sad emerging as the strongest performing classes at approximately 80% accuracy each.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="report-footer">
+    <p>Ethan Radecki · Syracuse University · M.S. Applied Data Science</p>
+    <a href="../index.html#projects" class="r-btn secondary">← All Projects</a>
+  </div>
+
+</div>
+</div>
+
+<script>
+function openLightbox(img) {
+  document.getElementById('lightbox-img').src = img.src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
