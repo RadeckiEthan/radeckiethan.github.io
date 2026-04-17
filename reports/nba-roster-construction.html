@@ -47,6 +47,12 @@
 .report-footer { margin-top:4rem; padding-top:2rem; border-top:1px solid var(--border-dim); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
 .report-footer p { font-size:0.78rem; color:var(--muted); }
 
+.conclusion-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.5rem 0; }
+.conclusion-card { padding:1.25rem 1.5rem; border-left:3px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0; }
+.conclusion-card .cc-eyebrow { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent); font-weight:700; margin-bottom:0.4rem; }
+.conclusion-card .cc-headline { font-size:0.95rem; font-weight:800; color:var(--text); margin-bottom:0.4rem; line-height:1.3; }
+.conclusion-card p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+
 @media(max-width:768px){
   nav { padding:0.9rem 1.2rem; }
   .report-wrap { padding:6rem 1.25rem 4rem; }
@@ -54,6 +60,7 @@
   .model-grid { grid-template-columns:1fr; }
   .fig-grid { grid-template-columns:1fr; }
   .fig-grid-3 { grid-template-columns:1fr; }
+  .conclusion-grid { grid-template-columns:1fr; }
   .report-footer { flex-direction:column; align-items:flex-start; }
 }
 </style>
@@ -89,7 +96,7 @@
       <span class="meta-item"><span class="meta-dot"></span>NBA</span>
     </div>
     <p class="report-summary">
-      This paper explores the multifaceted relationship between NBA player statistics, contract valuation, and the league's evolving salary cap structure. Drawing from a wide range of analytical models and scholarly articles, the research examines which performance metrics most significantly influence contract size, how the 2023 NBA Collective Bargaining Agreement has reshaped cap management strategies, and which team-level strategies most effectively lead to regular-season success.
+      Which performance metrics most influence NBA contracts? Which team strategies actually win games? Using <strong>3,176 player-seasons across 14 years</strong>, three OLS regression models examine how the 2023 CBA reshaped salary allocation, positional value, and the offensive vs. defensive balance of winning rosters.
     </p>
     <div class="report-actions" style="margin-top:1.25rem;">
       <a href="assets/Thesis_Paper_Radecki.pdf" target="_blank" class="r-btn secondary">
@@ -109,28 +116,16 @@
 
   <hr class="section-divider">
 
-  <!-- ABSTRACT -->
-  <section>
-    <div class="section-label">Abstract</div>
-    <div class="glass" style="padding:1.75rem 2rem; margin-top:0.75rem;">
-      <p style="font-size:0.95rem; color:var(--muted); line-height:1.85;">
-        This paper explores the multifaceted relationship between NBA player statistics, contract valuation, and the league's evolving salary cap structure. Drawing from a wide range of analytical models and scholarly articles, the research examines which performance metrics, ranging from basic counting stats like points per game to advanced metrics like PER and true shooting percentage, most significantly influence contract size. Additionally, this paper evaluates how the 2023 NBA Collective Bargaining Agreement (CBA) has reshaped cap management strategies, with new rules regarding punitive thresholds like the First and Second Aprons. By synthesizing findings from both academic and industry sources, the paper highlights how teams now balance statistical evaluation with financial constraints to optimize roster construction and player compensation. Ultimately, the research underscores the NBA's shift toward more data-informed decision-making while promoting equitable pay structures under the revised CBA.
-      </p>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
   <!-- INTRODUCTION -->
   <section>
     <div class="section-label">Introduction</div>
     <h2 class="section-title">How the 2023 CBA Changed Everything</h2>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      Before the 2011-12 NBA season, the league entered a lockout while negotiating a new Collective Bargaining Agreement that would provide fair terms for both players and teams. Since then, each successive CBA has added new layers of complexity to team-building decisions, culminating in the 2023 CBA, a major topic of discussion due to its stricter financial penalties and expanded salary cap restrictions.
+      Each successive CBA has layered new complexity onto team-building decisions. The <strong>2023 CBA</strong> introduced stricter financial penalties and expanded salary cap restrictions, making roster construction more constrained than ever. This paper asks: which types of players earn larger salary shares, and which team strategies most reliably produce wins?
     </p>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      This paper seeks to understand which types of players are rewarded with larger shares of team salary and which team-level strategies most effectively lead to regular-season success. To answer these questions, three models were developed. The first examines how individual characteristics such as position, age, and performance metrics affect a player's share of team salary. The second analyzes which team playstyle indicators are most strongly associated with win percentage. The third compares the relative impact of offensive versus defensive performance on team success.
+      Data was sourced from <strong>Basketball-Reference</strong> and <strong>RealGM</strong>, covering the 2011-12 through 2024-25 seasons. The sample was filtered to players averaging at least <strong>41 games</strong> and <strong>18.9 minutes per game</strong>, isolating rotation-level contributors whose salaries reflect intentional roster decisions.
     </p>
 
     <div class="stat-row">
@@ -144,17 +139,13 @@
       </div>
       <div class="glass stat-box">
         <div class="s-num">14</div>
-        <div class="s-label">Seasons (2011-2025)</div>
+        <div class="s-label">Seasons (2011–2025)</div>
       </div>
       <div class="glass stat-box">
         <div class="s-num">3</div>
         <div class="s-label">OLS Models</div>
       </div>
     </div>
-
-    <p style="color:var(--muted); line-height:1.8;">
-      Data was sourced from Basketball-Reference.com and Basketball.RealGM.com, covering the 2011-12 season through 2024-25. The sample was limited to players who participated in at least the average number of games and minutes per game during the sample period: 41 games and 18.9 minutes per game. These filters yielded 3,176 NBA player-seasons across 420 team rosters, focusing on players typically included in a team's active rotation whose salaries reflect intentional roster-building decisions.
-    </p>
   </section>
 
   <hr class="section-divider">
@@ -165,83 +156,77 @@
     <h2 class="section-title">What the Data Shows Before Modeling</h2>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
-      Visualizing the data helps produce an understanding of how independent variables may affect dependent variables in the models, like contract size or team success. The average Offensive Rating in the NBA during the 2011-12 season was 104.53 and increased to 114.95 by the 2023-24 season, reflecting the league-wide shift toward pace and three-point volume that makes season-adjusted metrics essential throughout this analysis.
+      The NBA's average Offensive Rating rose from <strong>104.53 (2011-12)</strong> to <strong>114.95 (2023-24)</strong>, reflecting the league-wide shift toward pace and three-point volume. Season-adjusted metrics are used throughout to ensure cross-year comparability.
     </p>
 
     <!-- Figure 2 -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Scoring and Salary Allocation</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      Points per Game has a strong positive correlation with the percentage of team salary taken up by a given player. This suggests that players who score more will most likely earn a greater salary. Notable examples include prime James Harden earning 25-30% of the Houston Rockets' total salary, and Luka Doncic and Trae Young during their second NBA seasons significantly outperforming their expected scoring relative to their salaries, highlighting the importance of teams maximizing value from rookie-scale contract players.
+      <strong>Points per game has the strongest positive correlation with salary share.</strong> Notable outliers include prime James Harden consuming 25-30% of Houston's cap, while Luka Doncic and Trae Young on rookie deals dramatically outperformed their pay, illustrating the value of developing stars before their first big contract.
     </p>
     <div class="fig-wrap">
       <img src="assets/scoring_allocation_graph.png" alt="Scoring and scoring efficiency vs percentage of team salary" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 2. Points per Game vs Percentage of Team Salary. Color indicates True Shooting %, with green reflecting higher efficiency. The strong positive trend confirms that scoring volume is the primary driver of contract size.</p>
+      <p class="fig-caption">Figure 2. Points per Game vs Percentage of Team Salary. Color indicates True Shooting %. The strong positive trend confirms scoring volume as the primary driver of contract size.</p>
     </div>
 
     <!-- Figure 4 -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Defensive Impact and Salary Allocation</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      The relationship between defensive pressure and salary is positive but weaker than scoring's relationship with salary. Several players on rookie-scale contracts, such as Kawhi Leonard, Ricky Rubio, and Dyson Daniels, appear in the top-left quadrant, indicating they exceeded expectations in Steals per Game despite lower salaries, emphasizing the importance of successful drafting. This weaker correlation compared to Figure 2 sets up a recurring theme in the analysis: offensive production commands salary more reliably than defensive production.
+      <strong>Defense correlates with salary, but far more weakly than offense.</strong> Players like Kawhi Leonard, Ricky Rubio, and Dyson Daniels sit in the top-left quadrant: elite steal rates on rookie-scale pay. This sets up a recurring theme: <strong>front offices consistently reward scoring more reliably than defense</strong>.
     </p>
     <div class="fig-wrap">
       <img src="assets/steals_allocation_graph.png" alt="Defensive pressure (steals per game) vs percentage of team salary" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 4. Steals per Game vs Percentage of Team Salary. The weaker positive trend compared to scoring reflects that defensive impact is less consistently rewarded in contract negotiations.</p>
+      <p class="fig-caption">Figure 4. Steals per Game vs Percentage of Team Salary. The weaker positive trend reflects that defensive impact is less consistently rewarded in contract negotiations.</p>
     </div>
 
     <!-- Figure 9 -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Advanced Metrics and Salary Allocation</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      Both Offensive Box Plus-Minus (OBPM) and Defensive Box Plus-Minus (DBPM) exhibit positive relationships with salary, yet OBPM demonstrates a stronger correlation. OBPM primarily reflects individual offensive performance, whereas DBPM is more indicative of a player's impact on team defense. The figure highlights examples of players who either underperform or exceed expectations relative to their salary, such as Lance Stephenson falling below expectations and Kawhi Leonard exceeding them. Similarly, Draymond Green's elite defensive capabilities combined with his relatively modest salary facilitated the Golden State Warriors' sustained success, including multiple NBA Finals appearances.
+      Both OBPM and DBPM correlate positively with salary, but <strong>OBPM shows a stronger relationship</strong>. Draymond Green's elite DBPM on a relatively modest deal is a clear example of how undervalued defensive impact enabled Golden State's sustained success.
     </p>
     <div class="fig-wrap">
       <img src="assets/offensive_defensive_allocation_graph.png" alt="Offensive and defensive box plus minus vs percentage of team salary" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 9. Offensive and Defensive BPM vs Percentage of Team Salary. OBPM (top) shows a stronger salary correlation than DBPM (bottom), suggesting teams financially reward offensive impact more consistently than defensive impact.</p>
+      <p class="fig-caption">Figure 9. Offensive and Defensive BPM vs Percentage of Team Salary. OBPM (top) shows a stronger salary correlation than DBPM (bottom).</p>
     </div>
 
     <!-- Figure 7 -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">How Positional Value Has Shifted</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      The market for NBA players by position has evolved, reflecting changes in offensive and defensive strategies, with the rise of three-point shooting and faster pace of play being particularly influential. Between 2011 and 2015, the average share of a team's total salary allocated to a rotational point guard was approximately 7.44%, but from 2020 to 2025 this share had risen to nearly 10.69%. In contrast, the salary share for a rotational center, which stood at 11.75% from 2011 to 2015, decreased to about 9.74% in the more recent period.
+      The market for positions has moved dramatically. <strong>Point guard salary share rose from 7.44% (2011-15) to 10.69% (2020-25)</strong>, while <strong>center share fell from 11.75% to 9.74%</strong> over the same span, reflecting the league-wide embrace of pace-and-space offenses.
     </p>
     <div class="fig-wrap">
       <img src="assets/position_allocation_graph.png" alt="Average percentage of team salary by position and time period" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 7. Average Salary Share by Position across three time periods (2011-2015, 2015-2020, 2020-2025). Point guard value has risen sharply while center value has declined, reflecting the league's shift toward pace and space.</p>
+      <p class="fig-caption">Figure 7. Average Salary Share by Position across three time periods (2011-2015, 2015-2020, 2020-2025).</p>
     </div>
 
     <!-- Figure 11 -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Team Spending vs Win Percentage</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      Figure 11 illustrates the relationship between net salary cap spending by a given team and its win percentage across all 30 franchises from 2011 to 2025. The net salary metric represents the percentage of salary a team spends relative to the league average expenditure in a given season. This chart helps identify additional team-building philosophies, from franchises that spent considerably less than league averages during rebuilding phases to those that consistently overspent in pursuit of immediate contention.
+      Net salary spending (relative to league average) plotted against win percentage across all 30 franchises reveals distinct philosophies: <strong>deliberate underspending during rebuilds, aggressive overspending in win-now windows</strong>, and everything in between.
     </p>
     <div class="fig-wrap">
       <img src="assets/winning_spending_graph.png" alt="Win percentage vs net salary spending percentage for each NBA team by season" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 11. Win Percentage vs Net Salary Cap Spending for all 30 NBA teams across 14 seasons. Green indicates winning records, red indicates losing records. The chart surfaces distinct team-building philosophies across franchises.</p>
+      <p class="fig-caption">Figure 11. Win Percentage vs Net Salary Cap Spending for all 30 NBA teams across 14 seasons. Green indicates winning records, red indicates losing records.</p>
     </div>
 
     <!-- Figures 6b, 6c, 6d -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Team Age, Roster Construction, and Sustained Success</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      The average age on a roster for rotational players between 2011 and 2025 is about 26.4 years old, aligning with the fact that NBA players typically reach peak performance in their late 20s. The following panels highlight select franchises that illustrate contrasting roster construction philosophies and their outcomes.
-    </p>
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      Both the Los Angeles Clippers and Oklahoma City Thunder sustained success over the past 14 seasons through very different approaches. The Clippers' rotation has been older than the league average every season since 2011, reflecting a preference for acquiring established veterans. Remarkably, the Clippers are the only team in the 14-year sample to post a win percentage above 50% every season. The Thunder, on the other hand, leaned heavily on the draft, securing franchise talents like Kevin Durant, Russell Westbrook, and more recently Chet Holmgren and Jalen Williams on rookie-scale contracts, allowing them to spend elsewhere on proven veterans.
-    </p>
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      The Sacramento Kings and San Antonio Spurs illustrate both the risks and rewards of rebuilding. The Kings have posted a winning record in only two seasons during this span despite rarely fielding a particularly young core. The Spurs, after averaging a 71.15% win percentage with Tim Duncan and Kawhi Leonard from 2011-12 through 2017-18, quickly declined after Leonard's departure and have since committed to a youth-driven rebuild centered on Victor Wembanyama and Stephon Castle on rookie-scale contracts, a path followed successfully by franchises like the 76ers, Suns, and Cavaliers in the preceding decade.
+      The average rotational player age across this sample was <strong>26.4 years</strong>. The following panels highlight contrasting roster philosophies and their outcomes. The <strong>LA Clippers</strong>, consistently older than league average, are the only team in the sample to post a winning record every season. The <strong>OKC Thunder</strong> achieved prolonged success through the opposite route, building around drafted stars on rookie deals. Meanwhile, the <strong>San Antonio Spurs</strong> transitioned sharply from a 71.15% win rate under Tim Duncan and Kawhi Leonard to a full youth rebuild centered on Victor Wembanyama.
     </p>
 
     <div class="fig-grid-3">
       <div class="fig-wrap" style="margin:0;">
         <img src="assets/age_winning_figureb.png" alt="Average age vs win percentage for LAC, DET, DEN, HOU, IND, LAL" class="fig-img" onclick="openLightbox(this)">
-        <p class="fig-caption">Figure 6b. Teams: DEN, DET, GSW, HOU, IND, LAC, LAL. LAC shows consistent veteran-heavy roster above league average age with sustained winning. DET shows aggressive youth rebuilding with low win percentages in early 2020s.</p>
+        <p class="fig-caption">Figure 6b. DEN, DET, GSW, HOU, IND, LAC, LAL. LAC shows consistent veteran-heavy rosters with sustained winning.</p>
       </div>
       <div class="fig-wrap" style="margin:0;">
         <img src="assets/age_winning_figurec.png" alt="Average age vs win percentage for MEM, MIA, MIL, MIN, NOP, NYK, OKC" class="fig-img" onclick="openLightbox(this)">
-        <p class="fig-caption">Figure 6c. Teams: MEM, MIA, MIL, MIN, NOP, NYK, OKC. OKC shows the draft-and-develop cycle clearly, with young rosters during rebuild years followed by winning seasons as core players mature.</p>
+        <p class="fig-caption">Figure 6c. MEM, MIA, MIL, MIN, NOP, NYK, OKC. OKC shows the draft-and-develop cycle: young rosters during rebuilds, winning as the core matures.</p>
       </div>
       <div class="fig-wrap" style="margin:0;">
         <img src="assets/age_winning_figured.png" alt="Average age vs win percentage for ORL, PHI, PHO, POR, SAC, SAS, TOR" class="fig-img" onclick="openLightbox(this)">
-        <p class="fig-caption">Figure 6d. Teams: ORL, PHI, PHO, POR, SAC, SAS, TOR. SAS shows a sharp transition from veteran-heavy championship contender to youth-driven rebuild following Kawhi Leonard's departure in 2018.</p>
+        <p class="fig-caption">Figure 6d. ORL, PHI, PHO, POR, SAC, SAS, TOR. SAS shows a sharp shift from championship contender to youth rebuild after Kawhi's 2018 departure.</p>
       </div>
     </div>
   </section>
@@ -254,7 +239,7 @@
     <h2 class="section-title">Three OLS Models, Three Levels of Analysis</h2>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
-      Three ordinary least squares regression models were developed to evaluate how NBA teams approach roster construction under the financial and structural constraints of recent Collective Bargaining Agreements. All on-court team metrics were adjusted relative to league averages for their respective seasons to ensure comparability across years.
+      Three OLS regression models were built to evaluate how NBA teams approach roster construction under modern CBA constraints. All on-court team metrics were adjusted relative to league averages for their respective seasons.
     </p>
 
     <div class="model-grid">
@@ -284,31 +269,31 @@
     <!-- Model 1 -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.75rem; color:var(--text);">Model 1 · Player Contract Evaluation</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      The final model explains approximately 56.1% of the variation in a player's share of team salary and is statistically significant overall. Composite advanced statistics such as PER, WS/48, OBPM, and DBPM were removed after several iterations, driven by the recognition that front offices are more likely to base salary decisions on a player's visible, in-game impact rather than complex advanced metrics. Key findings reveal that age and offensive production metrics, notably Points and Assists per Game, have the strongest influence on a player's share of team salary. For each additional point or assist per game, a player is expected to earn 0.571% and 0.535% more of their team's salary cap respectively, holding all else constant. Most notably, a point guard in the 2020-2025 era is expected to earn 3.159% more of a team's salary cap than a center in the 2011-2015 era, highlighting how positional value and team-building strategies have evolved.
+      The model explains <strong>56.1% of salary share variation</strong>. Composite advanced stats (PER, WS/48, OBPM, DBPM) were removed after several iterations, reflecting the reality that front offices lean on visible production over black-box metrics. <strong>Points per game (+0.571% salary share) and assists per game (+0.535%)</strong> were the strongest individual drivers. Most strikingly, a <strong>point guard in the 2020-25 era earns 3.159% more salary share than a center in the 2011-15 era</strong>, quantifying the positional shift the league has undergone.
     </p>
     <div class="fig-wrap">
       <img src="assets/player_allocation_OLS.png" alt="OLS regression results for player contract evaluation" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Table 6. OLS Regression Results for Player Contract Evaluation. Dependent variable: Percentage of Team Salary. N = 3,176, R² = 0.561, F = 161.162*** (df = 25; 3,150).</p>
+      <p class="fig-caption">Table 6. OLS Regression Results — Player Contract Evaluation. N = 3,176, R² = 0.561, F = 161.162*** (df = 25; 3,150).</p>
     </div>
 
     <!-- Model 2 -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.75rem; color:var(--text);">Model 2 · Team Playstyle and Win Percentage</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      The model is statistically significant and explains 91.3% of the variance in team win percentage, indicating a strong fit. Notably, a one-unit increase in Turnover Percentage is associated with a 4.3 percentage point decrease in win percentage, holding all else constant. In contrast, a one-unit increase in Opponent Turnover Percentage yields only a 3.1 percentage point increase in win percentage. This asymmetry suggests that the negative impact of committing turnovers outweighs the benefits of forcing them, highlighting the strategic value of ball security over defensive aggression. Regarding team spending, each 1% increase in spending relative to the league cap is associated with a 0.042% increase in win percentage. It is noteworthy that 3-Point Attempt Rate and 3-Point Percentage are not statistically significant in the model, indicating that no definitive conclusions can be drawn regarding the impact of three-point shooting on team success on a year-to-year basis.
+      Explaining <strong>91.3% of win percentage variance</strong>, this model surfaces a critical asymmetry: <strong>committing a turnover (-4.3 pp) hurts more than forcing one gains (+3.1 pp)</strong>. Ball security matters more than disruption. Notably, <strong>three-point attempt rate and three-point percentage are not statistically significant</strong>, meaning despite universal adoption, three-point volume alone does not reliably predict year-to-year success.
     </p>
     <div class="fig-wrap">
       <img src="assets/team_playstyle_OLS.png" alt="OLS regression results for team playstyle and team success" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Table 7. OLS Regression Results for Team Playstyle and Team Success. Dependent variable: Team Win Percentage. N = 420, R² = 0.913, F = 431.444*** (df = 10; 409).</p>
+      <p class="fig-caption">Table 7. OLS Regression Results — Team Playstyle and Team Success. N = 420, R² = 0.913, F = 431.444*** (df = 10; 409).</p>
     </div>
 
     <!-- Model 3 -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.75rem; color:var(--text);">Model 3 · Offense vs Defense and Win Percentage</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      The model includes only three variables but explains 93.3% of the variance in win percentage. All three variables as well as the overall model are statistically significant at the 1% level. Regarding the key question of whether offense or defense is more influential in determining win percentage relative to league averages, the results indicate that net defensive rating has a slightly greater effect. A one-unit increase in net defensive rating (relative to league average) is associated with an expected 2.896% increase in win percentage, compared to a 2.872% increase for net offensive rating, holding all else constant. Thus, defensive performance relative to the league appears to be slightly more impactful than offensive performance when it comes to predicting team success.
+      Three variables, <strong>93.3% of variance explained</strong>. The key finding: <strong>net defensive rating (+2.896% win percentage per unit) edges out net offensive rating (+2.872%)</strong>. The margin is narrow, but directionally consistent with the idea that elite defenses have a slight advantage over elite offenses at the team level.
     </p>
     <div class="fig-wrap">
       <img src="assets/offensive_defensive_OLS.png" alt="OLS regression results for offensive and defensive rating vs team success" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Table 8. OLS Regression Results for Offensive/Defensive Rating and Team Success. Dependent variable: Team Win Percentage. N = 420, R² = 0.933, F = 1,930.354*** (df = 3; 416).</p>
+      <p class="fig-caption">Table 8. OLS Regression Results — Offensive/Defensive Rating and Team Success. N = 420, R² = 0.933, F = 1,930.354*** (df = 3; 416).</p>
     </div>
   </section>
 
@@ -317,34 +302,38 @@
   <!-- CONCLUSION -->
   <section>
     <div class="section-label">Conclusion</div>
-    <h2 class="section-title">Offense Earns Contracts, Defense Wins Games</h2>
+    <h2 class="section-title">Offense Earns Contracts. Defense Wins Games.</h2>
 
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1.25rem;">
-      This paper aimed to examine which roster construction strategies most effectively position NBA teams for sustained success within the constraints of the modern salary cap and collective bargaining agreements.
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
+      The NBA's financial and competitive logic pulls in two directions. What gets players paid and what actually wins are not the same thing. Across 14 seasons of data, a clear picture emerges.
     </p>
 
-    <div class="finding-list">
-      <div class="glass finding-item">
-        <div class="fi-dot"></div>
-        <p><strong>Age and offensive production drive individual contracts.</strong> Points and Assists per Game are the most influential factors in determining a player's share of team salary, and results suggest a growing valuation of point guards in the modern NBA, highlighting a broader league-wide shift in team-building priorities that favor offensive-minded guards.</p>
+    <div class="conclusion-grid">
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Contracts</div>
+        <div class="cc-headline">Guards get paid. Scorers get paid more.</div>
+        <p>PPG and APG drive salary share more than any other variables. Point guard value has surged while center value has declined, mirroring the league's pace-and-space evolution. Teams that land elite guards on rookie deals, like OKC with SGA or Golden State with Steph, gain a structural financial advantage.</p>
       </div>
-      <div class="glass finding-item">
-        <div class="fi-dot"></div>
-        <p><strong>Ball security matters more than disruption.</strong> Limiting turnovers emerged as more critical to success than forcing them, and aggressive offensive strategies such as drawing fouls and dominating the glass were positively associated with win percentage.</p>
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Winning</div>
+        <div class="cc-headline">Defense wins, by a thread.</div>
+        <p>Net defensive rating (+2.896% per unit) narrowly outpaces net offensive rating (+2.872%) in predicting win percentage. The margin is slim enough to say both sides of the ball matter, but the edge belongs to defense.</p>
       </div>
-      <div class="glass finding-item">
-        <div class="fi-dot"></div>
-        <p><strong>Three-point shooting is not a significant predictor of year-to-year success.</strong> No statistically significant relationship was found between three-point shooting volume or accuracy and team success on an annual basis, despite the league's widespread adoption of the strategy.</p>
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Ball Security</div>
+        <div class="cc-headline">Turnovers hurt more than forcing them helps.</div>
+        <p>A one-unit increase in turnover rate costs 4.3 percentage points of win percentage. Forcing turnovers only gains 3.1 pp. The asymmetry is real: protecting the ball is more valuable than gambling for steals.</p>
       </div>
-      <div class="glass finding-item">
-        <div class="fi-dot"></div>
-        <p><strong>Defense wins, slightly.</strong> While both are important, having a stronger defense relative to the league average contributes slightly more to winning than having a stronger offense, with net defensive rating producing a 2.896% improvement in win percentage per unit versus 2.872% for net offensive rating.</p>
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Three-Point Era</div>
+        <div class="cc-headline">Volume shooting doesn't guarantee wins.</div>
+        <p>Three-point attempt rate and accuracy are statistically insignificant predictors of team success on a year-to-year basis. The strategy is universal now, which may be exactly why it no longer differentiates winners from losers.</p>
       </div>
     </div>
 
-    <div class="callout-box glass">
-      <div class="cb-label">Core Finding</div>
-      <p>While offensive skill and guard play are highly valued in individual contracts, team success is more strongly tied to disciplined, defense-oriented strategies. The data suggests that while individual contracts heavily favor offensive production and guard play, sustainable team success is more closely tied to defensive strength, rebounding, and disciplined execution.</p>
+    <div class="callout-box glass" style="margin-top:1.75rem;">
+      <div class="cb-label">The Paradox</div>
+      <p>NBA teams spend like offense is everything, then win with defense. The data suggests the most durable competitive advantages come from finding elite defensive contributors at below-market value, building around rookies before their pay scales to their production, and protecting the ball more carefully than the other team. Scoring gets the headlines. Discipline wins the rings.</p>
     </div>
   </section>
 

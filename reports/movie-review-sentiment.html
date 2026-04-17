@@ -52,6 +52,12 @@
 .report-footer { margin-top:4rem; padding-top:2rem; border-top:1px solid var(--border-dim); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
 .report-footer p { font-size:0.78rem; color:var(--muted); }
 
+.conclusion-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.5rem 0; }
+.conclusion-card { padding:1.25rem 1.5rem; border-left:3px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0; }
+.conclusion-card .cc-eyebrow { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent); font-weight:700; margin-bottom:0.4rem; }
+.conclusion-card .cc-headline { font-size:0.95rem; font-weight:800; color:var(--text); margin-bottom:0.4rem; line-height:1.3; }
+.conclusion-card p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+
 @media(max-width:768px){
   nav { padding:0.9rem 1.2rem; }
   .report-wrap { padding:6rem 1.25rem 4rem; }
@@ -59,6 +65,7 @@
   .feature-grid { grid-template-columns:1fr; }
   .fig-grid { grid-template-columns:1fr; }
   .sentiment-classes { grid-template-columns:repeat(3,1fr); }
+  .conclusion-grid { grid-template-columns:1fr; }
   .report-footer { flex-direction:column; align-items:flex-start; }
 }
 </style>
@@ -94,7 +101,7 @@
       <span class="meta-item"><span class="meta-dot"></span>December 2025</span>
     </div>
     <p class="report-summary">
-      A comprehensive sentiment analysis incorporating bag-of-words, sentiment lexicons, and negation handling features designed and evaluated for classifying movie review phrases into five sentiment categories. Through progressive experimentation with varying preprocessing levels, feature combinations, and classifiers, the best model achieved 58.1% accuracy and a 55.3% F-1 score, representing a 7.7% improvement from the baseline.
+      Classifying movie review phrases into <strong>five sentiment levels</strong> using bag-of-words, sentiment lexicons, and custom negation features. Across <strong>156,060 training phrases</strong> from Rotten Tomatoes, the best model achieved <strong>58.1% accuracy and 55.3% F-1</strong>, a 7.7% improvement over baseline. Fine-grained five-class classification is considerably harder than binary: 55-60% accuracy represents strong performance at this level of specificity.
     </p>
     <div class="stack-tags">
       <span class="stack-tag">Python</span>
@@ -109,31 +116,13 @@
 
   <hr class="section-divider">
 
-  <!-- ABSTRACT -->
-  <section>
-    <div class="section-label">Abstract</div>
-    <div class="glass" style="padding:1.75rem 2rem; margin-top:0.75rem;">
-      <p style="font-size:0.95rem; color:var(--muted); line-height:1.85;">
-        This paper details machine learning techniques used for classification tasks related to movie review data. The dataset used was originally sourced from Rotten Tomatoes and annotated by Socher et al. (2013). A comprehensive sentiment analysis incorporating bag-of-words, sentiment lexicons (LIWC and Subjectivity), and negation handling features was designed and evaluated for classifying phrases into 5 different classes (negative to positive). Through progressive experimentation with varying preprocessing levels, feature combinations, and classifier models, Naive Bayes, Logistic Regression, and SVMs were compared across 1,000 to 10,000 samples from the dataset. The best model included bag-of-words, sentiment lexicons, and negation features in addition to a Logistic Regression classifier and minimal text preprocessing. This model achieved 58.1% accuracy and a 55.3% F-1 score on a sample size of 10,000, which was about a 7.7% improvement from the baseline model. These results validate findings from prior analysis by Pang et al. (2002), identifying SVM and Logistic Regression effectiveness over Naive Bayes. The negation features created during the process also showed positive impact over the baseline, demonstrating domain-specific information's importance to sentiment analysis.
-      </p>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
   <!-- INTRODUCTION -->
   <section>
     <div class="section-label">Introduction</div>
     <h2 class="section-title">Fine-Grained Sentiment Classification</h2>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      In an era where online reviews heavily influence consumer behavior, the ability to automatically detect sentiment in text has tremendous practical value for the entertainment industry and beyond. This project analyzes sentiment analysis on thousands of movie reviews from Rotten Tomatoes, with the goal of automatically predicting sentiment across five categories from positive to negative.
-    </p>
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      Most sentiment analysis systems use simple binary classification, labeling text as either positive or negative. However, real opinions are rarely that black and white. People express varying degrees of sentiment, from extremely negative to extremely positive, and everything in between. This project tackles the more challenging task of fine-grained sentiment classification, which involves distinguishing between five distinct levels of sentiment rather than just two. This approach better reflects how real-world critics would voice their opinions on movies, but also brings along tougher classification tasks.
-    </p>
-    <p style="color:var(--muted); line-height:1.8;">
-      As a result, accuracy rates are expected to be lower than those typically achieved in simple two-class classification tasks, with performance around 55-60% considered strong for this level of specificity.
+      Most sentiment systems use <strong>binary classification</strong>: positive or negative. But real opinions exist on a spectrum. This project tackles the harder problem: five distinct sentiment levels across thousands of Rotten Tomatoes movie review phrases, annotated by Socher et al. (2013). The added granularity better mirrors how critics actually write, at the cost of a tougher classification task.
     </p>
 
     <div class="sentiment-classes">
@@ -174,7 +163,7 @@
       </div>
       <div class="glass stat-box">
         <div class="s-num">+7.7%</div>
-        <div class="s-label">Improvement Over Baseline</div>
+        <div class="s-label">Over Baseline</div>
       </div>
     </div>
   </section>
@@ -187,37 +176,34 @@
     <h2 class="section-title">Data, Features, and Experimental Design</h2>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1.25rem;">
-      The dataset was originally sourced from Rotten Tomatoes movie reviews and annotated by Socher et al. (2013). The training set contains 156,060 phrases, each labeled with one of five sentiment categories. These labels were created through crowdsourcing, where annotators manually assigned sentiment scores to both complete sentences and sub-phrases within them. Random samples of 1,000, 5,000, and 10,000 phrases were drawn from the full training set due to computational constraints.
-    </p>
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1.25rem;">
-      Two preprocessing strategies were compared throughout all experiments. The minimal preprocessing approach applied only tokenization, preserving everything else under the assumption that all textual elements might carry useful information. The full preprocessing approach applied lowercase conversion, stopword removal, and punctuation removal, with one critical exception: negation words such as "not", "never", and "no" were deliberately kept even though they appear on standard stopword lists. All experiments used 10-fold cross-validation, with F-1 score serving as the primary metric due to its balance between precision and recall in multi-class classification.
+      Random samples of <strong>1,000, 5,000, and 10,000 phrases</strong> were drawn from the full training set due to computational constraints. Two preprocessing strategies were tested throughout: <strong>minimal</strong> (tokenization only) and <strong>full</strong> (lowercase, stopword and punctuation removal). One critical exception: <strong>negation words were always preserved</strong>, even in full preprocessing, given their centrality to sentiment reversal. All experiments used <strong>10-fold cross-validation</strong> with F-1 score as the primary metric.
     </p>
 
     <div class="feature-grid">
       <div class="glass feature-card">
         <div class="fc-label">Feature 1</div>
         <div class="fc-title">Bag of Words</div>
-        <p>The 2,000 most frequently occurring words across training data with binary presence features. Word presence was used rather than frequency, aligning with findings from Pang et al. (2002) showing presence outperforms frequency for sentiment tasks.</p>
+        <p>The <strong>2,000 most frequent words</strong> with binary presence features. Word presence was used rather than frequency, following Pang et al. (2002) who showed presence outperforms frequency for sentiment tasks.</p>
       </div>
       <div class="glass feature-card">
         <div class="fc-label">Feature 2</div>
         <div class="fc-title">Sentiment Lexicons</div>
-        <p>Features drawn from LIWC (405 positive, 499 negative emotion words) and the Subjectivity Lexicon (2,718 positive, 4,912 negative, 570 neutral words). Raw counts and binary indicators were both included to capture sentiment-bearing vocabulary beyond what training data alone could provide.</p>
+        <p>Features from <strong>LIWC</strong> (405 positive, 499 negative words) and the <strong>Subjectivity Lexicon</strong> (2,718 positive, 4,912 negative, 570 neutral). Raw counts and binary indicators included to extend sentiment vocabulary beyond training data alone.</p>
       </div>
       <div class="glass feature-card">
         <div class="fc-label">Feature 3</div>
         <div class="fc-title">Negation Handling</div>
-        <p>A custom feature detecting negation words then tracking all subsequent words until reaching punctuation. Sub-features included total negations, words in negation scope, and positive or negative sentiment words appearing after negation. For instance, in "not good" the feature registers one negation and one positive word being negated.</p>
+        <p>Custom features detect negation words and track subsequent words until punctuation. In "not good," the feature registers <strong>one negation and one positive word being negated</strong>, capturing the sentiment reversal that unigrams alone miss.</p>
       </div>
       <div class="glass feature-card">
         <div class="fc-label">Feature 4</div>
         <div class="fc-title">POS Tags</div>
-        <p>Part-of-speech tag counts for nouns, verbs, adjectives, and adverbs per phrase. Tested based on the idea that adjectives and adverbs carry more weight when describing sentiment. Ultimately found to add noise rather than signal for this task.</p>
+        <p>Counts of nouns, verbs, adjectives, and adverbs per phrase. Motivated by the intuition that adjectives and adverbs carry more sentiment weight. <strong>Ultimately found to add noise rather than signal</strong> for this task.</p>
       </div>
     </div>
 
     <p style="color:var(--muted); line-height:1.8;">
-      Three classifiers were compared: NLTK's Naive Bayes as the probabilistic baseline, Scikit-learn's Logistic Regression configured with a maximum of 1,000 training iterations, and Scikit-learn's Linear SVM. The experimental design followed a progressive strategy, starting simple and gradually adding complexity, with all three classifiers tested on the best-performing feature combination at the end.
+      Three classifiers were compared: <strong>Naive Bayes</strong> (probabilistic baseline), <strong>Logistic Regression</strong> (max 1,000 iterations), and <strong>Linear SVM</strong>. The experimental design was progressive, starting simple and adding complexity, with all three classifiers tested on the best feature combination at the end.
     </p>
   </section>
 
@@ -229,120 +215,90 @@
     <h2 class="section-title">Progressive Feature Experimentation</h2>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
-      All experiments utilized 10-fold cross-validation and performance was evaluated using accuracy, precision, recall, and F-1 score, with F-1 score serving as the primary metric due to its balance between precision and recall in multi-class classification problems.
+      All experiments used <strong>10-fold cross-validation</strong> evaluated on accuracy, precision, recall, and F-1. F-1 is the primary metric given class imbalance in a five-category task.
     </p>
 
     <!-- Experiment 1: BoW -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Experiment 1 · Bag of Words Baseline</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      Since bag-of-words was the only feature within this model, the evaluation metrics were relatively low, but that is expected with a multi-class classification task. Full preprocessing works better in this experiment, as this is the most simple of all the experiments within this paper.
+      With only BoW features, metrics were expectedly modest. <strong>Full preprocessing outperformed minimal at this stage</strong>, as simpler models benefit from cleaner, reduced vocabulary.
     </p>
     <div class="fig-wrap">
       <img src="assets/bow_mr_sentiment.jpg" alt="Bag of Words experiment results" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 1. Bag of Words baseline results. Full preprocessing outperforms minimal at this stage, with F-1 scores of 45.60% vs 42.50%.</p>
+      <p class="fig-caption">Figure 1. Bag of Words baseline. Full preprocessing outperforms minimal (F-1: 45.60% vs 42.50%).</p>
     </div>
 
     <!-- Experiment 2: Sentiment Lexicons -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Experiment 2 · Sentiment Lexicons Only</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      This model removed bag-of-words features and evaluated sentiment lexicon features alone. Accuracy and recall decreased from the first model, but precision and F-1 took a big step up, which makes sense since the sentiment lexicons are better suited for identifying nuances within the phrases and correctly classifying all classes rather than just the extreme or neutral phrases.
+      Removing BoW and evaluating lexicons alone: overall accuracy dropped, but <strong>precision and F-1 improved</strong>. The lexicons are better at capturing nuance across all five classes, not just the extremes.
     </p>
     <div class="fig-wrap">
       <img src="assets/sl_mr_sentiment.jpg" alt="Sentiment Lexicons experiment results" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 2. Sentiment Lexicons only results. Precision and F-1 improve over BoW despite lower accuracy, showing the lexicons capture nuance that raw word counts miss.</p>
+      <p class="fig-caption">Figure 2. Sentiment Lexicons only. Precision and F-1 improve over BoW despite lower accuracy, showing lexicons capture nuance that raw word counts miss.</p>
     </div>
 
     <!-- Experiment 3: BoW + SL -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Experiment 3 · BoW + Sentiment Lexicons</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      Combining the bag-of-words and sentiment lexicon features produced decent improvement from the individual models, emphasizing that these two feature types stack well within sentiment analysis. The F-1 score jumped to 54.2% for full preprocessing, with the previous high being 49.5%. It is also interesting to note that minimal and full preprocessing models are performing similarly at this point.
+      Combining both feature types produced <strong>the largest single jump</strong>: F-1 climbed to <strong>54.2%</strong> from a prior high of 49.5%. Minimal and full preprocessing were now performing similarly, hinting that added features reduce the impact of preprocessing choice.
     </p>
     <div class="fig-wrap">
       <img src="assets/bow_sl_mr_sentiment.jpg" alt="BoW + Sentiment Lexicons combined results" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 3. BoW + Sentiment Lexicons combined. F-1 jumps to 54.2%, confirming these two feature types stack well for sentiment analysis.</p>
+      <p class="fig-caption">Figure 3. BoW + Sentiment Lexicons. F-1 jumps to 54.2%, the largest single gain across all experiments.</p>
     </div>
 
     <!-- Experiment 4: BoW + SL + Negation -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Experiment 4 · BoW + Sentiment Lexicons + Negation</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      Adding custom negation features to the baseline performed better, showing that negation is an important feature for sentiment analysis. Minimal preprocessing performed better than full preprocessing across the board for the first time, hinting that more complex models benefit from less preprocessing.
+      Adding negation features produced further gains, and <strong>minimal preprocessing outperformed full for the first time</strong>. This is the inflection point where more complex models benefit from less aggressive text cleaning.
     </p>
     <div class="fig-wrap">
       <img src="assets/bow_sl_negation_mr_sentiment.jpg" alt="BoW + Sentiment Lexicons + Negation results" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 4. BoW + Sentiment Lexicons + Negation. Best feature model so far, with minimal preprocessing outperforming full for the first time (+0.9% accuracy, +1.0% F-1 over BoW + SL).</p>
+      <p class="fig-caption">Figure 4. BoW + SL + Negation. Best feature set so far. Minimal preprocessing wins for the first time (+0.9% accuracy, +1.0% F-1 over BoW + SL).</p>
     </div>
 
     <!-- Experiments 5 & 6: POS and All Features -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Experiments 5 and 6 · POS Tags and All Features</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      Substituting negation for POS tags performed worse than the prior model, suggesting POS tags are not as helpful as expected when completing sentiment analysis. The F-1 score decreased by around 1% while other metrics decreased between 0.6% and 1.6%. Combining all features including both POS tags and negation did not reach the same performance level that negation features alone achieved, showing that stacking in this scenario does not help and that POS may not be useful for these tasks.
+      <strong>POS tags decreased performance across the board</strong>, with F-1 dropping roughly 1%. Combining all features, including both POS and negation, did not recover the losses. POS tags appear to add noise rather than signal for phrase-level sentiment.
     </p>
     <div class="fig-grid">
       <div class="fig-wrap" style="margin:0;">
         <img src="assets/bow_sl_pos_mr_sentiment.jpg" alt="BoW + SL + POS results" class="fig-img" onclick="openLightbox(this)">
-        <p class="fig-caption">Figure 5. BoW + SL + POS Tags. Performance drops compared to negation model, suggesting grammatical structure is less informative than lexical content for sentiment.</p>
+        <p class="fig-caption">Figure 5. BoW + SL + POS Tags. Performance drops vs negation model.</p>
       </div>
       <div class="fig-wrap" style="margin:0;">
         <img src="assets/all_mr_sentiment.jpg" alt="All features combined results" class="fig-img" onclick="openLightbox(this)">
-        <p class="fig-caption">Figure 6. All features combined. Stacking POS with negation does not improve over negation alone, confirming POS tags add noise rather than signal.</p>
+        <p class="fig-caption">Figure 6. All features. Stacking POS with negation does not improve over negation alone.</p>
       </div>
     </div>
 
     <!-- Experiment 7: Classifier comparison -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Experiment 7 · Classifier Comparison</h3>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      All three classifiers were evaluated on the best feature combination (BoW, sentiment lexicons, and negation features) across minimal and full preprocessing on 10,000 samples. Minimal preprocessing clearly works better for these complex classifiers and Logistic Regression and SVM are better for multi-class classification than Naive Bayes. The best configuration identified was Logistic Regression with minimal preprocessing, achieving 58.1% accuracy and 55.3% F-1.
+      All three classifiers were tested on the best feature set (BoW + lexicons + negation) at 10,000 samples. <strong>Logistic Regression with minimal preprocessing was the clear winner: 58.1% accuracy, 55.3% F-1</strong>. Logistic Regression and SVM outperformed Naive Bayes by +2.3% accuracy and +2.5% F-1, consistent with Pang et al. (2002).
     </p>
     <div class="fig-wrap">
-      <img src="assets/log_scikit_mr_sentiment.jpg" alt="Classifier comparison results across Naive Bayes, Logistic Regression, and SVM" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 7. Classifier comparison on the best feature set. Logistic Regression and SVM outperform Naive Bayes by +2.3% accuracy and +2.5% F-1 under minimal preprocessing.</p>
+      <img src="assets/log_scikit_mr_sentiment.jpg" alt="Classifier comparison results" class="fig-img" onclick="openLightbox(this)">
+      <p class="fig-caption">Figure 7. Classifier comparison on the best feature set. Logistic Regression and SVM both outperform Naive Bayes under minimal preprocessing.</p>
     </div>
 
     <!-- Summary table -->
     <h3 style="font-size:1rem; font-weight:700; margin-bottom:0.5rem; color:var(--text);">Summary of Results</h3>
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      The full progression from baseline to final model under minimal preprocessing shows consistent improvement with each meaningful feature addition, with POS tags being the one feature that did not contribute positively.
-    </p>
     <div class="fig-wrap">
-      <img src="assets/results_mr_sentiment.jpg" alt="Summary table showing full model progression from baseline to final" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 8. Full results summary. Total improvement of 7.7% accuracy and 12.8% F-1 from the BoW baseline to the final Logistic Regression model under minimal preprocessing.</p>
-    </div>
-
-    <!-- Performance progression bar chart -->
-    <div class="fig-wrap">
-      <img src="assets/performance_progression_movie.png" alt="Performance progression bar chart from baseline to final model" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 9. Performance progression from baseline to final model (minimal preprocessing). Each meaningful feature addition produced incremental gains in both accuracy and F-1 score.</p>
-    </div>
-
-    <!-- Confusion matrix -->
-    <div class="fig-wrap">
-      <img src="assets/confusion_matrix_movie.png" alt="Confusion matrix for the final Logistic Regression model" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 10. Confusion matrix for the final Logistic Regression model. The neutral class dominates predictions, reflecting the dataset's class imbalance where neutral phrases account for approximately 51% of samples.</p>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- DISCUSSION -->
-  <section>
-    <div class="section-label">Discussion</div>
-    <h2 class="section-title">Key Findings and Unexpected Results</h2>
-
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      The results demonstrate that both feature engineering and classifier selection significantly impact sentiment classification performance. The best-performing model included minimal preprocessing with Logistic Regression using bag-of-words, sentiment lexicons, and negation features. The model achieved 58.1% accuracy on the five-class classification task, representing a 7.7% improvement over the baseline. The model also achieved 55.3% F-1, representing a 12.8% improvement over the baseline. While this overall accuracy and F-1 may appear modest compared to binary classification benchmarks, it represents strong performance for fine-grained sentiment analysis where distinguishing between adjacent sentiment levels is very difficult.
-    </p>
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      The most surprising finding was that POS tag features decreased rather than improved performance, suggesting grammatical structure is less informative than lexical content for sentiment. Minimal preprocessing outperformed full preprocessing for advanced models, which contradicts the common practice of aggressive text cleaning, inferring that stopwords and punctuation may be important for sentiment analysis. The 2.3% performance gain of Logistic Regression over Naive Bayes aligns with findings from Pang et al. (2002), validating that more sophisticated classifiers better capture sentiment nuances.
-    </p>
-
-    <div class="callout-box glass">
-      <div class="cb-label">Challenges</div>
-      <p>The dataset's class distribution created challenges throughout, with neutral phrases accounting for approximately 51% of the full 156k sample, negative classes around 22%, and positive classes around 27%. This imbalance caused the model to over-predict the neutral class, as visible in the confusion matrix. Key limitations also include computational constraints that restricted experiments to 10,000 samples rather than the full training dataset, and the absence of bigram or trigram features that could better capture multi-word expressions like "not good."</p>
+      <img src="assets/results_mr_sentiment.jpg" alt="Summary table showing full model progression" class="fig-img" onclick="openLightbox(this)">
+      <p class="fig-caption">Figure 8. Full results summary. Total improvement: +7.7% accuracy, +12.8% F-1 from BoW baseline to final Logistic Regression model.</p>
     </div>
 
     <div class="fig-wrap">
-      <img src="assets/bigram_comparison.png" alt="Unigram vs bigram comparison showing how not good is tokenized differently" class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 11. Unigram vs bigram tokenization. The current unigram approach splits "not good" into separate tokens, treating "good" as positive. A bigram approach would capture "not good" as a single negative unit, which would improve sentiment reversal handling.</p>
+      <img src="assets/performance_progression_movie.png" alt="Performance progression bar chart" class="fig-img" onclick="openLightbox(this)">
+      <p class="fig-caption">Figure 9. Performance progression under minimal preprocessing. Each meaningful feature addition produced incremental gains.</p>
+    </div>
+
+    <div class="fig-wrap">
+      <img src="assets/confusion_matrix_movie.png" alt="Confusion matrix for the final model" class="fig-img" onclick="openLightbox(this)">
+      <p class="fig-caption">Figure 10. Confusion matrix for the final Logistic Regression model. The neutral class dominates predictions, reflecting its ~51% share of training samples.</p>
     </div>
   </section>
 
@@ -351,20 +307,43 @@
   <!-- CONCLUSION -->
   <section>
     <div class="section-label">Conclusion</div>
-    <h2 class="section-title">Strong Performance for a Challenging Five-Class Task</h2>
+    <h2 class="section-title">What the Model Got Right, and What's Still Hard</h2>
 
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      This project demonstrated effective approaches for multi-class sentiment classification on movie review phrases. The final model achieved 58.1% accuracy with 55.3% F-1 score, representing strong performance for five-class sentiment analysis without signs of overtraining. Cross-validation results remained consistent across 10-folds, and performance scaled appropriately with dataset size.
-    </p>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
-      Alternative approaches worth exploring include deep learning methods like BERT for contextual understanding and bigram or trigram features to capture multi-word expressions. Future analysis could also look into altering the data to be a binary classification rather than five-class classification to analyze model performance with less nuance in the data.
+      Five-class sentiment is genuinely difficult. Adjacent categories like "somewhat negative" and "neutral" are hard to separate even for humans. With that context, the results tell a clear story.
     </p>
 
-    <div class="glass" style="padding:1.5rem 1.75rem; border-left:3px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0;">
-      <div class="section-label" style="margin-bottom:0.5rem;">Core Finding</div>
-      <p style="font-size:0.95rem; color:var(--muted); line-height:1.8;">
-        The best model combined bag-of-words, sentiment lexicons, and custom negation features with a Logistic Regression classifier under minimal preprocessing, achieving 58.1% accuracy and 55.3% F-1 score on 10,000 samples across 10-fold cross-validation. This represents a 7.7% accuracy improvement and 12.8% F-1 improvement over the bag-of-words baseline, validating that domain-specific feature engineering and classifier selection both meaningfully impact fine-grained sentiment classification performance.
-      </p>
+    <div class="conclusion-grid">
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Feature Engineering</div>
+        <div class="cc-headline">Combining features beats any single approach.</div>
+        <p>BoW alone topped out at 45.6% F-1. Lexicons alone improved precision but hurt accuracy. <strong>Together, they jumped to 54.2%.</strong> Adding negation pushed further. The lesson: sentiment is multi-dimensional, and features that address different dimensions compound.</p>
+      </div>
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Preprocessing</div>
+        <div class="cc-headline">Less cleaning, better results for complex models.</div>
+        <p>Full preprocessing won early with simple BoW. But as models gained complexity, <strong>minimal preprocessing consistently outperformed</strong>. Stopwords, punctuation, and capitalization carry signal that aggressive cleaning throws away.</p>
+      </div>
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Classifiers</div>
+        <div class="cc-headline">Naive Bayes isn't built for this.</div>
+        <p>Logistic Regression and SVM both outperformed Naive Bayes by roughly <strong>2.3% accuracy and 2.5% F-1</strong> on the same features. For fine-grained multi-class problems, probabilistic simplicity is a ceiling, not a floor.</p>
+      </div>
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Surprise Finding</div>
+        <div class="cc-headline">Grammar didn't help. Negation did.</div>
+        <p>POS tags, expected to capture adjective and adverb-heavy sentiment language, <strong>decreased performance every time they were added</strong>. Custom negation features, which detect how words like "not" flip sentiment, consistently improved results. Lexical meaning beat grammatical structure.</p>
+      </div>
+    </div>
+
+    <div class="callout-box glass" style="margin-top:1.75rem;">
+      <div class="cb-label">Looking Ahead</div>
+      <p>The biggest remaining limitation is unigram tokenization: "not good" gets split into two tokens, treating "good" as positive. <strong>Bigrams and trigrams</strong> would capture these multi-word reversals more accurately. Contextual models like BERT, which encode full sentence meaning, would likely push accuracy significantly higher. There is also room to test a simpler binary classification version to isolate how much of the difficulty is inherent to five-class granularity versus the feature design itself.</p>
+    </div>
+
+    <div class="fig-wrap">
+      <img src="assets/bigram_comparison.png" alt="Unigram vs bigram comparison" class="fig-img" onclick="openLightbox(this)">
+      <p class="fig-caption">Figure 11. Unigram vs bigram tokenization. A bigram approach would capture "not good" as a single negative unit instead of treating "good" as positive.</p>
     </div>
   </section>
 
