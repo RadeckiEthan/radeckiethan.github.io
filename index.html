@@ -764,33 +764,26 @@ function openProj(id) {
 function closeProjModal(e){ if(e.target===document.getElementById('projOverlay')) closeProj(); }
 function closeProj(){ document.getElementById('projOverlay').classList.remove('open'); document.body.style.overflow=''; }
 
-// Video modal — checks if file exists, falls back to placeholder
+// Video modal — YouTube embed
 function openVideo() {
   const container = document.getElementById('videoContainer');
-  const videoSrc = 'reports/assets/portfolio_video.mp4';
   container.innerHTML = `
-    <video controls preload="metadata" id="portfolioVideo">
-      <source src="${videoSrc}" type="video/mp4">
-    </video>`;
-  const vid = document.getElementById('portfolioVideo');
-  vid.addEventListener('error', () => {
-    container.innerHTML = `
-      <div class="video-placeholder">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="23 7 16 12 23 17 23 7"/>
-          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-        </svg>
-        <span>Video coming soon</span>
-        <span style="font-size:0.76rem; opacity:0.7;">Upload portfolio_video.mp4 to reports/assets/ to activate</span>
-      </div>`;
-  });
+    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px;">
+      <iframe
+        src="https://www.youtube.com/embed/_4FpLaSjAR8?autoplay=1"
+        title="Portfolio Video Presentation"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:10px;">
+      </iframe>
+    </div>`;
   document.getElementById('videoOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeVideoModal(e){ if(e.target===document.getElementById('videoOverlay')) closeVideo(); }
 function closeVideo(){
-  const vid = document.getElementById('portfolioVideo');
-  if (vid) vid.pause();
+  document.getElementById('videoContainer').innerHTML = '';
   document.getElementById('videoOverlay').classList.remove('open');
   document.body.style.overflow='';
 }
