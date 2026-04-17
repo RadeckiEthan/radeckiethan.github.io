@@ -137,7 +137,7 @@
     <div class="report-meta">
       <span class="meta-item"><span class="meta-dot"></span>Personal Project</span>
       <span class="meta-item"><span class="meta-dot"></span>Python · scikit-learn · Chart.js</span>
-      <span class="meta-item"><span class="meta-dot"></span id="generated-date">2026</span>
+      <span class="meta-item"><span class="meta-dot"></span>Updated as of April 12, 2026</span>
     </div>
     <p class="report-summary">
       Two years of logging every film I watch on Letterboxd produced enough data to do something interesting. A Python pipeline pulls my exports, analyzes rating patterns, genres, directors, and release years, then trains two ML models on my own reviews: one on <strong>review text</strong>, one on <strong>film properties</strong>. The question: can my writing, or the film itself, predict how much I liked it?
@@ -253,7 +253,7 @@
     <div class="section-h">Can My Words Predict My Rating?</div>
     <div class="section-rule"></div>
     <p class="prose">
-      Two models trained on <strong id="ml-review-count"></strong> written reviews using an 80/20 train/test split: a <strong>Ridge Regression</strong> predicting the exact star rating, and a <strong>3-class Logistic Regression</strong> classifying each review as <em>Meh</em> (≤2.5★), <em>Solid</em> (3.0-3.5★), or <em>Great</em> (≥4.0★). Features are TF-IDF text vectors combined with VADER sentiment scores. Ridge was chosen over standard linear regression to avoid overfitting in the high-dimensional feature space. All metrics are from the held-out test set.
+      Two models trained on <strong id="ml-review-count"></strong> written reviews using an <strong>80/20 train/test split</strong>: a <strong>Ridge Regression</strong> predicting the exact star rating, and a <strong>3-class Logistic Regression</strong> classifying each review as <strong>Meh</strong> (≤2.5★), <strong>Solid</strong> (3.0-3.5★), or <strong>Great</strong> (≥4.0★). Features are <strong>TF-IDF text vectors</strong> combined with <strong>VADER sentiment scores</strong>. Ridge was chosen over standard linear regression to avoid overfitting in the high-dimensional feature space. All metrics are from the <strong>held-out test set</strong>.
     </p>
 
     <div class="visual-grid" style="margin-bottom:1.5rem;">
@@ -298,7 +298,7 @@
       <div class="section-h" style="font-size:0.95rem;">How My Language Changes by Rating</div>
       <div class="section-rule"></div>
       <p class="prose">
-        The words below are the most <strong>distinctive</strong> to each rating class, not just the most frequent, but the ones the model learned are most predictive of that class over the others. Bar length represents coefficient strength.
+        The words below are the most <strong>distinctive</strong> to each rating class — not just the most frequent, but the ones the model learned are most <strong>predictive of that class over the others</strong>. Bar length represents <strong>coefficient strength</strong>.
       </p>
       <div class="chart-wrap" style="margin-bottom:1.5rem;">
         <div class="chart-title">Average Review Length by Rating Class (Words)</div>
@@ -543,10 +543,6 @@ async function render() {
   const h  = data.headline_stats;
   const rs = data.rating_stats;
 
-  const genEl = document.getElementById('generated-date');
-  if (genEl) genEl.textContent = new Date(data.generated_at)
-    .toLocaleDateString('en-US', {month:'long', year:'numeric'});
-
   document.getElementById('intro-rated').textContent     = h.total_films_rated.toLocaleString();
   document.getElementById('intro-reviewed').textContent  = h.total_films_reviewed.toLocaleString();
   document.getElementById('ml-review-count').textContent = h.total_films_reviewed.toLocaleString();
@@ -555,9 +551,9 @@ async function render() {
 
   // ── SECTION 1: History of Film Taste ─────────────────────────────────────
   const yb = data.year_breakdown;
-  const ybRatings = yb.map(y => y.mean);
-  const ybMin = Math.min(...ybRatings);
-  const ybMax = Math.max(...ybRatings);
+  const ybCounts = yb.map(y => y.count);
+  const ybCountMin = Math.min(...ybCounts);
+  const ybCountMax = Math.max(...ybCounts);
 
   new Chart(document.getElementById('chartYearBreakdown'), {
     type: 'bar',
@@ -565,13 +561,13 @@ async function render() {
       labels: yb.map(y => y.Year),
       datasets: [
         {
-          type: 'bar', data: yb.map(y => y.count),
-          backgroundColor: yb.map(y => gradientColor(y.mean, ybMin, ybMax)),
+          type: 'bar', data: ybCounts,
+          backgroundColor: ybCounts.map(c => gradientColor(c, ybCountMin, ybCountMax)),
           borderRadius: 3, borderSkipped: false, yAxisID: 'yCount', order: 2,
         },
         {
           type: 'line', data: yb.map(y => y.mean),
-          borderColor: CORAL, backgroundColor: 'transparent',
+          borderColor: ACCENT, backgroundColor: 'transparent',
           tension: 0.35, pointRadius: 0, pointHoverRadius: 4,
           borderWidth: 2, yAxisID: 'yRating', order: 1,
         }
@@ -603,7 +599,7 @@ async function render() {
           position: 'right', min: 1, max: 5,
           grid: { drawOnChartArea: false },
           ticks: { font: {family:FONT, size:10} },
-          title: { display:true, text:'Avg Rating ★', font:{size:10}, color:CORAL },
+          title: { display:true, text:'Avg Rating ★', font:{size:10}, color:ACCENT },
         }
       }
     }
@@ -640,8 +636,8 @@ async function render() {
   // ── SECTION 2: How I Rate ─────────────────────────────────────────────────
   const ratingLabels = ['0.5','1.0','1.5','2.0','2.5','3.0','3.5','4.0','4.5','5.0'];
   const allCounts    = ratingLabels.map(r => rs.all_films.distribution[r] || 0);
-  // Color distribution by rating value: low ratings red, high green
-  const distColors   = ratingLabels.map(r => gradientColor(parseFloat(r), 0.5, 5.0));
+  // Distribution chart: flat accent color — this is a count plot, not a value comparison
+  const distColors   = ratingLabels.map(() => alphaAccent(0.65));
 
   const rt = tmdb.runtime_buckets;
   const bestRuntime = rt.reduce((a,b) => b.mean_rating > a.mean_rating ? b : a);
@@ -723,7 +719,9 @@ async function render() {
       datasets: [{
         data: genres.map(g => ({ x:g.count, y:g.mean_rating, name:g.name })),
         backgroundColor: genres.map(g => gradientColor(g.mean_rating, minR, maxR)),
-        pointRadius: 7, pointHoverRadius: 9,
+        borderColor: genres.map(g => gradientColor(g.mean_rating, minR, maxR).replace(',0.85)', ',1)')),
+        borderWidth: 2,
+        pointRadius: 9, pointHoverRadius: 11,
       }]
     },
     options: {
