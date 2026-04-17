@@ -21,15 +21,16 @@
 .ah-sub { font-size:0.76rem; color:var(--muted); margin-top:0.2rem; line-height:1.4; }
 
 /* Modal overhaul */
-.proj-modal { max-width:580px; }
-.m-hero { margin-bottom:1.25rem; }
-.m-hero h2 { font-size:1.15rem; font-weight:800; line-height:1.3; margin-bottom:0.35rem; }
-.m-sub { font-size:0.76rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; font-weight:600; }
-.m-what { font-size:0.88rem; color:var(--muted); line-height:1.7; margin:0.75rem 0 1rem; }
-.m-findings { display:flex; flex-direction:column; gap:0.45rem; margin:0.75rem 0 1.25rem; }
-.m-finding { display:flex; gap:0.7rem; align-items:flex-start; font-size:0.84rem; color:var(--muted); line-height:1.55; }
-.m-finding::before { content:''; min-width:6px; height:6px; border-radius:50%; background:var(--accent); margin-top:0.45rem; flex-shrink:0; }
-.m-finding strong { color:var(--text); }
+.proj-modal { max-width:560px; }
+.m-hero { margin-bottom:1rem; }
+.m-hero h2 { font-size:1.1rem; font-weight:800; line-height:1.3; margin-bottom:0.35rem; }
+.m-sub { font-size:0.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; font-weight:600; }
+.m-what { font-size:0.86rem; color:var(--muted); line-height:1.7; margin:0.85rem 0 1rem; }
+.m-findings { display:flex; flex-direction:column; gap:0.55rem; margin:0.75rem 0 1.25rem; }
+.m-finding { display:flex; gap:0.75rem; align-items:flex-start; font-size:0.84rem; color:var(--muted); line-height:1.6; }
+.m-finding-dot { min-width:6px; height:6px; border-radius:50%; background:var(--accent); margin-top:0.52rem; flex-shrink:0; }
+.m-finding-text { flex:1; }
+.m-finding-text strong { color:var(--text); }
 .m-stack-wrap { margin:0.5rem 0 1.25rem; }
 .m-stack-label { font-size:0.66rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); font-weight:700; margin-bottom:0.45rem; }
 .m-stack-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
@@ -556,7 +557,7 @@ function openProj(id) {
   // Findings
   const ptsList = document.getElementById('mPoints');
   ptsList.innerHTML = p.pts.map(pt =>
-    `<div class="m-finding"><strong>${pt.bold}</strong>${pt.text}</div>`
+    `<div class="m-finding"><div class="m-finding-dot"></div><div class="m-finding-text"><strong>${pt.bold}</strong>${pt.text}</div></div>`
   ).join('');
 
   // Stack tags
