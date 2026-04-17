@@ -50,10 +50,25 @@
 .resume-award .ra-text { font-size:0.82rem; color:var(--text); font-weight:600; line-height:1.4; }
 .resume-award .ra-sub { font-size:0.76rem; color:var(--muted); margin-top:0.1rem; }
 
-@media(max-width:768px){
-  .about-highlights { grid-template-columns:1fr; }
-  .resume-clean { grid-template-columns:1fr; gap:1.25rem; }
-}
+/* Blog and video cards */
+.media-row { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-top:1.25rem; }
+.media-card { padding:2rem 2rem; display:flex; flex-direction:column; gap:1rem; }
+.media-card .mc-icon { width:44px; height:44px; border-radius:12px; background:rgba(var(--accent-rgb),0.1); border:1px solid rgba(var(--accent-rgb),0.2); display:flex; align-items:center; justify-content:center; }
+.media-card .mc-icon svg { width:20px; height:20px; stroke:var(--accent); }
+.media-card .mc-title { font-size:1rem; font-weight:800; color:var(--text); line-height:1.3; }
+.media-card .mc-desc { font-size:0.84rem; color:var(--muted); line-height:1.65; flex:1; }
+.media-card .mc-btn { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.82rem; font-weight:700; color:var(--accent); cursor:pointer; background:none; border:none; padding:0; text-decoration:none; margin-top:0.25rem; }
+.media-card .mc-btn:hover { opacity:0.75; }
+
+/* Video modal */
+.video-modal { max-width:760px; width:95vw; }
+.video-modal video { width:100%; border-radius:10px; display:block; background:#000; }
+.video-modal .vm-title { font-size:0.95rem; font-weight:700; color:var(--text); margin-bottom:0.5rem; }
+.video-modal .vm-sub { font-size:0.78rem; color:var(--muted); margin-bottom:1.25rem; }
+.video-placeholder { width:100%; aspect-ratio:16/9; border-radius:10px; background:rgba(var(--accent-rgb),0.06); border:2px dashed rgba(var(--accent-rgb),0.25); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.75rem; color:var(--muted); font-size:0.84rem; }
+.video-placeholder svg { width:36px; height:36px; stroke:var(--accent); opacity:0.5; }
+
+@media(max-width:640px){ .media-row { grid-template-columns:1fr; } }
 
 /* Overview section */
 .outcome-list { display:flex; flex-direction:column; gap:0.5rem; margin:1.25rem 0 0; }
@@ -95,6 +110,7 @@
     <li><a href="#overview">Overview</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#media">Blog & Video</a></li>
     <li><a href="#resume">Resume</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -450,6 +466,50 @@
   </div>
 </section>
 
+</section>
+
+<section id="media">
+  <div class="section-label">Blog & Video</div>
+  <div class="divider"></div>
+  <div class="section-title">Reflections on the program.</div>
+  <p class="section-sub">A written reflection on my time in the M.S. Applied Data Science program and a short video summary of what I learned.</p>
+
+  <div class="media-row">
+    <div class="media-card glass">
+      <div class="mc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <line x1="10" y1="9" x2="8" y2="9"/>
+        </svg>
+      </div>
+      <div class="mc-title">Program Reflection Blog Post</div>
+      <div class="mc-desc">A ~3,000 word reflection covering what I expected from the program, what I actually learned, how each project contributed to my education, and the experiences that stood out most along the way.</div>
+      <a href="reports/blog.html" class="mc-btn">
+        Read the Blog Post
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="media-card glass">
+      <div class="mc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="23 7 16 12 23 17 23 7"/>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+      </div>
+      <div class="mc-title">Video Summary Presentation</div>
+      <div class="mc-desc">A 1-2 minute video reflecting on my overall experience in the Applied Data Science program, covering key takeaways, the skills I built, and what the work in this portfolio represents.</div>
+      <button class="mc-btn" onclick="openVideo()">
+        Watch the Video
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
 <section id="resume">
   <div class="section-label">Resume</div>
   <div class="divider"></div>
@@ -558,6 +618,16 @@
 </div>
 
 <!-- RESUME MODAL removed — using inline resume instead -->
+
+<!-- VIDEO MODAL -->
+<div class="overlay" id="videoOverlay" onclick="closeVideoModal(event)">
+  <div class="modal-box video-modal">
+    <button class="m-close" onclick="closeVideo()">✕</button>
+    <div class="vm-title">Video Summary Presentation</div>
+    <div class="vm-sub">M.S. Applied Data Science · Ethan Radecki · Syracuse University · 2026</div>
+    <div id="videoContainer"></div>
+  </div>
+</div>
 
 <script>
 const data = {
@@ -693,7 +763,39 @@ function openProj(id) {
 
 function closeProjModal(e){ if(e.target===document.getElementById('projOverlay')) closeProj(); }
 function closeProj(){ document.getElementById('projOverlay').classList.remove('open'); document.body.style.overflow=''; }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeProj(); });
+
+// Video modal — checks if file exists, falls back to placeholder
+function openVideo() {
+  const container = document.getElementById('videoContainer');
+  const videoSrc = 'reports/assets/portfolio_video.mp4';
+  container.innerHTML = `
+    <video controls preload="metadata" id="portfolioVideo">
+      <source src="${videoSrc}" type="video/mp4">
+    </video>`;
+  const vid = document.getElementById('portfolioVideo');
+  vid.addEventListener('error', () => {
+    container.innerHTML = `
+      <div class="video-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="23 7 16 12 23 17 23 7"/>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+        <span>Video coming soon</span>
+        <span style="font-size:0.76rem; opacity:0.7;">Upload portfolio_video.mp4 to reports/assets/ to activate</span>
+      </div>`;
+  });
+  document.getElementById('videoOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeVideoModal(e){ if(e.target===document.getElementById('videoOverlay')) closeVideo(); }
+function closeVideo(){
+  const vid = document.getElementById('portfolioVideo');
+  if (vid) vid.pause();
+  document.getElementById('videoOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeProj(); closeVideo(); } });
 </script>
 </body>
 </html>
