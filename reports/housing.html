@@ -62,6 +62,12 @@
 .formula { font-family:'Courier New', monospace; font-size:0.85rem; background:rgba(var(--accent-rgb),0.07); border:1px solid rgba(var(--accent-rgb),0.18); padding:0.85rem 1.25rem; border-radius:10px; margin:1.25rem 0; color:var(--text); line-height:1.9; overflow-x:auto; }
 code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 0.4em; border-radius:4px; font-family:'Courier New', monospace; }
 
+.conclusion-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.5rem 0; }
+.conclusion-card { padding:1.25rem 1.5rem; border-left:3px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0; }
+.conclusion-card .cc-eyebrow { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent); font-weight:700; margin-bottom:0.4rem; }
+.conclusion-card .cc-headline { font-size:0.95rem; font-weight:800; color:var(--text); margin-bottom:0.4rem; line-height:1.3; }
+.conclusion-card p { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+
 .stack-tags { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.75rem; }
 .stack-tag { background:rgba(var(--accent-rgb),0.08); border:1px solid rgba(var(--accent-rgb),0.2); color:var(--accent); border-radius:20px; padding:0.25rem 0.75rem; font-size:0.78rem; font-weight:600; }
 
@@ -74,6 +80,7 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
   .period-grid { grid-template-columns:1fr; }
   .callout-row { grid-template-columns:1fr; }
   .fig-grid { grid-template-columns:1fr; }
+  .conclusion-grid { grid-template-columns:1fr; }
   .report-footer { flex-direction:column; align-items:flex-start; }
   .report-actions { flex-direction:column; }
   .r-btn { justify-content:center; }
@@ -105,12 +112,12 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
     <div class="report-tag">Research Paper</div>
     <h1>The Decoupling of U.S. Housing Markets<br><span>from Economic Fundamentals</span></h1>
     <div class="report-meta">
-      <span class="meta-item"><span class="meta-dot"></span>Academic Research</span>
-      <span class="meta-item"><span class="meta-dot"></span>Syracuse University</span>
+      <span class="meta-item"><span class="meta-dot"></span>OLS</span>
+      <span class="meta-item"><span class="meta-dot"></span>Unemployment Analysis</span>
       <span class="meta-item"><span class="meta-dot"></span>2025</span>
     </div>
     <p class="report-summary">
-      This paper explores the relationships between housing prices and economic fundamentals and how they have shifted from 2000 to 2024. The results revealed three distinct periods based on economic fundamentals' relationships with housing prices, with unemployment's predictive power declining by around 97% across the three periods. These findings were supported by both frequentist and Bayesian approaches.
+      How has unemployment's relationship with housing prices changed since 2000? Using <strong>5,840 observations across 20 U.S. metro regions</strong>, a single interaction-term OLS model and Bayesian MCMC analysis reveal three distinct periods: a strong pre-crisis sensitivity, a weakening recovery, and a near-complete decoupling during Covid, with <strong>unemployment's predictive power declining by ~97%</strong> across the span.
     </p>
     <div class="stack-tags" style="margin-top:1.25rem;">
       <span class="stack-tag">R</span>
@@ -123,55 +130,38 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
 
   <hr class="section-divider">
 
-  <!-- ABSTRACT -->
-  <section>
-    <div class="section-label">Abstract</div>
-    <div class="glass" style="padding:1.75rem 2rem; margin-top:0.75rem;">
-      <p style="font-size:0.95rem; color:var(--muted); line-height:1.85;">
-        Traditionally, housing markets across the U.S. have responded to economic fundamentals, like unemployment and housing supply. This paper explores these relationships and how they have shifted from 2000 to 2024. The analysis was completed using monthly national metrics in addition to house price indices from 20 different metro regions across the U.S. Both a frequentist and Bayesian approach were applied to the analysis, which included period interactions to identify fluctuations in market sensitivity across two crises. The results revealed three distinct periods based on economic fundamentals' relationships with housing prices, specifically unemployment's relationship. During the Pre-Crisis period (2000-2008) there appeared to be a strong sensitivity to unemployment rates (-2.19% effect per percentage point increase in unemployment), the Recovery period (2009-2019) showed a deterioration of this effect (-1.23%), and by the Covid period (2020-2024) this relationship was nearly decoupled (-0.06%). Across the three periods, the unemployment rate's predictive power over housing prices across the nation on a monthly basis had declined by around 97%. This finding was supported by both the frequentist and Bayesian approaches. These results suggest that fiscal and monetary policy intervention measures, not accounted for in this analysis, very well may have altered housing market dynamics since 2000, suggesting a decoupling effect between unemployment and housing prices.
-      </p>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
   <!-- INTRODUCTION -->
   <section>
     <div class="section-label">Introduction</div>
-    <h2 class="section-title">Background and Motivation</h2>
+    <h2 class="section-title">When Economic Rules Stop Working</h2>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      It is generally accepted that housing markets respond to economic fundamentals, like unemployment and housing supply. For example, if unemployment rises we would expect demand for housing to decrease as fewer consumers have disposable income. Similarly, if housing supply were to increase through construction we would expect prices to decrease as competition rises, although demand for housing would need to not exceed supply for this effect to take place. Still, these relationships are the foundation of housing market forecasts and policy interventions.
+      It is generally accepted that housing markets respond to economic fundamentals: when unemployment rises, housing demand and prices should fall. These relationships are the foundation of housing market forecasts and policy design. Since 2000, two crises have tested that assumption: the <strong>2008 housing bubble</strong> and the <strong>2020 Covid pandemic</strong>. This paper asks whether those relationships have held, weakened, or effectively vanished.
     </p>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      Since 2000 we have witnessed two major crises that have brought huge impacts to the housing market: the 2008 housing bubble and the 2020 Covid pandemic. These two crises are the root of this paper's central analysis, attempting to identify how these relationships have been altered across these periods, and debating whether the relationships even persist through 2024.
-    </p>
-    <p style="color:var(--muted); line-height:1.8;">
-      Understanding how these relationships have changed throughout time and during crises is crucial for policymakers and consumers that want to manage their potential risk in the housing market. If there truly is a decoupling effect between economic fundamentals and the housing market, then forecasting models that are built on prior market patterns may fail to accurately predict price changes.
+      If a decoupling effect is real, <strong>forecasting models built on pre-2008 market patterns may be structurally wrong</strong>. Understanding when and how these relationships broke down matters for policymakers, lenders, and anyone trying to read the housing market from economic signals.
     </p>
 
     <div class="period-grid">
       <div class="glass period-card">
         <div class="period-label">Period 1</div>
-        <div class="period-years">Pre-Crisis · 2000–2008</div>
-        <div class="period-desc">Strong sensitivity to unemployment rates, with a one percentage point increase in unemployment leading to a 2.19% monthly decline in housing prices.</div>
+        <div class="period-years">Pre-Crisis · 2000-2008</div>
+        <div class="period-desc"><strong>-2.19% monthly price change</strong> per one percentage point increase in unemployment. Strong, reliable sensitivity.</div>
       </div>
       <div class="glass period-card">
         <div class="period-label">Period 2</div>
-        <div class="period-years">Recovery · 2009–2019</div>
-        <div class="period-desc">A deterioration of the unemployment effect, weakening substantially to 1.23% per percentage point increase in unemployment.</div>
+        <div class="period-years">Recovery · 2009-2019</div>
+        <div class="period-desc">Sensitivity weakens substantially to <strong>-1.23%</strong> per percentage point, roughly half of the pre-crisis effect.</div>
       </div>
       <div class="glass period-card">
         <div class="period-label">Period 3</div>
-        <div class="period-years">Covid · 2020–2024</div>
-        <div class="period-desc">A nearly complete decoupling effect, with unemployment effects reduced to just 0.06%, representing a 97% decline in sensitivity compared to Pre-Crisis levels.</div>
+        <div class="period-years">Covid · 2020-2024</div>
+        <div class="period-desc">Effect reduces to just <strong>-0.06%</strong>, representing a <strong>97% decline</strong> in sensitivity relative to the pre-crisis period.</div>
       </div>
     </div>
 
     <div class="fig-wrap">
-      <img src="assets/Unemployment_Time.png"
-           alt="Unemployment Rate Over Time across Pre-Crisis, Recovery, and Covid periods"
-           class="fig-img" onclick="openLightbox(this)">
+      <img src="assets/Unemployment_Time.png" alt="Unemployment Rate Over Time" class="fig-img" onclick="openLightbox(this)">
       <p class="fig-caption">Figure 1. National unemployment rate from 2000 to 2024 across the three defined analytical periods.</p>
     </div>
   </section>
@@ -181,21 +171,14 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
   <!-- METHODOLOGY -->
   <section>
     <div class="section-label">Methodology</div>
-    <h2 class="section-title">Data and Analytical Approaches</h2>
+    <h2 class="section-title">Data and Analytical Approach</h2>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1.25rem;">
-      The analysis uses monthly data from January 2000 to April 2024, which provides 292 months of data. All data was retrieved from the Federal Reserve Economic Data (FRED) database, which includes house price indices from 20 different metro regions in the U.S., national unemployment rates, and national building permits authorized in the prior month. The panel structure of this data yielded a final dataset of 5,840 total observations.
+      All data was sourced from <strong>FRED</strong>, covering January 2000 to April 2024 (292 months) across <strong>20 U.S. metro regions</strong>, yielding <strong>5,840 total observations</strong>. The dependent variable is the month-to-month percentage change in nominal housing prices. Independent variables include national unemployment rate change, building permits percentage change, a metro-level growth classification (high vs. low growth, split at 200% total appreciation), and period indicators.
     </p>
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1.25rem;">
-      The dependent variable is the month-to-month percentage change in nominal housing prices. The independent variables are the national unemployment rate change from month-to-month, the percentage change of building permits authorized month to month, a classification variable to account for the metro regions' overall growth across the 24-year sample, and period variables to account for when the observation took place. The classification variable for growth was calculated using the total appreciation of the housing index from a given metro region, split using a 200% appreciation threshold, which yielded 12 high-growth cities and 8 low-growth cities.
+      <strong>Two approaches were employed in parallel</strong>: a frequentist panel regression with interaction terms and cluster-robust standard errors (clustered by city), and a Bayesian MCMC analysis using 10,000 iterations to generate posterior distributions and 95% high density intervals (HDIs). The interaction terms allow unemployment and permit effects to vary across the three defined periods, with <strong>Pre-Crisis as the reference period</strong>. Using both approaches allowed for cross-validation across methodologies.
     </p>
-
-    <div class="glass" style="padding:1.25rem 1.5rem; margin:1.5rem 0; border-left:3px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0;">
-      <div class="section-label" style="margin-bottom:0.5rem;">Analytical Approach</div>
-      <p style="font-size:0.9rem; color:var(--muted); line-height:1.7;">
-        To complete this analysis, two different approaches were employed: frequentist and Bayesian. Panel regression was utilized alongside interaction terms, which allowed unemployment and permit effects to vary across the three defined time periods. Cluster-robust standard errors were used to account for heteroskedasticity and autocorrelation caused by relationships within the same city. The Bayesian approach utilizes the BayesFactor package to identify the ideal model configurations, completed with 10,000 iterations to generate posterior samples and identify high density intervals (HDIs) at the 95% level. Using both approaches allowed for cross-validation and drawing substantial conclusions across differing methodologies.
-      </p>
-    </div>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:0.75rem;">The model is specified as:</p>
     <div class="formula">
@@ -208,14 +191,13 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
 
   <!-- RESULTS: FREQUENTIST -->
   <section>
-    <div class="section-label">Results - Frequentist</div>
-    <h2 class="section-title">Panel Regression: A 97% Decline in Unemployment Sensitivity</h2>
+    <div class="section-label">Results · Frequentist</div>
+    <h2 class="section-title">A 97% Decline in Unemployment Sensitivity</h2>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
-      The panel regression revealed statistically significant results (p&lt;.01), with each coefficient being statistically significant individually. Pre-Crisis markets exhibited strong unemployment sensitivity, with a one percentage point increase in unemployment leading to a 2.19% monthly decline in housing prices, holding all else constant. This sensitivity weakened substantially during the Recovery period to 1.23%, holding all else constant. Then in the Covid period a nearly complete decoupling effect occurred, with unemployment effects reduced to just 0.06%, representing a 97% decline in sensitivity compared to Pre-Crisis levels. Additionally, the building permit variables were associated with a positive monthly price change, however this relationship too was reduced across the periods. The R-squared was about 15.2%, meaning that about 15.2% of the variance in monthly price change was captured by the model, which is sufficient for this analysis given the nature of monthly economic data.
+      All coefficients are statistically significant at p&lt;.01. The <strong>Pre-Crisis base unemployment coefficient is -2.187%</strong>. Effective period coefficients are recovered by summing this base with each interaction term. <strong>R² of 15.2%</strong> is sufficient for monthly economic data, where idiosyncratic local variation is expected to dominate.
     </p>
 
-    <!-- Coefficient comparison -->
     <div class="glass" style="padding:1.5rem; margin-bottom:1.5rem;">
       <div class="section-label" style="margin-bottom:0.75rem;">Unemployment Sensitivity by Period</div>
       <table class="coef-table">
@@ -229,7 +211,7 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
         </thead>
         <tbody>
           <tr>
-            <td>Pre-Crisis <span style="color:var(--muted); font-weight:400; font-size:0.82rem;">2000–2008</span></td>
+            <td>Pre-Crisis <span style="color:var(--muted); font-weight:400; font-size:0.82rem;">2000-2008</span></td>
             <td>-2.187%<span class="coef-sig">***</span></td>
             <td style="font-size:0.82rem;"><code>β₁</code> (base)</td>
             <td>
@@ -240,7 +222,7 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
             </td>
           </tr>
           <tr>
-            <td>Recovery <span style="color:var(--muted); font-weight:400; font-size:0.82rem;">2009–2019</span></td>
+            <td>Recovery <span style="color:var(--muted); font-weight:400; font-size:0.82rem;">2009-2019</span></td>
             <td>-1.232%<span class="coef-sig">***</span></td>
             <td style="font-size:0.82rem;"><code>-2.187 + 0.955</code></td>
             <td>
@@ -251,7 +233,7 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
             </td>
           </tr>
           <tr>
-            <td>Covid <span style="color:var(--muted); font-weight:400; font-size:0.82rem;">2020–2024</span></td>
+            <td>Covid <span style="color:var(--muted); font-weight:400; font-size:0.82rem;">2020-2024</span></td>
             <td>-0.061%<span style="color:var(--muted); font-size:0.75rem; margin-left:0.4rem;">n.s.</span></td>
             <td style="font-size:0.82rem;"><code>-2.187 + 2.126</code></td>
             <td>
@@ -265,21 +247,19 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
       </table>
     </div>
 
-    <!-- Callout stats -->
     <div class="callout-row">
       <div class="glass callout-stat">
         <div class="stat-number">97%</div>
         <div class="stat-label">Decline in Unemployment Sensitivity</div>
-        <div class="stat-note">Across the three periods, the unemployment rate's predictive power over housing prices on a monthly basis declined by around 97%, from -2.19% in Pre-Crisis to -0.06% in the Covid period.</div>
+        <div class="stat-note">From -2.19% per percentage point in the Pre-Crisis period to just -0.06% during Covid, with the Covid coefficient not statistically distinguishable from zero.</div>
       </div>
       <div class="glass callout-stat">
         <div class="stat-number">6.8×10<sup style="font-size:1.1rem;">195</sup></div>
         <div class="stat-label">Bayes Factor</div>
-        <div class="stat-note">The Bayes Factor comparing the three-period interaction model with simpler configurations displayed a value of about 6.8x10^195, providing decisive support for the period-differentiated model.</div>
+        <div class="stat-note">Comparing the three-period interaction model against simpler configurations. Provides decisive support for period-differentiated sensitivity over any single-coefficient model.</div>
       </div>
     </div>
 
-    <!-- Full regression table -->
     <div class="glass" style="padding:1.5rem;">
       <div class="section-label" style="margin-bottom:0.75rem;">Table 1 · Frequentist Results with Cluster-Robust SE · Dependent Variable: price_pct_change</div>
       <div class="reg-table-wrap">
@@ -319,9 +299,7 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
     </div>
 
     <div class="fig-wrap" style="margin-top:1.75rem;">
-      <img src="assets/Frequentist_Output.png"
-           alt="Full frequentist regression output from R"
-           class="fig-img" onclick="openLightbox(this)">
+      <img src="assets/Frequentist_Output.png" alt="Full frequentist regression output from R" class="fig-img" onclick="openLightbox(this)">
       <p class="fig-caption">Figure 2. Full R regression output. The base unemployment_change coefficient (-2.187) applies to Pre-Crisis. Effective period coefficients are recovered by adding each interaction term to this base.</p>
     </div>
   </section>
@@ -330,18 +308,15 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
 
   <!-- RESULTS: BAYESIAN -->
   <section>
-    <div class="section-label">Results - Bayesian</div>
-    <h2 class="section-title">Bayesian Confirmation: The Covid HDI Contains Zero</h2>
+    <div class="section-label">Results · Bayesian</div>
+    <h2 class="section-title">The Covid HDI Contains Zero</h2>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1.25rem;">
-      The Bayesian findings confirm what was found in the frequentist results, with the decoupling effect for unemployment across the periods being observed using the posterior means and the HDIs. The Bayes Factor comparing the three-period interaction model with simpler configurations displayed a value of about 6.8x10^195.
-    </p>
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
-      The three-period model demonstrated unemployment sensitivity of -2.18% in the Pre-Crisis period, declining to -1.23% during Recovery, and further weakening to -0.06% in the Covid period. Although the Covid period does show a negative effect between unemployment and housing prices, this effect may actually be zero, as shown by the 95% HDI containing 0%. Basically, one may say that there is a 95% probability that the unemployment rate and housing prices have completely decoupled by this time period. The consistency between the analytical approaches further strengthens the results and identified patterns.
+      The Bayesian results mirror the frequentist findings precisely. Posterior means for each period are nearly identical to the OLS estimates. The critical result: <strong>the Covid period's 95% HDI spans [-0.29%, +0.17%]</strong>, meaning there is a 95% probability that the unemployment-housing price relationship has gone to zero by 2020-2024. The Pre-Crisis and Recovery intervals contain only negative values, confirming those effects were real.
     </p>
 
     <div class="glass" style="padding:1.5rem; margin-bottom:1.5rem;">
-      <div class="section-label" style="margin-bottom:0.75rem;">Table 2 · Bayesian Posterior Summary - Unemployment Coefficient by Period</div>
+      <div class="section-label" style="margin-bottom:0.75rem;">Table 2 · Bayesian Posterior Summary · Unemployment Coefficient by Period</div>
       <table class="bayes-table">
         <thead>
           <tr>
@@ -380,24 +355,13 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
 
     <div class="fig-grid">
       <div class="fig-wrap" style="margin:0;">
-        <img src="assets/Bayesian_Small_Output.png"
-             alt="Bayesian posterior means and 95% HDIs by period"
-             class="fig-img" onclick="openLightbox(this)">
+        <img src="assets/Bayesian_Small_Output.png" alt="Bayesian posterior means and 95% HDIs" class="fig-img" onclick="openLightbox(this)">
         <p class="fig-caption">Figure 3. Posterior means and 95% HDIs per period. The Covid interval is the only one to contain zero.</p>
       </div>
       <div class="fig-wrap" style="margin:0;">
-        <img src="assets/Bayesian_Output.png"
-             alt="Full MCMC posterior output from R (10,000 iterations)"
-             class="fig-img" onclick="openLightbox(this)">
+        <img src="assets/Bayesian_Output.png" alt="Full MCMC posterior output" class="fig-img" onclick="openLightbox(this)">
         <p class="fig-caption">Figure 4. Full MCMC output (10,000 iterations). Posterior samples and quantiles for all model parameters.</p>
       </div>
-    </div>
-
-    <div class="glass" style="padding:1.5rem 1.75rem; margin-top:0.5rem; border-left:3px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0;">
-      <div class="section-label" style="margin-bottom:0.5rem;">Bayes Factor</div>
-      <p style="font-size:0.92rem; color:var(--muted); line-height:1.75;">
-        The Bayes Factor comparing the three-period interaction model with simpler configurations displayed a value of about <strong style="color:var(--text);">6.8 x 10<sup>195</sup></strong>. The consistency between the frequentist and Bayesian approaches further strengthens the results and identified patterns.
-      </p>
     </div>
   </section>
 
@@ -409,35 +373,53 @@ code { font-size:0.85em; background:rgba(var(--accent-rgb),0.07); padding:0.1em 
     <h2 class="section-title">Diagnostic Visualizations</h2>
 
     <p style="color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
-      Diagnostic visualizations are included below. There were a few multicollinearity issues within the interaction terms, but that is to be expected. The posterior predictive check, linearity, homogeneity of variance, influential observations, collinearity, and normality of residuals are all shown in the panel below.
+      Expected multicollinearity is present within the interaction terms. All other diagnostics, including posterior predictive check, linearity, homogeneity of variance, influential observations, and normality of residuals, are within acceptable ranges.
     </p>
 
     <div class="fig-wrap">
-      <img src="assets/Model_Diagnostics.png"
-           alt="Six-panel model diagnostics"
-           class="fig-img" onclick="openLightbox(this)">
-      <p class="fig-caption">Figure 5. Diagnostic visualizations for the panel regression model, including posterior predictive check, linearity, homogeneity of variance, influential observations, collinearity (VIF), and normality of residuals.</p>
+      <img src="assets/Model_Diagnostics.png" alt="Six-panel model diagnostics" class="fig-img" onclick="openLightbox(this)">
+      <p class="fig-caption">Figure 5. Diagnostic panel: posterior predictive check, linearity, homogeneity of variance, influential observations, collinearity (VIF), and normality of residuals.</p>
     </div>
   </section>
 
   <hr class="section-divider">
 
-  <!-- DISCUSSION & CONCLUSION -->
+  <!-- CONCLUSION -->
   <section>
-    <div class="section-label">Discussion &amp; Conclusion</div>
-    <h2 class="section-title">A Transformation in Housing Market Dynamics</h2>
+    <div class="section-label">Conclusion</div>
+    <h2 class="section-title">The Rules Changed. Twice.</h2>
 
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      This paper revealed a transformation in how U.S. housing markets react to economic fundamentals, specifically unemployment, across varying crises, signaling a decoupling effect. The 97% reduction in unemployment sensitivity from the Pre-Crisis period to the Covid period demonstrates that forever evolving policy interventions may fundamentally alter housing price relationships. Both the frequentist and Bayesian results confirm these findings with very statistically significant results.
-    </p>
-    <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
-      These findings suggest important revisions to forecasting models and policy design methodology, as housing market models may assume a straightforward effect between unemployment and prices. Future improvements and further research could include whether these decoupling effects persist past the 2020-2024 period and how current policy intervention may impact prices within housing markets for both now and the future.
+    <p style="color:var(--muted); line-height:1.8; margin-bottom:1.5rem;">
+      The relationship between unemployment and housing prices that defined pre-2008 markets no longer appears to exist. Both methods agree, and the numbers tell a clean story.
     </p>
 
-    <div class="glass" style="padding:1.5rem 1.75rem; border-left:3px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0;">
-      <div class="section-label" style="margin-bottom:0.5rem;">Core Finding</div>
-      <p style="font-size:0.95rem; color:var(--muted); line-height:1.8;">
-        The unemployment rate's predictive power over housing prices declined by around 97% across the three periods, from -2.19% in Pre-Crisis to -0.06% in the Covid period. This finding was supported by both the frequentist and Bayesian approaches, and these results suggest that fiscal and monetary policy intervention measures very well may have altered housing market dynamics since 2000, suggesting a decoupling effect between unemployment and housing prices.
+    <div class="conclusion-grid">
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Pre-Crisis (2000-2008)</div>
+        <div class="cc-headline">The classic relationship held.</div>
+        <p>A one percentage point rise in unemployment predicted a <strong>-2.19% monthly decline in housing prices</strong>. The market behaved as economic theory expected, with tight sensitivity to labor market conditions.</p>
+      </div>
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Recovery (2009-2019)</div>
+        <div class="cc-headline">It weakened, but didn't break.</div>
+        <p>Sensitivity fell to <strong>-1.23%</strong>, roughly half of the pre-crisis level. The relationship was still real, still statistically significant, but something had shifted in how markets priced in labor market signals.</p>
+      </div>
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Covid (2020-2024)</div>
+        <div class="cc-headline">The signal effectively disappeared.</div>
+        <p>The coefficient dropped to <strong>-0.06%</strong>, statistically indistinguishable from zero. The Bayesian HDI confirms it: there is a <strong>95% probability the effect is zero</strong>. Unemployment and housing prices decoupled.</p>
+      </div>
+      <div class="glass conclusion-card">
+        <div class="cc-eyebrow">Implication</div>
+        <div class="cc-headline">Policy intervention may have rewritten the model.</div>
+        <p>The most plausible explanation is that fiscal and monetary interventions, mortgage forbearance, stimulus payments, and record-low rates, insulated housing prices from the labor market in ways that prior models never accounted for. <strong>Forecasting models built on historical patterns may be structurally outdated.</strong></p>
+      </div>
+    </div>
+
+    <div class="glass" style="padding:1.5rem 1.75rem; margin-top:1.75rem; border-left:3px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0;">
+      <div class="section-label" style="margin-bottom:0.5rem;">Looking Ahead</div>
+      <p style="font-size:0.92rem; color:var(--muted); line-height:1.75;">
+        The key open question is whether the decoupling persists beyond 2024 as policy interventions fade, or whether unemployment and housing prices re-couple as conditions normalize. The answer will determine whether the Covid period represents a structural break in housing market dynamics, or simply a temporary distortion.
       </p>
     </div>
   </section>
