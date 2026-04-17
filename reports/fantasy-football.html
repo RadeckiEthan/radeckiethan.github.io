@@ -12,23 +12,52 @@
 .arch-icon-svg { width:32px;height:32px;margin:0 auto 0.6rem;display:block; }
 .arch-box h4 { font-size:0.78rem;font-weight:700;color:var(--text);margin-bottom:0.35rem;text-transform:uppercase;letter-spacing:0.08em; }
 .arch-box p { font-size:0.76rem;color:var(--muted);line-height:1.5; }
+
 .metric-grid { display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.5rem 0; }
 .metric-card { padding:1.5rem; }
 .metric-card h4 { font-size:0.85rem;font-weight:700;color:var(--accent);margin-bottom:0.5rem; }
 .metric-card p { font-size:0.86rem;color:var(--muted);line-height:1.65; }
 .metric-formula { font-family:monospace;font-size:0.82rem;background:rgba(var(--accent-rgb),0.06);border:1px solid rgba(var(--accent-rgb),0.15);padding:0.4rem 0.75rem;border-radius:8px;margin-top:0.5rem;color:var(--text);display:inline-block; }
+
 .weight-table { width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:0.88rem; }
 .weight-table th { text-align:left;padding:0.6rem 1rem;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);border-bottom:2px solid var(--border-dim); }
 .weight-table td { padding:0.6rem 1rem;color:var(--muted);border-bottom:1px solid var(--border-dim); }
 .weight-table tr:last-child td { border-bottom:none; }
 .weight-bar { height:8px;border-radius:4px;background:rgba(var(--accent-rgb),0.15);position:relative;width:120px; }
 .weight-fill { height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2)); }
-.findings-bubbles { display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.5rem 0; }
-.finding-bubble { padding:1.5rem 1.75rem;transition:transform 0.2s; }
-.finding-bubble:hover { transform:translateY(-3px); }
-.finding-num { font-size:0.68rem;font-weight:800;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem;opacity:0.7; }
-.finding-bubble p { font-size:0.93rem;color:var(--text);line-height:1.65;font-weight:500; }
-@media(max-width:600px){ .findings-bubbles { grid-template-columns:1fr; } }
+
+.stat-row { display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.75rem 0; }
+.stat-box { padding:1.25rem 1rem;text-align:center; }
+.stat-box .num { font-size:1.9rem;font-weight:900;color:var(--accent);line-height:1;letter-spacing:-0.03em;margin-bottom:0.3rem; }
+.stat-box .label { font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);font-weight:600; }
+
+.visual-block { margin:2rem 0; }
+.visual-img { width:100%;border-radius:var(--radius);box-shadow:0 8px 32px rgba(0,0,0,0.1);display:block;cursor:zoom-in;transition:transform 0.2s; }
+.visual-img:hover { transform:scale(1.01); }
+.caption { font-size:0.8rem;color:var(--muted);margin-top:0.65rem;font-style:italic;text-align:center; }
+
+.callout { padding:1.25rem 1.5rem;margin:1.5rem 0;border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0; }
+.callout .callout-label { font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);font-weight:700;margin-bottom:0.5rem; }
+.callout p { font-size:0.9rem;color:var(--muted);line-height:1.7; }
+
+.conclusion-grid { display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0; }
+.conclusion-card { padding:1.25rem 1.5rem;border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;background:var(--surface);border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border); }
+.conclusion-card .cc-eyebrow { font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);font-weight:700;margin-bottom:0.4rem; }
+.conclusion-card .cc-headline { font-size:0.95rem;font-weight:800;color:var(--text);margin-bottom:0.4rem;line-height:1.3; }
+.conclusion-card p { font-size:0.82rem;color:var(--muted);line-height:1.6; }
+
+.lightbox-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:999;display:none;align-items:center;justify-content:center;cursor:zoom-out;padding:1.5rem; }
+.lightbox-overlay.active { display:flex; }
+.lightbox-overlay img { max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.5);object-fit:contain; }
+.lightbox-close { position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;opacity:0.7; }
+.lightbox-close:hover { opacity:1; }
+
+@media(max-width:768px){
+  .stat-row { grid-template-columns:repeat(2,1fr); }
+  .metric-grid { grid-template-columns:1fr; }
+  .arch-diagram { grid-template-columns:1fr; }
+  .conclusion-grid { grid-template-columns:1fr; }
+}
 </style>
 </head>
 <body>
@@ -54,11 +83,11 @@
     <div class="report-meta">
       <span class="meta-item"><span class="meta-dot"></span>Personal Project</span>
       <span class="meta-item"><span class="meta-dot"></span>Self-Taught</span>
-      <span class="meta-item"><span class="meta-dot"></span>2024 - 2025</span>
+      <span class="meta-item"><span class="meta-dot"></span>2024-2025</span>
       <span class="meta-item"><span class="meta-dot"></span>Live on Render</span>
     </div>
     <p class="report-summary">
-      A full-stack fantasy football web application built from scratch with no prior web development experience. The platform transforms six seasons of league data into interactive analytics including custom-built metrics, a machine learning similarity engine, and per-manager performance dashboards, deployed live and accessible to all league members.
+      A full-stack fantasy football web application built from scratch with no prior web development experience. <strong>Six seasons of league data</strong> transformed into interactive analytics: custom-built metrics, a machine learning similarity engine, and per-manager dashboards, <strong>deployed live and accessible to all league members</strong>.
     </p>
     <div class="report-actions">
       <a href="https://github.com/RadeckiEthan/fantasy-league-hub" target="_blank" class="r-btn primary">View on GitHub</a>
@@ -82,8 +111,8 @@
   <!-- PROBLEM -->
   <div class="section-label">Problem</div>
   <div class="section-title">More than a scoreboard.</div>
-  <p class="prose">Most fantasy football platforms give you wins, losses, and points - and nothing else. They don't tell you whether a team got lucky with their schedule, whether a manager is genuinely dominant or just fortunate, or how a current team compares to the best and worst teams in league history. Standard tools also have no memory: each season starts fresh with no cumulative context.</p>
-  <p class="prose">The goal was to build a platform that treats the league like a real sports organization, with career statistics, historical context, and analytics that actually tell you something meaningful about performance.</p>
+  <p class="prose">Most fantasy platforms give you wins, losses, and points, and nothing else. They don't tell you <strong>whether a team got lucky with their schedule</strong>, whether a manager is genuinely dominant or just fortunate, or how a current team compares to the best and worst teams in league history. Standard tools also have no memory: each season starts fresh with no cumulative context.</p>
+  <p class="prose">The goal was to treat the league like a real sports organization, with <strong>career statistics, historical context, and analytics that actually separate performance from luck</strong>.</p>
 
   <div class="callout glass">
     <div class="callout-label">Core Question</div>
@@ -95,7 +124,7 @@
   <!-- ARCHITECTURE -->
   <div class="section-label">Architecture</div>
   <div class="section-title">How the system is built.</div>
-  <p class="prose">The application follows a clean separation between data processing, application logic, and presentation. Python scripts handle all analytics and visualization generation; Flask routes serve dynamic pages from pre-processed data; and HTML templates handle display with Bootstrap for layout.</p>
+  <p class="prose">Clean separation between data processing, application logic, and presentation. <strong>Python handles all analytics</strong> and visualization generation; <strong>Flask routes serve dynamic pages</strong> from pre-processed data; HTML templates handle display with Bootstrap for layout.</p>
   <div class="arch-diagram">
     <div class="arch-box glass">
       <svg class="arch-icon-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,7 +137,7 @@
         <circle cx="23" cy="6" r="1.5" fill="rgba(74,140,100,0.9)"/>
       </svg>
       <h4>Data Layer</h4>
-      <p>CSV files for matchup history and manager stats. Python scripts for metric calculation, visualization generation, and similarity analysis.</p>
+      <p>CSV files for matchup history and manager stats. Python scripts for metric calculation, visualization, and similarity analysis.</p>
     </div>
     <div class="arch-box glass">
       <svg class="arch-icon-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +150,7 @@
         <line x1="3" y1="20" x2="29" y2="20" stroke="rgba(200,185,165,0.4)" stroke-width="1"/>
       </svg>
       <h4>Application Layer</h4>
-      <p>Flask backend with 15+ routes. Pandas for data manipulation. Plotly for interactive chart generation. Auto-runs visualization pipeline on startup.</p>
+      <p>Flask backend with 15+ routes. Pandas for data manipulation. Plotly for interactive charts. Visualization pipeline runs automatically on startup.</p>
     </div>
     <div class="arch-box glass">
       <svg class="arch-icon-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -145,26 +174,26 @@
   <!-- METRICS -->
   <div class="section-label">Custom Analytics</div>
   <div class="section-title">Metrics built from scratch.</div>
-  <p class="prose">Rather than surface-level stats, the platform introduces three original performance metrics designed to isolate real signals from the inherent randomness of fantasy scheduling, plus a dedicated draft slot analysis framework.</p>
+  <p class="prose">Rather than surface stats, the platform introduces <strong>three original performance metrics</strong> designed to isolate real signals from the inherent randomness of fantasy scheduling, plus a dedicated draft slot analysis framework.</p>
   <div class="metric-grid">
     <div class="metric-card glass">
       <h4>Dominance Score</h4>
-      <p>Measures how offensively dominant a team was relative to the rest of the league in a given season. A z-score calculated from points-for per game, where 0 is league average. Positive values indicate above-average scoring, negative values below average.</p>
+      <p>A z-score measuring how offensively dominant a team was relative to the league in a given season. <strong>0 is league average</strong>; positive values indicate above-average scoring.</p>
       <span class="metric-formula">z = (PF/G - league_mean) / league_std</span>
     </div>
     <div class="metric-card glass">
       <h4>Luck Score</h4>
-      <p>Measures how favorable a team's schedule was. Based on points-against per game. A team that faced weak opponents all season has a negative luck score. A high positive score means the schedule actively worked against them.</p>
+      <p>Measures how favorable a team's schedule was based on points-against per game. <strong>A high positive score means the schedule actively worked against them</strong>; negative means the schedule was a gift.</p>
       <span class="metric-formula">z = (PA/G - league_mean) / league_std</span>
     </div>
     <div class="metric-card glass">
       <h4>Schedule Luck Rating</h4>
-      <p>Quantifies the cumulative impact of schedule randomness by calculating how many wins a manager gained or lost over their career by not playing the league median score each week. A positive value means the schedule gifted wins; negative means wins were taken away.</p>
+      <p>Quantifies career schedule impact by comparing actual wins to expected wins if the team had played the <strong>league median score each week</strong>. Positive = schedule gifted wins; negative = wins were taken away.</p>
       <span class="metric-formula">luck = actual_wins - expected_wins</span>
     </div>
     <div class="metric-card glass">
       <h4>Draft Slot Analysis</h4>
-      <p>Manager-quality-adjusted analysis of historical draft slot performance. Accounts for the fact that stronger managers tend to cluster in certain slots over time, using each manager's career average Dominance Score as a quality baseline before measuring slot-level over or underperformance.</p>
+      <p>Manager-quality-adjusted analysis of draft slot performance. Accounts for stronger managers clustering in certain slots by using <strong>each manager's career Dominance Score as a quality baseline</strong> before measuring slot over/underperformance.</p>
       <span class="metric-formula">adj = actual_dom - expected_dom</span>
     </div>
   </div>
@@ -174,11 +203,11 @@
   <!-- SIMILARITY ENGINE -->
   <div class="section-label">Similarity Engine</div>
   <div class="section-title">Finding your historical twin.</div>
-  <p class="prose">The most technically complex feature is the historical team similarity engine, which matches each 2025 playoff team against every team in league history using a weighted Euclidean distance algorithm. The system normalizes all features using StandardScaler, applies custom weights to reflect the relative importance of each metric, and returns the top 3 most similar historical teams with a similarity score out of 100. By surfacing how analogous teams have fared historically in the playoffs, the engine offers meaningful context into how a current team's trajectory may unfold when the stakes are highest.</p>
+  <p class="prose">The most technically complex feature matches each 2025 playoff team against every team in league history using a <strong>weighted Euclidean distance algorithm</strong>. Features are normalized via StandardScaler, custom weights reflect each metric's relative importance, and the system returns the <strong>top 3 most similar historical teams</strong> with a similarity score out of 100.</p>
 
   <div class="visual-block">
     <img src="assets/preach_similarity_grid.png" class="visual-img" alt="Historical team similarity analysis grid">
-    <p class="caption">2025 playoff team similarity cards - each card shows the 3 most statistically similar teams from league history, ranked by weighted Euclidean distance across 7 performance features.</p>
+    <p class="caption">2025 playoff team similarity cards. Each card shows the 3 most statistically similar teams from league history, ranked by weighted Euclidean distance across 7 performance features.</p>
   </div>
 
   <table class="weight-table glass" style="padding:1.5rem;display:block;">
@@ -201,18 +230,18 @@
     </tbody>
   </table>
 
-  <p class="prose" style="margin-top:1.25rem;">The algorithm also handles non-standard playoff structures. The 2020 season had 14 teams with 4 playoff rounds, and 2021 included a wildcard game for two managers, requiring custom normalization logic to make historical comparisons meaningful across seasons with different formats.</p>
+  <p class="prose" style="margin-top:1.25rem;">The algorithm also handles non-standard playoff structures. The 2020 season had 14 teams with 4 playoff rounds; 2021 included a wildcard game for two managers, requiring <strong>custom normalization logic</strong> to make historical comparisons meaningful across seasons with different formats.</p>
 
   <hr class="section-divider">
 
   <!-- MANAGER DASHBOARDS -->
   <div class="section-label">Manager Dashboards</div>
   <div class="section-title">Per-manager interactive analytics.</div>
-  <p class="prose">Every manager in the league has a dedicated profile page generated dynamically from the data, including a career summary with rank-among-peers coloring, a full season-by-season record table, and interactive Plotly visualizations covering win percentage trends, scoring distributions, and head-to-head records. Rather than showcasing individual manager pages here, the visual below captures the full league view: an all-time head-to-head matrix showing career win percentages between every pair of managers.</p>
+  <p class="prose">Every manager has a dedicated profile page generated dynamically from the data, including a career summary with rank-among-peers coloring, a full season-by-season record table, and <strong>interactive Plotly visualizations</strong> covering win percentage trends, scoring distributions, and head-to-head records. The visual below shows the league-wide view: an all-time head-to-head matrix across every pair of managers.</p>
 
   <div class="visual-block">
     <img src="assets/preach_h2h_matrix.png" class="visual-img" alt="All-time head-to-head matrix">
-    <p class="caption">All-time head-to-head matrix across all managers (2020-2025). Green cells indicate winning records, red cells losing records - color intensity reflects dominance.</p>
+    <p class="caption">All-time head-to-head matrix (2020-2025). Green cells indicate winning records, red losing. Color intensity reflects dominance.</p>
   </div>
 
   <hr class="section-divider">
@@ -220,16 +249,16 @@
   <!-- DRAFT ANALYSIS -->
   <div class="section-label">Draft Analysis</div>
   <div class="section-title">Does draft position matter?</div>
-  <p class="prose">Using six seasons of draft and performance data, each draft slot was evaluated on two dimensions: raw playoff conversion rate and manager-quality-adjusted dominance score. Adjusting for manager quality is critical — stronger managers have historically clustered in certain slots, which can artificially inflate or deflate a slot's apparent value.</p>
+  <p class="prose">Six seasons of draft and performance data evaluated on two dimensions: <strong>raw playoff conversion rate</strong> and <strong>manager-quality-adjusted dominance score</strong>. Adjusting for manager quality is critical since stronger managers have historically clustered in certain slots, which can artificially inflate or deflate a slot's apparent value.</p>
 
   <div class="visual-block">
     <img src="assets/preach_draft_playoff_rate.png" class="visual-img" alt="Playoff rate by draft slot">
-    <p class="caption">Playoff rate by draft slot - slots 1, 7, 8, 11, and 13 show the highest historical playoff conversion rates at 83.3%.</p>
+    <p class="caption">Playoff rate by draft slot. Slots 1, 7, 8, 11, and 13 show the highest historical playoff conversion rates at 83.3%.</p>
   </div>
 
   <div class="visual-block">
     <img src="assets/preach_draft_adjusted_performance.png" class="visual-img" alt="Manager adjusted dominance score by draft slot">
-    <p class="caption">Manager-quality-adjusted dominance score by draft slot - controls for the fact that stronger managers cluster in certain positions over time.</p>
+    <p class="caption">Manager-quality-adjusted dominance score by draft slot. Controls for stronger managers clustering in certain positions over time.</p>
   </div>
 
   <hr class="section-divider">
@@ -237,11 +266,11 @@
   <!-- SEASONAL ANALYSIS -->
   <div class="section-label">Seasonal Analysis</div>
   <div class="section-title">Which quarter matters most?</div>
-  <p class="prose">To formally test which part of the season best predicts playoff qualification, a logistic regression was run using average points scored across each quarter of the season as independent variables. The model achieved an AUC of 0.83, indicating strong predictive accuracy.</p>
+  <p class="prose">A logistic regression tested which part of the season best predicts playoff qualification, using average points scored each quarter as independent variables. <strong>The model achieved an AUC of 0.83</strong>, indicating strong predictive accuracy.</p>
 
   <div class="visual-block">
     <img src="assets/preach_quarterly_regression.png" class="visual-img" alt="Quarterly regression predicting playoff appearance">
-    <p class="caption">Logistic regression coefficients and Pearson correlations for each quarter of the season as predictors of playoff appearance. Q2 (Wks 4-6) and Q4 (Wks 10-13) are statistically significant at p&lt;0.05, with Q3 (Wks 7-9) being the weakest predictor.</p>
+    <p class="caption">Logistic regression coefficients and Pearson correlations for each quarter as predictors of playoff appearance. <strong>Q2 (Wks 4-6) and Q4 (Wks 10-13) are statistically significant at p&lt;0.05.</strong> Q3 (Wks 7-9) is the weakest predictor.</p>
   </div>
 
   <hr class="section-divider">
@@ -249,47 +278,47 @@
   <!-- SCHEDULE LUCK -->
   <div class="section-label">Schedule Luck</div>
   <div class="section-title">Who has the schedule been kind to?</div>
-  <p class="prose">By comparing each manager's actual win total against their expected win total — calculated by measuring weekly scores against the league median — it's possible to quantify exactly how much the schedule has helped or hurt each manager over their entire career.</p>
+  <p class="prose">By comparing each manager's actual wins against expected wins, calculated by measuring weekly scores against the <strong>league median each week</strong>, the platform quantifies exactly how much the schedule has helped or hurt each manager over their entire career.</p>
 
   <div class="visual-block">
     <img src="assets/preach_luck_analysis.png" class="visual-img" alt="All-time schedule luck analysis">
-    <p class="caption">All-time schedule luck rankings (2020-2025). Luck is defined as actual wins minus expected wins, where expected wins are calculated by comparing each weekly score against the league median that week.</p>
+    <p class="caption">All-time schedule luck rankings (2020-2025). Luck = actual wins minus expected wins against the weekly league median.</p>
   </div>
 
   <hr class="section-divider">
 
-  <!-- KEY FINDINGS -->
+  <!-- CONCLUSION -->
   <div class="section-label">Key Findings</div>
   <div class="section-title">What the data revealed.</div>
-  <div class="findings-bubbles">
-    <div class="finding-bubble glass">
-      <div class="finding-num">01</div>
-      <p>Historical similarity is an interesting lens but a limited predictor — single-elimination fantasy playoffs are too luck-dependent for past patterns to be reliable, though the 2025 champion was most similar to a prior champion in the model.</p>
+
+  <p class="prose" style="margin-bottom:1.5rem;">Six seasons of data surfaced patterns that standard platforms would never show. Some of them were surprising.</p>
+
+  <div class="conclusion-grid">
+    <div class="conclusion-card glass">
+      <div class="cc-eyebrow">Draft Strategy</div>
+      <div class="cc-headline">Later slots outperform expectations.</div>
+      <p>When adjusting for manager quality, <strong>slots 9-14 consistently outpaced expectations</strong> while slots 1, 3-6 fell short. Early picks carry more pressure and leave less room to exceed what's expected of them.</p>
     </div>
-    <div class="finding-bubble glass">
-      <div class="finding-num">02</div>
-      <p>Later draft slots tend to over-achieve while early slots underperform — when accounting for manager talent, slots 9-14 consistently outpaced expectations while slots 1, 3-6 fell short.</p>
+    <div class="conclusion-card glass">
+      <div class="cc-eyebrow">Season Structure</div>
+      <div class="cc-headline">Q2 and Q4 are what matter.</div>
+      <p><strong>Weeks 4-6 and 10-13 are the only statistically significant predictors of making the playoffs</strong> (p&lt;0.05, AUC 0.83). The middle stretch of the season (Q3) is nearly irrelevant in terms of predictive power.</p>
     </div>
-    <div class="finding-bubble glass">
-      <div class="finding-num">03</div>
-      <p>Q2 and Q4 scoring are the only statistically significant predictors of making the playoffs (p&lt;0.05, AUC 0.83).</p>
+    <div class="conclusion-card glass">
+      <div class="cc-eyebrow">Schedule Luck</div>
+      <div class="cc-headline">The schedule has swung careers by up to 10 wins.</div>
+      <p>Some managers are <strong>significantly better than their record shows</strong>. Others have been gifted wins they didn't earn. The luck metric makes that visible for the first time in this league's history.</p>
     </div>
-    <div class="finding-bubble glass">
-      <div class="finding-num">04</div>
-      <p>Schedule luck has swung careers by up to 10 wins — some managers are far better than their record shows.</p>
+    <div class="conclusion-card glass">
+      <div class="cc-eyebrow">Similarity Engine</div>
+      <div class="cc-headline">Interesting lens, limited predictor.</div>
+      <p>Single-elimination fantasy playoffs are too luck-dependent for past patterns to be reliable guides. That said, <strong>the 2025 champion's most similar historical team was a prior champion</strong>, so it's not useless either.</p>
     </div>
   </div>
 
-  <hr class="section-divider">
-
-  <!-- REFLECTION -->
-  <div class="section-label">Reflection</div>
-  <div class="section-title">What this project taught me.</div>
-  <p class="prose">Building this platform from zero prior web development experience taught me how to connect existing analytical skills in Python and statistical modeling to full-stack engineering — spanning data pipeline design, backend routing with Flask, and production deployment on Render.</p>
-
-  <div class="callout glass">
-    <div class="callout-label">Takeaway</div>
-    <p>The most valuable thing a data scientist can build isn't always the most complex model — it's the tool that makes good analysis accessible and interpretable to the people who need it.</p>
+  <div class="callout glass" style="margin-top:1.75rem;">
+    <div class="callout-label">The Bigger Takeaway</div>
+    <p>The most valuable thing a data scientist can build isn't always the most complex model. It's the tool that makes good analysis <strong>accessible and interpretable to the people who need it</strong>. Building this platform from zero web development experience taught me how to connect Python and statistical modeling to full-stack engineering — and how to ship something people actually use.</p>
   </div>
 
   <hr class="section-divider">
