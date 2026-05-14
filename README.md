@@ -20,7 +20,6 @@ radeckiethan.github.io/
     ├── housing.html                  # Housing markets report
     ├── movie-review-sentiment.html   # Sentiment analysis report
     ├── cnn-emotion-music.html        # CNN emotion project report
-    ├── blog.html                     # Program reflection blog post
     └── assets/                       # Images and data files for reports
 ```
 
