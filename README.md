@@ -2,7 +2,7 @@
 
 **Live site:** [radeckiethan.github.io](https://radeckiethan.github.io/index.html)
 
-M.S. Applied Data Science candidate at Syracuse University. This portfolio showcases six data science projects spanning machine learning, natural language processing, sports analytics, econometrics, and full-stack web development.
+M.S. Applied Data Science graduate from Syracuse University. This portfolio showcases six data science projects spanning machine learning, natural language processing, sports analytics, econometrics, and full-stack web development.
 
 ---
 
@@ -12,7 +12,7 @@ M.S. Applied Data Science candidate at Syracuse University. This portfolio showc
 radeckiethan.github.io/
 ├── index.html                        # Main portfolio page
 ├── style.css                         # Shared styles across all pages
-├── RadeckiEthan_Resume_Base.pdf      # Downloadable resume
+├── RadeckiEthan_Resume_May2026.pdf   # Downloadable resume
 └── reports/
     ├── nba-roster-construction.html  # NBA project report
     ├── movies.html                   # Letterboxd project report
