@@ -12,6 +12,7 @@
 .p-visual-cnn::before { content:'';position:absolute;inset:0;background:radial-gradient(circle at 25% 50%,rgba(160,80,140,0.08) 0%,transparent 55%),radial-gradient(circle at 75% 50%,rgba(74,127,168,0.08) 0%,transparent 55%); }
 .p-visual-sentiment { background:linear-gradient(135deg,rgba(180,60,60,0.12),rgba(74,127,168,0.12)); }
 .p-visual-sentiment::before { content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 10px,rgba(180,60,60,0.04) 10px,rgba(180,60,60,0.04) 11px); }
+.p-visual-esg { background:linear-gradient(135deg,rgba(74,127,168,0.08) 0%,rgba(74,127,168,0.04) 100%); }
 
 /* About highlights */
 .about-highlights { display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; margin-top:1.5rem; }
@@ -133,7 +134,35 @@
   <p class="section-sub">A selection of projects spanning machine learning, NLP, sports analytics, and business intelligence.</p>
   <div class="projects-grid">
 
-    <!-- 1: NBA -->
+    <!-- 1: ESG -->
+    <div class="project-card glass" onclick="openProj('p1')">
+      <div class="p-top-bar"></div>
+      <div class="p-visual p-visual-esg">
+        <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="65" r="55" fill="none" stroke="rgba(74,127,168,0.15)" stroke-width="1"/>
+          <circle cx="100" cy="65" r="40" fill="none" stroke="rgba(74,127,168,0.2)" stroke-width="1"/>
+          <rect x="22" y="72" width="10" height="28" rx="2" fill="rgba(74,127,168,0.35)"/>
+          <rect x="35" y="58" width="10" height="42" rx="2" fill="rgba(74,127,168,0.55)"/>
+          <rect x="48" y="45" width="10" height="55" rx="2" fill="rgba(74,127,168,0.75)"/>
+          <path d="M85 85 Q100 40 115 85" fill="none" stroke="rgba(74,127,168,0.8)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="100" cy="62" r="4" fill="#4a7fa8"/>
+          <rect x="130" y="48" width="42" height="5" rx="2" fill="rgba(74,127,168,0.3)"/>
+          <rect x="130" y="58" width="30" height="5" rx="2" fill="rgba(74,127,168,0.5)"/>
+          <rect x="130" y="68" width="38" height="5" rx="2" fill="rgba(74,127,168,0.4)"/>
+          <rect x="130" y="78" width="24" height="5" rx="2" fill="rgba(74,127,168,0.6)"/>
+          <rect x="130" y="88" width="35" height="5" rx="2" fill="rgba(74,127,168,0.35)"/>
+          <text x="30" y="112" font-size="7" fill="rgba(74,127,168,0.7)" text-anchor="middle" font-family="sans-serif" font-weight="600">E</text>
+          <text x="100" y="112" font-size="7" fill="rgba(74,127,168,0.7)" text-anchor="middle" font-family="sans-serif" font-weight="600">S</text>
+          <text x="151" y="112" font-size="7" fill="rgba(74,127,168,0.7)" text-anchor="middle" font-family="sans-serif" font-weight="600">G</text>
+        </svg>
+      </div>
+      <h3>Democratizing ESG Ratings Through Machine Learning</h3>
+      <p>Predicting corporate sustainability scores from free SEC filings and FinBERT text analysis, replacing $30K/year black-box ratings with a transparent, zero-cost pipeline.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">FinBERT</span><span class="tag">ElasticNet</span><span class="tag">NLP</span></div>
+      <button class="view-btn">View Project →</button>
+    </div>
+
+    <!-- 2: NBA -->
     <div class="project-card glass" onclick="openProj('p4')">
       <div class="p-top-bar"></div>
       <div class="p-visual p-visual-nba">
@@ -153,7 +182,7 @@
       <button class="view-btn">View Project →</button>
     </div>
 
-    <!-- 2: Letterboxd -->
+    <!-- 3: Letterboxd -->
     <div class="project-card glass" onclick="openProj('p2')">
       <div class="p-top-bar"></div>
       <div class="p-visual p-visual-movie">
@@ -176,7 +205,7 @@
       <button class="view-btn">View Project →</button>
     </div>
 
-    <!-- 3: Fantasy -->
+    <!-- 4: Fantasy -->
     <div class="project-card glass" onclick="openProj('p3')">
       <div class="p-top-bar"></div>
       <div class="p-visual p-visual-ff">
@@ -198,7 +227,7 @@
       <button class="view-btn">View Project →</button>
     </div>
 
-    <!-- 4: Housing -->
+    <!-- 5: Housing -->
     <div class="project-card glass" onclick="openProj('p5')">
       <div class="p-top-bar"></div>
       <div class="p-visual p-visual-housing">
@@ -219,7 +248,7 @@
       <button class="view-btn">View Project →</button>
     </div>
 
-    <!-- 5: Movie Review Sentiment -->
+    <!-- 6: Movie Review Sentiment -->
     <div class="project-card glass" onclick="openProj('p7')">
       <div class="p-top-bar"></div>
       <div class="p-visual p-visual-sentiment">
@@ -245,7 +274,7 @@
       <button class="view-btn">View Project →</button>
     </div>
 
-    <!-- 6: CNN Emotion -->
+    <!-- 7: CNN Emotion -->
     <div class="project-card glass" onclick="openProj('p6')">
       <div class="p-top-bar"></div>
       <div class="p-visual p-visual-cnn">
@@ -431,6 +460,20 @@
 
 <script>
 const data = {
+  p1:{
+    title:"Democratizing ESG: Predicting Sustainability Scores from Free Public Data",
+    sub:"IST 707 Applied Machine Learning · Python · FinBERT · ElasticNet",
+    overview:"Commercial ESG ratings cost up to $30,000 per year and use proprietary black-box methodologies. This project builds a machine learning pipeline that predicts corporate ESG scores using only freely available SEC 10-K filings and public EDGAR financial data, making sustainability signal accessible without a subscription. The Social pillar model achieved a test R\u00b2 of 0.215 with full coefficient-level interpretability.",
+    pts:[
+      {bold:"Extracted and processed narrative text", text:" from three 10-K filing sections (Business, Risk Factors, MD&A) for 323 S&P 500 companies via the SEC EDGAR API."},
+      {bold:"76 FinBERT sentiment features", text:" per company generated by chunking filing text into sentences and scoring positive/negative/neutral probabilities using a finance-specific language model."},
+      {bold:"ElasticNet selected over XGBoost and Ridge", text:" via 5-fold CV; L1 regularization drove 110-128 of 130 features to zero, producing a sparse, directly interpretable model."},
+      {bold:"Best result: Social pillar Test R\u00b2 = 0.215.", text:" Governance near-zero confirmed as a structural ceiling since board and compensation signals do not appear in 10-K filings."}
+    ],
+    stack:["Python","FinBERT","ElasticNet","SEC EDGAR API","scikit-learn","pandas"],
+    gh:"#",
+    report:"reports/esg.html"
+  },
   p2:{
     title:"My Letterboxd in Numbers",
     sub:"Personal Analytics · Python · scikit-learn · Chart.js",
@@ -526,7 +569,7 @@ function openProj(id) {
     const a = document.createElement('a');
     a.href = p.report;
     a.className = 'm-link s';
-    a.textContent = 'View Full Report →';
+    a.textContent = 'View Full Report \u2192';
     linksTop.appendChild(a);
   }
   if (p.gh && p.gh !== '#') {

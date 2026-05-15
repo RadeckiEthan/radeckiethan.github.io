@@ -2,7 +2,7 @@
 
 **Live site:** [radeckiethan.github.io](https://radeckiethan.github.io/index.html)
 
-M.S. Applied Data Science graduate from Syracuse University. This portfolio showcases six data science projects spanning machine learning, natural language processing, sports analytics, econometrics, and full-stack web development.
+M.S. Applied Data Science graduate from Syracuse University. This portfolio showcases seven data science projects spanning machine learning, natural language processing, sports analytics, econometrics, and full-stack web development.
 
 ---
 
@@ -14,6 +14,7 @@ radeckiethan.github.io/
 ├── style.css                         # Shared styles across all pages
 ├── RadeckiEthan_Resume_May2026.pdf   # Downloadable resume
 └── reports/
+    ├── esg.html                      # ESG ratings project report
     ├── nba-roster-construction.html  # NBA project report
     ├── movies.html                   # Letterboxd project report
     ├── fantasy-football.html         # Fantasy football report
@@ -26,6 +27,15 @@ radeckiethan.github.io/
 ---
 
 ## Projects
+
+### Democratizing ESG: Predicting Corporate Sustainability Scores from Free Public Data
+**Course:** IST 707 — Applied Machine Learning. Group project with Caden Lippie and John Masseria.
+
+A machine learning pipeline that predicts corporate ESG scores using only freely available SEC 10-K filings and public EDGAR financial data, with no proprietary feeds, no prior ESG ratings, and no cost barrier. FinBERT sentiment features extracted from three 10-K narrative sections feed an ElasticNet regression model across 323 S&P 500 companies. The Social pillar achieved a holdout test R² of 0.215; Governance was structurally unpredictable from 10-K text alone.
+
+`Python` `FinBERT` `ElasticNet` `SEC EDGAR API` `scikit-learn` `pandas`
+
+---
 
 ### NBA Roster Construction & Salary Optimization
 **Course:** Senior Thesis — Syracuse University, 2025
@@ -87,11 +97,11 @@ A real-time pipeline that classifies facial expressions into one of seven emotio
 |---|---|
 | Languages | Python, R, SQL |
 | Machine Learning | scikit-learn, TensorFlow, Keras, XGBoost |
-| NLP | NLTK, TF-IDF, VADER, LIWC |
+| NLP | NLTK, FinBERT, TF-IDF, VADER, LIWC |
 | Data & Visualization | Pandas, NumPy, Plotly, Tableau, Chart.js, Matplotlib |
 | Web | Flask, Bootstrap, HTML, CSS, JavaScript |
-| Statistical Modeling | OLS Regression, Panel Regression, Bayesian MCMC |
-| APIs & Data Sources | TMDB API, FRED, Basketball-Reference, RealGM, Spotify |
+| Statistical Modeling | OLS Regression, ElasticNet, Panel Regression, Bayesian MCMC |
+| APIs & Data Sources | SEC EDGAR, TMDB API, FRED, Basketball-Reference, RealGM, Spotify |
 | Deployment | GitHub Pages, Render |
 
 ---
