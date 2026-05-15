@@ -49,7 +49,7 @@ Three OLS regression models across 3,176 player-seasons and 420 team rosters (20
 ### My Letterboxd in Numbers
 **Course:** Personal Project
 
-A personal analytics pipeline built on 689 rated films and 255 written reviews. TMDB API metadata enrichment feeds two machine learning models: an NLP model using TF-IDF and VADER sentiment, and a structured model using film properties. Explores whether writing style or the film itself better predicts personal taste.
+A personal analytics pipeline built on 704 rated films and 275 written reviews. TMDB API metadata enrichment feeds two machine learning models: an NLP model using TF-IDF and VADER sentiment, and a structured model using film properties. The NLP classifier achieves 62% accuracy versus a 48% majority-class baseline. VADER sentiment correlates only 0.16 with star ratings, and removing TMDB vote average from the structured model collapses performance to near zero.
 
 `Python` `scikit-learn` `TF-IDF` `VADER` `Ridge Regression` `TMDB API` `Chart.js`
 

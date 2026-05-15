@@ -200,7 +200,7 @@
         </svg>
       </div>
       <h3>My Letterboxd in Numbers</h3>
-      <p>A personal analytics report built on <strong>689 rated films</strong> and <strong>255 written reviews</strong>, with NLP models, TMDB metadata analysis, and a structured ML model comparing my taste against crowd consensus.</p>
+      <p>A personal analytics report built on <strong>704 rated films</strong> and <strong>275 written reviews</strong>, with NLP models, TMDB metadata analysis, and a structured ML model comparing my taste against crowd consensus.</p>
       <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">TF-IDF</span><span class="tag">VADER</span><span class="tag">TMDB API</span><span class="tag">Chart.js</span></div>
       <button class="view-btn">View Project →</button>
     </div>
@@ -477,12 +477,12 @@ const data = {
   p2:{
     title:"My Letterboxd in Numbers",
     sub:"Personal Analytics · Python · scikit-learn · Chart.js",
-    overview:"Two years of rating and reviewing every film I watch, turned into a full analytics pipeline. Two ML models trained on 689 films: one on review text, one on film properties. The question: can my writing, or the film itself, predict how much I liked it?",
+    overview:"Two years of rating and reviewing every film I watch, turned into a full analytics pipeline. Two ML models trained on 704 films: one on review text, one on film properties. The question: can my writing, or the film itself, predict how much I liked it?",
     pts:[
-      {bold:"689 rated films, 255 written reviews", text:" analyzed with genre, director, actor, and financial metadata from the TMDB API."},
-      {bold:"NLP model (TF-IDF + VADER):", text:" 3-class Logistic Regression achieves 64.7% accuracy vs a 48% majority-class baseline."},
-      {bold:"Structured model reveals:", text:" removing TMDB vote average collapses R\u00b2 from 0.45 to near zero. Genre, director, and runtime alone explain almost nothing about personal taste."},
-      {bold:"VADER sentiment correlates only 0.176", text:" with star ratings, suggesting an analytical, often humorous writing style regardless of how much I liked a film."}
+      {bold:"704 rated films, 275 written reviews", text:" analyzed with genre, director, actor, and financial metadata from the TMDB API."},
+      {bold:"NLP model (TF-IDF + VADER):", text:" 3-class Logistic Regression achieves 62% accuracy vs a 48% majority-class baseline."},
+      {bold:"Structured model reveals:", text:" removing TMDB vote average collapses R\u00b2 to near zero. Genre, director, and runtime alone explain almost nothing about personal taste."},
+      {bold:"VADER sentiment correlates only 0.16", text:" with star ratings, suggesting an analytical, often humorous writing style regardless of how much I liked a film."}
     ],
     stack:["Python","scikit-learn","TF-IDF","VADER","Ridge Regression","TMDB API","Chart.js"],
     report:"reports/movies.html"
