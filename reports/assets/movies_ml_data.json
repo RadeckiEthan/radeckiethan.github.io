@@ -1,7 +1,7 @@
 {
   "train_test_split": {
-    "train_size": 204,
-    "test_size": 51,
+    "train_size": 220,
+    "test_size": 55,
     "test_pct": 0.2,
     "random_state": 42
   },
@@ -11,45 +11,45 @@
     "Great": "≥4.0"
   },
   "class_distribution": {
-    "Meh": 28,
-    "Solid": 104,
-    "Great": 123
+    "Meh": 33,
+    "Solid": 113,
+    "Great": 129
   },
-  "vader_correlation_with_rating": 0.176,
+  "vader_correlation_with_rating": 0.16,
   "vader_by_class": {
     "Meh": {
-      "mean_compound": 0.382,
-      "mean_pos": 0.14,
-      "mean_neg": 0.078,
-      "mean_neu": 0.783
+      "mean_compound": 0.465,
+      "mean_pos": 0.148,
+      "mean_neg": 0.081,
+      "mean_neu": 0.772
     },
     "Solid": {
-      "mean_compound": 0.845,
+      "mean_compound": 0.842,
       "mean_pos": 0.183,
       "mean_neg": 0.047,
       "mean_neu": 0.77
     },
     "Great": {
-      "mean_compound": 0.788,
+      "mean_compound": 0.798,
       "mean_pos": 0.197,
       "mean_neg": 0.046,
       "mean_neu": 0.757
     }
   },
   "nlp_regression_metrics": {
-    "cv_r2_mean": 0.231,
-    "cv_r2_std": 0.082,
-    "cv_mae_mean": 0.498,
-    "cv_mae_std": 0.057,
-    "test_r2": 0.416,
-    "test_mae": 0.457
+    "cv_r2_mean": 0.322,
+    "cv_r2_std": 0.044,
+    "cv_mae_mean": 0.505,
+    "cv_mae_std": 0.036,
+    "test_r2": 0.299,
+    "test_mae": 0.435
   },
   "nlp_classification_metrics": {
-    "cv_accuracy_mean": 0.613,
-    "cv_accuracy_std": 0.035,
-    "cv_f1_mean": 0.528,
-    "cv_f1_std": 0.041,
-    "test_accuracy": 0.647,
+    "cv_accuracy_mean": 0.618,
+    "cv_accuracy_std": 0.097,
+    "cv_f1_mean": 0.531,
+    "cv_f1_std": 0.089,
+    "test_accuracy": 0.618,
     "classes": [
       "Meh",
       "Solid",
@@ -64,50 +64,52 @@
     ],
     "matrix": [
       [
-        4,
-        2,
+        3,
+        3,
         0
       ],
       [
-        3,
-        13,
-        5
+        0,
+        12,
+        11
       ],
       [
         3,
-        5,
-        16
+        4,
+        19
       ]
     ],
     "misclassified_films": {
       "Meh_as_Solid": [
-        "Heads of State",
-        "The Loveless"
+        "The Electric State",
+        "Good Time",
+        "Heads of State"
       ],
       "Meh_as_Great": [],
-      "Solid_as_Meh": [
-        "The King",
-        "War Machine",
-        "The Naked Gun"
-      ],
+      "Solid_as_Meh": [],
       "Solid_as_Great": [
-        "Notting Hill",
-        "Wake Up Dead Man",
-        "Fantastic Beasts and Where to Find Them",
         "Flow",
-        "The Lego Batman Movie"
+        "The Last of the Mohicans",
+        "Warfare",
+        "Dunkirk",
+        "Moon",
+        "Notting Hill",
+        "Pom Poko",
+        "The Man in the Iron Mask",
+        "Wake Up Dead Man",
+        "Harry Potter and the Chamber of Secrets",
+        "Happy Gilmore 2"
       ],
       "Great_as_Meh": [
         "Mississippi Burning",
-        "Say Anything...",
-        "Training Day"
+        "Training Day",
+        "Say Anything..."
       ],
       "Great_as_Solid": [
-        "Glengarry Glen Ross",
-        "Argo",
-        "How to Train Your Dragon",
         "Perfect Blue",
-        "Battle Royale"
+        "The Drama",
+        "Battle Royale",
+        "Collateral"
       ]
     }
   },
@@ -115,206 +117,206 @@
     "Meh": {
       "top": [
         {
-          "word": "comedy",
-          "score": 0.8986
+          "word": "didn",
+          "score": 0.9429
         },
         {
           "word": "just",
-          "score": 0.8487
+          "score": 0.8943
         },
         {
           "word": "plot",
-          "score": 0.8058
-        },
-        {
-          "word": "type",
-          "score": 0.6679
-        },
-        {
-          "word": "lmao",
-          "score": 0.6593
-        },
-        {
-          "word": "place",
-          "score": 0.6388
-        },
-        {
-          "word": "really like",
-          "score": 0.6123
-        },
-        {
-          "word": "worse",
-          "score": 0.5845
-        },
-        {
-          "word": "decisions",
-          "score": 0.5844
-        },
-        {
-          "word": "seeing",
-          "score": 0.5363
-        },
-        {
-          "word": "watching",
-          "score": 0.5307
-        },
-        {
-          "word": "dumb",
-          "score": 0.4998
-        },
-        {
-          "word": "expect",
-          "score": 0.485
-        },
-        {
-          "word": "sadly",
-          "score": 0.4817
+          "score": 0.823
         },
         {
           "word": "yeah",
-          "score": 0.4772
-        },
-        {
-          "word": "deliver",
-          "score": 0.4616
-        },
-        {
-          "word": "good movie",
-          "score": 0.4592
-        },
-        {
-          "word": "time",
-          "score": 0.4546
-        },
-        {
-          "word": "basically",
-          "score": 0.4479
-        },
-        {
-          "word": "trailer",
-          "score": 0.4392
+          "score": 0.7591
         },
         {
           "word": "honestly",
-          "score": 0.4369
+          "score": 0.6588
         },
         {
-          "word": "funny",
-          "score": 0.4367
+          "word": "decisions",
+          "score": 0.6448
         },
         {
-          "word": "ve seen",
-          "score": 0.4344
+          "word": "comedy",
+          "score": 0.6334
         },
         {
-          "word": "drama",
-          "score": 0.4294
+          "word": "dumb",
+          "score": 0.613
         },
         {
-          "word": "movie honestly",
-          "score": 0.4224
+          "word": "watching",
+          "score": 0.6121
+        },
+        {
+          "word": "worst",
+          "score": 0.6054
+        },
+        {
+          "word": "expect",
+          "score": 0.5718
+        },
+        {
+          "word": "fine",
+          "score": 0.5548
+        },
+        {
+          "word": "end",
+          "score": 0.547
+        },
+        {
+          "word": "care",
+          "score": 0.5385
+        },
+        {
+          "word": "predictable",
+          "score": 0.5256
+        },
+        {
+          "word": "worse",
+          "score": 0.5255
+        },
+        {
+          "word": "type",
+          "score": 0.51
+        },
+        {
+          "word": "lmao",
+          "score": 0.4993
+        },
+        {
+          "word": "place",
+          "score": 0.491
+        },
+        {
+          "word": "don",
+          "score": 0.488
+        },
+        {
+          "word": "exactly expect",
+          "score": 0.4658
+        },
+        {
+          "word": "sadly",
+          "score": 0.456
+        },
+        {
+          "word": "good movie",
+          "score": 0.451
+        },
+        {
+          "word": "kill",
+          "score": 0.4408
+        },
+        {
+          "word": "recommend",
+          "score": 0.4377
         }
       ],
       "bottom": [
         {
-          "word": "great",
-          "score": -0.4552
-        },
-        {
           "word": "solid",
-          "score": -0.4447
-        },
-        {
-          "word": "best",
-          "score": -0.4173
-        },
-        {
-          "word": "life",
-          "score": -0.4163
-        },
-        {
-          "word": "peak",
-          "score": -0.414
-        },
-        {
-          "word": "way",
-          "score": -0.4104
-        },
-        {
-          "word": "thought",
-          "score": -0.3963
-        },
-        {
-          "word": "action",
-          "score": -0.3836
-        },
-        {
-          "word": "performance",
-          "score": -0.3783
-        },
-        {
-          "word": "final",
-          "score": -0.3652
-        },
-        {
-          "word": "feels",
-          "score": -0.3585
-        },
-        {
-          "word": "hitchcock",
-          "score": -0.3553
-        },
-        {
-          "word": "home",
-          "score": -0.3456
-        },
-        {
-          "word": "incredible",
-          "score": -0.3319
-        },
-        {
-          "word": "half",
-          "score": -0.3268
-        },
-        {
-          "word": "little",
-          "score": -0.3199
-        },
-        {
-          "word": "say",
-          "score": -0.3137
-        },
-        {
-          "word": "deeper",
-          "score": -0.3136
-        },
-        {
-          "word": "feels like",
-          "score": -0.2963
-        },
-        {
-          "word": "scene",
-          "score": -0.2935
-        },
-        {
-          "word": "fun",
-          "score": -0.2933
-        },
-        {
-          "word": "job",
-          "score": -0.286
-        },
-        {
-          "word": "true",
-          "score": -0.2774
-        },
-        {
-          "word": "gotta",
-          "score": -0.2754
+          "score": -0.533
         },
         {
           "word": "film",
-          "score": -0.2701
+          "score": -0.4937
+        },
+        {
+          "word": "final",
+          "score": -0.4582
+        },
+        {
+          "word": "life",
+          "score": -0.4431
+        },
+        {
+          "word": "great",
+          "score": -0.4338
+        },
+        {
+          "word": "fun",
+          "score": -0.3902
+        },
+        {
+          "word": "incredible",
+          "score": -0.3876
+        },
+        {
+          "word": "action",
+          "score": -0.3721
+        },
+        {
+          "word": "scene",
+          "score": -0.3644
+        },
+        {
+          "word": "peak",
+          "score": -0.3631
+        },
+        {
+          "word": "job",
+          "score": -0.3612
+        },
+        {
+          "word": "hitchcock",
+          "score": -0.3417
+        },
+        {
+          "word": "lot",
+          "score": -0.3373
+        },
+        {
+          "word": "idea",
+          "score": -0.3307
+        },
+        {
+          "word": "best",
+          "score": -0.3267
+        },
+        {
+          "word": "strong",
+          "score": -0.3042
+        },
+        {
+          "word": "home",
+          "score": -0.2939
+        },
+        {
+          "word": "way",
+          "score": -0.2936
+        },
+        {
+          "word": "deeper",
+          "score": -0.2891
+        },
+        {
+          "word": "finally",
+          "score": -0.289
+        },
+        {
+          "word": "classic",
+          "score": -0.286
+        },
+        {
+          "word": "doesn",
+          "score": -0.282
+        },
+        {
+          "word": "makes",
+          "score": -0.28
+        },
+        {
+          "word": "liked",
+          "score": -0.2755
+        },
+        {
+          "word": "performance",
+          "score": -0.2745
         }
       ]
     },
@@ -322,205 +324,205 @@
       "top": [
         {
           "word": "pretty",
-          "score": 0.8113
+          "score": 0.876
         },
         {
           "word": "solid",
-          "score": 0.741
+          "score": 0.8291
         },
         {
           "word": "fun",
-          "score": 0.6366
+          "score": 0.7838
         },
         {
           "word": "definitely",
-          "score": 0.628
+          "score": 0.5789
         },
         {
           "word": "action",
-          "score": 0.4885
-        },
-        {
-          "word": "felt",
-          "score": 0.4755
-        },
-        {
-          "word": "say",
-          "score": 0.4561
+          "score": 0.5211
         },
         {
           "word": "did",
-          "score": 0.45
+          "score": 0.4477
         },
         {
-          "word": "quick",
-          "score": 0.4364
+          "word": "say",
+          "score": 0.4258
         },
         {
-          "word": "just didn",
-          "score": 0.4195
+          "word": "feels like",
+          "score": 0.4225
         },
         {
-          "word": "movie",
-          "score": 0.4136
+          "word": "lowkey",
+          "score": 0.4173
         },
         {
-          "word": "pull",
-          "score": 0.3939
+          "word": "bit",
+          "score": 0.4088
         },
         {
-          "word": "home",
-          "score": 0.3832
-        },
-        {
-          "word": "ll",
-          "score": 0.3815
-        },
-        {
-          "word": "laughs",
-          "score": 0.3594
-        },
-        {
-          "word": "try",
-          "score": 0.3549
-        },
-        {
-          "word": "given",
-          "score": 0.3455
-        },
-        {
-          "word": "nice",
-          "score": 0.341
-        },
-        {
-          "word": "actually",
-          "score": 0.3405
-        },
-        {
-          "word": "meh",
-          "score": 0.339
-        },
-        {
-          "word": "hilarious",
-          "score": 0.3383
-        },
-        {
-          "word": "let",
-          "score": 0.3314
+          "word": "job",
+          "score": 0.3922
         },
         {
           "word": "little",
-          "score": 0.3249
+          "score": 0.3834
         },
         {
-          "word": "fully",
-          "score": 0.3224
+          "word": "present",
+          "score": 0.3834
         },
         {
-          "word": "stuck",
-          "score": 0.3205
+          "word": "wanted",
+          "score": 0.3812
+        },
+        {
+          "word": "kinda",
+          "score": 0.3791
+        },
+        {
+          "word": "expectations",
+          "score": 0.364
+        },
+        {
+          "word": "just feels",
+          "score": 0.3635
+        },
+        {
+          "word": "girl",
+          "score": 0.3614
+        },
+        {
+          "word": "hopefully",
+          "score": 0.3602
+        },
+        {
+          "word": "like movie",
+          "score": 0.3456
+        },
+        {
+          "word": "felt",
+          "score": 0.3427
+        },
+        {
+          "word": "super",
+          "score": 0.3417
+        },
+        {
+          "word": "obviously",
+          "score": 0.3406
+        },
+        {
+          "word": "hilarious",
+          "score": 0.3393
+        },
+        {
+          "word": "new",
+          "score": 0.3367
         }
       ],
       "bottom": [
         {
           "word": "place",
-          "score": -0.6191
+          "score": -0.497
         },
         {
-          "word": "time",
-          "score": -0.527
-        },
-        {
-          "word": "absolutely",
-          "score": -0.4453
-        },
-        {
-          "word": "acting",
-          "score": -0.4343
-        },
-        {
-          "word": "favorite",
-          "score": -0.4068
+          "word": "end",
+          "score": -0.4936
         },
         {
           "word": "soundtrack",
-          "score": -0.4017
+          "score": -0.4868
         },
         {
           "word": "plot",
-          "score": -0.3919
+          "score": -0.4769
         },
         {
-          "word": "films",
-          "score": -0.3676
-        },
-        {
-          "word": "seeing",
-          "score": -0.3638
-        },
-        {
-          "word": "year",
-          "score": -0.3572
-        },
-        {
-          "word": "man",
-          "score": -0.3413
-        },
-        {
-          "word": "drama",
-          "score": -0.3397
-        },
-        {
-          "word": "reviews",
-          "score": -0.3388
-        },
-        {
-          "word": "lmao",
-          "score": -0.3387
-        },
-        {
-          "word": "type",
-          "score": -0.3369
-        },
-        {
-          "word": "recommend",
-          "score": -0.3361
-        },
-        {
-          "word": "honestly",
-          "score": -0.3264
-        },
-        {
-          "word": "think",
-          "score": -0.3203
-        },
-        {
-          "word": "happy",
-          "score": -0.3199
+          "word": "watching",
+          "score": -0.4246
         },
         {
           "word": "expect",
-          "score": -0.3171
+          "score": -0.4023
+        },
+        {
+          "word": "think",
+          "score": -0.3839
+        },
+        {
+          "word": "acting",
+          "score": -0.3776
+        },
+        {
+          "word": "watched",
+          "score": -0.3773
+        },
+        {
+          "word": "nd",
+          "score": -0.3696
+        },
+        {
+          "word": "favorite",
+          "score": -0.369
+        },
+        {
+          "word": "best",
+          "score": -0.3688
+        },
+        {
+          "word": "want",
+          "score": -0.3675
+        },
+        {
+          "word": "know",
+          "score": -0.3658
+        },
+        {
+          "word": "honestly",
+          "score": -0.3627
         },
         {
           "word": "decisions",
-          "score": -0.3066
+          "score": -0.3595
         },
         {
-          "word": "completely",
-          "score": -0.2991
+          "word": "book",
+          "score": -0.358
+        },
+        {
+          "word": "man",
+          "score": -0.3474
+        },
+        {
+          "word": "takes",
+          "score": -0.3409
+        },
+        {
+          "word": "year",
+          "score": -0.3376
+        },
+        {
+          "word": "predictable",
+          "score": -0.3282
+        },
+        {
+          "word": "recommend",
+          "score": -0.3224
+        },
+        {
+          "word": "worst",
+          "score": -0.3224
         },
         {
           "word": "moving",
-          "score": -0.2953
+          "score": -0.3223
         },
         {
-          "word": "sad",
-          "score": -0.2909
-        },
-        {
-          "word": "lost",
-          "score": -0.2887
+          "word": "type",
+          "score": -0.321
         }
       ]
     },
@@ -528,251 +530,251 @@
       "top": [
         {
           "word": "best",
-          "score": 0.6992
+          "score": 0.6955
         },
         {
           "word": "life",
-          "score": 0.6407
-        },
-        {
-          "word": "year",
-          "score": 0.5873
+          "score": 0.6127
         },
         {
           "word": "incredible",
-          "score": 0.571
+          "score": 0.6088
         },
         {
-          "word": "soundtrack",
-          "score": 0.5362
-        },
-        {
-          "word": "hitchcock",
-          "score": 0.4972
+          "word": "year",
+          "score": 0.5995
         },
         {
           "word": "makes",
-          "score": 0.4936
+          "score": 0.5748
+        },
+        {
+          "word": "hitchcock",
+          "score": 0.5213
         },
         {
           "word": "scene",
-          "score": 0.4602
+          "score": 0.4965
+        },
+        {
+          "word": "soundtrack",
+          "score": 0.4953
         },
         {
           "word": "banger",
-          "score": 0.4599
+          "score": 0.4774
         },
         {
-          "word": "thought",
-          "score": 0.4398
+          "word": "film",
+          "score": 0.4591
         },
         {
           "word": "nd time",
-          "score": 0.428
-        },
-        {
-          "word": "great",
-          "score": 0.4157
+          "score": 0.4487
         },
         {
           "word": "christmas",
-          "score": 0.4127
+          "score": 0.437
         },
         {
           "word": "man",
-          "score": 0.3939
+          "score": 0.4275
         },
         {
           "word": "performance",
-          "score": 0.3821
-        },
-        {
-          "word": "acting",
-          "score": 0.371
+          "score": 0.4179
         },
         {
           "word": "perfect",
-          "score": 0.3253
-        },
-        {
-          "word": "tension",
-          "score": 0.3227
-        },
-        {
-          "word": "stunning",
-          "score": 0.313
+          "score": 0.3938
         },
         {
           "word": "strong",
-          "score": 0.3016
+          "score": 0.3923
         },
         {
-          "word": "appreciated",
-          "score": 0.2964
+          "word": "performances",
+          "score": 0.3787
         },
         {
-          "word": "camera",
-          "score": 0.2949
+          "word": "especially",
+          "score": 0.3781
         },
         {
-          "word": "imax",
-          "score": 0.2926
-        },
-        {
-          "word": "long",
-          "score": 0.2905
+          "word": "perfectly",
+          "score": 0.3702
         },
         {
           "word": "dialogue",
-          "score": 0.289
+          "score": 0.3632
+        },
+        {
+          "word": "great",
+          "score": 0.3601
+        },
+        {
+          "word": "finally",
+          "score": 0.3489
+        },
+        {
+          "word": "long",
+          "score": 0.3391
+        },
+        {
+          "word": "favorite",
+          "score": 0.3217
+        },
+        {
+          "word": "single",
+          "score": 0.3217
         }
       ],
       "bottom": [
         {
-          "word": "did",
-          "score": -0.8331
+          "word": "didn",
+          "score": -0.8595
         },
         {
           "word": "pretty",
-          "score": -0.6679
+          "score": -0.7488
+        },
+        {
+          "word": "did",
+          "score": -0.7326
         },
         {
           "word": "fine",
-          "score": -0.643
-        },
-        {
-          "word": "comedy",
-          "score": -0.6361
+          "score": -0.729
         },
         {
           "word": "just",
-          "score": -0.6159
+          "score": -0.6701
         },
         {
-          "word": "didn",
-          "score": -0.5434
-        },
-        {
-          "word": "sequel",
-          "score": -0.5185
-        },
-        {
-          "word": "movie just",
-          "score": -0.5031
-        },
-        {
-          "word": "felt",
-          "score": -0.4855
-        },
-        {
-          "word": "kinda",
-          "score": -0.4773
-        },
-        {
-          "word": "gets",
-          "score": -0.474
+          "word": "comedy",
+          "score": -0.5931
         },
         {
           "word": "laughs",
-          "score": -0.4499
+          "score": -0.5362
         },
         {
           "word": "kind",
-          "score": -0.4463
+          "score": -0.5352
         },
         {
-          "word": "definitely",
-          "score": -0.4405
+          "word": "sequel",
+          "score": -0.5309
         },
         {
           "word": "don",
-          "score": -0.4307
+          "score": -0.4986
         },
         {
-          "word": "plot",
-          "score": -0.4139
+          "word": "definitely",
+          "score": -0.4864
         },
         {
-          "word": "interesting",
-          "score": -0.396
-        },
-        {
-          "word": "average",
-          "score": -0.3605
-        },
-        {
-          "word": "really like",
-          "score": -0.3537
-        },
-        {
-          "word": "yeah",
-          "score": -0.35
+          "word": "felt",
+          "score": -0.4827
         },
         {
           "word": "just didn",
-          "score": -0.3478
+          "score": -0.4568
+        },
+        {
+          "word": "yeah",
+          "score": -0.4415
+        },
+        {
+          "word": "like",
+          "score": -0.4228
+        },
+        {
+          "word": "kinda",
+          "score": -0.4062
+        },
+        {
+          "word": "wasn",
+          "score": -0.4035
+        },
+        {
+          "word": "quick",
+          "score": -0.3985
         },
         {
           "word": "fun",
-          "score": -0.3433
+          "score": -0.3936
         },
         {
-          "word": "started",
-          "score": -0.3408
+          "word": "basically",
+          "score": -0.3721
         },
         {
-          "word": "fan",
-          "score": -0.3384
+          "word": "gets",
+          "score": -0.372
         },
         {
-          "word": "type",
-          "score": -0.331
+          "word": "let",
+          "score": -0.3511
+        },
+        {
+          "word": "bad",
+          "score": -0.3481
+        },
+        {
+          "word": "plot",
+          "score": -0.3462
+        },
+        {
+          "word": "movie just",
+          "score": -0.3453
         }
       ]
     }
   },
   "length_by_class": {
     "Meh": {
-      "mean": 115.0,
-      "median": 123.5,
+      "mean": 121.5,
+      "median": 131.0,
       "min": 8,
       "max": 227
     },
     "Solid": {
-      "mean": 133.0,
-      "median": 120.0,
+      "mean": 137.1,
+      "median": 127.0,
       "min": 4,
       "max": 418
     },
     "Great": {
-      "mean": 150.7,
-      "median": 135.0,
+      "mean": 154.8,
+      "median": 138.0,
       "min": 10,
       "max": 454
     }
   },
   "structured_regression_metrics": {
-    "cv_r2_mean": -0.045,
-    "cv_r2_std": 0.201,
-    "cv_mae_mean": 0.572,
-    "cv_mae_std": 0.073,
-    "test_r2": 0.447,
-    "test_mae": 0.414,
+    "cv_r2_mean": 0.125,
+    "cv_r2_std": 0.26,
+    "cv_mae_mean": 0.556,
+    "cv_mae_std": 0.078,
+    "test_r2": -0.457,
+    "test_mae": 0.59,
     "without_vote_avg": {
-      "cv_r2_mean": -0.387,
-      "cv_r2_std": 0.285,
-      "cv_mae_mean": 0.631,
-      "cv_mae_std": 0.018,
-      "test_r2": 0.02,
-      "test_mae": 0.57
+      "cv_r2_mean": -0.356,
+      "cv_r2_std": 0.194,
+      "cv_mae_mean": 0.717,
+      "cv_mae_std": 0.079,
+      "test_r2": -1.142,
+      "test_mae": 0.702
     }
   },
   "structured_classification_metrics": {
-    "cv_accuracy_mean": 0.686,
-    "cv_accuracy_std": 0.035,
-    "cv_f1_mean": 0.596,
-    "cv_f1_std": 0.04,
-    "test_accuracy": 0.588,
+    "cv_accuracy_mean": 0.668,
+    "cv_accuracy_std": 0.053,
+    "cv_f1_mean": 0.601,
+    "cv_f1_std": 0.055,
+    "test_accuracy": 0.655,
     "classes": [
       "Meh",
       "Solid",
@@ -792,48 +794,46 @@
         0
       ],
       [
-        5,
-        13,
+        3,
+        17,
         3
       ],
       [
-        2,
-        9,
-        13
+        1,
+        10,
+        15
       ]
     ],
     "misclassified_films": {
       "Meh_as_Solid": [
         "Heads of State",
-        "The Internship"
+        "History of the World: Part I"
       ],
       "Meh_as_Great": [],
       "Solid_as_Meh": [
-        "Nobody 2",
-        "Young Guns",
-        "A Real Pain",
-        "Happy Gilmore 2",
-        "Flow"
+        "Flow",
+        "Sea of Love",
+        "Happy Gilmore 2"
       ],
       "Solid_as_Great": [
-        "Blue Valentine",
+        "Moon",
         "The Graduate",
-        "The King"
+        "Harry Potter and the Chamber of Secrets"
       ],
       "Great_as_Meh": [
-        "Halloween",
         "Perfect Blue"
       ],
       "Great_as_Solid": [
+        "The Sheep Detectives",
         "Mississippi Burning",
-        "Glengarry Glen Ross",
-        "Say Anything...",
-        "How to Train Your Dragon",
         "The Pianist",
-        "Harry Potter and the Deathly Hallows: Part 1",
-        "Eternity",
+        "Halloween",
         "Superman",
-        "Waves"
+        "The Drama",
+        "How to Train Your Dragon",
+        "Harry Potter and the Deathly Hallows: Part 1",
+        "Whisper of the Heart",
+        "Say Anything..."
       ]
     }
   },
@@ -841,520 +841,547 @@
     "Meh": [
       {
         "feature": "vote_avg",
-        "score": -1.6309
+        "score": -1.9308
       },
       {
         "feature": "genre_Animation",
-        "score": 0.9896
-      },
-      {
-        "feature": "actor_Ryan Gosling",
-        "score": -0.7586
-      },
-      {
-        "feature": "vote_count",
-        "score": -0.6252
-      },
-      {
-        "feature": "genre_Family",
-        "score": -0.5981
+        "score": 0.9128
       },
       {
         "feature": "runtime",
-        "score": -0.5594
+        "score": -0.8861
       },
       {
-        "feature": "genre_Adventure",
-        "score": -0.4188
+        "feature": "genre_Family",
+        "score": -0.7138
+      },
+      {
+        "feature": "actor_Ryan Gosling",
+        "score": -0.6887
+      },
+      {
+        "feature": "actor_Rachel McAdams",
+        "score": -0.6631
+      },
+      {
+        "feature": "genre_Comedy",
+        "score": -0.5215
       },
       {
         "feature": "actor_Marlon Wayans",
-        "score": -0.4006
-      },
-      {
-        "feature": "genre_Horror",
-        "score": 0.3884
+        "score": -0.4699
       },
       {
         "feature": "genre_History",
-        "score": -0.37
-      },
-      {
-        "feature": "actor_Jena Malone",
-        "score": 0.3668
-      },
-      {
-        "feature": "genre_Action",
-        "score": 0.3559
+        "score": -0.3968
       },
       {
         "feature": "revenue",
-        "score": 0.3492
+        "score": 0.3968
       },
       {
-        "feature": "year",
-        "score": -0.3483
-      },
-      {
-        "feature": "dir_Hayao Miyazaki",
-        "score": -0.3175
-      },
-      {
-        "feature": "genre_Crime",
-        "score": -0.3019
+        "feature": "actor_Rose Byrne",
+        "score": 0.3906
       },
       {
         "feature": "genre_Fantasy",
-        "score": 0.2983
+        "score": 0.3696
       },
       {
-        "feature": "dir_Isao Takahata",
-        "score": -0.2929
+        "feature": "genre_Adventure",
+        "score": -0.3483
       },
       {
         "feature": "actor_Mark Wahlberg",
-        "score": 0.2843
+        "score": 0.3202
       },
       {
-        "feature": "actor_Tom Hanks",
-        "score": -0.2806
+        "feature": "vote_count",
+        "score": -0.3145
+      },
+      {
+        "feature": "dir_Hayao Miyazaki",
+        "score": -0.2988
+      },
+      {
+        "feature": "dir_Goro Miyazaki",
+        "score": -0.2594
+      },
+      {
+        "feature": "actor_Brad Pitt",
+        "score": -0.2427
+      },
+      {
+        "feature": "dir_Isao Takahata",
+        "score": -0.2361
+      },
+      {
+        "feature": "genre_Mystery",
+        "score": 0.2348
       }
     ],
     "Solid": [
       {
         "feature": "genre_Adventure",
-        "score": 0.8624
-      },
-      {
-        "feature": "actor_Jonathan Bailey",
-        "score": -0.5959
+        "score": 0.6961
       },
       {
         "feature": "genre_Family",
-        "score": 0.5387
-      },
-      {
-        "feature": "genre_Crime",
-        "score": 0.5341
-      },
-      {
-        "feature": "genre_Science Fiction",
-        "score": 0.5003
-      },
-      {
-        "feature": "genre_Romance",
-        "score": 0.4857
-      },
-      {
-        "feature": "genre_Drama",
-        "score": -0.4627
-      },
-      {
-        "feature": "genre_Animation",
-        "score": -0.4597
-      },
-      {
-        "feature": "genre_War",
-        "score": 0.4534
+        "score": 0.6112
       },
       {
         "feature": "genre_Fantasy",
-        "score": -0.4365
+        "score": -0.5222
       },
       {
-        "feature": "dir_Matt Shakman",
-        "score": -0.4075
+        "feature": "genre_Drama",
+        "score": -0.5161
       },
       {
-        "feature": "genre_Thriller",
-        "score": -0.3995
+        "feature": "actor_Jonathan Bailey",
+        "score": -0.5045
       },
       {
-        "feature": "dir_Isao Takahata",
-        "score": 0.3983
+        "feature": "actor_Rachel McAdams",
+        "score": 0.4872
       },
       {
-        "feature": "actor_Michael Cera",
+        "feature": "genre_Comedy",
+        "score": 0.4844
+      },
+      {
+        "feature": "dir_Denis Villeneuve",
+        "score": -0.3913
+      },
+      {
+        "feature": "genre_War",
         "score": 0.3872
       },
       {
-        "feature": "actor_Sean Penn",
-        "score": -0.386
+        "feature": "dir_Hayao Miyazaki",
+        "score": -0.3602
       },
       {
-        "feature": "dir_Robert Zemeckis",
-        "score": -0.3644
+        "feature": "dir_Rob Reiner",
+        "score": -0.3495
       },
       {
         "feature": "dir_Guillermo del Toro",
-        "score": 0.3614
+        "score": 0.3495
       },
       {
-        "feature": "actor_Jean-Claude Van Damme",
-        "score": 0.3502
+        "feature": "actor_Marlon Wayans",
+        "score": 0.3484
       },
       {
-        "feature": "actor_Anya Taylor-Joy",
-        "score": 0.3482
+        "feature": "actor_Sean Penn",
+        "score": -0.3469
       },
       {
-        "feature": "actor_Michael Keaton",
-        "score": 0.3212
+        "feature": "actor_Channing Tatum",
+        "score": 0.3345
+      },
+      {
+        "feature": "actor_Michael Gambon",
+        "score": -0.3271
+      },
+      {
+        "feature": "runtime",
+        "score": 0.3172
+      },
+      {
+        "feature": "dir_Matt Shakman",
+        "score": -0.3085
+      },
+      {
+        "feature": "actor_Eva Mendes",
+        "score": 0.3054
+      },
+      {
+        "feature": "dir_Isao Takahata",
+        "score": 0.3027
       }
     ],
     "Great": [
       {
         "feature": "vote_avg",
-        "score": 1.7349
-      },
-      {
-        "feature": "actor_Jonathan Bailey",
-        "score": 0.7297
-      },
-      {
-        "feature": "actor_Sean Penn",
-        "score": 0.6299
-      },
-      {
-        "feature": "actor_Ryan Gosling",
-        "score": 0.6124
-      },
-      {
-        "feature": "dir_Hayao Miyazaki",
-        "score": 0.577
+        "score": 1.7298
       },
       {
         "feature": "genre_Animation",
-        "score": -0.5299
+        "score": -0.7063
       },
       {
-        "feature": "genre_Science Fiction",
-        "score": -0.5199
+        "feature": "dir_Hayao Miyazaki",
+        "score": 0.659
       },
       {
-        "feature": "vote_count",
-        "score": 0.4952
-      },
-      {
-        "feature": "dir_Matt Shakman",
-        "score": 0.4766
-      },
-      {
-        "feature": "dir_Robert Zemeckis",
-        "score": 0.4755
-      },
-      {
-        "feature": "genre_Drama",
-        "score": 0.4687
-      },
-      {
-        "feature": "genre_History",
-        "score": 0.4458
-      },
-      {
-        "feature": "genre_Adventure",
-        "score": -0.4436
+        "feature": "actor_Jonathan Bailey",
+        "score": 0.6328
       },
       {
         "feature": "runtime",
-        "score": 0.4101
+        "score": 0.5689
       },
       {
-        "feature": "genre_Horror",
-        "score": -0.3518
+        "feature": "actor_Sean Penn",
+        "score": 0.5616
       },
       {
-        "feature": "genre_Romance",
-        "score": -0.3342
+        "feature": "actor_Ryan Gosling",
+        "score": 0.5527
       },
       {
-        "feature": "genre_Western",
-        "score": 0.3341
+        "feature": "genre_Drama",
+        "score": 0.4829
+      },
+      {
+        "feature": "dir_Robert Zemeckis",
+        "score": 0.4525
+      },
+      {
+        "feature": "genre_Mystery",
+        "score": -0.407
+      },
+      {
+        "feature": "genre_History",
+        "score": 0.399
+      },
+      {
+        "feature": "dir_Denis Villeneuve",
+        "score": 0.397
+      },
+      {
+        "feature": "actor_Tom Hanks",
+        "score": 0.3781
+      },
+      {
+        "feature": "dir_Rob Reiner",
+        "score": 0.3741
       },
       {
         "feature": "genre_War",
-        "score": -0.3296
+        "score": -0.3721
+      },
+      {
+        "feature": "dir_Matt Shakman",
+        "score": 0.3704
+      },
+      {
+        "feature": "genre_Adventure",
+        "score": -0.3478
       },
       {
         "feature": "actor_Michael Gambon",
-        "score": 0.3207
+        "score": 0.3279
       },
       {
         "feature": "actor_Dakota Johnson",
-        "score": 0.3088
+        "score": 0.3051
+      },
+      {
+        "feature": "actor_Pedro Pascal",
+        "score": 0.2973
       }
     ]
   },
   "per_review": [
     {
-      "name": "Blue Valentine",
-      "actual": 3.5,
-      "cls": "Solid",
-      "predicted_nlp": 3.77,
-      "vader": 0.971,
-      "length": 231,
-      "predicted_structured": 3.64
-    },
-    {
-      "name": "The Girl Next Door",
-      "actual": 3.0,
-      "cls": "Solid",
-      "predicted_nlp": 3.5,
-      "vader": 0.978,
-      "length": 178,
-      "predicted_structured": 3.05
-    },
-    {
-      "name": "Mississippi Burning",
+      "name": "The Sheep Detectives",
       "actual": 4.0,
       "cls": "Great",
-      "predicted_nlp": 3.33,
-      "vader": -0.53,
-      "length": 47,
-      "predicted_structured": 3.46
-    },
-    {
-      "name": "Glengarry Glen Ross",
-      "actual": 4.0,
-      "cls": "Great",
-      "predicted_nlp": 3.48,
-      "vader": 0.978,
-      "length": 186,
-      "predicted_structured": 4.07
-    },
-    {
-      "name": "The Truman Show",
-      "actual": 4.5,
-      "cls": "Great",
-      "predicted_nlp": 3.81,
-      "vader": 0.891,
-      "length": 12,
-      "predicted_structured": 4.86
-    },
-    {
-      "name": "The Hangover Part III",
-      "actual": 2.5,
-      "cls": "Meh",
-      "predicted_nlp": 3.27,
-      "vader": -0.591,
-      "length": 62,
-      "predicted_structured": 2.37
-    },
-    {
-      "name": "Notting Hill",
-      "actual": 3.5,
-      "cls": "Solid",
-      "predicted_nlp": 3.82,
-      "vader": 0.986,
-      "length": 179,
-      "predicted_structured": 3.45
-    },
-    {
-      "name": "Blue Moon",
-      "actual": 4.0,
-      "cls": "Great",
-      "predicted_nlp": 3.84,
-      "vader": 0.787,
-      "length": 192,
-      "predicted_structured": 4.07
-    },
-    {
-      "name": "Raging Bull",
-      "actual": 4.0,
-      "cls": "Great",
-      "predicted_nlp": 3.75,
-      "vader": 0.997,
-      "length": 179,
-      "predicted_structured": 4.03
-    },
-    {
-      "name": "Argo",
-      "actual": 4.0,
-      "cls": "Great",
-      "predicted_nlp": 3.61,
-      "vader": 0.992,
-      "length": 170,
-      "predicted_structured": 3.63
-    },
-    {
-      "name": "Wicked",
-      "actual": 4.0,
-      "cls": "Great",
-      "predicted_nlp": 3.99,
-      "vader": 0.906,
-      "length": 39,
-      "predicted_structured": 4.0
-    },
-    {
-      "name": "Say Anything...",
-      "actual": 4.0,
-      "cls": "Great",
-      "predicted_nlp": 3.49,
-      "vader": -0.758,
-      "length": 271,
-      "predicted_structured": 3.25
-    },
-    {
-      "name": "The Graduate",
-      "actual": 3.5,
-      "cls": "Solid",
-      "predicted_nlp": 3.28,
-      "vader": 0.975,
-      "length": 111,
-      "predicted_structured": 3.28
-    },
-    {
-      "name": "Ford v Ferrari",
-      "actual": 4.0,
-      "cls": "Great",
-      "predicted_nlp": 3.39,
-      "vader": 0.987,
-      "length": 227,
-      "predicted_structured": 5.7
-    },
-    {
-      "name": "The King",
-      "actual": 3.0,
-      "cls": "Solid",
-      "predicted_nlp": 3.38,
-      "vader": -0.039,
-      "length": 80,
-      "predicted_structured": 3.48
-    },
-    {
-      "name": "Kickboxer",
-      "actual": 3.0,
-      "cls": "Solid",
-      "predicted_nlp": 3.43,
-      "vader": 0.952,
-      "length": 77,
-      "predicted_structured": 2.88
-    },
-    {
-      "name": "Heads of State",
-      "actual": 2.5,
-      "cls": "Meh",
-      "predicted_nlp": 3.07,
-      "vader": 0.957,
-      "length": 71,
-      "predicted_structured": 1.96
-    },
-    {
-      "name": "Hamnet",
-      "actual": 4.5,
-      "cls": "Great",
-      "predicted_nlp": 3.84,
-      "vader": 0.957,
-      "length": 216,
-      "predicted_structured": 4.5
-    },
-    {
-      "name": "Wallace & Gromit: Vengeance Most Fowl",
-      "actual": 3.5,
-      "cls": "Solid",
-      "predicted_nlp": 3.77,
-      "vader": 0.883,
-      "length": 23,
-      "predicted_structured": 3.15
-    },
-    {
-      "name": "Nobody 2",
-      "actual": 3.0,
-      "cls": "Solid",
-      "predicted_nlp": 3.46,
-      "vader": 0.919,
-      "length": 72,
-      "predicted_structured": 3.34
-    },
-    {
-      "name": "Halloween",
-      "actual": 4.5,
-      "cls": "Great",
-      "predicted_nlp": 3.57,
-      "vader": 0.848,
-      "length": 63,
-      "predicted_structured": 3.01
-    },
-    {
-      "name": "Inherent Vice",
-      "actual": 3.0,
-      "cls": "Solid",
-      "predicted_nlp": 3.45,
-      "vader": 0.974,
-      "length": 110,
-      "predicted_structured": 3.25
-    },
-    {
-      "name": "How to Train Your Dragon",
-      "actual": 4.0,
-      "cls": "Great",
-      "predicted_nlp": 3.79,
-      "vader": 0.99,
-      "length": 130,
-      "predicted_structured": 4.33
-    },
-    {
-      "name": "The Iron Claw",
-      "actual": 5.0,
-      "cls": "Great",
-      "predicted_nlp": 3.79,
-      "vader": 0.6,
-      "length": 108,
-      "predicted_structured": 4.41
-    },
-    {
-      "name": "Wake Up Dead Man",
-      "actual": 3.5,
-      "cls": "Solid",
-      "predicted_nlp": 3.56,
-      "vader": 0.985,
-      "length": 225,
-      "predicted_structured": 4.04
+      "predicted_nlp": 3.31,
+      "vader": 0.996,
+      "length": 196,
+      "predicted_structured": 4.24
     },
     {
       "name": "Perfect Blue",
       "actual": 4.0,
       "cls": "Great",
-      "predicted_nlp": 3.61,
+      "predicted_nlp": 3.53,
       "vader": 0.869,
       "length": 84,
-      "predicted_structured": 3.53
+      "predicted_structured": 3.58
     },
     {
-      "name": "Mission: Impossible – The Final Reckoning",
+      "name": "Flow",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.6,
+      "vader": 0.991,
+      "length": 209,
+      "predicted_structured": 3.31
+    },
+    {
+      "name": "Mississippi Burning",
       "actual": 4.0,
       "cls": "Great",
-      "predicted_nlp": 3.94,
-      "vader": 0.967,
-      "length": 77,
-      "predicted_structured": 4.76
+      "predicted_nlp": 3.34,
+      "vader": -0.53,
+      "length": 47,
+      "predicted_structured": 3.58
     },
     {
       "name": "The Pianist",
       "actual": 4.5,
       "cls": "Great",
-      "predicted_nlp": 3.99,
+      "predicted_nlp": 3.83,
       "vader": 0.956,
       "length": 61,
-      "predicted_structured": 3.17
+      "predicted_structured": 3.63
     },
     {
-      "name": "War Machine",
-      "actual": 3.0,
-      "cls": "Solid",
-      "predicted_nlp": 3.44,
-      "vader": 0.0,
-      "length": 4,
-      "predicted_structured": 3.19
+      "name": "The Iron Claw",
+      "actual": 5.0,
+      "cls": "Great",
+      "predicted_nlp": 3.81,
+      "vader": 0.6,
+      "length": 108,
+      "predicted_structured": 4.4
     },
     {
-      "name": "The Naked Gun",
+      "name": "Halloween",
+      "actual": 4.5,
+      "cls": "Great",
+      "predicted_nlp": 3.66,
+      "vader": 0.848,
+      "length": 63,
+      "predicted_structured": 2.82
+    },
+    {
+      "name": "Sea of Love",
       "actual": 3.5,
       "cls": "Solid",
-      "predicted_nlp": 3.26,
-      "vader": 0.796,
-      "length": 20,
+      "predicted_nlp": 3.57,
+      "vader": 0.988,
+      "length": 223,
+      "predicted_structured": 3.06
+    },
+    {
+      "name": "La La Land",
+      "actual": 5.0,
+      "cls": "Great",
+      "predicted_nlp": 4.26,
+      "vader": 0.772,
+      "length": 34,
+      "predicted_structured": 5.0
+    },
+    {
+      "name": "The Last of the Mohicans",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.57,
+      "vader": 0.978,
+      "length": 129,
+      "predicted_structured": 3.97
+    },
+    {
+      "name": "Superman",
+      "actual": 4.0,
+      "cls": "Great",
+      "predicted_nlp": 4.23,
+      "vader": 0.999,
+      "length": 454,
+      "predicted_structured": 3.73
+    },
+    {
+      "name": "Glengarry Glen Ross",
+      "actual": 4.0,
+      "cls": "Great",
+      "predicted_nlp": 3.64,
+      "vader": 0.978,
+      "length": 186,
+      "predicted_structured": 3.76
+    },
+    {
+      "name": "Warfare",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.76,
+      "vader": 0.468,
+      "length": 199,
+      "predicted_structured": 3.93
+    },
+    {
+      "name": "Hamnet",
+      "actual": 4.5,
+      "cls": "Great",
+      "predicted_nlp": 3.82,
+      "vader": 0.957,
+      "length": 216,
+      "predicted_structured": 4.42
+    },
+    {
+      "name": "The Electric State",
+      "actual": 2.5,
+      "cls": "Meh",
+      "predicted_nlp": 3.41,
+      "vader": 0.43,
+      "length": 33,
+      "predicted_structured": 4.04
+    },
+    {
+      "name": "Blink Twice",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.9,
+      "vader": 0.921,
+      "length": 41,
+      "predicted_structured": 2.79
+    },
+    {
+      "name": "The Drama",
+      "actual": 4.0,
+      "cls": "Great",
+      "predicted_nlp": 3.64,
+      "vader": 0.995,
+      "length": 232,
       "predicted_structured": 3.5
+    },
+    {
+      "name": "Dunkirk",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.74,
+      "vader": 0.949,
+      "length": 109,
+      "predicted_structured": 3.38
+    },
+    {
+      "name": "Ford v Ferrari",
+      "actual": 4.0,
+      "cls": "Great",
+      "predicted_nlp": 3.5,
+      "vader": 0.987,
+      "length": 227,
+      "predicted_structured": 5.48
+    },
+    {
+      "name": "The Naked Gun 2½: The Smell of Fear",
+      "actual": 3.0,
+      "cls": "Solid",
+      "predicted_nlp": 3.27,
+      "vader": 0.861,
+      "length": 102,
+      "predicted_structured": 3.13
+    },
+    {
+      "name": "A Real Pain",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.61,
+      "vader": 0.964,
+      "length": 62,
+      "predicted_structured": 3.33
+    },
+    {
+      "name": "Kickboxer",
+      "actual": 3.0,
+      "cls": "Solid",
+      "predicted_nlp": 3.56,
+      "vader": 0.952,
+      "length": 77,
+      "predicted_structured": 2.88
+    },
+    {
+      "name": "The Truman Show",
+      "actual": 4.5,
+      "cls": "Great",
+      "predicted_nlp": 3.87,
+      "vader": 0.891,
+      "length": 12,
+      "predicted_structured": 6.45
+    },
+    {
+      "name": "Training Day",
+      "actual": 5.0,
+      "cls": "Great",
+      "predicted_nlp": 3.27,
+      "vader": -0.927,
+      "length": 252,
+      "predicted_structured": 2.65
+    },
+    {
+      "name": "Moon",
+      "actual": 3.0,
+      "cls": "Solid",
+      "predicted_nlp": 3.93,
+      "vader": 0.994,
+      "length": 219,
+      "predicted_structured": 3.51
+    },
+    {
+      "name": "How to Train Your Dragon",
+      "actual": 4.0,
+      "cls": "Great",
+      "predicted_nlp": 3.95,
+      "vader": 0.99,
+      "length": 130,
+      "predicted_structured": 4.34
+    },
+    {
+      "name": "Death Warrant",
+      "actual": 3.0,
+      "cls": "Solid",
+      "predicted_nlp": 3.23,
+      "vader": 0.782,
+      "length": 114,
+      "predicted_structured": 2.33
+    },
+    {
+      "name": "The Graduate",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.35,
+      "vader": 0.975,
+      "length": 111,
+      "predicted_structured": 3.08
+    },
+    {
+      "name": "Blue Moon",
+      "actual": 4.0,
+      "cls": "Great",
+      "predicted_nlp": 3.93,
+      "vader": 0.787,
+      "length": 192,
+      "predicted_structured": 2.31
+    },
+    {
+      "name": "Notting Hill",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.64,
+      "vader": 0.986,
+      "length": 179,
+      "predicted_structured": 3.52
+    },
+    {
+      "name": "I Know What You Did Last Summer",
+      "actual": 2.5,
+      "cls": "Meh",
+      "predicted_nlp": 2.64,
+      "vader": -0.704,
+      "length": 137,
+      "predicted_structured": 1.47
+    },
+    {
+      "name": "Pom Poko",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.85,
+      "vader": 0.962,
+      "length": 131,
+      "predicted_structured": 3.52
+    },
+    {
+      "name": "The Man in the Iron Mask",
+      "actual": 3.0,
+      "cls": "Solid",
+      "predicted_nlp": 3.88,
+      "vader": 0.993,
+      "length": 179,
+      "predicted_structured": 4.02
     },
     {
       "name": "Harry Potter and the Deathly Hallows: Part 1",
@@ -1363,187 +1390,196 @@
       "predicted_nlp": 4.17,
       "vader": 0.974,
       "length": 215,
-      "predicted_structured": 3.94
+      "predicted_structured": 3.98
     },
     {
-      "name": "Dunkirk",
-      "actual": 3.5,
-      "cls": "Solid",
-      "predicted_nlp": 3.66,
-      "vader": 0.949,
-      "length": 109,
-      "predicted_structured": 3.28
-    },
-    {
-      "name": "Training Day",
-      "actual": 5.0,
-      "cls": "Great",
-      "predicted_nlp": 3.51,
-      "vader": -0.927,
-      "length": 252,
-      "predicted_structured": 4.05
-    },
-    {
-      "name": "Young Guns",
+      "name": "Meet the Fockers",
       "actual": 3.0,
       "cls": "Solid",
-      "predicted_nlp": 3.56,
-      "vader": 0.911,
-      "length": 74,
-      "predicted_structured": 3.29
+      "predicted_nlp": 3.58,
+      "vader": 0.973,
+      "length": 90,
+      "predicted_structured": 1.62
+    },
+    {
+      "name": "Raging Bull",
+      "actual": 4.0,
+      "cls": "Great",
+      "predicted_nlp": 3.73,
+      "vader": 0.997,
+      "length": 179,
+      "predicted_structured": 4.06
+    },
+    {
+      "name": "Good Time",
+      "actual": 2.5,
+      "cls": "Meh",
+      "predicted_nlp": 3.23,
+      "vader": 0.946,
+      "length": 134,
+      "predicted_structured": 3.16
     },
     {
       "name": "Meet the Parents",
       "actual": 3.5,
       "cls": "Solid",
-      "predicted_nlp": 3.41,
+      "predicted_nlp": 3.44,
       "vader": 0.881,
       "length": 131,
-      "predicted_structured": 3.55
+      "predicted_structured": 2.47
     },
     {
-      "name": "A Real Pain",
-      "actual": 3.5,
-      "cls": "Solid",
-      "predicted_nlp": 3.66,
-      "vader": 0.964,
-      "length": 62,
-      "predicted_structured": 3.37
-    },
-    {
-      "name": "La La Land",
-      "actual": 5.0,
-      "cls": "Great",
-      "predicted_nlp": 4.36,
-      "vader": 0.772,
-      "length": 34,
-      "predicted_structured": 4.56
-    },
-    {
-      "name": "Happy Gilmore 2",
-      "actual": 3.0,
-      "cls": "Solid",
-      "predicted_nlp": 3.78,
-      "vader": 0.989,
-      "length": 171,
-      "predicted_structured": 2.49
-    },
-    {
-      "name": "Fantastic Beasts and Where to Find Them",
-      "actual": 3.0,
-      "cls": "Solid",
-      "predicted_nlp": 3.56,
-      "vader": 0.962,
-      "length": 173,
-      "predicted_structured": 3.13
-    },
-    {
-      "name": "Flow",
-      "actual": 3.5,
-      "cls": "Solid",
-      "predicted_nlp": 3.63,
-      "vader": 0.991,
-      "length": 209,
-      "predicted_structured": 3.33
-    },
-    {
-      "name": "Eternity",
-      "actual": 4.0,
-      "cls": "Great",
-      "predicted_nlp": 3.57,
-      "vader": 0.998,
-      "length": 329,
-      "predicted_structured": 3.52
-    },
-    {
-      "name": "The Lego Batman Movie",
-      "actual": 3.5,
-      "cls": "Solid",
-      "predicted_nlp": 3.69,
-      "vader": 0.883,
-      "length": 126,
-      "predicted_structured": 2.58
-    },
-    {
-      "name": "The Internship",
+      "name": "Heads of State",
       "actual": 2.5,
       "cls": "Meh",
-      "predicted_nlp": 3.19,
-      "vader": -0.774,
-      "length": 46,
-      "predicted_structured": 2.89
+      "predicted_nlp": 3.03,
+      "vader": 0.957,
+      "length": 71,
+      "predicted_structured": 2.17
     },
     {
-      "name": "Superman",
+      "name": "The Secret Agent",
       "actual": 4.0,
       "cls": "Great",
-      "predicted_nlp": 4.13,
-      "vader": 0.999,
-      "length": 454,
-      "predicted_structured": 3.58
+      "predicted_nlp": 4.08,
+      "vader": 0.991,
+      "length": 135,
+      "predicted_structured": 4.02
     },
     {
-      "name": "Mercy",
-      "actual": 1.5,
-      "cls": "Meh",
-      "predicted_nlp": 2.95,
-      "vader": -0.512,
-      "length": 224,
-      "predicted_structured": 2.03
-    },
-    {
-      "name": "Battle Royale",
-      "actual": 4.0,
-      "cls": "Great",
-      "predicted_nlp": 3.95,
-      "vader": 0.996,
-      "length": 150,
-      "predicted_structured": 3.5
-    },
-    {
-      "name": "The Loveless",
-      "actual": 2.0,
-      "cls": "Meh",
-      "predicted_nlp": 2.96,
-      "vader": 0.934,
-      "length": 111,
-      "predicted_structured": 1.68
+      "name": "Naked Gun 33⅓: The Final Insult",
+      "actual": 3.0,
+      "cls": "Solid",
+      "predicted_nlp": 3.3,
+      "vader": 0.923,
+      "length": 81,
+      "predicted_structured": 2.65
     },
     {
       "name": "Whisper of the Heart",
       "actual": 4.0,
       "cls": "Great",
-      "predicted_nlp": 3.82,
+      "predicted_nlp": 3.9,
       "vader": 0.999,
       "length": 390,
-      "predicted_structured": 3.47
+      "predicted_structured": 3.69
     },
     {
-      "name": "Death Warrant",
-      "actual": 3.0,
-      "cls": "Solid",
-      "predicted_nlp": 3.39,
-      "vader": 0.782,
-      "length": 114,
-      "predicted_structured": 2.4
-    },
-    {
-      "name": "Waves",
-      "actual": 4.5,
+      "name": "Battle Royale",
+      "actual": 4.0,
       "cls": "Great",
-      "predicted_nlp": 3.65,
-      "vader": 0.998,
-      "length": 336,
-      "predicted_structured": 3.89
+      "predicted_nlp": 3.88,
+      "vader": 0.996,
+      "length": 150,
+      "predicted_structured": 3.4
     },
     {
-      "name": "I Know What You Did Last Summer",
+      "name": "Mission: Impossible – The Final Reckoning",
+      "actual": 4.0,
+      "cls": "Great",
+      "predicted_nlp": 3.79,
+      "vader": 0.967,
+      "length": 77,
+      "predicted_structured": 5.44
+    },
+    {
+      "name": "Wake Up Dead Man",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.64,
+      "vader": 0.985,
+      "length": 225,
+      "predicted_structured": 4.14
+    },
+    {
+      "name": "Wallace & Gromit: Vengeance Most Fowl",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.79,
+      "vader": 0.883,
+      "length": 23,
+      "predicted_structured": 3.17
+    },
+    {
+      "name": "Collateral",
+      "actual": 4.0,
+      "cls": "Great",
+      "predicted_nlp": 3.4,
+      "vader": 0.995,
+      "length": 116,
+      "predicted_structured": 3.56
+    },
+    {
+      "name": "History of the World: Part I",
+      "actual": 2.0,
+      "cls": "Meh",
+      "predicted_nlp": 3.14,
+      "vader": -0.321,
+      "length": 98,
+      "predicted_structured": 3.13
+    },
+    {
+      "name": "Wicked",
+      "actual": 4.0,
+      "cls": "Great",
+      "predicted_nlp": 3.96,
+      "vader": 0.906,
+      "length": 39,
+      "predicted_structured": 4.0
+    },
+    {
+      "name": "Say Anything...",
+      "actual": 4.0,
+      "cls": "Great",
+      "predicted_nlp": 3.4,
+      "vader": -0.758,
+      "length": 271,
+      "predicted_structured": 3.26
+    },
+    {
+      "name": "Bring Her Back",
       "actual": 2.5,
       "cls": "Meh",
-      "predicted_nlp": 2.6,
-      "vader": -0.704,
-      "length": 137,
-      "predicted_structured": 1.88
+      "predicted_nlp": 2.95,
+      "vader": 0.401,
+      "length": 39,
+      "predicted_structured": 2.5
+    },
+    {
+      "name": "Birdman or (The Unexpected Virtue of Ignorance)",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.41,
+      "vader": 0.995,
+      "length": 292,
+      "predicted_structured": 4.21
+    },
+    {
+      "name": "Harry Potter and the Chamber of Secrets",
+      "actual": 3.5,
+      "cls": "Solid",
+      "predicted_nlp": 3.82,
+      "vader": 0.992,
+      "length": 226,
+      "predicted_structured": 3.93
+    },
+    {
+      "name": "Scent of a Woman",
+      "actual": 4.5,
+      "cls": "Great",
+      "predicted_nlp": 4.07,
+      "vader": 0.944,
+      "length": 269,
+      "predicted_structured": 4.32
+    },
+    {
+      "name": "Happy Gilmore 2",
+      "actual": 3.0,
+      "cls": "Solid",
+      "predicted_nlp": 3.96,
+      "vader": 0.989,
+      "length": 171,
+      "predicted_structured": 2.5
     }
   ]
 }

@@ -1,35 +1,35 @@
 {
-  "generated_at": "2026-04-13T07:32:28.619973+00:00",
+  "generated_at": "2026-05-15T17:48:35.111783+00:00",
   "coverage": {
-    "total_films": 689,
-    "matched_to_tmdb": 689,
+    "total_films": 704,
+    "matched_to_tmdb": 704,
     "unmatched": 0
   },
   "genre_analysis": [
     {
       "name": "Comedy",
-      "count": 239,
-      "mean_rating": 3.134
+      "count": 247,
+      "mean_rating": 3.123
     },
     {
       "name": "Drama",
-      "count": 230,
-      "mean_rating": 3.724
+      "count": 239,
+      "mean_rating": 3.703
     },
     {
       "name": "Adventure",
-      "count": 214,
-      "mean_rating": 3.315
+      "count": 216,
+      "mean_rating": 3.312
     },
     {
       "name": "Action",
-      "count": 207,
+      "count": 209,
       "mean_rating": 3.309
     },
     {
       "name": "Thriller",
-      "count": 147,
-      "mean_rating": 3.327
+      "count": 150,
+      "mean_rating": 3.31
     },
     {
       "name": "Science Fiction",
@@ -38,38 +38,38 @@
     },
     {
       "name": "Family",
-      "count": 120,
-      "mean_rating": 3.171
+      "count": 121,
+      "mean_rating": 3.178
     },
     {
       "name": "Fantasy",
-      "count": 100,
-      "mean_rating": 3.25
+      "count": 101,
+      "mean_rating": 3.252
     },
     {
       "name": "Animation",
-      "count": 98,
-      "mean_rating": 3.398
+      "count": 99,
+      "mean_rating": 3.399
     },
     {
       "name": "Crime",
-      "count": 95,
-      "mean_rating": 3.595
+      "count": 98,
+      "mean_rating": 3.607
     },
     {
       "name": "Horror",
-      "count": 79,
-      "mean_rating": 2.722
+      "count": 80,
+      "mean_rating": 2.706
     },
     {
       "name": "Romance",
-      "count": 71,
-      "mean_rating": 3.401
+      "count": 74,
+      "mean_rating": 3.378
     },
     {
       "name": "Mystery",
-      "count": 60,
-      "mean_rating": 3.258
+      "count": 63,
+      "mean_rating": 3.262
     },
     {
       "name": "History",
@@ -82,12 +82,12 @@
       "mean_rating": 3.974
     },
     {
-      "name": "Western",
-      "count": 10,
-      "mean_rating": 3.7
+      "name": "Music",
+      "count": 11,
+      "mean_rating": 3.682
     },
     {
-      "name": "Music",
+      "name": "Western",
       "count": 10,
       "mean_rating": 3.7
     }
@@ -102,6 +102,11 @@
       "name": "Tom Cruise",
       "count": 14,
       "mean_rating": 3.786
+    },
+    {
+      "name": "Ryan Gosling",
+      "count": 14,
+      "mean_rating": 3.964
     },
     {
       "name": "Robert Downey Jr.",
@@ -119,14 +124,9 @@
       "mean_rating": 3.846
     },
     {
-      "name": "Ryan Gosling",
-      "count": 13,
-      "mean_rating": 4.0
-    },
-    {
       "name": "Hugh Jackman",
-      "count": 12,
-      "mean_rating": 3.333
+      "count": 13,
+      "mean_rating": 3.385
     },
     {
       "name": "Chris Evans",
@@ -288,11 +288,6 @@
       "mean_rating": 4.389
     },
     {
-      "name": "Ridley Scott",
-      "count": 4,
-      "mean_rating": 4.375
-    },
-    {
       "name": "Damien Chazelle",
       "count": 4,
       "mean_rating": 4.375
@@ -301,6 +296,11 @@
       "name": "Peter Jackson",
       "count": 3,
       "mean_rating": 4.333
+    },
+    {
+      "name": "Ridley Scott",
+      "count": 5,
+      "mean_rating": 4.3
     },
     {
       "name": "Martin Scorsese",
@@ -326,30 +326,30 @@
   "runtime_buckets": [
     {
       "bucket": "<90 min",
-      "count": 48,
-      "mean_rating": 3.0
+      "count": 51,
+      "mean_rating": 2.931
     },
     {
       "bucket": "90–120 min",
-      "count": 374,
-      "mean_rating": 3.1
+      "count": 383,
+      "mean_rating": 3.098
     },
     {
       "bucket": "120–150 min",
-      "count": 206,
-      "mean_rating": 3.631
+      "count": 208,
+      "mean_rating": 3.632
     },
     {
       "bucket": "150+ min",
-      "count": 61,
-      "mean_rating": 4.082
+      "count": 62,
+      "mean_rating": 4.089
     }
   ],
   "language_breakdown": [
     {
       "language": "English",
-      "count": 657,
-      "mean_rating": 3.319
+      "count": 672,
+      "mean_rating": 3.311
     },
     {
       "language": "Japanese",
