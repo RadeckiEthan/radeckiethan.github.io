@@ -137,7 +137,7 @@
     <div class="report-meta">
       <span class="meta-item"><span class="meta-dot"></span>Personal Project</span>
       <span class="meta-item"><span class="meta-dot"></span>Python · scikit-learn · Chart.js</span>
-      <span class="meta-item"><span class="meta-dot"></span>Updated as of April 12, 2026</span>
+      <span class="meta-item"><span class="meta-dot"></span>Updated as of May 15, 2026</span>
     </div>
     <p class="report-summary">
       Two years of logging every film I watch on Letterboxd produced enough data to do something interesting. A Python pipeline pulls my exports, analyzes rating patterns, genres, directors, and release years, then trains two ML models on my own reviews: one on <strong>review text</strong>, one on <strong>film properties</strong>. The question: can my writing, or the film itself, predict how much I liked it?
@@ -380,8 +380,8 @@
       </div>
       <div class="conclusion-card glass">
         <div class="cc-eyebrow">Structured Model</div>
-        <div class="cc-headline">Crowd consensus does nearly all the work.</div>
-        <p>With TMDB vote average included, the structured model performs reasonably well. <strong>Remove it and performance collapses to near zero.</strong> Genre, director, runtime, and cast alone explain almost nothing about my personal ratings.</p>
+        <div class="cc-headline">Crowd consensus was supposed to do the work.</div>
+        <p>With TMDB vote average included, the structured model classifies 66% of films correctly but the regression R² on the test set came in at -0.46, worse than predicting the mean. <strong>The CV score of 0.13 hints at a weak signal, but the small test set amplifies noise considerably.</strong></p>
       </div>
       <div class="conclusion-card glass">
         <div class="cc-eyebrow">The Honest Answer</div>
@@ -937,15 +937,15 @@ async function render() {
     [(sClf.cv_accuracy_mean * 100).toFixed(0) + '%',  'Accuracy (CV)'],
     ['±' + (sClf.cv_accuracy_std * 100).toFixed(0) + '%', 'Std Dev'],
     [(sClf.test_accuracy * 100).toFixed(0) + '%',     'Accuracy (test set)'],
-    ['~33%', 'Baseline (chance)'],
+    ['~48%', 'Baseline (majority class)'],
   ]);
 
   document.getElementById('struct-model-callout').textContent =
-    `With TMDB crowd rating included, the structured model achieves R² of ${sReg.test_r2.toFixed(2)} on the test set. ` +
-    `Remove vote average and that collapses to ${sNov.test_r2.toFixed(2)}, essentially zero. ` +
+    `With TMDB crowd rating included, the structured regression achieves a CV R² of ${sReg.cv_r2_mean.toFixed(2)} ` +
+    `but collapses to ${sReg.test_r2.toFixed(2)} on the held-out test set, a sign that the small sample size is amplifying noise. ` +
+    `Remove vote average entirely and that drops to ${sNov.test_r2.toFixed(2)}. ` +
     `Genre, director, runtime, budget, and cast alone explain almost nothing about my personal ratings. ` +
-    `The crowd average does nearly all the work, which means my taste aligns with consensus more than ` +
-    `any specific film property predicts it.`;
+    `The crowd average carries whatever signal exists, but even that signal is fragile at this data size.`;
 
   const structScatter = ml.per_review
     .filter(r => r.predicted_structured != null)
